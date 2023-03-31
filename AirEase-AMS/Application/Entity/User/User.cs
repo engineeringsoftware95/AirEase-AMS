@@ -4,74 +4,106 @@ namespace AirEase_AMS.Application.Entity.User;
 
 public class User : IUser
 {
+    private string _firstName;
+    private string _lastName;
+    private string _email;
+    private string _phoneNum;
+    private string _address;
+    private string _birthDate;
+    private string _password;
+    private int _userId;
+
+    public User()
+    {
+        _firstName = "";
+        _lastName = "";
+        _email = "";
+        _phoneNum = "";
+        _address = "";
+        _birthDate = "";
+        _password = "";
+        _userId = -1;
+    }
+    public User(string firstName, string lastName, string email, string phoneNum, string address, string birthDate, string password, int userId)
+    {
+        _firstName = firstName;
+        _lastName = lastName;
+        _email = email;
+        _phoneNum = phoneNum;
+        _address = address;
+        _birthDate = birthDate;
+        _password = password;
+        _userId = userId;
+    }
+
     public void SetFirstName(string first)
     {
-        throw new NotImplementedException();
+        _firstName = first;
     }
 
     public void SetLastName(string last)
     {
-        throw new NotImplementedException();
+        _lastName = last;
     }
 
     public void SetPhoneNum(string num)
     {
-        throw new NotImplementedException();
+        _phoneNum = num;
     }
 
     public void SetEmail(string email)
     {
-        throw new NotImplementedException();
+        _email = email;
     }
 
     public void SetBirthDate(string bday)
     {
-        throw new NotImplementedException();
+        _birthDate = bday;
     }
 
     public void SetPassword(string pass)
     {
-        throw new NotImplementedException();
+        _password = pass;
     }
 
     public void SetId(int id)
     {
-        throw new NotImplementedException();
+        _userId = id;
     }
 
     public string GetFirstName()
     {
-        throw new NotImplementedException();
+        return _firstName;
     }
 
     public string GetLastName()
     {
-        throw new NotImplementedException();
+        return _lastName;
     }
 
     public string GetEmail()
     {
-        throw new NotImplementedException();
+        return _email;
     }
 
     public string GetPassword()
     {
-        throw new NotImplementedException();
+        return _password;
     }
 
     public string GetPhoneNum()
     {
-        throw new NotImplementedException();
+        return _phoneNum;
     }
 
     public string GetBirthDate()
     {
-        throw new NotImplementedException();
+        return _birthDate;
     }
 
     public int GetUserId()
     {
-        throw new NotImplementedException();
+        return _userId;
     }
 
     public int GenerateUniqueId()
