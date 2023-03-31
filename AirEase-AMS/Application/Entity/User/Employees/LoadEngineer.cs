@@ -1,6 +1,6 @@
 ﻿namespace AirEase_AMS.Application.Entity.User.Employees;
 
-public class LoadEngineer : Application.User.User
+public class LoadEngineer : User
 {
     
 }
