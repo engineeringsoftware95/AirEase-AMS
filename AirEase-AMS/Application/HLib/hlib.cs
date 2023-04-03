@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Collections;
 
 namespace AirEase_AMS.Application
 {
@@ -56,16 +58,44 @@ namespace AirEase_AMS.Application
             return Convert.ToInt32(cost * 100);
         }
 
+        /// <summary>
+        /// A function which accepts a password and salt and outputs a sha512 conversion string.
+        /// </summary>
+        /// <param name="password">The password to be converted.</param>
+        /// <param name="salt">The salt to be appended to the password.</param>
+        /// <returns>A SHA512 encryption of the password and salt.</returns>
         public static string EncryptPassword(string password, string salt)
         {
+            //Concat password and salt for hashing
+            string concatPassword = password + salt;
+            
+            SHA512 sha512 = SHA512.Create();
 
-            return "";
+            //Get byte array result from the hash (64 bytes or 512 bits)
+            byte[] bytePassword = sha512.ComputeHash(Encoding.ASCII.GetBytes(concatPassword));
+
+            //Return the string conversion
+            return BitConverter.ToString(bytePassword);
         }
 
-        public static string GenerateSalt(int size)
+        /// <summary>
+        /// This function takes in a byte array size and returns a salt.
+        /// </summary>
+        /// <param name="byteSize">The number of bytes in the original byte array.</param>
+        /// <returns>A random string. The result will NOT have the same number of characters as the input, but it will be proportional.</returns>
+        public static string GenerateSalt(int byteSize)
         {
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                //Size of stringSize bytes
+                byte[] bytes = new byte[byteSize];
 
-            return "";
+                //Get a random array of bytes
+                rng.GetBytes(bytes);
+
+
+                return BitConverter.ToString(bytes);
+            }
         }
 
     }
