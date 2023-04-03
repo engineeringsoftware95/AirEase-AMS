@@ -56,6 +56,17 @@ namespace AirEase_AMS.Application
             return Convert.ToInt32(cost * 100);
         }
 
+        public static string EncryptPassword(string password, string salt)
+        {
+
+            return "";
+        }
+
+        public static string GenerateSalt(int size)
+        {
+
+            return "";
+        }
 
     }
 
