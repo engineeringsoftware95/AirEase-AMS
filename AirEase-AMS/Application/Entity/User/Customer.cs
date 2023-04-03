@@ -2,7 +2,7 @@
 
 namespace AirEase_AMS.Application.User;
 
-public class Customer : User
+public class Customer : Entity.User.User
 {
     
 }
