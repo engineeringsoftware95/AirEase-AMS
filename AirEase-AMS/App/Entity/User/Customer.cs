@@ -1,8 +1,11 @@
-﻿using AirEase_AMS.Application.Defs;
+﻿using AirEase_AMS.App.Defs;
 
-namespace AirEase_AMS.Application.User;
+namespace AirEase_AMS.App.Entity.User;
 
-public class Customer : Entity.User.User
+public class Customer : User
 {
-    
+    public Customer()
+    {
+      SetRole(1);
+    }
 }

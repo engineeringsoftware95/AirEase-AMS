@@ -1,4 +1,4 @@
-﻿namespace AirEase_AMS.Application.Defs;
+﻿namespace AirEase_AMS.App.Defs;
 
 public interface ITicket
 {

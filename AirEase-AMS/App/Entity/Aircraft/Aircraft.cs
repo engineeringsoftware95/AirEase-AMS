@@ -1,6 +1,6 @@
-﻿using AirEase_AMS.Application.Defs;
+﻿using AirEase_AMS.App.Defs;
 
-namespace AirEase_AMS.Application.Entity.Aircraft;
+namespace AirEase_AMS.App.Entity.Aircraft;
 
 public class Aircraft : IAircraft
 {

@@ -1,6 +1,6 @@
 ﻿using AirEase_AMS.Application.Defs.Struct;
 
-namespace AirEase_AMS.Application.Entity.Graph;
+namespace AirEase_AMS.App.Entity.Graph;
 
 public class Airport : INode
 {

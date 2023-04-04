@@ -1,6 +1,6 @@
-﻿using AirEase_AMS.Application.Defs;
+﻿using AirEase_AMS.App.Defs;
 
-namespace AirEase_AMS.Application.Flight;
+namespace AirEase_AMS.App.Flight;
 
 public class Route : IRoute
 {

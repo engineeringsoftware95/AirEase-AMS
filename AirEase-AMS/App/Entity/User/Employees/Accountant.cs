@@ -1,5 +1,10 @@
-﻿namespace AirEase_AMS.Application.Entity.User.Employees;
+﻿namespace AirEase_AMS.App.Entity.User.Employees;
 
 public class Accountant : User
 {
+
+    public Accountant()
+    {
+        _roleBit = 2;
+    }
 }

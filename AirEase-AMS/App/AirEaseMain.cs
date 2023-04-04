@@ -1,8 +1,7 @@
-using AirEase_AMS.App.HLib;
-using AirEase_AMS.Interface;
-using AirEase_AMS.Application;
+using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Entity.User.Employees;
 
-namespace AirEase_AMS.Application
+namespace AirEase_AMS.App
 {
     internal static class Program
     {
@@ -12,13 +11,17 @@ namespace AirEase_AMS.Application
         [STAThread]
         static void Main()
         {
-
-            //Temporary example of using an HLib function. Delete whenever
-            int num = HLib.GenerateFiveDigitId();
-            Console.WriteLine(num);
-            string salt = HLib.GenerateSalt(2);
-            string hash = HLib.EncryptPassword("SomePassword88!", salt);
-            Console.WriteLine("Password: " + hash + " \nWhere salt is " + salt);
+            Customer testCust = new();
+            Accountant testAcc = new();
+            FlightManager fMan = new();
+            LoadEngineer loadEngineer = new();
+            MarketManager marketManager = new();
+            Console.WriteLine("Customer UID :" + testCust.GenerateUniqueId());
+            Console.WriteLine("Accountant UID :" + testAcc.GenerateUniqueId());
+            Console.WriteLine("FlightMan UID :" + fMan.GenerateUniqueId());
+            Console.WriteLine("MarkMan UID :" + marketManager.GenerateUniqueId());
+            Console.WriteLine("Load Eng UID :" + loadEngineer.GenerateUniqueId());
+            Console.WriteLine();
             Console.WriteLine("Thank you for playing Wing Commander");
         }
     }

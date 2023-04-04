@@ -2,7 +2,7 @@
 using System.Text;
 // ReSharper disable All
 
-namespace AirEase_AMS.App.HLib
+namespace AirEase_AMS.App
 {
     class HLib
     {
@@ -30,8 +30,7 @@ namespace AirEase_AMS.App.HLib
             int numberOfDigits = Convert.ToInt32(Math.Floor(Math.Log10(number)));
             //The prepended digit will be one order of magnitude larger than number.
             numberOfDigits++;
-
-            int prependedInteger = Convert.ToInt32(Math.Pow(10, numberOfDigits)) + number;
+            int prependedInteger = (digit * Convert.ToInt32(Math.Pow(10, numberOfDigits))) + number;
             return prependedInteger;
         }
 

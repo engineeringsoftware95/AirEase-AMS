@@ -1,8 +1,6 @@
-﻿using AirEase_AMS.Application.Defs;
+﻿namespace AirEase_AMS.App.Entity.User;
 
-namespace AirEase_AMS.Application.User;
-
-public class Employee : Entity.User.User
+public class Employee : User
 {
     
 }
