@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Defs\HLib" />
+    <Folder Include="App\Defs\HLib" />
   </ItemGroup>
 
 </Project>
