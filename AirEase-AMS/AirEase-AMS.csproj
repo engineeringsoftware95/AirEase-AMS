@@ -9,8 +9,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="App\Defs\HLib" />
-  </ItemGroup>
-
 </Project>

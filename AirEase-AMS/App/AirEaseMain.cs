@@ -1,3 +1,4 @@
+using AirEase_AMS.App.HLib;
 using AirEase_AMS.Interface;
 using AirEase_AMS.Application;
 
@@ -13,7 +14,7 @@ namespace AirEase_AMS.Application
         {
 
             //Temporary example of using an HLib function. Delete whenever
-            int num = HLib.GenerateFiveDigitID();
+            int num = HLib.GenerateFiveDigitId();
             Console.WriteLine(num);
             string salt = HLib.GenerateSalt(2);
             string hash = HLib.EncryptPassword("SomePassword88!", salt);

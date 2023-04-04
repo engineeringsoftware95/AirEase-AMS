@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using System.Collections;
+// ReSharper disable All
 
-namespace AirEase_AMS.Application
+namespace AirEase_AMS.App.HLib
 {
     class HLib
     {
         /// <summary>
         /// Generates some number between 10000 and 99999.
         /// </summary>
-        public static int GenerateFiveDigitID()
+        public static int GenerateFiveDigitId()
         {
-            Random rand = new Random();
-
+            var rand = new Random();
             //Generate some number between 10000 and 99999.
             return rand.Next(10000, 100000);
         }
@@ -68,12 +63,8 @@ namespace AirEase_AMS.Application
         {
             //Concat password and salt for hashing
             string concatPassword = password + salt;
-            
-            SHA512 sha512 = SHA512.Create();
-
             //Get byte array result from the hash (64 bytes or 512 bits)
-            byte[] bytePassword = sha512.ComputeHash(Encoding.ASCII.GetBytes(concatPassword));
-
+            byte[] bytePassword = SHA512.HashData(Encoding.ASCII.GetBytes(concatPassword));
             //Return the string conversion
             return BitConverter.ToString(bytePassword);
         }
