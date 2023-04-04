@@ -15,6 +15,9 @@ namespace AirEase_AMS.Application
             //Temporary example of using an HLib function. Delete whenever
             int num = HLib.GenerateFiveDigitID();
             Console.WriteLine(num);
+            string salt = HLib.GenerateSalt(2);
+            string hash = HLib.EncryptPassword("SomePassword88!", salt);
+            Console.WriteLine("Password: " + hash + " \nWhere salt is " + salt);
             Console.WriteLine("Thank you for playing Wing Commander");
         }
     }
