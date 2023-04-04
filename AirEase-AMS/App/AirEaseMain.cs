@@ -10,7 +10,8 @@ namespace AirEase_AMS.Application
         [STAThread]
         static void Main()
         {
-  
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
         }
     }
 }
