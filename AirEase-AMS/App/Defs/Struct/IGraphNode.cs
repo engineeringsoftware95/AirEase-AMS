@@ -2,6 +2,6 @@
 
 public interface IGraphNode
 {
-    List<IRoute> DepartingFlights();
-    void PopulateNode(string city);
+   string GetCityName();
+   List<IRoute>? GetRoutes();
 }

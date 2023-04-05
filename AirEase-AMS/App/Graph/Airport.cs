@@ -25,4 +25,14 @@ public class Airport : IGraphNode
     {
         _city = city;
     }
+
+    public string GetCityName()
+    {
+        return _city;
+    }
+
+    public List<IRoute>? GetRoutes()
+    {
+        return _departingEdges;
+    }
 }

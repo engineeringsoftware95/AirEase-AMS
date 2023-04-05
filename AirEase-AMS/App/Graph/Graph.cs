@@ -1,32 +1,51 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
-
+using AirEase_AMS.App.Graph.Flight;
 namespace AirEase_AMS.App.Graph;
 
 public class Graph : IGraph
 {
     private List<IGraphNode> _airports;
+    private List<string> _cityNames;
     
-    public void AddNode(IGraphNode node)
+
+
+    public IRoute? FindFlight(string origin, string destination)
     {
-        if (!_airports.Contains(node))
+        // Graph contains a list of airports.
+        // Each airport contains a list of routes.
+        // Each route contains a list of flights.
+        // to find flights:
+        //
+        // Check if origin and destination are in the graph.
+        // If not, return an error and exit.
+        //
+        // Search origin city's routes list.
+        // If destination city is not there, return an error and exit.
+        // Return the route.
+        if (!_cityNames.Contains(origin) || !_cityNames.Contains(destination))
         {
-            _airports.Add(node);
+            return null;
         }
+        foreach (var airport in _airports)
+        {
+            if (!airport.GetCityName().Equals(origin)) continue;
+            foreach (var route in airport.GetRoutes()!)
+            {
+                if (route.IsDestination(destination))
+                {
+                    return route;
+                }
+            }
+        }
+        return null;
     }
 
-    public void SetEdge(IGraphNode origin, IGraphNode destination, IRoute flight)
+    public List<IFlight>? GetFlightsInRange(string origin, string destination, DateTime begin, DateTime end)
     {
-        if (origin.DepartingFlights().Contains(flight)) return;
-        origin.DepartingFlights().Add(flight);
-        if (_airports.Contains(destination))
-        {
-            AddNode(destination);
-        }
-    }
-
-    public List<ITicket> CreateSortedTicketList(IGraphNode origin, IGraphNode destination, string date, string flightTime, bool sortByTime)
-    {
-        throw new NotImplementedException();
+        List<IFlight>? validFlights = null;
+        IRoute? route = FindFlight(origin, destination);
+        validFlights = route?.FindFlightsInRange(begin, end);
+        return validFlights;
     }
 }
