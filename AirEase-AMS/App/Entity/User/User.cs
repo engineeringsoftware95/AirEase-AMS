@@ -1,9 +1,11 @@
-﻿using AirEase_AMS.Application.Defs;
+﻿using AirEase_AMS.App.Defs;
+using AirEase_AMS.Application.Defs;
 
-namespace AirEase_AMS.Application.Entity.User;
+namespace AirEase_AMS.App.Entity.User;
 
 public class User : IUser
 {
+    protected int _roleBit;
     private string _firstName;
     private string _lastName;
     private string _email;
@@ -66,9 +68,19 @@ public class User : IUser
         _password = pass;
     }
 
+    public void SetAddress(string addr)
+    {
+        _address = addr;
+    }
+
     public void SetId(int id)
     {
         _userId = id;
+    }
+
+    public void SetRole(int role)
+    {
+        _roleBit = role;
     }
 
     public string GetFirstName()
@@ -106,8 +118,20 @@ public class User : IUser
         return _userId;
     }
 
+    public string GetAddress()
+    {
+        return _address;
+    }
+
+    public int GetRole()
+    {
+        return _roleBit;
+    }
+
     public int GenerateUniqueId()
     {
-        throw new NotImplementedException();
+        // get five digit ID
+        int fiveDigitId = HLib.GenerateFiveDigitId();
+        return HLib.PrependNumberToInteger(_roleBit, fiveDigitId);
     }
 }
