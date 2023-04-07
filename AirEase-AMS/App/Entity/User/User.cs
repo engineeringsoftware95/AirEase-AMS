@@ -134,4 +134,10 @@ public class User : IUser
         int fiveDigitId = HLib.GenerateFiveDigitId();
         return HLib.PrependNumberToInteger(_roleBit, fiveDigitId);
     }
+
+    public bool AttemptLogin(string username, string password)
+    {
+
+        return false;
+    }
 }

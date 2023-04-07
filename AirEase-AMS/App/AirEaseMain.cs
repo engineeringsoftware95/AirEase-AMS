@@ -1,5 +1,6 @@
 using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Entity.User.Employees;
+using AirEase_AMS.Interface;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -13,6 +14,9 @@ namespace AirEase_AMS.App
         [STAThread]
         static void Main()
         {
+            ApplicationConfiguration.Initialize();
+            System.Windows.Forms.Application.Run(new Login());
+
             Customer testCust = new();
             Accountant testAcc = new();
             FlightManager fMan = new();
@@ -34,6 +38,8 @@ namespace AirEase_AMS.App
             dbAccessObject.PrintDataTable(dt);
 
             Console.WriteLine("Thank you for playing Wing Commander");
+
+
         }
     }
 }
