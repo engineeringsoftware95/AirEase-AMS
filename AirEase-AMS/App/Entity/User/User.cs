@@ -1,5 +1,4 @@
 ﻿using AirEase_AMS.App.Defs;
-using AirEase_AMS.Application.Defs;
 
 namespace AirEase_AMS.App.Entity.User;
 
@@ -133,5 +132,11 @@ public class User : IUser
         // get five digit ID
         int fiveDigitId = HLib.GenerateFiveDigitId();
         return HLib.PrependNumberToInteger(_roleBit, fiveDigitId);
+    }
+
+    public bool AttemptLogin(string username, string password)
+    {
+
+        return false;
     }
 }
