@@ -18,5 +18,6 @@ public interface IUser
     string GetBirthDate();
     int GetUserId();
     int GenerateUniqueId();
-    
+    bool AttemptLogin(string username, string password);
+
 }
