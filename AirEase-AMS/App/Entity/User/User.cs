@@ -1,5 +1,4 @@
 ﻿using AirEase_AMS.App.Defs;
-using AirEase_AMS.Application.Defs;
 
 namespace AirEase_AMS.App.Entity.User;
 
