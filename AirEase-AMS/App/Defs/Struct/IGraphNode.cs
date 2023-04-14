@@ -4,4 +4,8 @@ public interface IGraphNode
 {
    string GetCityName();
    List<IRoute>? GetRoutes();
+
+   void AddDeparture(IGraphNode destination, IRoute flight);
+   void AddArrival(IGraphNode origin, IRoute flight);
+   void SetCity(string city);
 }

@@ -1,6 +1,7 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
 using AirEase_AMS.App.Graph.Flight;
+// ReSharper disable All
 namespace AirEase_AMS.App.Graph;
 
 public class Graph : IGraph
