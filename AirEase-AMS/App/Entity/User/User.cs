@@ -1,4 +1,5 @@
 ﻿using AirEase_AMS.App.Defs;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AirEase_AMS.App.Entity.User;
 
@@ -147,11 +148,30 @@ public class User : IUser
         return HLib.PrependNumberToInteger(_roleBit, fiveDigitId);
     }
 
+    /// <summary>
+    /// This function takes the class members and attempts to create an account.
+    /// </summary>
+    /// <returns>Returns whether or not it was successful.</returns>
     public bool AttemptAccountCreation()
     {
-        int role = GetRole();
+
+        bool fNameEmpty = String.IsNullOrEmpty(_firstName);
+        bool lNameEmpty = String.IsNullOrEmpty(_lastName);
+        bool addressEmpty = String.IsNullOrEmpty(_address);
+        bool saltEmpty = String.IsNullOrEmpty(_salt);
+        bool emailEmpty = String.IsNullOrEmpty(_email);
+        bool passwordEmpty = String.IsNullOrEmpty(_password);
+        bool phoneNumEmpty = String.IsNullOrEmpty(_phoneNum);
+        bool bDateEmpty = String.IsNullOrEmpty(_birthDate);
+
+        //Do not create account if field is missing
+        if (fNameEmpty || lNameEmpty || emailEmpty || passwordEmpty || addressEmpty || saltEmpty || phoneNumEmpty || bDateEmpty) return false;
+        
+        int role = _roleBit;
         string table = (role == 1) ? "CUSTOMER" : "EMPLOYEE"; 
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
+        //While the ID isn't unique, make a new one.
         while(dao.Retrieve("SELECT * FROM " + table + " WHERE UserID=" + GetUserId() + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
@@ -161,23 +181,54 @@ public class User : IUser
         //Now we have a unique ID and a user class loaded with information - we can attempt to push it to the Database
         if(role == 1)
         {
-            dao.Update("INSERT INTO CUSTOMER VALUES(" + GetUserId() + ", '" + GetPassword() + "', '" + GetFirstName() + "', '" + GetLastName() + "', '" + GetAddress() + "', '" + GetPhoneNum() + "', '" + GetBirthDate() + "', 0.0, 0, '" + GetSalt() + "', '" + GetEmail() + "');");
+            //Try to create the customer
+            string query = "INSERT INTO CUSTOMER VALUES(" + GetUserId() + ", '" + GetPassword() + "', '" + GetFirstName() + "', '" + GetLastName() + "', '" + GetAddress() + "', '" + GetPhoneNum() + "', '" + GetBirthDate() + "', 0.0, 0, '" + GetSalt() + "', '" + GetEmail() + "');";
+            int results = dao.Update(query);
+
+            //Returns whether or not a row was created
+            return results > 0;
         }
         
-
+        //The funtion failed somewhere
         return false;
     }
 
+    /// <summary>
+    /// This function takes a username and password and returns
+    /// whether the account exists with the given credentials.
+    /// </summary>
+    /// <param name="username">The input username.</param>
+    /// <param name="password">The input password.</param>
+    /// <returns>If the login was successful.</returns>
     public static bool AttemptLogin(string username, string password)
     {
-        string salt = HLib.GenerateSalt(32);
-        string table = (username[0] == 1) ? "CUSTOMER" : "EMPLOYEE";
-        password = HLib.EncryptPassword(password, salt);
-        DatabaseAccessObject dao = new DatabaseAccessObject();
+        string table = (username[0] == '1') ? "CUSTOMER" : "EMPLOYEE";
+
+        //Sanitize user inputs
         username = DatabaseAccessObject.SanitizeString(username);
         password = DatabaseAccessObject.SanitizeString(password);
+
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+
+        //Get the salt associated with this username
+        string query = "SELECT Salt FROM "+table+" WHERE UserID = " + username + ";";
+
+        //Get salt from row[0]
+        System.Data.DataTable dt = dao.Retrieve(query);
+        System.Data.DataRow[] rows = dt.Select();
+
+        //No match
+        if(rows.Length <= 0) { return false; }
+
+        //Encrypt the password with our salt
+        string salt = rows[0]["Salt"].ToString() ?? "";
+        password = HLib.EncryptPassword(password, salt);
+
         //Login verified
-        return (dao.Retrieve("SELECT * FROM " + table + " WHERE PASSWORD = '" + password + "' AND UserID = " + username + ";").Rows.Count == 1);
+        query = "SELECT * FROM " + table + " WHERE UserPassword = '" + password + "' AND UserID = " + username + ";";
+        
+        //Return whether our select returned a match
+        return (dao.Retrieve(query).Rows.Count == 1);
     }
 
 }

@@ -70,7 +70,14 @@ namespace AirEase_AMS.Interface
                     DatabaseAccessObject dao = new DatabaseAccessObject();
 
                     Customer cs = new Customer(FirstNameBox.Text, LastNameBox.Text, AddressBox.Text, BirthDateCalendar.Text, PasswordFirst.Text, PhoneNumberBox.Text, EmailBox.Text);
-                    cs.AttemptAccountCreation();
+                    bool successful = cs.AttemptAccountCreation();
+                    if(successful)
+                    {
+                        AccountCreated ac = new AccountCreated(cs.GetUserId().ToString());
+                        this.Hide();
+                        ac.ShowDialog();
+                        this.Close();
+                    }
                 }
                 else
                 {

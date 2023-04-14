@@ -26,7 +26,13 @@ namespace AirEase_AMS.Interface
             username= UsernameBox.Text;
             if(Customer.AttemptLogin(username, password))
             {
+                this.Hide();
                 this.Close();
+            }
+            else
+            {
+                string error = "Incorrect username or password.";
+                LoginFailureLabel.Text = error;
             }
 
 

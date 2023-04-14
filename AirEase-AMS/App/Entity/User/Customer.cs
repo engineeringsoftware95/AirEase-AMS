@@ -6,6 +6,7 @@ public class Customer : User
 {
     public Customer(string fName, string lName, string address, string date, string password, string phoneNum, string email)
     {
+        SetRole(1);
         SetFirstName(fName);
         SetLastName(lName);
         SetAddress(address);
@@ -15,7 +16,6 @@ public class Customer : User
         SetPhoneNum(phoneNum);
         SetEmail(email);
         SetId(GenerateId());
-        SetRole(1);
     }
 
 

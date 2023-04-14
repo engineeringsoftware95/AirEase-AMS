@@ -26,6 +26,8 @@ namespace Tests
         {
             DatabaseAccessObject dao = new DatabaseAccessObject();
 
+            dao.Update(deleteQuery);
+
             Console.WriteLine(insertQuery);
             dao.Update(insertQuery);
             DataTable? dt = dao.Retrieve(retrieveQuery);
