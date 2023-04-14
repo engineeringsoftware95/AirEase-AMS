@@ -3,12 +3,12 @@ using AirEase_AMS.App.Defs.Struct;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
-public class Route : IRoute
+public class Route : IRoute, IComparable<Route>
 {
     private IGraphNode _origin;
     private IGraphNode _destination;
     private List<IFlight> _flightsOnRoute;
-
+    private int _distance;
 
     public bool FlightExists(IFlight flight)
     {
@@ -58,4 +58,40 @@ public class Route : IRoute
     {
         return _origin.GetCityName().Equals(city);
     }
+
+
+    public int GetDistance()
+    {
+        return _distance;
+    }
+    
+    public int CompareTo(Route? other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        if (ReferenceEquals(null, other)) return 1;
+        return GetDistance().CompareTo(other.GetDistance());
+    }
+    
+    
+    public static int CompareByDistance(Flight? lhs, Flight? rhs)
+    {
+        if ((lhs == null))
+        {
+            if (rhs == null) // if lhs and rhs are null, they are equal
+            {
+                return 0; // so return 0.
+            }
+
+            return -1; // If lhs is null and rhs is not, then lhs < rhs.
+        }
+
+        if (rhs == null) // likewise, if we get here, lhs is not null, so lhs > rhs
+        {
+            return 1;
+        }
+        // otherwise compare the values.
+        int retval = lhs.GetDistance().CompareTo(rhs.GetDistance());
+        return retval != 0 ? retval : lhs.CompareTo(rhs);
+    }
+    
 }

@@ -14,15 +14,9 @@ public class Airport : IGraphNode
         if(!_departingEdges.Contains(flight))
         {
          _departingEdges.Add(flight);
-         destination.AddArrival(this, flight);
         }
     }
-
-    public void AddArrival(IGraphNode origin, IRoute flight)
-    {
-        
-    }
-
+    
     public List<IRoute> ArrivingFlights()
     {
         return _departingEdges;
@@ -47,4 +41,7 @@ public class Airport : IGraphNode
     {
         return _departingEdges;
     }
+ 
+
+
 }

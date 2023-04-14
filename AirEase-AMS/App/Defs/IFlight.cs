@@ -3,4 +3,5 @@
 public interface IFlight
 {
     DateTime GetTime();
+
 }
