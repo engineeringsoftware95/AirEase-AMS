@@ -34,8 +34,6 @@ namespace AirEase_AMS.Interface
                 string error = "Incorrect username or password.";
                 LoginFailureLabel.Text = error;
             }
-
-
         }
 
         //PASSWORD

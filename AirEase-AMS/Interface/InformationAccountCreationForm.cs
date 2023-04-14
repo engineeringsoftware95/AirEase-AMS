@@ -39,7 +39,10 @@ namespace AirEase_AMS.Interface
             bool addressMissing = (String.IsNullOrEmpty(AddressBox.Text));
             bool emailMissing = (String.IsNullOrEmpty(EmailBox.Text));
             bool birthDateMissing = BirthDateCalendar.ToString == null;
+            bool emailFormatCorrect = EmailBox.Text.Contains("@") && EmailBox.Text.Contains(".");
+            bool phoneFormatCorrect = PhoneNumberBox.Text.Length == 10;
             bool noDataMissing = !firstNameMissing && !lastNameMissing && !addressMissing && !birthDateMissing && !emailMissing;
+            bool fieldsAccurate = emailFormatCorrect && phoneFormatCorrect;
 
             //If both passwords are null
             bool passwordsMissing = String.IsNullOrEmpty(PasswordFirst.Text) && String.IsNullOrEmpty(PasswordVerify.Text);
@@ -52,6 +55,8 @@ namespace AirEase_AMS.Interface
 
             errorMessage +=
                 ((firstNameMissing || lastNameMissing || addressMissing || birthDateMissing || passwordsMissing) ? "Please fill out all information.\r\n" : "") +
+                (emailFormatCorrect ? "" : "Email is not formatted correctly.\r\n") +
+                (phoneFormatCorrect ? "" : "Phone number is not formatted correctly.\r\n") + 
                 ((passwordsMatch) ? "" : "Passwords do not match.");
 
             if(passwordsMatch)
@@ -65,7 +70,7 @@ namespace AirEase_AMS.Interface
                     && passwordContainsNumeric && passwordContainsSpecialChar
                     && passwordContainsSpecialChar;
 
-                if(passwordCorrect && noDataMissing)
+                if(passwordCorrect && noDataMissing && fieldsAccurate)
                 {
                     DatabaseAccessObject dao = new DatabaseAccessObject();
 
