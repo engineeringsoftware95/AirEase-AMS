@@ -7,7 +7,10 @@ public class Flight : Route
     private DateTime _flightTime;
     private Aircraft _aircraft;
 
+    public Flight()
+    {
 
+    }
 
     public DateTime GetTime()
     {
