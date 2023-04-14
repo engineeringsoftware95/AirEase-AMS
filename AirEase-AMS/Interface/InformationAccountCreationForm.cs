@@ -40,7 +40,7 @@ namespace AirEase_AMS.Interface
             bool emailMissing = (String.IsNullOrEmpty(EmailBox.Text));
             bool birthDateMissing = BirthDateCalendar.ToString == null;
             bool emailFormatCorrect = EmailBox.Text.Contains("@") && EmailBox.Text.Contains(".");
-            bool phoneFormatCorrect = PhoneNumberBox.Text.Length == 10;
+            bool phoneFormatCorrect = PhoneNumberBox.Text.Length == 10 && !PhoneNumberBox.Text.Any(ch => ! char.IsNumber(ch));
             bool noDataMissing = !firstNameMissing && !lastNameMissing && !addressMissing && !birthDateMissing && !emailMissing;
             bool fieldsAccurate = emailFormatCorrect && phoneFormatCorrect;
 
