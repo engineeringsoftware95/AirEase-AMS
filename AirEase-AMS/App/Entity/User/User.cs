@@ -12,6 +12,7 @@ public class User : IUser
     private string _address;
     private string _birthDate;
     private string _password;
+    private string _salt;
     private int _userId;
 
     public User()
@@ -23,9 +24,10 @@ public class User : IUser
         _address = "";
         _birthDate = "";
         _password = "";
+        _salt = "";
         _userId = -1;
     }
-    public User(string firstName, string lastName, string email, string phoneNum, string address, string birthDate, string password, int userId)
+    public User(string firstName, string lastName, string email, string phoneNum, string address, string birthDate, string password, string salt, int userId)
     {
         _firstName = firstName;
         _lastName = lastName;
@@ -35,26 +37,27 @@ public class User : IUser
         _birthDate = birthDate;
         _password = password;
         _userId = userId;
+        _salt = salt;
     }
 
     public void SetFirstName(string first)
     {
-        _firstName = first;
+        _firstName = DatabaseAccessObject.SanitizeString(first);
     }
 
     public void SetLastName(string last)
     {
-        _lastName = last;
+        _lastName = DatabaseAccessObject.SanitizeString(last);
     }
 
     public void SetPhoneNum(string num)
     {
-        _phoneNum = num;
+        _phoneNum = DatabaseAccessObject.SanitizeString(num);
     }
 
     public void SetEmail(string email)
     {
-        _email = email;
+        _email = DatabaseAccessObject.SanitizeString(email);
     }
 
     public void SetBirthDate(string bday)
@@ -64,12 +67,12 @@ public class User : IUser
 
     public void SetPassword(string pass)
     {
-        _password = pass;
+        _password = DatabaseAccessObject.SanitizeString(pass);
     }
 
     public void SetAddress(string addr)
     {
-        _address = addr;
+        _address = DatabaseAccessObject.SanitizeString(addr);
     }
 
     public void SetId(int id)
@@ -80,6 +83,11 @@ public class User : IUser
     public void SetRole(int role)
     {
         _roleBit = role;
+    }
+
+    public void SetSalt(string salt)
+    {
+        _salt = DatabaseAccessObject.SanitizeString(salt);
     }
 
     public string GetFirstName()
@@ -122,21 +130,54 @@ public class User : IUser
         return _address;
     }
 
+    public string GetSalt()
+    {
+        return _salt;
+    }
+
     public int GetRole()
     {
         return _roleBit;
     }
 
-    public int GenerateUniqueId()
+    public int GenerateId()
     {
         // get five digit ID
         int fiveDigitId = HLib.GenerateFiveDigitId();
         return HLib.PrependNumberToInteger(_roleBit, fiveDigitId);
     }
 
-    public bool AttemptLogin(string username, string password)
+    public bool AttemptAccountCreation()
     {
+        int role = GetRole();
+        string table = (role == 1) ? "CUSTOMER" : "EMPLOYEE"; 
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        while(dao.Retrieve("SELECT * FROM " + table + " WHERE UserID=" + GetUserId() + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            SetId(GenerateId());
+        }
+
+        //Now we have a unique ID and a user class loaded with information - we can attempt to push it to the Database
+        if(role == 1)
+        {
+            dao.Update("INSERT INTO CUSTOMER VALUES(" + GetUserId() + ", '" + GetPassword() + "', '" + GetFirstName() + "', '" + GetLastName() + "', '" + GetAddress() + "', '" + GetPhoneNum() + "', '" + GetBirthDate() + "', 0.0, 0, '" + GetSalt() + "', '" + GetEmail() + "');");
+        }
+        
 
         return false;
     }
+
+    public static bool AttemptLogin(string username, string password)
+    {
+        string salt = HLib.GenerateSalt(32);
+        string table = (username[0] == 1) ? "CUSTOMER" : "EMPLOYEE";
+        password = HLib.EncryptPassword(password, salt);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        username = DatabaseAccessObject.SanitizeString(username);
+        password = DatabaseAccessObject.SanitizeString(password);
+        //Login verified
+        return (dao.Retrieve("SELECT * FROM " + table + " WHERE PASSWORD = '" + password + "' AND UserID = " + username + ";").Rows.Count == 1);
+    }
+
 }
