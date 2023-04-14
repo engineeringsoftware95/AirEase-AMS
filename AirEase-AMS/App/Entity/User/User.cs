@@ -6,15 +6,17 @@ namespace AirEase_AMS.App.Entity.User;
 public class User : IUser
 {
     protected int _roleBit;
-    private string _firstName;
-    private string _lastName;
-    private string _email;
-    private string _phoneNum;
-    private string _address;
-    private string _birthDate;
-    private string _password;
-    private string _salt;
-    private int _userId;
+    protected string _firstName;
+    protected string _lastName;
+    protected string _email;
+    protected string _phoneNum;
+    protected string _address;
+    protected string _birthDate;
+    protected string _password;
+    protected string _salt;
+    protected string _ssn;
+    protected string _positionTitle;
+    protected int _userId;
 
     public User()
     {
@@ -91,6 +93,16 @@ public class User : IUser
         _salt = DatabaseAccessObject.SanitizeString(salt);
     }
 
+    public void SetSsn(string ssn)
+    {
+        _ssn = DatabaseAccessObject.SanitizeString(ssn);
+    }
+
+    public void SetTitle(string title)
+    {
+        _positionTitle = DatabaseAccessObject.SanitizeString(title);
+    }
+
     public string GetFirstName()
     {
         return _firstName;
@@ -136,6 +148,16 @@ public class User : IUser
         return _salt;
     }
 
+    public string GetSsn()
+    {
+        return _ssn;
+    }
+
+    public string GetTitle()
+    {
+        return _positionTitle;
+    }
+
     public int GetRole()
     {
         return _roleBit;
@@ -172,13 +194,15 @@ public class User : IUser
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //While the ID isn't unique, make a new one.
-        while(dao.Retrieve("SELECT * FROM " + table + " WHERE UserID=" + GetUserId() + ";").Rows.Count > 0)
+        SetId(GenerateId());
+        while (dao.Retrieve("SELECT * FROM " + table + " WHERE UserID=" + GetUserId() + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
             SetId(GenerateId());
         }
 
         //Now we have a unique ID and a user class loaded with information - we can attempt to push it to the Database
+        //Customer
         if(role == 1)
         {
             //Try to create the customer
@@ -188,9 +212,16 @@ public class User : IUser
             //Returns whether or not a row was created
             return results > 0;
         }
-        
-        //The funtion failed somewhere
-        return false;
+        //Employee
+        else
+        {
+            //Try to create the employee
+            string query = "INSERT INTO EMPLOYEE VALUES(" + GetUserId() + ", '" + GetPassword() + "', '" + GetFirstName() + "', '" + GetLastName() + "', '" + GetAddress() + "', '" + GetPhoneNum() + "', '" + GetBirthDate() + "', '" + GetSalt() + "', '" + GetEmail() + "', '"+GetSsn()+"', '"+GetTitle()+"');";
+            int results = dao.Update(query);
+
+            //Returns whether or not a row was created
+            return results > 0;
+        }
     }
 
     /// <summary>

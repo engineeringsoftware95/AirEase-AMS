@@ -1,10 +1,8 @@
 ﻿namespace AirEase_AMS.App.Entity.User.Employees;
 
-public class MarketManager : User
+public class MarketManager : Employee
 {
-    private int _roleBit = 5;
-    public MarketManager()
-    {
-        SetRole(4);
-    }
+    //This is similar to a member initializer list from cpp - instead of copying the memory over, and rereading it in the function contents, it sets the data the first time its copied over
+    public MarketManager(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn) =>
+        (_firstName, _lastName, _address, _birthDate, _salt, _phoneNum, _email, _ssn, _positionTitle, _roleBit, _password) = (fName, lName, address, date, HLib.GenerateSalt(32), phoneNum, email, ssn, "Market Manager", 5, HLib.EncryptPassword(password, _salt));
 }

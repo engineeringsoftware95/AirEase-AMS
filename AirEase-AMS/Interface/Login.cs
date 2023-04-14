@@ -27,6 +27,19 @@ namespace AirEase_AMS.Interface
             if(Customer.AttemptLogin(username, password))
             {
                 this.Hide();
+                //Customer
+                if (username[0] == '1')
+                {
+
+                }
+                //Employee
+                else
+                {
+                    EmployeeForm employeeForm = new EmployeeForm(username[0]);
+                    employeeForm.ShowDialog();
+
+                }
+
                 this.Close();
             }
             else

@@ -37,6 +37,15 @@ namespace AirEase_AMS.App
             dt = dbAccessObject.Retrieve("SELECT * FROM CUSTOMER;");
             dbAccessObject.PrintDataTable(dt);
 
+            Accountant ac = new Accountant("Tabitha", "Taberton", "123 Tabby Street, Dallas, TX", "2023-04-14", "Password123", "2223339999", "tabbers@accountant.net", "123456789");
+            Console.WriteLine(ac.AttemptAccountCreation());
+            FlightManager fm = new FlightManager("Robert", "Robertson", "123 Robby Road, Dallas, TX", "2023-04-14", "Password123", "2223339999", "robbs@flightmanager.rob", "143456789");
+            Console.WriteLine(fm.AttemptAccountCreation());
+            LoadEngineer le = new LoadEngineer("Shelby", "Shelton", "123 Engineer Street, Dallas, TX", "2023-04-14", "Password123", "2223339999", "sHlb@loadeng.net", "323456789");
+            Console.WriteLine(le.AttemptAccountCreation());
+            MarketManager mm = new MarketManager("Patricia", "Pattinson", "123 Market Road, Dallas, TX", "2023-04-14", "Password123", "2223339999", "patsy@marketmanager.net", "123456789");
+            Console.WriteLine(mm.AttemptAccountCreation());
+
             Console.WriteLine("Thank you for playing Wing Commander");
 
 
