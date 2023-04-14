@@ -17,7 +17,6 @@ public interface IUser
     string GetPhoneNum();
     string GetBirthDate();
     int GetUserId();
-    int GenerateUniqueId();
-    bool AttemptLogin(string username, string password);
+    int GenerateId();
 
 }

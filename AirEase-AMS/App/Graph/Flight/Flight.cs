@@ -1,4 +1,4 @@
-﻿using AirEase_AMS.App.Entity.Aircraft;
+using AirEase_AMS.App.Entity.Aircraft;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
@@ -12,8 +12,6 @@ public class Flight : Route, IEquatable<Flight>
         return _flightTime;
     }
     
-    
-
 public bool Equals(Flight? other)
     {
         if (ReferenceEquals(null, other)) return false;
