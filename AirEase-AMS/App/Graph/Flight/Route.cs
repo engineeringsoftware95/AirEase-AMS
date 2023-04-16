@@ -9,6 +9,7 @@ public class Route : IRoute, IComparable<Route>
     private IGraphNode _destination;
     private List<IRoute> _flightsOnRoute;
     private int _distance;
+    private int _routeId;
 
     public bool FlightExists(IRoute flight)
     {
@@ -98,6 +99,18 @@ public class Route : IRoute, IComparable<Route>
         // otherwise compare the values.
         int retval = lhs.GetDistance().CompareTo(rhs.GetDistance());
         return retval != 0 ? retval : lhs.CompareTo(rhs);
+    }
+
+
+    public int RouteId()
+    {
+        return _routeId;
+    }
+
+
+    public void GenerateId()
+    {
+        _routeId = HLib.GenerateFiveDigitId();
     }
     
 }
