@@ -24,7 +24,17 @@ namespace AirEase_AMS.Interface
         {
             password= PasswordBox.Text;
             username= UsernameBox.Text;
-            if(Customer.AttemptLogin(username, password))
+            if(true)// Customer.AttemptLogin(username, password))
+            {
+                // Setup currentCustomer using a database query for the username
+
+                //Customer currentCustomer;
+                CustomerMain customerInstance = new CustomerMain();
+                this.Hide();
+                customerInstance.ShowDialog();
+                this.Close();
+            }
+            else if(Employee.AttemptLogin(username, password))
             {
                 this.Hide();
                 this.Close();
