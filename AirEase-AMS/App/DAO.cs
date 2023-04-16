@@ -58,6 +58,10 @@ public class DatabaseAccessObject
             Console.WriteLine(e.ToString());
             isConnected = false;
         }
+        catch (System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+        }
     }
 
     /// <summary>
@@ -113,6 +117,10 @@ public class DatabaseAccessObject
         catch (SqlException e)
         {
             //Print exception info
+            Console.WriteLine(e.ToString());
+        }
+        catch (System.InvalidOperationException e)
+        {
             Console.WriteLine(e.ToString());
         }
         //Looks like an exception occurred - return null.

@@ -2,21 +2,28 @@ using AirEase_AMS.App.Entity.Aircraft;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
-public class Flight : Route, IEquatable<Flight>
+public class Flight : Route
 {
     private readonly DateTime _flightTime;
     private readonly Aircraft _aircraft;
-    
+    private Route _route;
+    private string flightID;
+
+    public Flight()
+    {
+
+    }
+
     public DateTime GetTime()
     {
         return _flightTime;
     }
-    
-public bool Equals(Flight? other)
+
+    public bool Equals(Flight? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return    _flightTime.Equals(other._flightTime)
+        return _flightTime.Equals(other._flightTime)
                && _aircraft.Equals(other._aircraft)
                && Origin().Equals(other.Origin())
                && Destination().Equals(other.Destination());
@@ -35,5 +42,10 @@ public bool Equals(Flight? other)
         return HashCode.Combine(_flightTime, _aircraft);
     }
 
-
+    public DateTime EstimateArrivalTime()
+    {
+        DateTime estimate = new DateTime();
+        
+        return estimate;
+    }
 }

@@ -28,6 +28,7 @@ namespace AirEase_AMS.App
             Console.WriteLine("MarkMan UID :" + marketManager.GenerateId());
             Console.WriteLine("Load Eng UID :" + loadEngineer.GenerateId());
             */
+
             Console.WriteLine();
             DatabaseAccessObject dbAccessObject = new DatabaseAccessObject();
             dbAccessObject.Update("DELETE FROM CUSTOMER;");
@@ -50,6 +51,7 @@ namespace AirEase_AMS.App
             Console.WriteLine("Thank you for playing Wing Commander");
 
 
+            System. Console.WriteLine("\nThank you for playing Wing Commander\n");
         }
     }
 }
