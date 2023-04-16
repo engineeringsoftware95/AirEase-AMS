@@ -32,7 +32,8 @@ public class User : IUser
         _positionTitle = "";
         _userId = -1;
     }
-    public User(string firstName, string lastName, string email, string phoneNum, string address, string birthDate, string password)
+    public User(string firstName, string lastName, string email, string phoneNum, 
+                string address, string birthDate, string password)
     {
         _firstName = firstName;
         _lastName = lastName;
@@ -41,6 +42,9 @@ public class User : IUser
         _address = address;
         _birthDate = birthDate;
         _password = password;
+        SetSalt(HLib.GenerateSalt(32));
+        SetPassword(HLib.EncryptPassword(password, GetSalt()));
+        SetId(GenerateId());
     }
 
 

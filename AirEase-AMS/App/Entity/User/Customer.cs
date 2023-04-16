@@ -6,17 +6,10 @@ namespace AirEase_AMS.App.Entity.User;
 public class Customer : User
 {
     public Customer(string fName, string lName, string address, string date, string password, string phoneNum, string email)
+    : base(fName, lName, address, date, password, phoneNum, email)
     {
         SetRole(1);
-        SetFirstName(fName);
-        SetLastName(lName);
-        SetAddress(address);
-        SetBirthDate(date);
-        SetSalt(HLib.GenerateSalt(32));
-        SetPassword(HLib.EncryptPassword(password, GetSalt()));
-        SetPhoneNum(phoneNum);
-        SetEmail(email);
-        SetId(GenerateId());
+  
     }
 
     public Customer(string username, string password)
