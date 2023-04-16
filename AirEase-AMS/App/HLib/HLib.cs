@@ -17,6 +17,16 @@ namespace AirEase_AMS.App
         }
 
         /// <summary>
+        /// Generates some number between 100000 and 999999.
+        /// </summary>
+        public static int GenerateSixDigitId()
+        {
+            var rand = new Random();
+            //Generate some number between 100000 and 999999.
+            return rand.Next(100000, 999999);
+        }
+
+        /// <summary>
         /// Prepends a digit to an integer number.
         /// </summary>
         /// <param name="digit">The number to be prepended.</param>

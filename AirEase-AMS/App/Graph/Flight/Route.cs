@@ -1,15 +1,27 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
+using System.Data;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
 public class Route : IRoute, IComparable<Route>
 {
-    private IGraphNode _origin;
-    private IGraphNode _destination;
-    private List<IRoute> _flightsOnRoute;
-    private int _distance;
-    private int _routeId;
+    protected IGraphNode _origin;
+    protected IGraphNode _destination;
+    protected List<IRoute> _flightsOnRoute;
+    protected int _distance;
+    protected string _routeId;
+
+    public Route(string flightId, string departureId)
+    {
+        
+
+    }
+
+    public Route(string routeId)
+    {
+
+    }
 
     public bool FlightExists(IRoute flight)
     {
@@ -102,7 +114,7 @@ public class Route : IRoute, IComparable<Route>
     }
 
 
-    public int RouteId()
+    public string RouteId()
     {
         return _routeId;
     }
@@ -110,7 +122,7 @@ public class Route : IRoute, IComparable<Route>
 
     public void GenerateId()
     {
-        _routeId = HLib.GenerateFiveDigitId();
+        _routeId = HLib.GenerateSixDigitId().ToString();
     }
     
 }

@@ -48,10 +48,13 @@ namespace AirEase_AMS.App
             MarketManager mm = new MarketManager("Patricia", "Pattinson", "123 Market Road, Dallas, TX", "2023-04-14", "Password123", "2223339999", "patsy@marketmanager.net", "123456789");
             Console.WriteLine(mm.AttemptAccountCreation());
             */
+            App.Ticket.Ticket tck = new App.Ticket.Ticket(250, 76.22M, "Cleveland", "Atlanta");
+            Console.WriteLine(tck.GetTicketInformation());
+
             Console.WriteLine("Thank you for playing Wing Commander");
 
 
-            System. Console.WriteLine("\nThank you for playing Wing Commander\n");
+            Console.WriteLine("\nThank you for playing Wing Commander\n");
         }
     }
 }

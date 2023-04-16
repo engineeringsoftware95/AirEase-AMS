@@ -93,7 +93,7 @@ namespace AirEase_AMS.App.Tests
 
             //Displays hex values with '-' inbetween - that's where the 64 * 3 - 1 comes from. That's the ACTUAL string len
             Assert.AreEqual(result1, result2);
-            Assert.AreEqual(64*3-1, result2.Length);
+            Assert.AreEqual(64 * 3 - 1, result2.Length);
         }
 
         [Test()]
@@ -107,6 +107,14 @@ namespace AirEase_AMS.App.Tests
             int outLen = saltSize * 3 - 1;
             if (outLen < 0) outLen = 0;
             Assert.AreEqual(outLen, result.Length);
+        }
+
+        [Test()]
+        public void GenerateSixDigitIdTest()
+        {
+            string result = HLib.GenerateSixDigitId().ToString();
+            Console.WriteLine("Result = " + result);
+            Assert.AreEqual(result.Length, 6);
         }
     }
 }
