@@ -11,6 +11,7 @@ using Microsoft.Data;
 public class DatabaseAccessObject
 {
     SqlConnection? connection = null;
+    private bool isConnected = false;
     /// <summary>
     /// This is the constructor for the database access object. It will initialize a connection to the database.
     /// </summary>
@@ -43,11 +44,19 @@ public class DatabaseAccessObject
 
             //Once the connection is open, we have finished our job here!!
             connection.Open();
+            isConnected = true;
 
         }
         catch (SqlException e)
         {
             Console.WriteLine(e.ToString());
+            isConnected = false;
+            
+        }
+        catch(System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+            isConnected = false;
         }
         catch (System.InvalidOperationException e)
         {
@@ -62,7 +71,7 @@ public class DatabaseAccessObject
     {
         if (connection != null) { connection.Close(); }
     }
-
+    public bool IsConnected { get { return isConnected; } }
 
     /// <summary>
     /// A general function for database SELECTS. Expects to get some return value, or it returns null.

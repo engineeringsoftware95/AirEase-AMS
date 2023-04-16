@@ -1,4 +1,4 @@
-﻿using AirEase_AMS.App.Entity.Aircraft;
+using AirEase_AMS.App.Entity.Aircraft;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
