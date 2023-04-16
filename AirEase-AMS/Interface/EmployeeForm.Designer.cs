@@ -52,9 +52,16 @@
             this.summaryReportWindow = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.HomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.MarketsTab.SuspendLayout();
             this.FlightsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flightManifestWindow)).BeginInit();
             this.RoutesTab.SuspendLayout();
@@ -62,6 +69,7 @@
             this.AccountsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.summaryReportWindow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -124,6 +132,12 @@
             // 
             // MarketsTab
             // 
+            this.MarketsTab.Controls.Add(this.button3);
+            this.MarketsTab.Controls.Add(this.label5);
+            this.MarketsTab.Controls.Add(this.label4);
+            this.MarketsTab.Controls.Add(this.pictureBox4);
+            this.MarketsTab.Controls.Add(this.comboBox2);
+            this.MarketsTab.Controls.Add(this.comboBox1);
             this.MarketsTab.Location = new System.Drawing.Point(50, 4);
             this.MarketsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MarketsTab.Name = "MarketsTab";
@@ -323,6 +337,59 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(123, 137);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(123, 185);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 23);
+            this.comboBox2.TabIndex = 1;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(6, 5);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(238, 110);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 2;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(70, 145);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Flight";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(70, 193);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Plane";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(123, 233);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(121, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Set";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -336,6 +403,8 @@
             this.tabControl1.ResumeLayout(false);
             this.HomeTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.MarketsTab.ResumeLayout(false);
+            this.MarketsTab.PerformLayout();
             this.FlightsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.flightManifestWindow)).EndInit();
             this.RoutesTab.ResumeLayout(false);
@@ -344,6 +413,7 @@
             this.AccountsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.summaryReportWindow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -373,5 +443,11 @@
         private DataGridView flightManifestWindow;
         private Button button2;
         private DataGridView summaryReportWindow;
+        private PictureBox pictureBox4;
+        private ComboBox comboBox2;
+        private ComboBox comboBox1;
+        private Label label5;
+        private Label label4;
+        private Button button3;
     }
 }

@@ -22,7 +22,7 @@ public class DatabaseAccessObject
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
             //This is the name of the SQL Server - don't ask why
-            builder.DataSource = "THE";
+            //builder.DataSource = "THE";
 
             //We need to tell the connection object - WE WANT TO CONNECT USING TCP!
             //Otherwise, we would need to be a trusted_connection, and talk via pipes.
