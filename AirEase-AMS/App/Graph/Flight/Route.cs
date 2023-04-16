@@ -1,6 +1,7 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
 using System.Data;
+using System.Windows.Forms;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
@@ -8,19 +9,49 @@ public class Route : IRoute, IComparable<Route>
 {
     protected IGraphNode _origin;
     protected IGraphNode _destination;
-    protected List<IRoute> _flightsOnRoute;
+    protected List<Flight> _flightsOnRoute;
     protected int _distance;
     protected string _routeId;
 
+    /// <summary>
+    /// Base constructor for FLIGHT
+    /// </summary>
+    /// <param name="flightId">Flight key used in identifying the flight information.</param>
+    /// <param name="departureId">Departure id used in identifying departure information.</param>
     public Route(string flightId, string departureId)
     {
         
 
     }
 
+
+    /// <summary>
+    /// Takes a route ID and instantiates this class with the route with routeID from the database.
+    /// </summary>
+    /// <param name="routeId">The key associated with the route we want.</param>
     public Route(string routeId)
     {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
 
+        _routeId = routeId;
+        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
+        System.Data.DataTable routeTable = dao.Retrieve(query);
+        if (routeTable == null || routeTable.Rows.Count != 1)
+        {
+            _routeId = "-1";
+            _origin = new Airport("-1");
+
+            _destination = new Airport("-1");
+            _flightsOnRoute = new List<Flight>();
+        }
+        else
+        {
+            DataRow route = routeTable.Rows[0];
+            _routeId = routeId;
+            _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
+            _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
+            _flightsOnRoute = new List<Flight>();
+        }
     }
 
     public bool FlightExists(IRoute flight)

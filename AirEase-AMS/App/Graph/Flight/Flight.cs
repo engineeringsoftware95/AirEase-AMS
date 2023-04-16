@@ -10,6 +10,11 @@ public class Flight : Route
     private string _flightID;
     private string _yearWeekId;
 
+    /// <summary>
+    /// Takes a flight and departure key, uses them to load this instance with data with identical keys in the database.
+    /// </summary>
+    /// <param name="flightId">The key used to identify the correct flight information.</param>
+    /// <param name="departureId">The key used to identify the correct departure information.</param>
     public Flight(string flightId, string departureId) : base(flightId, departureId)
     {
         _flightID = flightId;
@@ -33,7 +38,21 @@ public class Flight : Route
             _routeId = flight["RouteID"].ToString() ?? "-1";
             query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
             System.Data.DataTable routeTable = dao.Retrieve(query);
+            if (routeTable == null || routeTable.Rows.Count != 1)
+            {
+                _routeId = "-1";
+                _origin = new Airport("-1");
 
+                _destination = new Airport("-1");
+                _flightsOnRoute = new List<Flight>();
+            }
+            else
+            {
+                DataRow route = routeTable.Rows[0];
+                _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
+                _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
+                _flightsOnRoute = new List<Flight>();
+            }
 
         }
 
