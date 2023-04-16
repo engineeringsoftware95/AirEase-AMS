@@ -1,4 +1,5 @@
 using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Entity.User.Employees;
 
 namespace AirEase_AMS.Interface
 {
@@ -26,7 +27,58 @@ namespace AirEase_AMS.Interface
             username= UsernameBox.Text;
             if(Customer.AttemptLogin(username, password))
             {
+                //Hide current form
                 this.Hide();
+                //Customer
+                if (username[0] == '1')
+                {
+                    //Initialize customer class
+                    Customer loggedUser = new Customer(username, password);
+
+                    //Load customer form
+
+                }
+                //Employee
+                else
+                {
+
+                    EmployeeForm employeeForm;
+                    //Initialize employee class and load form
+                    switch (username[0])
+                    {
+                        case '2':
+                            Accountant loggedAcc = new Accountant(username, password);
+                            //Load employee form
+                            employeeForm = new EmployeeForm(loggedAcc);
+
+                            break;
+                        case '3':
+                            FlightManager loggedFm = new FlightManager(username, password);
+                            //Load employee form
+                            employeeForm = new EmployeeForm(loggedFm);
+                            break;
+                        case '4':
+                            LoadEngineer loggedLe = new LoadEngineer(username, password);
+                            //Load employee form
+                            employeeForm = new EmployeeForm(loggedLe);
+
+                            break;
+                        case '5':
+                            MarketManager loggedMm = new MarketManager(username, password);
+                            //Load employee form
+                            employeeForm = new EmployeeForm(loggedMm);
+                            break;
+                        default:
+                            //Error
+                            return;
+                            
+                    }
+                    employeeForm.ShowDialog();
+
+
+                }
+
+                //Close out login form
                 this.Close();
             }
             else
@@ -39,13 +91,13 @@ namespace AirEase_AMS.Interface
         //PASSWORD
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            password = e.ToString() ?? "";
+
         }
 
         //USERNAME
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            username = e.ToString() ?? "";
+
         }
 
         private void Login_Load(object sender, EventArgs e)

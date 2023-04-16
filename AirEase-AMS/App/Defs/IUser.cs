@@ -18,5 +18,8 @@ public interface IUser
     string GetBirthDate();
     int GetUserId();
     int GenerateId();
+    bool AttemptAccountCreation();
+
+
 
 }

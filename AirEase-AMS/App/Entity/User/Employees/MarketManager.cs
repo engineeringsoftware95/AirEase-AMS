@@ -1,10 +1,28 @@
 ﻿namespace AirEase_AMS.App.Entity.User.Employees;
 
-public class MarketManager : User
+public class MarketManager : Employee
 {
-    private int _roleBit = 5;
-    public MarketManager()
+
+    MarketManager() : base() { }
+
+    public MarketManager(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn)
     {
-        SetRole(4);
+        _roleBit = 5;
+        _positionTitle = "Market Manager";
+        _firstName = fName;
+        _lastName = lName;
+        _email = email;
+        _phoneNum = phoneNum;
+        _address = address;
+        _birthDate = date;
+        _salt = HLib.GenerateSalt(32);
+        _password = HLib.EncryptPassword(password, _salt);
+        _ssn = ssn;
+        _userId = GenerateId();
+    }
+
+    public MarketManager(string username, string password) : base(username, password)
+    {
+
     }
 }
