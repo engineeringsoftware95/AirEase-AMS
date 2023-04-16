@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AirEase_AMS.App
 {
-    public class HLib
+    class HLib
     {
         /// <summary>
         /// Generates some number between 10000 and 99999.
@@ -23,16 +23,14 @@ namespace AirEase_AMS.App
         /// <param name="number">The number being prepended to.</param>
         public static int PrependNumberToInteger(int digit, int number)
         {
-
-            if (Math.Abs(digit) > 9) return -1;
             //Prepend 1 to 9600:
             //10000 + 9600 = 19600
-            
+
             //This is the rounded down log10 of number. Used to figure out how large to make the prepended integer.
-            int numberOfDigits = Convert.ToInt32(Math.Floor(Math.Log10((number <= 0) ? 1 : number)));
+            int numberOfDigits = Convert.ToInt32(Math.Floor(Math.Log10(number)));
             //The prepended digit will be one order of magnitude larger than number.
             numberOfDigits++;
-            int prependedInteger = (Math.Abs(digit) * Convert.ToInt32(Math.Pow(10, numberOfDigits))) + Math.Abs(number);
+            int prependedInteger = (digit * Convert.ToInt32(Math.Pow(10, numberOfDigits))) + number;
             return prependedInteger;
         }
 
@@ -43,8 +41,6 @@ namespace AirEase_AMS.App
         /// <returns></returns>
         public static int ConvertToPoints(double cost)
         {
-
-            if (cost < 0) return -1;
             //This even works on numbers without exactly two digits of precision.
             //Floor(19.3294 * 100) = Floor(1932.94) = 1932
 
@@ -53,7 +49,7 @@ namespace AirEase_AMS.App
             //the total dollar amount its being converted from.
             //1 point = 1 penny
 
-            return Convert.ToInt32(Math.Floor(cost * 100));
+            return Convert.ToInt32(cost * 100);
         }
 
         /// <summary>
