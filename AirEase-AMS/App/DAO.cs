@@ -58,10 +58,6 @@ public class DatabaseAccessObject
             Console.WriteLine(e.ToString());
             isConnected = false;
         }
-        catch (System.InvalidOperationException e)
-        {
-            Console.WriteLine(e.ToString());
-        }
     }
 
     /// <summary>
