@@ -2,7 +2,7 @@
 
 namespace AirEase_AMS.App.Entity.Aircraft;
 
-public class Aircraft : IAircraft
+public class Aircraft : IAircraft, IComparable<Aircraft>
 {
     public void SetCruisingSpeed()
     {
@@ -33,4 +33,12 @@ public class Aircraft : IAircraft
     {
         throw new NotImplementedException();
     }
+    
+    public int CompareTo(Aircraft? other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        if (ReferenceEquals(null, other)) return 1;
+        return String.Compare(GetModelName(), other.GetModelName(), StringComparison.Ordinal);
+    }
+    
 }

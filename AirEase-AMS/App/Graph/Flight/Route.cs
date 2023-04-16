@@ -3,14 +3,14 @@ using AirEase_AMS.App.Defs.Struct;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
-public class Route : IRoute
+public class Route : IRoute, IComparable<Route>
 {
     private IGraphNode _origin;
     private IGraphNode _destination;
-    private List<IFlight> _flightsOnRoute;
+    private List<IRoute> _flightsOnRoute;
+    private int _distance;
 
-
-    public bool FlightExists(IFlight flight)
+    public bool FlightExists(IRoute flight)
     {
         return _flightsOnRoute.Contains(flight);
     }
@@ -23,11 +23,12 @@ public class Route : IRoute
      * search for flights for hours, days, months, etc. with a single function,
      * which are before a certain departure time.
      */
-    public List<IFlight>? FindFlightsInRange(DateTime begin, DateTime end)
+    public List<Flight>? FindFlightsInRange(DateTime begin, DateTime end)
     {
-        List<IFlight>? validFlights = null;
-        foreach(var flight in _flightsOnRoute)
+        List<Flight>? validFlights = null;
+        foreach(var route in _flightsOnRoute)
         {
+            var flight = (Flight)route;
             if (DateTime.Compare(flight.GetTime(), end) <= 0)
             {
                 if (DateTime.Compare(flight.GetTime(), begin) >= 0)
@@ -58,4 +59,45 @@ public class Route : IRoute
     {
         return _origin.GetCityName().Equals(city);
     }
+
+    public DateTime GetTime()
+    {
+        throw new NotImplementedException();
+    }
+
+
+    public int GetDistance()
+    {
+        return _distance;
+    }
+    
+    public int CompareTo(Route? other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        if (ReferenceEquals(null, other)) return 1;
+        return GetDistance().CompareTo(other.GetDistance());
+    }
+    
+    
+    public static int CompareByDistance(Flight? lhs, Flight? rhs)
+    {
+        if ((lhs == null))
+        {
+            if (rhs == null) // if lhs and rhs are null, they are equal
+            {
+                return 0; // so return 0.
+            }
+
+            return -1; // If lhs is null and rhs is not, then lhs < rhs.
+        }
+
+        if (rhs == null) // likewise, if we get here, lhs is not null, so lhs > rhs
+        {
+            return 1;
+        }
+        // otherwise compare the values.
+        int retval = lhs.GetDistance().CompareTo(rhs.GetDistance());
+        return retval != 0 ? retval : lhs.CompareTo(rhs);
+    }
+    
 }

@@ -59,7 +59,6 @@ public class DatabaseAccessObject
         if (connection != null) { connection.Close(); }
     }
 
-
     /// <summary>
     /// A general function for database SELECTS. Expects to get some return value, or it returns null.
     /// </summary>
