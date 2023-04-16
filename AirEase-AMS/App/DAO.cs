@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data;
+
+
 public class DatabaseAccessObject
 {
     SqlConnection? connection = null;
@@ -47,6 +49,10 @@ public class DatabaseAccessObject
         {
             Console.WriteLine(e.ToString());
         }
+        catch (System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+        }
     }
 
     /// <summary>
@@ -63,13 +69,14 @@ public class DatabaseAccessObject
     /// </summary>
     /// <param name="sqlQuery">The query being passed to the database (WARNING: query needs sanitized before getting here!)</param>
     /// <returns>A data table object, populated with the results of the input search query. Can be null.</returns>
-    public DataTable? Retrieve(string sqlQuery)
+    public DataTable Retrieve(string sqlQuery)
     {
+        if(sqlQuery== "") return new DataTable();
         //No connection established - return error
         if (connection == null)
         {
             Console.WriteLine("Connection is null. Abort.");
-            return null;
+            return new DataTable();
         }
         try
         {
@@ -83,7 +90,7 @@ public class DatabaseAccessObject
                     //No return data - return null object
                     if (!reader.HasRows)
                     {
-                        return null;
+                        return new DataTable();
                     }
                     else
                     {
@@ -97,24 +104,28 @@ public class DatabaseAccessObject
                     }
                 }
             }
-
         }
         catch (SqlException e)
         {
             //Print exception info
             Console.WriteLine(e.ToString());
         }
+        catch (System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+        }
         //Looks like an exception occurred - return null.
-        return null;
+        return new DataTable();
     }
 
     /// <summary>
     ///  A general function for database edits. Returns the number of rows altered.
     /// </summary>
-    /// <param name="sqlQuery">The query being passed to the database (WARNING: query needs sanitized before getting here!)</param>
+    /// <param name="sqlQuery">The query being passed to the database</param>
     /// <returns>The number of rows altered by the input query.</returns>
     public int Update(string sqlQuery)
     {
+        if (sqlQuery == "") return 0;
         //No connection established - return error
         if (connection == null)
         {
@@ -169,8 +180,16 @@ public class DatabaseAccessObject
             }
             Console.WriteLine();
         }
+    }
 
-
+    /// <summary>
+    /// Sanitizes a user input string.
+    /// </summary>
+    /// <param name="input">The input string to be sanitized.</param>
+    /// <returns>Returns the sanitized string.</returns>
+    public static string SanitizeString(string input)
+    {
+        return input.Replace("'", "''");
     }
 }
 
