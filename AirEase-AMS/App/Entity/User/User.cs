@@ -28,9 +28,11 @@ public class User : IUser
         _birthDate = "";
         _password = "";
         _salt = "";
+        _ssn = "";
+        _positionTitle = "";
         _userId = -1;
     }
-    public User(string firstName, string lastName, string email, string phoneNum, string address, string birthDate, string password, string salt, int userId)
+    public User(string firstName, string lastName, string email, string phoneNum, string address, string birthDate, string password)
     {
         _firstName = firstName;
         _lastName = lastName;
@@ -39,9 +41,8 @@ public class User : IUser
         _address = address;
         _birthDate = birthDate;
         _password = password;
-        _userId = userId;
-        _salt = salt;
     }
+
 
     public void SetFirstName(string first)
     {
@@ -193,6 +194,9 @@ public class User : IUser
         string table = (role == 1) ? "CUSTOMER" : "EMPLOYEE"; 
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
+        //If not connected, return false
+        if (dao.IsConnected) return false;
+
         //While the ID isn't unique, make a new one.
         SetId(GenerateId());
         while (dao.Retrieve("SELECT * FROM " + table + " WHERE UserID=" + GetUserId() + ";").Rows.Count > 0)
@@ -233,7 +237,10 @@ public class User : IUser
     /// <returns>If the login was successful.</returns>
     public static bool AttemptLogin(string username, string password)
     {
-        string table = (username[0] == '1') ? "CUSTOMER" : "EMPLOYEE";
+        if(String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password)) { return false; }
+        char roleBit = username[0];
+        string table = (roleBit == '1') ? "CUSTOMER" : "EMPLOYEE";
+        string passwordColumn = (roleBit == '1') ? "UserPassword" : "EmployeePassword";
 
         //Sanitize user inputs
         username = DatabaseAccessObject.SanitizeString(username);
@@ -256,7 +263,8 @@ public class User : IUser
         password = HLib.EncryptPassword(password, salt);
 
         //Login verified
-        query = "SELECT * FROM " + table + " WHERE UserPassword = '" + password + "' AND UserID = " + username + ";";
+        query = "SELECT * FROM " + table + " WHERE "+passwordColumn+" = '" + password + "' AND UserID = " + username + ";";
+        Console.WriteLine(query);
         
         //Return whether our select returned a match
         return (dao.Retrieve(query).Rows.Count == 1);

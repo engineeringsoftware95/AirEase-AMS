@@ -2,8 +2,25 @@
 
 public class Accountant : Employee
 {
+    Accountant() : base() { }
+    public Accountant(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn)
+    {
+        _roleBit = 2;
+        _positionTitle = "Accountant";
+        _firstName = fName;
+        _lastName = lName;
+        _email = email;
+        _phoneNum = phoneNum;
+        _address = address;
+        _birthDate = date;
+        _salt = HLib.GenerateSalt(32);
+        _password = HLib.EncryptPassword(password, _salt);
+        _ssn = ssn;
+        _userId = GenerateId();
+    }
 
-    //This is similar to a member initializer list from cpp - instead of copying the memory over, and rereading it in the function contents, it sets the data the first time its copied over
-    public Accountant(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn) =>
-        (_firstName, _lastName, _address, _birthDate, _salt, _phoneNum, _email, _ssn, _positionTitle, _roleBit,_password) = (fName, lName, address, date, HLib.GenerateSalt(32), phoneNum, email, ssn, "Accountant", 2, HLib.EncryptPassword(password, _salt));
+    public Accountant(string username, string password) : base(username, password)
+    {
+
+    }
 }
