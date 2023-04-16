@@ -5,8 +5,8 @@ namespace AirEase_AMS.Interface
 {
     public partial class Login : Form
     {
-        string username;
-        string password;
+        string username = "";
+        string password = "";
 
         public Login()
         {
@@ -23,19 +23,10 @@ namespace AirEase_AMS.Interface
         //SUBMIT BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
-            password= PasswordBox.Text;
-            username= UsernameBox.Text;
-            if(true)// Customer.AttemptLogin(username, password))
-            {
-                // Setup currentCustomer using a database query for the username
+            password = PasswordBox.Text;
+            username = UsernameBox.Text;
 
-                //Customer currentCustomer;
-                CustomerMain customerInstance = new CustomerMain();
-                this.Hide();
-                customerInstance.ShowDialog();
-                this.Close();
-            }
-            else if(Employee.AttemptLogin(username, password))
+            if(Employee.AttemptLogin(username, password))
             {
                 //Hide current form
                 this.Hide();
@@ -45,7 +36,13 @@ namespace AirEase_AMS.Interface
                     //Initialize customer class
                     Customer loggedUser = new Customer(username, password);
 
-                    //Load customer form
+                    // Setup currentCustomer using a database query for the username
+
+                    //Customer currentCustomer;
+                    CustomerMain customerInstance = new CustomerMain();
+                    this.Hide();
+                    customerInstance.ShowDialog();
+                    this.Close();
 
                 }
                 //Employee
