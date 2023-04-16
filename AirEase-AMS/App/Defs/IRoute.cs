@@ -1,14 +1,16 @@
 ﻿using AirEase_AMS.App.Defs.Struct;
+using AirEase_AMS.App.Graph.Flight;
 
 namespace AirEase_AMS.App.Defs;
 
 public interface IRoute
 {
-    public bool FlightExists(IFlight flight);
+    bool FlightExists(IRoute flight);
     int GetDistance();
-    public IGraphNode Origin();
-    public IGraphNode Destination();
-    public List<IFlight>? FindFlightsInRange(DateTime begin, DateTime end);
-    public bool IsDestination(string city);
-    public bool IsOrigin(string city);
+    IGraphNode Origin();
+    IGraphNode Destination();
+    List<Flight>? FindFlightsInRange(DateTime begin, DateTime end);
+    bool IsDestination(string city);
+    bool IsOrigin(string city);
+    DateTime GetTime();
 }

@@ -9,8 +9,8 @@ namespace AirEase_AMS.App.Graph;
 
 public class Graph : IGraph
 {
-    private List<IGraphNode> _airports;
-    private List<string> _cityNames;
+    private List<IGraphNode>? _airports;
+    private List<string>? _cityNames;
     
 
 
@@ -45,10 +45,10 @@ public class Graph : IGraph
         return null;
     }
 
-    public List<IFlight>? GetFlightsInRange(string origin, string destination, DateTime begin,
+    public List<Flight.Flight>? GetFlightsInRange(string origin, string destination, DateTime begin,
         DateTime end)
     {
-        List<IFlight>? validFlights = null;
+        List<Flight.Flight>? validFlights = null;
         IRoute? route = FindFlight(origin, destination);
         validFlights = route?.FindFlightsInRange(begin, end);
         validFlights?.Sort();

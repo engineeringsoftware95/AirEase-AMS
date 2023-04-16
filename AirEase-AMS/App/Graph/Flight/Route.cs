@@ -7,10 +7,10 @@ public class Route : IRoute, IComparable<Route>
 {
     private IGraphNode _origin;
     private IGraphNode _destination;
-    private List<IFlight> _flightsOnRoute;
+    private List<IRoute> _flightsOnRoute;
     private int _distance;
 
-    public bool FlightExists(IFlight flight)
+    public bool FlightExists(IRoute flight)
     {
         return _flightsOnRoute.Contains(flight);
     }
@@ -23,11 +23,12 @@ public class Route : IRoute, IComparable<Route>
      * search for flights for hours, days, months, etc. with a single function,
      * which are before a certain departure time.
      */
-    public List<IFlight>? FindFlightsInRange(DateTime begin, DateTime end)
+    public List<Flight>? FindFlightsInRange(DateTime begin, DateTime end)
     {
-        List<IFlight>? validFlights = null;
-        foreach(var flight in _flightsOnRoute)
+        List<Flight>? validFlights = null;
+        foreach(var route in _flightsOnRoute)
         {
+            var flight = (Flight)route;
             if (DateTime.Compare(flight.GetTime(), end) <= 0)
             {
                 if (DateTime.Compare(flight.GetTime(), begin) >= 0)
@@ -57,6 +58,11 @@ public class Route : IRoute, IComparable<Route>
     public bool IsOrigin(string city)
     {
         return _origin.GetCityName().Equals(city);
+    }
+
+    public DateTime GetTime()
+    {
+        throw new NotImplementedException();
     }
 
 
