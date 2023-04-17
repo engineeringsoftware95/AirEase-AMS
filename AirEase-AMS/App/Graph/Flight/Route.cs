@@ -13,16 +13,9 @@ public class Route : IRoute, IComparable<Route>
     protected int _distance;
     protected string _routeId;
 
-    /// <summary>
-    /// Base constructor for FLIGHT
-    /// </summary>
-    /// <param name="flightId">Flight key used in identifying the flight information.</param>
-    /// <param name="departureId">Departure id used in identifying departure information.</param>
-    public Route(string flightId, string departureId)
-    {
-        
 
-    }
+    //Base constructor used for child class flight
+    protected Route() { }
 
 
     /// <summary>
@@ -52,6 +45,29 @@ public class Route : IRoute, IComparable<Route>
             _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
             _flightsOnRoute = new List<Flight>();
         }
+    }
+
+    public Route(string originAirportId, string destinationAirportId, int distanceMiles)
+    {
+        _routeId = GenerateId();
+        _origin = new Airport(originAirportId);
+        _destination = new Airport(destinationAirportId);
+        _distance = distanceMiles;
+        _flightsOnRoute= new List<Flight>();
+    }
+
+    public bool UploadRoute()
+    {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        //While the ID isn't unique, make a new one.
+        _routeId = (GenerateId());
+        while (dao.Retrieve("SELECT * FROM FLIGHTROUTE WHERE RouteID=" + _routeId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _routeId = (GenerateId());
+        }
+        string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3})", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
+        return (dao.Update(query) == 1);
     }
 
     public bool FlightExists(IRoute flight)
@@ -151,9 +167,9 @@ public class Route : IRoute, IComparable<Route>
     }
 
 
-    public void GenerateId()
+    public string GenerateId()
     {
-        _routeId = HLib.GenerateSixDigitId().ToString();
+        return HLib.GenerateSixDigitId().ToString();
     }
     
 }

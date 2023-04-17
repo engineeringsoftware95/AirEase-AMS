@@ -7,7 +7,7 @@ public class Flight : Route
 {
     private readonly DateTime _flightTime;
     private readonly Aircraft _aircraft;
-    private string _flightID;
+    private string _flightId;
     private string _yearWeekId;
 
     /// <summary>
@@ -15,9 +15,9 @@ public class Flight : Route
     /// </summary>
     /// <param name="flightId">The key used to identify the correct flight information.</param>
     /// <param name="departureId">The key used to identify the correct departure information.</param>
-    public Flight(string flightId, string departureId) : base(flightId, departureId)
+    public Flight(string flightId, string departureId)
     {
-        _flightID = flightId;
+        _flightId = flightId;
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         string query = String.Format("EXEC GetAllFlightInformation @DepartureID = {0}, @FlightID = {1};", departureId, flightId);
@@ -42,7 +42,6 @@ public class Flight : Route
             {
                 _routeId = "-1";
                 _origin = new Airport("-1");
-
                 _destination = new Airport("-1");
                 _flightsOnRoute = new List<Flight>();
             }
@@ -56,6 +55,29 @@ public class Flight : Route
 
         }
 
+    }
+
+    public Flight(string routeId, string yearWeekId, DateTime departureTime, string planeId) : base(routeId)
+    {
+        _yearWeekId = yearWeekId;
+        _flightTime = departureTime;
+        _flightId = GenerateId();
+        _routeId = routeId;
+        _aircraft = new Aircraft(planeId);
+    }
+
+    public bool UploadFlight()
+    {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        //While the ID isn't unique, make a new one.
+        _routeId = (GenerateId());
+        while (dao.Retrieve("SELECT * FROM FLIGHT WHERE FlightID=" + _flightId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _flightId = (GenerateId());
+        }
+        string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3})", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
+        return (dao.Update(query) == 1);
     }
 
     public DateTime GetTime()

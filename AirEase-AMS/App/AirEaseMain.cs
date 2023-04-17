@@ -37,6 +37,8 @@ namespace AirEase_AMS.App
             dbAccessObject.PrintDataTable(dt);
             dt = dbAccessObject.Retrieve("SELECT * FROM CUSTOMER;");
             dbAccessObject.PrintDataTable(dt);
+            Customer c = new Customer("Bobby", "Bobber", "Testaddress", DateTime.Now.ToString(), "Test12", "1112223333", "bob@bob.bob");
+            Console.WriteLine(c.AttemptAccountCreation());
 
             //!This is actually important for testing, you can comment it out but do not delete it please. Maybe someday it'll be its own function.
             /*Accountant ac = new Accountant("Tabitha", "Taberton", "123 Tabby Street, Dallas, TX", "2023-04-14", "Password123", "2223339999", "tabbers@accountant.net", "123456789");
@@ -48,8 +50,15 @@ namespace AirEase_AMS.App
             MarketManager mm = new MarketManager("Patricia", "Pattinson", "123 Market Road, Dallas, TX", "2023-04-14", "Password123", "2223339999", "patsy@marketmanager.net", "123456789");
             Console.WriteLine(mm.AttemptAccountCreation());
             */
-            App.Ticket.Ticket tck = new App.Ticket.Ticket(250, 76.22M, "Cleveland", "Atlanta");
+            App.Ticket.Ticket tck = new App.Ticket.Ticket(76.22M, "Cleveland", "Atlanta");
             Console.WriteLine(tck.GetTicketInformation());
+
+            Customer cs1 = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
+            cs1.AttemptAccountCreation();
+            Customer cs2 = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
+            cs2.AttemptAccountCreation();
+            Customer cs3 = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
+            cs3.AttemptAccountCreation();
 
             Console.WriteLine("Thank you for playing Wing Commander");
 

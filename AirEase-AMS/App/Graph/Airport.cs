@@ -40,6 +40,44 @@ public class Airport : IGraphNode
         _arrivingEdges = new List<IRoute>();
     }
 
+    public Airport(string city, string airportName)
+    {
+        _departingEdges = new List<IRoute>;
+        _arrivingEdges = new List<IRoute>;
+        _city = city;
+        _airportId = GenerateId();
+        _airportName = airportName;
+    }
+
+    protected string GenerateId()
+    {
+        return HLib.GenerateSixDigitId().ToString();
+    }
+
+    public string GetAirportId()
+    {
+        return _airportId;
+    }
+
+
+    /// <summary>
+    /// Attempts to upload the current rendition of this class to the database.
+    /// </summary>
+    /// <returns>Returns whether or not the function succeeded.</returns>
+    public bool UploadAirport()
+    {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        //While the ID isn't unique, make a new one.
+        _airportId = (GenerateId());
+        while (dao.Retrieve("SELECT * FROM AIRPORT WHERE UserID=" + _airportId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _airportId = (GenerateId());
+        }
+        string query = String.Format("INSERT INTO AIRPORT VALUES({0}, {1}, {2})", _airportId, _city, _airportName);
+        return (dao.Update(query) == 1);
+    }
+
     public void AddDeparture(IGraphNode destination, IRoute flight)
     {
         if(!_departingEdges.Contains(flight))

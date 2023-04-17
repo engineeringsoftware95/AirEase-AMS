@@ -19,9 +19,9 @@ public class Ticket : ITicket
 
     private List<Flight> flights;
 
-    public Ticket(int straightLineMileage, decimal ticketCost, string startCity, string endCity)
+    public Ticket(decimal ticketCost, string startCity, string endCity)
     {
-        _straightLineMileage = straightLineMileage;
+        _straightLineMileage = 0;
         _ticketCost = ticketCost;
         _ticketId = GenerateTicketId().ToString();
         _startCity = startCity;
@@ -61,6 +61,20 @@ public class Ticket : ITicket
         }
 
         flights = new List<Flight>();
+    }
+
+    public void SetStraightLineMileage(double slm)
+    {
+        _straightLineMileage = slm;
+    }
+
+    public double GetStraightLineMileage() { return _straightLineMileage; }
+
+    public decimal GetTicketCost() { return _ticketCost; }
+
+    public string GetTicketId()
+    {
+        return _ticketId;
     }
 
 

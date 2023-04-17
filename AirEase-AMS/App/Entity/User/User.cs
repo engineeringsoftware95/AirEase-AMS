@@ -32,19 +32,18 @@ public class User : IUser
         _positionTitle = "";
         _userId = -1;
     }
-    public User(string firstName, string lastName, string email, string phoneNum, 
-                string address, string birthDate, string password)
+    public User(string fName, string lName, string address, string date, string password, string phoneNum, string email)
     {
-        _firstName = firstName;
-        _lastName = lastName;
+        _firstName = fName;
+        _lastName = lName;
         _email = email;
         _phoneNum = phoneNum;
         _address = address;
-        _birthDate = birthDate;
-        _password = password;
-        SetSalt(HLib.GenerateSalt(32));
-        SetPassword(HLib.EncryptPassword(password, GetSalt()));
-        SetId(GenerateId());
+        _birthDate = date;
+        _salt = (HLib.GenerateSalt(32));
+        _password = (HLib.EncryptPassword(password, GetSalt()));
+        _ssn = "";
+        _positionTitle = "";
     }
 
 
@@ -199,7 +198,7 @@ public class User : IUser
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //If not connected, return false
-        if (dao.IsConnected) return false;
+        if (!dao.IsConnected) return false;
 
         //While the ID isn't unique, make a new one.
         SetId(GenerateId());
