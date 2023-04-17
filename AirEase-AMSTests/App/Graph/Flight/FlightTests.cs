@@ -16,10 +16,11 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
         {
             DatabaseAccessObject dao = new DatabaseAccessObject();
             dao.Update("DELETE FROM FLIGHT;");
-            Flight flight = new Flight();
+            //Flight flight = new Flight();
 
-            Flight reused = new Flight();
-            Assert.AreEqual(flight., reused.);
+            //Flight reused = new Flight();
+            //Assert.AreEqual(flight., reused.);
+            Assert.Fail();
             dao.Update("DELETE FROM FLIGHT;");
         }
     }

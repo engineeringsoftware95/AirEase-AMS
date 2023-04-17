@@ -42,8 +42,8 @@ public class Airport : IGraphNode
 
     public Airport(string city, string airportName)
     {
-        _departingEdges = new List<IRoute>;
-        _arrivingEdges = new List<IRoute>;
+        _departingEdges = new List<IRoute>();
+        _arrivingEdges = new List<IRoute>();
         _city = city;
         _airportId = GenerateId();
         _airportName = airportName;

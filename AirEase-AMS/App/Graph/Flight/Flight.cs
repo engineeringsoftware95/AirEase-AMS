@@ -117,6 +117,6 @@ public class Flight : Route
 
     public string GetFlightId()
     {
-        return _flightID;
+        return _flightId;
     }
 }
