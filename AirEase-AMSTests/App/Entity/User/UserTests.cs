@@ -95,24 +95,60 @@ namespace AirEase_AMS.App.Entity.User.Tests
             Route route = new Route("Cleveland", "Atlanta", 150);
             route.UploadRoute();
 
-            Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
-            Flight flight = new Flight(route.GetRouteId(), (yearWeekId+2).ToString(), DateTime.Now);
-            flight.UploadFlight();
-            ticket.AddFlight(flight);
-            Flight flight2 = new Flight(route.GetRouteId(), (yearWeekId+2).ToString(), DateTime.Now);
-            flight.UploadFlight();
-            ticket.AddFlight(flight);
+            for(int i = -5; i < 5; i++)
+            {
+                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
+                Flight flight = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                flight.UploadFlight();
+                ticket.AddFlight(flight);
+                Flight flight2 = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                flight.UploadFlight();
+                ticket.AddFlight(flight);
 
-            ticket.PurchaseTicket();
+                ticket.PurchaseTicket();
+            }
 
-            Ticket.Ticket reuse = new Ticket.Ticket(ticket.GetTicketId());
-            Assert.AreEqual(ticket.GetTicketCost(), reuse.GetTicketCost());
+
+            Assert.AreEqual(5, customer.GetUpcomingTickets().Count);
         }
 
         [Test()]
         public void GetPastTicketsTest()
         {
-            Assert.Fail();
+
+            DateTime time = DateTime.Now;
+            string yearWeekId = time.Year.ToString();
+            yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+
+
+
+
+            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
+            customer.AttemptAccountCreation();
+
+
+
+
+            Route route = new Route("Cleveland", "Atlanta", 150);
+            route.UploadRoute();
+
+            for (int i = -5; i < 5; i++)
+            {
+                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
+                Flight flight = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                flight.UploadFlight();
+                ticket.AddFlight(flight);
+                Flight flight2 = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                flight.UploadFlight();
+                ticket.AddFlight(flight);
+
+                ticket.PurchaseTicket();
+            }
+
+
+            Assert.AreEqual(5, customer.GetPastTickets().Count);
         }
     }
 }
