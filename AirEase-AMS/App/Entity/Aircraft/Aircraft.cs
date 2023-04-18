@@ -47,6 +47,11 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
         DatabaseAccessObject dao = new DatabaseAccessObject();
         return (dao.Update(query) == 1);
     }
+    public void SetAircraftId(string aircraftId)
+    {
+        _aircraftId = aircraftId;
+    }
+
     public void SetCruisingSpeed()
     {
         throw new NotImplementedException();

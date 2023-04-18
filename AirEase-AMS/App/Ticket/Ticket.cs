@@ -16,10 +16,12 @@ public class Ticket : ITicket
     private string _startCity;
     private string _endCity;
     private bool _isRefunded;
+    private string _transactionId;
+    private string _customerId;
 
     private List<Flight> flights;
 
-    public Ticket(decimal ticketCost, string startCity, string endCity)
+    public Ticket(decimal ticketCost, string startCity, string endCity, string customerId)
     {
         _straightLineMileage = 0;
         _ticketCost = ticketCost;
@@ -28,6 +30,8 @@ public class Ticket : ITicket
         _endCity = endCity;
         _isRefunded = false;
         flights = new List<Flight>();
+        _transactionId = HLib.GenerateSixDigitId().ToString();
+        _customerId = customerId;
     }
 
     public Ticket(string ticketId)
@@ -63,6 +67,39 @@ public class Ticket : ITicket
         flights = new List<Flight>();
     }
 
+    public bool UploadTicket()
+    {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        //While the ID isn't unique, make a new one.
+        _transactionId = (GenerateTicketId());
+        while (dao.Retrieve("SELECT * FROM TRANSACTION WHERE TransactionID=" + _transactionId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _ticketId = (GenerateTicketId());
+        }
+
+        //While the ID isn't unique, make a new one.
+        _ticketId = (GenerateTicketId());
+        while (dao.Retrieve("SELECT * FROM TICKETS WHERE TicketID=" + _ticketId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _ticketId = (GenerateTicketId());
+        }
+
+        string query = String.Format("EXEC InsertTicket " +
+            "@TicketID = {0}, @StartCity = '{1}', @EndCity  = '{2}', @TicketCost = {3}, " +
+            "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6}, @PointCost  = {7};", 
+            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transactionId,_customerId, HLib.ConvertToPoints(_ticketCost));
+
+        foreach(Flight flight in flights)
+        {
+            query = String.Format("EXEC UpdateFlights " +
+            "@CustomerID = {0}, @FlightID = {1}, @DepartureID = {2}, @TicketID = {3};", _customerId, flight.GetFlightId(), flight.GetDepartureId(), _ticketId);
+        }
+
+        return (dao.Update(query) == 1);
+    }
+
     public void SetStraightLineMileage(double slm)
     {
         _straightLineMileage = slm;
@@ -90,36 +127,22 @@ public class Ticket : ITicket
     }
 
 
+    
     public double CalculateTicketCost()
     {
-        double runningTotal = 0;
-
-        runningTotal = CalculateStraightLineMileage() * .12;
-        runningTotal += 50;
-        runningTotal += (8 * flights.Count);
-        TimeSpan departureTime = flights[0].GetTime().TimeOfDay;
-       
-        // this needs to be estimated arrival time, not departure time.
-        TimeSpan finalArrival = flights.Last().GetTime().TimeOfDay;
-        if (departureTime.Hours is >= 0 and <= 5)
-        {
-            runningTotal *= .8;
-        }
-        else if(departureTime.Hours <= 8 || finalArrival.Hours >= 19)
-        {
-            runningTotal *= .9;
-        }
-        return runningTotal;
+        //Summates the cost of all flights in this ticket, then adds layover costs.
+        throw new NotImplementedException();
     }
 
     public void AddFlight(Flight flight)
     {
-        flights.Add(flight);
+        if(flights.Count <= 3)
+            flights.Add(flight);
     }
 
-    public int GenerateTicketId()
+    public string GenerateTicketId()
     {
-       return HLib.GenerateSixDigitId();
+       return HLib.GenerateSixDigitId().ToString();
     }
 
     public string GetTicketInformation()

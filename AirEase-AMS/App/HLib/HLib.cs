@@ -51,7 +51,7 @@ namespace AirEase_AMS.App
         /// </summary>
         /// <param name="cost">The price to be converted into points.</param>
         /// <returns></returns>
-        public static int ConvertToPoints(double cost)
+        public static int ConvertToPoints(decimal cost)
         {
 
             if (cost < 0) return -1;

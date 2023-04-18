@@ -21,14 +21,14 @@ namespace AirEase_AMS.App.Tests
         [TestCase(10.257)]
         [TestCase(264.04)]
 
-        public void ConvertToPointsTest(double input)
+        public void ConvertToPointsTest(decimal input)
         {
             //ARRANGE
 
 
             //ACT
             int output = HLib.ConvertToPoints(input);
-            int compOut = (int)(Math.Floor(input * 100.0));
+            int compOut = (int)(Math.Floor(input * 100.00m));
             if (input < 0) compOut = -1;
             Console.WriteLine("Input = " + input + " results in output = " + output);
 

@@ -1,3 +1,4 @@
+using AirEase_AMS.App.Entity.Aircraft;
 using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Entity.User.Employees;
 using AirEase_AMS.Interface;
@@ -14,6 +15,10 @@ namespace AirEase_AMS.App
         [STAThread]
         static void Main()
         {
+            DatabaseAccessObject dao = new DatabaseAccessObject(); 
+            Aircraft defaultAircraft = new Aircraft("B-52", 5);
+            defaultAircraft.SetAircraftId("111111");
+            defaultAircraft.UploadAircraft();
             ApplicationConfiguration.Initialize();
             System.Windows.Forms.Application.Run(new Login());
 
@@ -30,13 +35,12 @@ namespace AirEase_AMS.App
             */
 
             Console.WriteLine();
-            DatabaseAccessObject dbAccessObject = new DatabaseAccessObject();
-            dbAccessObject.Update("DELETE FROM CUSTOMER;");
-            DataTable? dt = dbAccessObject.Retrieve("SELECT * FROM CUSTOMER;");
-            dbAccessObject.Update("DELETE FROM CUSTOMER;");
-            dbAccessObject.PrintDataTable(dt);
-            dt = dbAccessObject.Retrieve("SELECT * FROM CUSTOMER;");
-            dbAccessObject.PrintDataTable(dt);
+            dao.Update("DELETE FROM CUSTOMER;");
+            DataTable? dt = dao.Retrieve("SELECT * FROM CUSTOMER;");
+            dao.Update("DELETE FROM CUSTOMER;");
+            dao.PrintDataTable(dt);
+            dt = dao.Retrieve("SELECT * FROM CUSTOMER;");
+            dao.PrintDataTable(dt);
             Customer c = new Customer("Bobby", "Bobber", "Testaddress", DateTime.Now.ToString(), "Test12", "1112223333", "bob@bob.bob");
             Console.WriteLine(c.AttemptAccountCreation());
 
@@ -50,7 +54,7 @@ namespace AirEase_AMS.App
             MarketManager mm = new MarketManager("Patricia", "Pattinson", "123 Market Road, Dallas, TX", "2023-04-14", "Password123", "2223339999", "patsy@marketmanager.net", "123456789");
             Console.WriteLine(mm.AttemptAccountCreation());
             */
-            App.Ticket.Ticket tck = new App.Ticket.Ticket(76.22M, "Cleveland", "Atlanta");
+            App.Ticket.Ticket tck = new App.Ticket.Ticket(76.22M, "Cleveland", "Atlanta", c.GetUserId().ToString());
             Console.WriteLine(tck.GetTicketInformation());
 
             Customer cs1 = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");

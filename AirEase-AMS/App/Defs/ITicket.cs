@@ -6,7 +6,7 @@ public interface ITicket
 {
     public void AddFlight(Flight flight);
 
-    public int GenerateTicketId();
+    public string GenerateTicketId();
 
     public string GetTicketInformation();
 

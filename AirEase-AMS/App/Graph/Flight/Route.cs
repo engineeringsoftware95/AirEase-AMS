@@ -10,7 +10,7 @@ public class Route : IRoute, IComparable<Route>
     protected IGraphNode _origin;
     protected IGraphNode _destination;
     protected List<Flight> _flightsOnRoute;
-    protected int _distance;
+    protected double _distance;
     protected string _routeId;
 
 
@@ -36,6 +36,7 @@ public class Route : IRoute, IComparable<Route>
 
             _destination = new Airport("-1");
             _flightsOnRoute = new List<Flight>();
+            _distance = 0;
         }
         else
         {
@@ -44,6 +45,7 @@ public class Route : IRoute, IComparable<Route>
             _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
             _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
             _flightsOnRoute = new List<Flight>();
+            _distance = double.Parse(route["DistanceMiles"].ToString() ?? "-1");
         }
     }
 
@@ -66,7 +68,7 @@ public class Route : IRoute, IComparable<Route>
             //Set ID until one is unique
             _routeId = (GenerateId());
         }
-        string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3})", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
+        string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
         return (dao.Update(query) == 1);
     }
 
@@ -126,10 +128,12 @@ public class Route : IRoute, IComparable<Route>
     }
 
 
-    public int GetDistance()
+    public double GetDistance()
     {
         return _distance;
     }
+
+    public string GetRouteId() { return _routeId; } 
     
     public int CompareTo(Route? other)
     {

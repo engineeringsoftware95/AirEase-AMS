@@ -69,12 +69,12 @@ public class Airport : IGraphNode
         DatabaseAccessObject dao = new DatabaseAccessObject();
         //While the ID isn't unique, make a new one.
         _airportId = (GenerateId());
-        while (dao.Retrieve("SELECT * FROM AIRPORT WHERE UserID=" + _airportId + ";").Rows.Count > 0)
+        while (dao.Retrieve("SELECT * FROM AIRPORT WHERE AirportID=" + _airportId + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
             _airportId = (GenerateId());
         }
-        string query = String.Format("INSERT INTO AIRPORT VALUES({0}, {1}, {2})", _airportId, _city, _airportName);
+        string query = String.Format("INSERT INTO AIRPORT VALUES({0}, '{1}', '{2}');", _airportId, _city, _airportName);
         return (dao.Update(query) == 1);
     }
 

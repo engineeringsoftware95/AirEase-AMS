@@ -273,4 +273,38 @@ public class User : IUser
         return (dao.Retrieve(query).Rows.Count == 1);
     }
 
+    public List<App.Ticket.Ticket> GetUpcomingTickets()
+    {
+        DateTime time = DateTime.Now;
+        string yearWeekId = time.Year.ToString();
+        yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+        string query = String.Format("EXEC SelectFutureTickets @CustomerId = {0}, @YearWeekID={1};", _userId, yearWeekId);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        System.Data.DataTable dt = dao.Retrieve(query);
+
+        List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
+        foreach(System.Data.DataRow row in dt.Rows)
+        {
+            tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
+        }
+        return tickets;
+    }
+    public List<App.Ticket.Ticket> GetPastTickets()
+    {
+
+        DateTime time = DateTime.Now;
+        string yearWeekId = time.Year.ToString();
+        yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+        string query = String.Format("EXEC SelectPastTickets @CustomerId = {0}, @YearWeekID={1};", _userId, yearWeekId);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        System.Data.DataTable dt = dao.Retrieve(query);
+
+        List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
+        foreach (System.Data.DataRow row in dt.Rows)
+        {
+            tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
+        }
+        return tickets;
+    }
+
 }

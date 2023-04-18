@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Reflection.Metadata;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Net;
+using AirEase_AMS.App.Graph.Flight;
+using AirEase_AMS.App.Ticket;
 
 namespace AirEase_AMS.App.Entity.User.Tests
 {
@@ -70,6 +72,47 @@ namespace AirEase_AMS.App.Entity.User.Tests
             Assert.AreEqual(expected, attempt);
 
             dao.Update("DELETE FROM CUSTOMER;");
+        }
+
+        [Test()]
+        public void GetUpcomingTicketsTest()
+        {
+            DateTime time = DateTime.Now;
+            string yearWeekId = time.Year.ToString();
+            yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+
+
+
+
+            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
+            customer.AttemptAccountCreation();
+
+
+
+
+            Route route = new Route("Cleveland", "Atlanta", 150);
+            route.UploadRoute();
+
+            Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
+            Flight flight = new Flight(route.GetRouteId(), (yearWeekId+2).ToString(), DateTime.Now);
+            flight.UploadFlight();
+            ticket.AddFlight(flight);
+            Flight flight2 = new Flight(route.GetRouteId(), (yearWeekId+2).ToString(), DateTime.Now);
+            flight.UploadFlight();
+            ticket.AddFlight(flight);
+
+            ticket.PurchaseTicket();
+
+            Ticket.Ticket reuse = new Ticket.Ticket(ticket.GetTicketId());
+            Assert.AreEqual(ticket.GetTicketCost(), reuse.GetTicketCost());
+        }
+
+        [Test()]
+        public void GetPastTicketsTest()
+        {
+            Assert.Fail();
         }
     }
 }

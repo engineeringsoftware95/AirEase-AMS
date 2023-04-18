@@ -12,13 +12,16 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
     public class RouteTests
     {
         [Test()]
+        [TestCase()]
         public void RouteTest()
         {
             DatabaseAccessObject dao = new DatabaseAccessObject();
             dao.Update("DELETE FROM AIRPORT;");
-            dao.Update("DELETE FROM FLIGHTROUTES;");
+            dao.Update("DELETE FROM FLIGHTROUTE;");
             Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
+            origin.UploadAirport();
             Airport destination = new Airport("New York", "LaGuardia");
+            destination.UploadAirport();
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 160);
             route.UploadRoute();
 
@@ -26,8 +29,9 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
 
 
             Assert.AreEqual(route.GetDistance(), reuse.GetDistance());
+
+            dao.Update("DELETE FROM FLIGHTROUTE;");
             dao.Update("DELETE FROM AIRPORT;");
-            dao.Update("DELETE FROM FLIGHTROUTES;");
         }
     }
 }

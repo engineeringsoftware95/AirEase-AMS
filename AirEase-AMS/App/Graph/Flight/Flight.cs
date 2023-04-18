@@ -9,6 +9,9 @@ public class Flight : Route
     private readonly Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;
+    private decimal _flightCost;
+    private int _flightPoints;
+    private string _departureId;
 
     /// <summary>
     /// Takes a flight and departure key, uses them to load this instance with data with identical keys in the database.
@@ -54,21 +57,30 @@ public class Flight : Route
             }
 
         }
+        _departureId = HLib.GenerateSixDigitId().ToString();
+        _flightCost = CalculateFlightCost();
+        _flightPoints = CalculateFlightPoints();
 
     }
 
-    public Flight(string routeId, string yearWeekId, DateTime departureTime, string planeId) : base(routeId)
+    public Flight(string routeId, string yearWeekId, DateTime departureTime) : base(routeId)
     {
         _yearWeekId = yearWeekId;
         _flightTime = departureTime;
         _flightId = GenerateId();
         _routeId = routeId;
-        _aircraft = new Aircraft(planeId);
+
+        //Use the default aircraft ID
+        _aircraft = new Aircraft("111111");
+        _flightCost = CalculateFlightCost();
+        _flightPoints = CalculateFlightPoints();
+        _departureId = HLib.GenerateSixDigitId().ToString();
     }
 
     public bool UploadFlight()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
         //While the ID isn't unique, make a new one.
         _routeId = (GenerateId());
         while (dao.Retrieve("SELECT * FROM FLIGHT WHERE FlightID=" + _flightId + ";").Rows.Count > 0)
@@ -76,9 +88,30 @@ public class Flight : Route
             //Set ID until one is unique
             _flightId = (GenerateId());
         }
-        string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3})", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
+
+        //While the ID isn't unique, make a new one.
+        _departureId = (GenerateId());
+        while (dao.Retrieve("SELECT * FROM DEPARTURE WHERE FlightID=" + _departureId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _departureId = (GenerateId());
+        }
+
+        string query = String.Format("EXEC InsertFlight @FlightID = {0}, @FlightCost = {1}, @FlightPoints = {2}, @RouteID = {3}, @DepartureID = {4}, @YearWeekID = {5}, @DepartureTime = {6}, @PlaneID = {7};", 
+            _flightId, _flightCost, _flightPoints, _routeId,
+            _departureId, _yearWeekId, _flightTime.TimeOfDay.ToString(), _aircraft.GetAircraftId());
         return (dao.Update(query) == 1);
     }
+
+    public bool SetPlaneForFlight(string aircraftId)
+    {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        string query = String.Format("UPDATE FLIGHT_PLANE SET PlaneID = {0} WHERE FlightID = {1};", aircraftId, _flightId);
+        return (dao.Update(query) == 1);
+    }
+
+    public string GetDepartureId() {  return _departureId; }
+
 
     public DateTime GetTime()
     {
@@ -118,5 +151,42 @@ public class Flight : Route
     public string GetFlightId()
     {
         return _flightId;
+    }
+
+
+    private decimal CalculateFlightCost()
+    {
+        //Calculates the cost of an individual flight
+
+        /*
+        decimal runningTotal = 0;
+
+        runningTotal = _distance * .12;
+        runningTotal += 50;
+        DateTime departureTime = _flightTime;
+
+        // this needs to be estimated arrival time, not departure time.
+        TimeSpan finalArrival = flights.Last().GetTime().TimeOfDay;
+        if (departureTime.Hours is >= 0 and <= 5)
+        {
+            runningTotal *= .8;
+        }
+        else if (departureTime.Hours <= 8 || finalArrival.Hours >= 19)
+        {
+            runningTotal *= .9;
+        }
+        return runningTotal;
+        */
+        throw new NotImplementedException();
+    }
+
+    public decimal GetFlightCost()
+    {
+        return _flightCost;
+    }
+
+    private int CalculateFlightPoints()
+    {
+        return HLib.ConvertToPoints(_flightCost);
     }
 }
