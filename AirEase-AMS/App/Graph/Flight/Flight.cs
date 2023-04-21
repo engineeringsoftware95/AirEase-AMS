@@ -1,6 +1,6 @@
 using AirEase_AMS.App.Entity.Aircraft;
-namespace AirEase_AMS.App.Graph.Flight;
 using System.Data;
+namespace AirEase_AMS.App.Graph.Flight;
 
 public class Flight : Route
 {
