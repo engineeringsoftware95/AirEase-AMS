@@ -131,7 +131,7 @@ public class Ticket : ITicket
     public double CalculateTicketCost()
     {
         //Summates the cost of all flights in this ticket, then adds layover costs.
-        throw new NotImplementedException();
+        return Convert.ToDouble(flights[0].GetFlightCost() + ((flights.Count-1)*8));
     }
 
     public void AddFlight(Flight flight)
