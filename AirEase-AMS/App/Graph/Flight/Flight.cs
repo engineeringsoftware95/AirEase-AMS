@@ -4,7 +4,7 @@ namespace AirEase_AMS.App.Graph.Flight;
 
 public class Flight : Route
 {
-    readonly DateTime _flightTime;
+    private DateTime _flightTime;
     private readonly Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;
@@ -74,6 +74,17 @@ public class Flight : Route
         _flightCost = CalculateFlightCost();
         _flightPoints = CalculateFlightPoints();
         _departureId = HLib.GenerateSixDigitId().ToString();
+    }
+
+    public Flight()
+    {
+    }
+
+    public Flight(Airport testOrigin, Airport destination, DateTime departureTime)
+    {
+        _origin = testOrigin;
+        _destination = destination;
+        _flightTime = departureTime;
     }
 
     public bool UploadFlight()

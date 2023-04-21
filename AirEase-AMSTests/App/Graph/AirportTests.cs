@@ -5,12 +5,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirEase_AMS.App.Defs;
+using AirEase_AMS.App.Graph.Flight;
 
 namespace AirEase_AMS.App.Graph.Tests
 {
+    
+    
     [TestFixture()]
     public class AirportTests
     {
+        private Airport _testGuy;
+        private IRoute testRoute;
+        private Airport testAirport;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _testGuy = new Airport(); 
+            testRoute = new Route();
+            testAirport = new Airport();
+            testAirport.SetCity("FlavorTown");
+            testRoute.SetDestination(testAirport.GetCityName());
+        }
+        
+        
+        
+        
         [Test()]
         [TestCase("Cleveland", "Cleveland Hawkins")]
         [TestCase("", "")]
@@ -29,24 +50,7 @@ namespace AirEase_AMS.App.Graph.Tests
             Assert.AreEqual(airport.GetCityName(), reuse.GetCityName());
             dao.Update(query);
         }
-
-        [Test()]
-        public void AirportTest1()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void AirportTest2()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetAirportIdTest()
-        {
-            Assert.Fail();
-        }
+        
 
         [Test()]
         public void UploadAirportTest()
@@ -57,37 +61,21 @@ namespace AirEase_AMS.App.Graph.Tests
         [Test()]
         public void AddDepartureTest()
         {
-            Assert.Fail();
+            _testGuy.AddDeparture(testAirport, testRoute);
+            Assert.IsTrue(_testGuy.DepartingFlights().Contains(testRoute));
         }
-
         [Test()]
-        public void ArrivingFlightsTest()
+        public void AirportIdTest()
         {
-            Assert.Fail();
+            _testGuy.SetCity("FlavorTown");
+            Assert.AreEqual(_testGuy.GetCityName(), "FlavorTown");
         }
-
-        [Test()]
-        public void DepartingFlightsTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void SetCityTest()
-        {
-            Assert.Fail();
-        }
-
+        
         [Test()]
         public void GetCityNameTest()
         {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetRoutesTest()
-        {
-            Assert.Fail();
+            _testGuy.SetCity("FlavorTown");
+            Assert.IsTrue(Convert.ToInt32(_testGuy.GetAirportId())>9999);
         }
     }
 }

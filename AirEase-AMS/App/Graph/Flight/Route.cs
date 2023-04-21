@@ -15,7 +15,12 @@ public class Route : IRoute, IComparable<Route>
 
 
     //Base constructor used for child class flight
-    protected Route() { }
+    public Route()
+    {
+        _destination = new Airport();
+        _origin = new Airport();
+        _flightsOnRoute = new List<Flight>();
+    }
 
 
     /// <summary>
@@ -87,16 +92,12 @@ public class Route : IRoute, IComparable<Route>
      */
     public List<Flight>? FindFlightsInRange(DateTime begin, DateTime end)
     {
-        List<Flight>? validFlights = null;
+        List<Flight>? validFlights = new List<Flight>();
         foreach(var route in _flightsOnRoute)
         {
-            var flight = (Flight)route;
-            if (DateTime.Compare(flight.GetTime(), end) <= 0)
+            if ((DateTime.Compare(route.GetTime(), begin) >= 0) && (DateTime.Compare(route.GetTime(), end) <= 0))
             {
-                if (DateTime.Compare(flight.GetTime(), begin) >= 0)
-                {
-                    validFlights?.Add(flight);
-                }
+                    validFlights?.Add(route);
             }
         }
         return validFlights;
@@ -111,6 +112,7 @@ public class Route : IRoute, IComparable<Route>
     {
         return _destination;
     }
+    
 
     public bool IsDestination(string city)
     {
@@ -127,7 +129,10 @@ public class Route : IRoute, IComparable<Route>
         throw new NotImplementedException();
     }
 
-
+    public void AddFlight(Flight flight)
+    {
+        _flightsOnRoute.Add(flight);
+    }
     public double GetDistance()
     {
         return _distance;
@@ -175,5 +180,13 @@ public class Route : IRoute, IComparable<Route>
     {
         return HLib.GenerateSixDigitId().ToString();
     }
-    
+    public void SetOrigin(string origin)
+    {
+        _origin.SetCity(origin);
+    }
+
+    public void SetDestination(string destination)
+    {
+        _destination.SetCity(destination);
+    }
 }
