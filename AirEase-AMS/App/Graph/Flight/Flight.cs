@@ -156,17 +156,14 @@ public class Flight : Route
 
     private decimal CalculateFlightCost()
     {
-        //Calculates the cost of an individual flight
+       //Calculates the cost of an individual flight
 
-        /*
-        decimal runningTotal = 0;
+       double runningTotal = 0;
 
         runningTotal = _distance * .12;
         runningTotal += 50;
-        DateTime departureTime = _flightTime;
-
-        // this needs to be estimated arrival time, not departure time.
-        TimeSpan finalArrival = flights.Last().GetTime().TimeOfDay;
+         TimeSpan departureTime = _flightTime.TimeOfDay;
+         TimeSpan finalArrival = EstimateArrivalTime().TimeOfDay;
         if (departureTime.Hours is >= 0 and <= 5)
         {
             runningTotal *= .8;
@@ -175,9 +172,7 @@ public class Flight : Route
         {
             runningTotal *= .9;
         }
-        return runningTotal;
-        */
-        throw new NotImplementedException();
+        return Convert.ToDecimal(runningTotal);
     }
 
     public decimal GetFlightCost()
