@@ -7,7 +7,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace AirEase_AMS.App.Entity.BoardingPass
 {
-    internal class BoardingPass
+    public class BoardingPass
     {
         string flightID_;
         string firstName_;
