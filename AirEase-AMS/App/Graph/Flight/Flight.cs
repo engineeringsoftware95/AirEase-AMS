@@ -1,11 +1,10 @@
 using AirEase_AMS.App.Entity.Aircraft;
-using System.Data;
-
 namespace AirEase_AMS.App.Graph.Flight;
+using System.Data;
 
 public class Flight : Route
 {
-    private readonly string _flightTime;
+    readonly DateTime _flightTime;
     private readonly Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;
@@ -113,7 +112,7 @@ public class Flight : Route
     public string GetDepartureId() {  return _departureId; }
 
 
-    public string GetTime()
+    public DateTime GetTime()
     {
         return _flightTime;
     }
@@ -146,21 +145,6 @@ public class Flight : Route
         // double arrivalTime = (ticket.CalculateStraightLineMilage/500) + 0.5
         string estimate = "";
         return estimate;
-    }
-
-    public int SetPlaneForFlight(string flightID)
-    {
-        // query database to find flightID
-        if (false)          // if flightID and planeID are invalid
-            return 3;
-        else if (false)     // if planeID is invalid
-            return 2;
-        else if (false)     // if flightID is invalid
-            return 1;
-
-        //update planeID in flight table
-        _flightID = flightID;
-        return 0;
     }
 
     public string GetFlightId()
