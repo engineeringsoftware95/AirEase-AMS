@@ -14,4 +14,5 @@ public interface IRoute
     bool IsOrigin(string city);
     void SetDestination(string destination);
     void SetOrigin(string origin);
+    void AddFlight(Flight flight);
 }

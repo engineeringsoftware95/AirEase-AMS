@@ -80,6 +80,13 @@ public class Flight : Route
     {
     }
 
+    public Flight(Airport testOrigin, Airport destination, DateTime departureTime)
+    {
+        _origin = testOrigin;
+        _destination = destination;
+        _flightTime = departureTime;
+    }
+
     public bool UploadFlight()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();

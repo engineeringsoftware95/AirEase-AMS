@@ -11,7 +11,23 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
     [TestFixture()]
     public class RouteTests
     {
-        [Test()]
+        private Route ibilly;
+        private Flight ijoseph;
+        private DateTime begin;
+        private DateTime end;
+
+        [SetUp]
+        public void SetUp()
+        {
+            ibilly = new Route();
+            ibilly.SetOrigin("Flavor Town");
+            ibilly.SetDestination("Flavor Town, but further away");
+            ijoseph = new Flight();
+            ibilly.AddFlight(ijoseph);
+        }
+
+
+            [Test()]
         [TestCase()]
         public void RouteTest()
         {
@@ -55,13 +71,16 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
         [Test()]
         public void FlightExistsTest()
         {
-            Assert.Fail();
+           Assert.IsTrue(ibilly.FlightExists(ijoseph));
         }
 
         [Test()]
         public void FindFlightsInRangeTest()
         {
-            Assert.Fail();
+            List<Flight> testList = new List<Flight>();
+            testList = ibilly.FindFlightsInRange(begin, end);
+
+            Assert.AreEqual(testList[0], ijoseph);
         }
 
         [Test()]

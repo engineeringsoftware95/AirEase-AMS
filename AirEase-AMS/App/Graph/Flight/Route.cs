@@ -92,15 +92,17 @@ public class Route : IRoute, IComparable<Route>
      */
     public List<Flight>? FindFlightsInRange(DateTime begin, DateTime end)
     {
-        List<Flight>? validFlights = null;
+        List<Flight>? validFlights = new List<Flight>();
         foreach(var route in _flightsOnRoute)
         {
-            var flight = (Flight)route;
-            if (DateTime.Compare(flight.GetTime(), end) <= 0)
+            TimeSpan begin_span = begin.TimeOfDay;
+            TimeSpan end_span = end.TimeOfDay;
+            TimeSpan route_span = route.GetTime().TimeOfDay;
+            if (route_span.Days > begin_span.Days)
             {
-                if (DateTime.Compare(flight.GetTime(), begin) >= 0)
+                if (route_span.Days < end_span.Days)
                 {
-                    validFlights?.Add(flight);
+                    validFlights?.Add(route);
                 }
             }
         }
@@ -116,6 +118,7 @@ public class Route : IRoute, IComparable<Route>
     {
         return _destination;
     }
+    
 
     public bool IsDestination(string city)
     {
@@ -132,7 +135,10 @@ public class Route : IRoute, IComparable<Route>
         throw new NotImplementedException();
     }
 
-
+    public void AddFlight(Flight flight)
+    {
+        _flightsOnRoute.Add(flight);
+    }
     public double GetDistance()
     {
         return _distance;
