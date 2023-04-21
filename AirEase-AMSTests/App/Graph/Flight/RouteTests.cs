@@ -33,5 +33,101 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
             dao.Update("DELETE FROM FLIGHTROUTE;");
             dao.Update("DELETE FROM AIRPORT;");
         }
+
+        [Test()]
+        public void RouteTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void RouteTest2()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void UploadRouteTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void FlightExistsTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void FindFlightsInRangeTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void OriginTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void DestinationTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void IsDestinationTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void IsOriginTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTimeTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetDistanceTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetRouteIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CompareToTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CompareByDistanceTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void RouteIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GenerateIdTest()
+        {
+            Assert.Fail();
+        }
     }
 }

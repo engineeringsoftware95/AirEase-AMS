@@ -29,12 +29,90 @@ namespace AirEase_AMS.App.Entity.Aircraft.Tests
             System.Data.DataTable dt = dao.Retrieve(query);
 
 
-            if(dt == null) Assert.Fail();
+            if (dt == null) Assert.Fail();
 
             Aircraft craft = new Aircraft(aircraft.GetAircraftId());
 
             Assert.AreEqual(craft.GetModelName(), aircraftName);
             dao.Update("DELETE FROM PLANE;");
+        }
+
+        [Test()]
+        public void AircraftTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void AircraftTest2()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void UploadAircraftTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetAircraftIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetCruisingSpeedTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetModelNameTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetFuelCapacityTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetCruisingSpeedTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetModelNameTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetNumberOfSeatsTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetFuelCapacityTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CompareToTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetAircraftIdTest()
+        {
+            Assert.Fail();
         }
     }
 }

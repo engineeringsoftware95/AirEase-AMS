@@ -30,5 +30,77 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
             Assert.Fail();
             dao.Update("DELETE FROM FLIGHT;");
         }
+
+        [Test()]
+        public void FlightTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void FlightTest2()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void UploadFlightTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetPlaneForFlightTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetDepartureIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTimeTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void EqualsTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void EqualsTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetHashCodeTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void EstimateArrivalTimeTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetFlightIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetFlightCostTest()
+        {
+            Assert.Fail();
+        }
     }
 }

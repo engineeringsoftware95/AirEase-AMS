@@ -26,10 +26,10 @@ namespace AirEase_AMS.App.Ticket.Tests
 
 
 
-            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(),"Password123", "2223334444", "bob@bob.bob");
+            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
             customer.AttemptAccountCreation();
 
-            
+
 
 
             Route route = new Route("Cleveland", "Atlanta", 150);
@@ -47,6 +47,90 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             Ticket reused = new Ticket(ticket.GetTicketId());
             Assert.AreEqual(ticket.GetTicketCost(), reused.GetTicketCost());
+        }
+
+        [Test()]
+        public void TicketTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void TicketTest2()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void UploadTicketTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetStraightLineMileageTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetStraightLineMileageTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTicketCostTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTicketIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CalculateStraightLineMileageTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CalculateTicketCostTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void AddFlightTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GenerateTicketIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTicketInformationTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void PurchaseTicketTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CancelTicketTest()
+        {
+            Assert.Fail();
         }
     }
 }
