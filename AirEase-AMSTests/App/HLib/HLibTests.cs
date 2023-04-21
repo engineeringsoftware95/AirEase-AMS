@@ -21,14 +21,14 @@ namespace AirEase_AMS.App.Tests
         [TestCase(10.257)]
         [TestCase(264.04)]
 
-        public void ConvertToPointsTest(double input)
+        public void ConvertToPointsTest(decimal input)
         {
             //ARRANGE
 
 
             //ACT
             int output = HLib.ConvertToPoints(input);
-            int compOut = (int)(Math.Floor(input * 100.0));
+            int compOut = (int)(Math.Floor(input * 100.00m));
             if (input < 0) compOut = -1;
             Console.WriteLine("Input = " + input + " results in output = " + output);
 
@@ -93,7 +93,7 @@ namespace AirEase_AMS.App.Tests
 
             //Displays hex values with '-' inbetween - that's where the 64 * 3 - 1 comes from. That's the ACTUAL string len
             Assert.AreEqual(result1, result2);
-            Assert.AreEqual(64*3-1, result2.Length);
+            Assert.AreEqual(64 * 3 - 1, result2.Length);
         }
 
         [Test()]
@@ -107,6 +107,14 @@ namespace AirEase_AMS.App.Tests
             int outLen = saltSize * 3 - 1;
             if (outLen < 0) outLen = 0;
             Assert.AreEqual(outLen, result.Length);
+        }
+
+        [Test()]
+        public void GenerateSixDigitIdTest()
+        {
+            string result = HLib.GenerateSixDigitId().ToString();
+            Console.WriteLine("Result = " + result);
+            Assert.AreEqual(result.Length, 6);
         }
     }
 }

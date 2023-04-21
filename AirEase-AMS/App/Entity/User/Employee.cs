@@ -12,7 +12,6 @@ public class Employee : User
         _password = HLib.EncryptPassword(password, _salt);
         _ssn = ssn;
         _positionTitle = "";
-        _userId = GenerateId();
     }
 
     public Employee(string username, string password)

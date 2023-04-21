@@ -21,9 +21,6 @@ public class DatabaseAccessObject
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            //This is the name of the SQL Server - don't ask why
-            builder.DataSource = "THE";
-
             //We need to tell the connection object - WE WANT TO CONNECT USING TCP!
             //Otherwise, we would need to be a trusted_connection, and talk via pipes.
             //This works fine if we're only ever using localhost on your local windows device - not optimal!!
@@ -57,10 +54,6 @@ public class DatabaseAccessObject
         {
             Console.WriteLine(e.ToString());
             isConnected = false;
-        }
-        catch (System.InvalidOperationException e)
-        {
-            Console.WriteLine(e.ToString());
         }
     }
 
