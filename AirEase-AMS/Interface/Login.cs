@@ -26,7 +26,7 @@ namespace AirEase_AMS.Interface
             password = PasswordBox.Text;
             username = UsernameBox.Text;
 
-            if(Employee.AttemptLogin(username, password))
+            if (Employee.AttemptLogin(username, password))
             {
                 //Hide current form
                 this.Hide();
@@ -38,7 +38,7 @@ namespace AirEase_AMS.Interface
 
                     // Setup currentCustomer using a database query for the username
 
-                    //Customer currentCustomer;
+                    Customer currentCustomer;
                     CustomerMain customerInstance = new CustomerMain();
                     this.Hide();
                     customerInstance.ShowDialog();
@@ -78,7 +78,7 @@ namespace AirEase_AMS.Interface
                         default:
                             //Error
                             return;
-                            
+
                     }
                     employeeForm.ShowDialog();
 
@@ -92,6 +92,7 @@ namespace AirEase_AMS.Interface
             {
                 string error = "Incorrect username or password.";
                 LoginFailureLabel.Text = error;
+                LoginFailureLabel.Visible = true;
             }
         }
 
@@ -118,6 +119,11 @@ namespace AirEase_AMS.Interface
             this.Hide();
             personalAccountCreationForm.ShowDialog();
             this.Close();
+        }
+
+        private void LoginFailureLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

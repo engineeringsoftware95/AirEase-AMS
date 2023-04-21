@@ -85,5 +85,33 @@ namespace AirEase_AMS.Interface
         {
 
         }
+
+        private void RoundTrip_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RoundTrip.Checked)
+            {
+                label1.Visible = true;
+                dateTimePicker3.Visible = true;
+            }
+            else
+            {
+                label1.Visible = false;
+                dateTimePicker3.Visible = false;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            /*
+             * set up the ticket object, query the database, find the departure time, check against current time
+             * if within 48 hours, allow printing of boarding pass
+             * if more than an hour before the flight, allow cancelation
+             */
+        }
     }
 }

@@ -1,11 +1,10 @@
 using AirEase_AMS.App.Entity.Aircraft;
 using System.Data;
-
 namespace AirEase_AMS.App.Graph.Flight;
 
 public class Flight : Route
 {
-    private readonly DateTime _flightTime;
+    readonly DateTime _flightTime;
     private readonly Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;
@@ -141,10 +140,10 @@ public class Flight : Route
         return HashCode.Combine(_flightTime, _aircraft);
     }
 
-    public DateTime EstimateArrivalTime()
+    public string EstimateArrivalTime()
     {
-        DateTime estimate = new DateTime();
-
+        // double arrivalTime = (ticket.CalculateStraightLineMilage/500) + 0.5
+        string estimate = "";
         return estimate;
     }
 
