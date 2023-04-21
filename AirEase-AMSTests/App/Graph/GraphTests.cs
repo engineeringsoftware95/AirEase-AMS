@@ -24,9 +24,9 @@ namespace AirEase_AMS.App.Graph.Tests
         private Airport testOrigin;
         private Airport testDestination;
         private List<Flight.Flight> testList;
-        private DateTime begin;
         private Flight.Flight testFlight;
-        private DateTime end;
+        private DateTime time;
+        
         [SetUp]
         public void SetUp()
         {
@@ -37,13 +37,12 @@ namespace AirEase_AMS.App.Graph.Tests
             testDestination = new Airport();
             testList = new List<Flight.Flight>();
             testOrigin.SetCity("FlavorTown");
-            testDestination.SetCity("New Jersey, but in Brazil");
-            DateTime begin = new DateTime();
+            testDestination.SetCity("New Jersey, but in Brazil"); 
+            time = new DateTime(2019, 3, 20, 6, 20, 40);
             testRoute.SetOrigin(testOrigin.GetCityName());
             testRoute.SetDestination(testDestination.GetCityName());
-            testFlight = new Flight.Flight(testOrigin, testDestination, begin);
-            testRoute.AddFlight(testFlight); 
-            end = new DateTime();
+            testFlight = new Flight.Flight(testOrigin, testDestination, time);
+            testRoute.AddFlight(testFlight);
             testOrigin.AddDeparture(testDestination, testRoute);
             
             graphTest.add_node(testOrigin);
@@ -60,9 +59,9 @@ namespace AirEase_AMS.App.Graph.Tests
         [Test()]
         public void GetFlightsInRangeTest()
         {
-            begin = DateTime.Now;
-            end = begin.AddMonths(6);
-            testList = graphTest.GetFlightsInRange("FlavorTown", "New Jersey, but in Brazil", begin, end);
+            DateTime begin = new DateTime(2019, 1, 20, 6, 20, 40);
+            DateTime endGuy = begin.AddMonths(6);
+            testList = graphTest.GetFlightsInRange("FlavorTown", "New Jersey, but in Brazil", begin, endGuy);
             Assert.IsTrue(testList.Contains(testFlight));
         }
     }

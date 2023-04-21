@@ -4,7 +4,7 @@ namespace AirEase_AMS.App.Graph.Flight;
 
 public class Flight : Route
 {
-    readonly DateTime _flightTime;
+    private DateTime _flightTime;
     private readonly Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;

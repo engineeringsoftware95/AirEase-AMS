@@ -55,7 +55,7 @@ public class Graph : IGraph
         List<Flight.Flight>? validFlights = new List<Flight.Flight>();
         IRoute? route = FindFlight(origin, destination);
         validFlights = route?.FindFlightsInRange(begin, end);
-  //      validFlights?.Sort();
+        validFlights?.Sort();
         return validFlights;
     }
 }

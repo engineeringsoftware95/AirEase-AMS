@@ -95,15 +95,9 @@ public class Route : IRoute, IComparable<Route>
         List<Flight>? validFlights = new List<Flight>();
         foreach(var route in _flightsOnRoute)
         {
-            TimeSpan begin_span = begin.TimeOfDay;
-            TimeSpan end_span = end.TimeOfDay;
-            TimeSpan route_span = route.GetTime().TimeOfDay;
-            if (route_span.Days > begin_span.Days)
+            if ((DateTime.Compare(route.GetTime(), begin) >= 0) && (DateTime.Compare(route.GetTime(), end) <= 0))
             {
-                if (route_span.Days < end_span.Days)
-                {
                     validFlights?.Add(route);
-                }
             }
         }
         return validFlights;
