@@ -147,16 +147,21 @@ public class Ticket : ITicket
 
     public string GetTicketInformation()
     {
-        //THIS IS A STUB - IT ISNT FINISHED!
+        //Don't argue with me.
         string output = "";
 
+        output += String.Format("Ticket ID: ${0}\n", _ticketId);
+        output += String.Format("Customer ID: ${0}\n", _customerId);
         output += String.Format("Flight from {0} to {1}\n", _startCity, _endCity);
-        output += String.Format("Distance: {0} miles\n", _straightLineMileage);
-        output += String.Format("Cost: ${0}\n", _ticketCost);
-        
+        output += String.Format("Distance: {0} miles\n", _straightLineMileage.ToString());
 
+        for (int i = 1; i < flights.Count; i++)
+        {
+            output += String.Format("Layover from: ${0}  to: {1} \n", flights[i].Origin(), flights[i].Destination());
+        }
 
-
+        output += String.Format("Invoice Number: ${0}\n", _transactionId);
+        output += String.Format("Total cost: ${0}\n", _ticketCost.ToString());
         return output;
     }
 
