@@ -39,7 +39,6 @@
             button3 = new Button();
             comboBox1 = new ComboBox();
             dataGridView2 = new DataGridView();
-            pictureBox4 = new PictureBox();
             FlightsTab = new TabPage();
             pictureBox5 = new PictureBox();
             flightManifestWindow = new DataGridView();
@@ -61,12 +60,12 @@
             summaryReportWindow = new DataGridView();
             button1 = new Button();
             pictureBox1 = new PictureBox();
+            pictureBox4 = new PictureBox();
             tabControl1.SuspendLayout();
             HomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             MarketsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             FlightsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flightManifestWindow).BeginInit();
@@ -77,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)summaryReportWindow).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -146,11 +146,11 @@
             // 
             // MarketsTab
             // 
+            MarketsTab.Controls.Add(pictureBox4);
             MarketsTab.Controls.Add(label4);
             MarketsTab.Controls.Add(button3);
             MarketsTab.Controls.Add(comboBox1);
             MarketsTab.Controls.Add(dataGridView2);
-            MarketsTab.Controls.Add(pictureBox4);
             MarketsTab.Location = new Point(50, 4);
             MarketsTab.Margin = new Padding(3, 2, 3, 2);
             MarketsTab.Name = "MarketsTab";
@@ -197,16 +197,6 @@
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.Size = new Size(320, 418);
             dataGridView2.TabIndex = 14;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.number2;
-            pictureBox4.Location = new Point(6, 5);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(238, 110);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox4.TabIndex = 2;
-            pictureBox4.TabStop = false;
             // 
             // FlightsTab
             // 
@@ -430,6 +420,16 @@
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = Properties.Resources.number2;
+            pictureBox4.Location = new Point(3, 3);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(163, 79);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 15;
+            pictureBox4.TabStop = false;
+            // 
             // EmployeeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -447,7 +447,6 @@
             MarketsTab.ResumeLayout(false);
             MarketsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             FlightsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)flightManifestWindow).EndInit();
@@ -459,6 +458,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)summaryReportWindow).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
         }
 
@@ -489,12 +489,12 @@
         private DataGridView summaryReportWindow;
         private ListBox listBox1;
         private DataGridView dataGridView1;
-        private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private PictureBox pictureBox6;
         private Label label4;
         private Button button3;
         private ComboBox comboBox1;
         private DataGridView dataGridView2;
+        private PictureBox pictureBox4;
     }
 }
