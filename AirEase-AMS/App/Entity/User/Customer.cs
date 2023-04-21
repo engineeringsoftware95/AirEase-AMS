@@ -9,7 +9,7 @@ public class Customer : User
     : base(fName, lName, address, date, password, phoneNum, email)
     {
         SetRole(1);
-  
+        SetId(GenerateId());
     }
 
     public Customer(string username, string password)
