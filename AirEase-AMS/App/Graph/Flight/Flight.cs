@@ -76,6 +76,10 @@ public class Flight : Route
         _departureId = HLib.GenerateSixDigitId().ToString();
     }
 
+    public Flight()
+    {
+    }
+
     public bool UploadFlight()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();

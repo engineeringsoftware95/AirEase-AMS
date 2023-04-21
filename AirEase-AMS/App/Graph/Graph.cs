@@ -34,7 +34,7 @@ public class Graph : IGraph
         foreach (var airport in _airports)
         {
             if (!airport.GetCityName().Equals(origin)) continue;
-            foreach (var route in airport.GetRoutes()!)
+            foreach (var route in airport.DepartingFlights()!)
             {
                 if (route.IsDestination(destination))
                 {

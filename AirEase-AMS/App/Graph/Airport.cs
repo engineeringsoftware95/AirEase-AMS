@@ -8,7 +8,6 @@ namespace AirEase_AMS.App.Graph;
 public class Airport : IGraphNode
 {
     private List<IRoute> _departingEdges;
-    private List<IRoute> _arrivingEdges;
     private string _city;
     private string _airportId;
     private string _airportName;    
@@ -37,16 +36,20 @@ public class Airport : IGraphNode
             _airportId = airportId;
         }
         _departingEdges = new List<IRoute>();
-        _arrivingEdges = new List<IRoute>();
     }
 
     public Airport(string city, string airportName)
     {
         _departingEdges = new List<IRoute>();
-        _arrivingEdges = new List<IRoute>();
         _city = city;
         _airportId = GenerateId();
         _airportName = airportName;
+    }
+
+    public Airport()
+    {
+        _departingEdges = new List<IRoute>();
+        _airportId = GenerateId();
     }
 
     protected string GenerateId()
@@ -86,12 +89,7 @@ public class Airport : IGraphNode
         }
     }
     
-    public List<IRoute> ArrivingFlights()
-    {
-        return _departingEdges;
-    }
-    
-    public List<IRoute> DepartingFlights()
+    public List<IRoute>? DepartingFlights()
     {
         return _departingEdges;
     }
@@ -105,12 +103,6 @@ public class Airport : IGraphNode
     {
         return _city;
     }
-
-    public List<IRoute>? GetRoutes()
-    {
-        return _departingEdges;
-    }
- 
-
-
+    
+    
 }

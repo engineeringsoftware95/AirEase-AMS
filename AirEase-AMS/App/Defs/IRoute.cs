@@ -12,5 +12,6 @@ public interface IRoute
     List<Flight>? FindFlightsInRange(DateTime begin, DateTime end);
     bool IsDestination(string city);
     bool IsOrigin(string city);
-
+    void SetDestination(string destination);
+    void SetOrigin(string origin);
 }

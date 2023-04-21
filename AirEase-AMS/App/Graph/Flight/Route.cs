@@ -15,7 +15,12 @@ public class Route : IRoute, IComparable<Route>
 
 
     //Base constructor used for child class flight
-    protected Route() { }
+    public Route()
+    {
+        _destination = new Airport();
+        _origin = new Airport();
+        _flightsOnRoute = new List<Flight>();
+    }
 
 
     /// <summary>
@@ -175,5 +180,13 @@ public class Route : IRoute, IComparable<Route>
     {
         return HLib.GenerateSixDigitId().ToString();
     }
-    
+    public void SetOrigin(string origin)
+    {
+        _origin.SetCity(origin);
+    }
+
+    public void SetDestination(string destination)
+    {
+        _destination.SetCity(destination);
+    }
 }
