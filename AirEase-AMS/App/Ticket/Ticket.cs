@@ -153,9 +153,6 @@ public class Ticket : ITicket
         output += String.Format("Flight from {0} to {1}\n", _startCity, _endCity);
         output += String.Format("Distance: {0} miles\n", _straightLineMileage);
         output += String.Format("Cost: ${0}\n", _ticketCost);
-        
-
-
 
         return output;
     }
