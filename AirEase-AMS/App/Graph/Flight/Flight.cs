@@ -140,11 +140,10 @@ public class Flight : Route
         return HashCode.Combine(_flightTime, _aircraft);
     }
 
-    public string EstimateArrivalTime()
+    public DateTime EstimateArrivalTime()
     {
-        // double arrivalTime = (ticket.CalculateStraightLineMilage/500) + 0.5
-        string estimate = "";
-        return estimate;
+        DateTime arrivalTime = _flightTime.AddHours((_distance / 500.0) + 0.5);
+        return arrivalTime;
     }
 
     public string GetFlightId()

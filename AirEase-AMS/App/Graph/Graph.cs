@@ -54,6 +54,4 @@ public class Graph : IGraph
         validFlights?.Sort();
         return validFlights;
     }
-    
-    
 }
