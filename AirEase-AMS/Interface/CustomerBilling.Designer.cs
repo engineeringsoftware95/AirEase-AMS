@@ -115,6 +115,7 @@
             Controls.Add(purchase);
             Name = "CustomerBilling";
             Text = "Billing Preview Page";
+            Load += CustomerBilling_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

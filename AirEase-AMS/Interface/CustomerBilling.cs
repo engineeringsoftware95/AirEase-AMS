@@ -16,5 +16,10 @@ namespace AirEase_AMS.Interface
         {
             InitializeComponent();
         }
+
+        private void CustomerBilling_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
