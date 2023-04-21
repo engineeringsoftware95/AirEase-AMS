@@ -28,409 +28,472 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CustomerTabControl = new System.Windows.Forms.TabControl();
-            this.Home = new System.Windows.Forms.TabPage();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.NewsFeed = new System.Windows.Forms.ListBox();
-            this.AccountHistory = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.PastFlights = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CanceledFlights = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DepatureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DepartureCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DestinationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UpcomingFlights = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Booking = new System.Windows.Forms.TabPage();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.FlightID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerTabControl.SuspendLayout();
-            this.Home.SuspendLayout();
-            this.AccountHistory.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.PastFlights.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.CanceledFlights.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.UpcomingFlights.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.Booking.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
+            CustomerTabControl = new TabControl();
+            Home = new TabPage();
+            newPaymentMethod = new Button();
+            AccountManagement = new Button();
+            monthCalendar1 = new MonthCalendar();
+            upcomingDepartureList = new ListBox();
+            NewsFeed = new ListBox();
+            AccountHistory = new TabPage();
+            tabControl1 = new TabControl();
+            PastFlights = new TabPage();
+            dataGridView2 = new DataGridView();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            CanceledFlights = new TabPage();
+            dataGridView1 = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            DepatureDate = new DataGridViewTextBoxColumn();
+            DepartureCity = new DataGridViewTextBoxColumn();
+            DestinationCity = new DataGridViewTextBoxColumn();
+            UpcomingFlights = new TabPage();
+            dataGridView3 = new DataGridView();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
+            ArrivalTime = new DataGridViewTextBoxColumn();
+            Booking = new TabPage();
+            label1 = new Label();
+            SelectDepartureDate = new Label();
+            dateTimePicker3 = new DateTimePicker();
+            dateTimePicker1 = new DateTimePicker();
+            RoundTrip = new CheckBox();
+            dataGridView4 = new DataGridView();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
+            button1 = new Button();
+            comboBox3 = new ComboBox();
+            comboBox2 = new ComboBox();
+            pictureBox1 = new PictureBox();
+            FlightID = new DataGridViewTextBoxColumn();
+            CustomerTabControl.SuspendLayout();
+            Home.SuspendLayout();
+            AccountHistory.SuspendLayout();
+            tabControl1.SuspendLayout();
+            PastFlights.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            CanceledFlights.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            UpcomingFlights.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            Booking.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // CustomerTabControl
             // 
-            this.CustomerTabControl.AccessibleDescription = "";
-            this.CustomerTabControl.AccessibleName = "";
-            this.CustomerTabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.CustomerTabControl.AllowDrop = true;
-            this.CustomerTabControl.Controls.Add(this.Home);
-            this.CustomerTabControl.Controls.Add(this.AccountHistory);
-            this.CustomerTabControl.Controls.Add(this.UpcomingFlights);
-            this.CustomerTabControl.Controls.Add(this.Booking);
-            this.CustomerTabControl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CustomerTabControl.Location = new System.Drawing.Point(102, 2);
-            this.CustomerTabControl.Multiline = true;
-            this.CustomerTabControl.Name = "CustomerTabControl";
-            this.CustomerTabControl.Padding = new System.Drawing.Point(50, 50);
-            this.CustomerTabControl.SelectedIndex = 0;
-            this.CustomerTabControl.Size = new System.Drawing.Size(700, 447);
-            this.CustomerTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.CustomerTabControl.TabIndex = 10;
+            CustomerTabControl.AccessibleDescription = "";
+            CustomerTabControl.AccessibleName = "";
+            CustomerTabControl.Alignment = TabAlignment.Left;
+            CustomerTabControl.AllowDrop = true;
+            CustomerTabControl.Controls.Add(Home);
+            CustomerTabControl.Controls.Add(AccountHistory);
+            CustomerTabControl.Controls.Add(UpcomingFlights);
+            CustomerTabControl.Controls.Add(Booking);
+            CustomerTabControl.ImeMode = ImeMode.NoControl;
+            CustomerTabControl.Location = new Point(109, 2);
+            CustomerTabControl.Multiline = true;
+            CustomerTabControl.Name = "CustomerTabControl";
+            CustomerTabControl.Padding = new Point(50, 50);
+            CustomerTabControl.SelectedIndex = 0;
+            CustomerTabControl.Size = new Size(693, 447);
+            CustomerTabControl.SizeMode = TabSizeMode.Fixed;
+            CustomerTabControl.TabIndex = 10;
             // 
             // Home
             // 
-            this.Home.Controls.Add(this.monthCalendar1);
-            this.Home.Controls.Add(this.listBox2);
-            this.Home.Controls.Add(this.NewsFeed);
-            this.Home.Location = new System.Drawing.Point(121, 4);
-            this.Home.Name = "Home";
-            this.Home.Padding = new System.Windows.Forms.Padding(3);
-            this.Home.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Home.Size = new System.Drawing.Size(575, 439);
-            this.Home.TabIndex = 0;
-            this.Home.Text = "Home";
-            this.Home.UseVisualStyleBackColor = true;
+            Home.Controls.Add(newPaymentMethod);
+            Home.Controls.Add(AccountManagement);
+            Home.Controls.Add(monthCalendar1);
+            Home.Controls.Add(upcomingDepartureList);
+            Home.Controls.Add(NewsFeed);
+            Home.Location = new Point(121, 4);
+            Home.Name = "Home";
+            Home.Padding = new Padding(3);
+            Home.RightToLeft = RightToLeft.No;
+            Home.Size = new Size(568, 439);
+            Home.TabIndex = 0;
+            Home.Text = "Home";
+            Home.UseVisualStyleBackColor = true;
+            // 
+            // newPaymentMethod
+            // 
+            newPaymentMethod.Location = new Point(40, 381);
+            newPaymentMethod.Name = "newPaymentMethod";
+            newPaymentMethod.Size = new Size(163, 23);
+            newPaymentMethod.TabIndex = 21;
+            newPaymentMethod.Text = "Enter new payment method";
+            newPaymentMethod.UseVisualStyleBackColor = true;
+            // 
+            // AccountManagement
+            // 
+            AccountManagement.Location = new Point(40, 352);
+            AccountManagement.Name = "AccountManagement";
+            AccountManagement.Size = new Size(148, 23);
+            AccountManagement.TabIndex = 20;
+            AccountManagement.Text = "Account Management";
+            AccountManagement.UseVisualStyleBackColor = true;
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(9, 12);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 19;
+            monthCalendar1.Location = new Point(9, 12);
+            monthCalendar1.Name = "monthCalendar1";
+            monthCalendar1.TabIndex = 19;
             // 
-            // listBox2
+            // upcomingDepartureList
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 15;
-            this.listBox2.Location = new System.Drawing.Point(9, 187);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(546, 244);
-            this.listBox2.TabIndex = 18;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            upcomingDepartureList.FormattingEnabled = true;
+            upcomingDepartureList.ItemHeight = 15;
+            upcomingDepartureList.Location = new Point(238, 187);
+            upcomingDepartureList.Name = "upcomingDepartureList";
+            upcomingDepartureList.Size = new Size(317, 244);
+            upcomingDepartureList.TabIndex = 18;
+            upcomingDepartureList.SelectedIndexChanged += listBox2_SelectedIndexChanged;
             // 
             // NewsFeed
             // 
-            this.NewsFeed.FormattingEnabled = true;
-            this.NewsFeed.ItemHeight = 15;
-            this.NewsFeed.Location = new System.Drawing.Point(248, 12);
-            this.NewsFeed.Name = "NewsFeed";
-            this.NewsFeed.Size = new System.Drawing.Size(307, 169);
-            this.NewsFeed.TabIndex = 17;
+            NewsFeed.FormattingEnabled = true;
+            NewsFeed.ItemHeight = 15;
+            NewsFeed.Location = new Point(238, 12);
+            NewsFeed.Name = "NewsFeed";
+            NewsFeed.Size = new Size(317, 169);
+            NewsFeed.TabIndex = 17;
             // 
             // AccountHistory
             // 
-            this.AccountHistory.Controls.Add(this.tabControl1);
-            this.AccountHistory.Location = new System.Drawing.Point(121, 4);
-            this.AccountHistory.Name = "AccountHistory";
-            this.AccountHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.AccountHistory.Size = new System.Drawing.Size(575, 439);
-            this.AccountHistory.TabIndex = 1;
-            this.AccountHistory.Text = "Account History";
-            this.AccountHistory.UseVisualStyleBackColor = true;
+            AccountHistory.Controls.Add(tabControl1);
+            AccountHistory.Location = new Point(121, 4);
+            AccountHistory.Name = "AccountHistory";
+            AccountHistory.Padding = new Padding(3);
+            AccountHistory.Size = new Size(568, 439);
+            AccountHistory.TabIndex = 1;
+            AccountHistory.Text = "Account History";
+            AccountHistory.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.PastFlights);
-            this.tabControl1.Controls.Add(this.CanceledFlights);
-            this.tabControl1.Location = new System.Drawing.Point(6, 6);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(552, 426);
-            this.tabControl1.TabIndex = 0;
+            tabControl1.Controls.Add(PastFlights);
+            tabControl1.Controls.Add(CanceledFlights);
+            tabControl1.Location = new Point(6, 6);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(552, 426);
+            tabControl1.TabIndex = 0;
             // 
             // PastFlights
             // 
-            this.PastFlights.Controls.Add(this.dataGridView2);
-            this.PastFlights.Location = new System.Drawing.Point(4, 24);
-            this.PastFlights.Name = "PastFlights";
-            this.PastFlights.Padding = new System.Windows.Forms.Padding(3);
-            this.PastFlights.Size = new System.Drawing.Size(544, 398);
-            this.PastFlights.TabIndex = 0;
-            this.PastFlights.Text = "Past Flights";
-            this.PastFlights.UseVisualStyleBackColor = true;
+            PastFlights.Controls.Add(dataGridView2);
+            PastFlights.Location = new Point(4, 24);
+            PastFlights.Name = "PastFlights";
+            PastFlights.Padding = new Padding(3);
+            PastFlights.Size = new Size(544, 398);
+            PastFlights.TabIndex = 0;
+            PastFlights.Text = "Past Flights";
+            PastFlights.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(535, 392);
-            this.dataGridView2.TabIndex = 4;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5 });
+            dataGridView2.Location = new Point(3, 3);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowTemplate.Height = 25;
+            dataGridView2.Size = new Size(535, 392);
+            dataGridView2.TabIndex = 4;
+            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Flight ID";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            dataGridViewTextBoxColumn2.HeaderText = "Flight ID";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Departure Date";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            dataGridViewTextBoxColumn3.HeaderText = "Departure Date";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Departure City";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            dataGridViewTextBoxColumn4.HeaderText = "Departure City";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Destination City";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            dataGridViewTextBoxColumn5.HeaderText = "Destination City";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // CanceledFlights
             // 
-            this.CanceledFlights.Controls.Add(this.dataGridView1);
-            this.CanceledFlights.Location = new System.Drawing.Point(4, 24);
-            this.CanceledFlights.Name = "CanceledFlights";
-            this.CanceledFlights.Padding = new System.Windows.Forms.Padding(3);
-            this.CanceledFlights.Size = new System.Drawing.Size(544, 398);
-            this.CanceledFlights.TabIndex = 1;
-            this.CanceledFlights.Text = "Canceled Flights";
-            this.CanceledFlights.UseVisualStyleBackColor = true;
+            CanceledFlights.Controls.Add(dataGridView1);
+            CanceledFlights.Location = new Point(4, 24);
+            CanceledFlights.Name = "CanceledFlights";
+            CanceledFlights.Padding = new Padding(3);
+            CanceledFlights.Size = new Size(544, 398);
+            CanceledFlights.TabIndex = 1;
+            CanceledFlights.Text = "Canceled Flights";
+            CanceledFlights.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.DepatureDate,
-            this.DepartureCity,
-            this.DestinationCity});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(535, 392);
-            this.dataGridView1.TabIndex = 3;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, DepatureDate, DepartureCity, DestinationCity });
+            dataGridView1.Location = new Point(3, 3);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(535, 392);
+            dataGridView1.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Flight ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            dataGridViewTextBoxColumn1.HeaderText = "Flight ID";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // DepatureDate
             // 
-            this.DepatureDate.HeaderText = "Departure Date";
-            this.DepatureDate.Name = "DepatureDate";
-            this.DepatureDate.ReadOnly = true;
+            DepatureDate.HeaderText = "Departure Date";
+            DepatureDate.Name = "DepatureDate";
+            DepatureDate.ReadOnly = true;
             // 
             // DepartureCity
             // 
-            this.DepartureCity.HeaderText = "Departure City";
-            this.DepartureCity.Name = "DepartureCity";
-            this.DepartureCity.ReadOnly = true;
+            DepartureCity.HeaderText = "Departure City";
+            DepartureCity.Name = "DepartureCity";
+            DepartureCity.ReadOnly = true;
             // 
             // DestinationCity
             // 
-            this.DestinationCity.HeaderText = "Destination City";
-            this.DestinationCity.Name = "DestinationCity";
-            this.DestinationCity.ReadOnly = true;
+            DestinationCity.HeaderText = "Destination City";
+            DestinationCity.Name = "DestinationCity";
+            DestinationCity.ReadOnly = true;
             // 
             // UpcomingFlights
             // 
-            this.UpcomingFlights.Controls.Add(this.dataGridView3);
-            this.UpcomingFlights.Location = new System.Drawing.Point(121, 4);
-            this.UpcomingFlights.Name = "UpcomingFlights";
-            this.UpcomingFlights.Padding = new System.Windows.Forms.Padding(3);
-            this.UpcomingFlights.Size = new System.Drawing.Size(575, 439);
-            this.UpcomingFlights.TabIndex = 2;
-            this.UpcomingFlights.Text = "Upcoming Flights";
-            this.UpcomingFlights.UseVisualStyleBackColor = true;
+            UpcomingFlights.Controls.Add(dataGridView3);
+            UpcomingFlights.Location = new Point(121, 4);
+            UpcomingFlights.Name = "UpcomingFlights";
+            UpcomingFlights.Padding = new Padding(3);
+            UpcomingFlights.Size = new Size(568, 439);
+            UpcomingFlights.TabIndex = 2;
+            UpcomingFlights.Text = "Upcoming Flights";
+            UpcomingFlights.UseVisualStyleBackColor = true;
             // 
             // dataGridView3
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9});
-            this.dataGridView3.Location = new System.Drawing.Point(6, 3);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 25;
-            this.dataGridView3.Size = new System.Drawing.Size(552, 429);
-            this.dataGridView3.TabIndex = 4;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, ArrivalTime });
+            dataGridView3.Location = new Point(6, 3);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.RowTemplate.Height = 25;
+            dataGridView3.Size = new Size(552, 429);
+            dataGridView3.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Flight ID";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            dataGridViewTextBoxColumn6.HeaderText = "Flight ID";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn7
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Departure Date";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            dataGridViewTextBoxColumn7.HeaderText = "Departure Date";
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Departure City";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            dataGridViewTextBoxColumn8.HeaderText = "Departure City";
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn9
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Destination City";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            dataGridViewTextBoxColumn9.HeaderText = "Destination City";
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // ArrivalTime
+            // 
+            ArrivalTime.HeaderText = "Arrival Time";
+            ArrivalTime.Name = "ArrivalTime";
+            ArrivalTime.ReadOnly = true;
             // 
             // Booking
             // 
-            this.Booking.Controls.Add(this.dataGridView4);
-            this.Booking.Controls.Add(this.monthCalendar2);
-            this.Booking.Controls.Add(this.button1);
-            this.Booking.Controls.Add(this.comboBox3);
-            this.Booking.Controls.Add(this.comboBox2);
-            this.Booking.Location = new System.Drawing.Point(121, 4);
-            this.Booking.Name = "Booking";
-            this.Booking.Padding = new System.Windows.Forms.Padding(3);
-            this.Booking.Size = new System.Drawing.Size(575, 439);
-            this.Booking.TabIndex = 3;
-            this.Booking.Text = "Booking";
-            this.Booking.UseVisualStyleBackColor = true;
+            Booking.Controls.Add(label1);
+            Booking.Controls.Add(SelectDepartureDate);
+            Booking.Controls.Add(dateTimePicker3);
+            Booking.Controls.Add(dateTimePicker1);
+            Booking.Controls.Add(RoundTrip);
+            Booking.Controls.Add(dataGridView4);
+            Booking.Controls.Add(button1);
+            Booking.Controls.Add(comboBox3);
+            Booking.Controls.Add(comboBox2);
+            Booking.Location = new Point(121, 4);
+            Booking.Name = "Booking";
+            Booking.Padding = new Padding(3);
+            Booking.Size = new Size(568, 439);
+            Booking.TabIndex = 3;
+            Booking.Text = "Booking";
+            Booking.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(19, 264);
+            label1.Name = "label1";
+            label1.Size = new Size(191, 15);
+            label1.TabIndex = 12;
+            label1.Text = "Select Return Flight Departure Date";
+            label1.Visible = false;
+            // 
+            // SelectDepartureDate
+            // 
+            SelectDepartureDate.AutoSize = true;
+            SelectDepartureDate.Location = new Point(19, 169);
+            SelectDepartureDate.Name = "SelectDepartureDate";
+            SelectDepartureDate.Size = new Size(120, 15);
+            SelectDepartureDate.TabIndex = 11;
+            SelectDepartureDate.Text = "Select Departure Date";
+            SelectDepartureDate.Click += label1_Click;
+            // 
+            // dateTimePicker3
+            // 
+            dateTimePicker3.Location = new Point(19, 282);
+            dateTimePicker3.Name = "dateTimePicker3";
+            dateTimePicker3.Size = new Size(200, 23);
+            dateTimePicker3.TabIndex = 10;
+            dateTimePicker3.Visible = false;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(19, 187);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.TabIndex = 8;
+            // 
+            // RoundTrip
+            // 
+            RoundTrip.AutoSize = true;
+            RoundTrip.Location = new Point(70, 232);
+            RoundTrip.Name = "RoundTrip";
+            RoundTrip.Size = new Size(83, 19);
+            RoundTrip.TabIndex = 7;
+            RoundTrip.Text = "Round Trip";
+            RoundTrip.UseVisualStyleBackColor = true;
+            RoundTrip.CheckedChanged += RoundTrip_CheckedChanged;
             // 
             // dataGridView4
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13});
-            this.dataGridView4.Location = new System.Drawing.Point(235, 3);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.RowTemplate.Height = 25;
-            this.dataGridView4.Size = new System.Drawing.Size(337, 433);
-            this.dataGridView4.TabIndex = 6;
+            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView4.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
+            dataGridView4.Location = new Point(235, 3);
+            dataGridView4.Name = "dataGridView4";
+            dataGridView4.RowTemplate.Height = 25;
+            dataGridView4.Size = new Size(337, 433);
+            dataGridView4.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn11
             // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Departure Date";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            dataGridViewTextBoxColumn11.HeaderText = "Departure Date";
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn12
             // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Departure City";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            dataGridViewTextBoxColumn12.HeaderText = "Departure City";
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn13
             // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Destination City";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // monthCalendar2
-            // 
-            this.monthCalendar2.Location = new System.Drawing.Point(6, 107);
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.TabIndex = 5;
+            dataGridViewTextBoxColumn13.HeaderText = "Destination City";
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.ReadOnly = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(45, 281);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 38);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Location = new Point(52, 339);
+            button1.Name = "button1";
+            button1.Size = new Size(143, 38);
+            button1.TabIndex = 4;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
             // comboBox3
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(6, 43);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(227, 23);
-            this.comboBox3.TabIndex = 1;
-            this.comboBox3.Text = "{Select origin city}";
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(6, 65);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(227, 23);
+            comboBox3.TabIndex = 1;
+            comboBox3.Text = "{Select origin city}";
             // 
             // comboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(6, 72);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(227, 23);
-            this.comboBox2.TabIndex = 0;
-            this.comboBox2.Text = "{Select destination city}";
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(6, 119);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(227, 23);
+            comboBox2.TabIndex = 0;
+            comboBox2.Text = "{Select destination city}";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::AirEase_AMS.Properties.Resources.IconLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(1, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(95, 77);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 20;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.Image = Properties.Resources.IconLogo;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(95, 77);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 20;
+            pictureBox1.TabStop = false;
             // 
             // FlightID
             // 
-            this.FlightID.HeaderText = "FlightID";
-            this.FlightID.Name = "FlightID";
+            FlightID.HeaderText = "FlightID";
+            FlightID.Name = "FlightID";
             // 
             // CustomerMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.CustomerTabControl);
-            this.Name = "CustomerMain";
-            this.Text = "CustomerMain";
-            this.CustomerTabControl.ResumeLayout(false);
-            this.Home.ResumeLayout(false);
-            this.AccountHistory.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.PastFlights.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.CanceledFlights.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.UpcomingFlights.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.Booking.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
+            Controls.Add(CustomerTabControl);
+            Name = "CustomerMain";
+            Text = "Customer View";
+            CustomerTabControl.ResumeLayout(false);
+            Home.ResumeLayout(false);
+            AccountHistory.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
+            PastFlights.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            CanceledFlights.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            UpcomingFlights.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            Booking.ResumeLayout(false);
+            Booking.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
         private Button button4;
         private Button button1;
-        private Button button2;
+        private Button AccountManagement;
         private Button button3;
         private TabControl CustomerTabControl;
         private TabPage Home;
@@ -438,14 +501,13 @@
         private TabPage UpcomingFlights;
         private TabPage Booking;
         private MonthCalendar monthCalendar1;
-        private ListBox listBox2;
+        private ListBox upcomingDepartureList;
         private ListBox NewsFeed;
         private TabControl tabControl1;
         private TabPage PastFlights;
         private TabPage CanceledFlights;
         private ComboBox comboBox3;
         private ComboBox comboBox2;
-        private MonthCalendar monthCalendar2;
         private PictureBox pictureBox1;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -467,5 +529,12 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn ArrivalTime;
+        private DateTimePicker dateTimePicker3;
+        private DateTimePicker dateTimePicker1;
+        private CheckBox RoundTrip;
+        private Label SelectDepartureDate;
+        private Label label1;
+        private Button newPaymentMethod;
     }
 }
