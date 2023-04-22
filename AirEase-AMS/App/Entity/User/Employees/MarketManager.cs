@@ -3,7 +3,7 @@
 public class MarketManager : Employee
 {
 
-    MarketManager() : base() { }
+    MarketManager() : base() { } //TODO: statement or branch uncovered
 
     public MarketManager(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn)
     {
@@ -21,7 +21,7 @@ public class MarketManager : Employee
         _userId = GenerateId();
     }
 
-    public MarketManager(string username, string password) : base(username, password)
+    public MarketManager(string username, string password) : base(username, password) //TODO: statement or branch uncovered
     {
 
     }

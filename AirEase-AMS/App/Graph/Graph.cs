@@ -36,7 +36,7 @@ public class Graph : IGraph
         if (_airports != null)
             foreach (var airport in _airports)
             {
-                if (!airport.GetCityName().Equals(origin)) continue;
+                if (!airport.GetCityName().Equals(origin)) continue; //TODO: statement or branch uncovered
                 foreach (var route in airport.DepartingFlights()!)
                 {
                     if (route.IsDestination(destination))
@@ -46,7 +46,7 @@ public class Graph : IGraph
                 }
             }
 
-        return null;
+        return null; //TODO: statement or branch uncovered
     }
 
     public List<Flight.Flight>? GetFlightsInRange(string origin, string destination, DateTime begin,

@@ -29,21 +29,21 @@ public class Airport : IGraphNode
             _airportName = "";
         }
         else
-        {
-            DataRow airport = dt.Rows[0];
-            _city = airport["City"].ToString() ?? "";
-            _airportName = airport["Airport"].ToString() ?? "";
-            _airportId = airportId;
+        {//TODO: statement or branch uncovered
+            DataRow airport = dt.Rows[0];                       //TODO: statement uncovered - needs test  
+            _city = airport["City"].ToString() ?? "";           //TODO: statement uncovered - needs test  
+            _airportName = airport["Airport"].ToString() ?? ""; //TODO: statement uncovered - needs test  
+            _airportId = airportId;                             //TODO: statement uncovered - needs test  
         }
         _departingEdges = new List<IRoute>();
     }
 
-    public Airport(string city, string airportName)
-    {
-        _departingEdges = new List<IRoute>();
-        _city = city;
-        _airportId = GenerateId();
-        _airportName = airportName;
+    public Airport(string city, string airportName)//TODO: statement uncovered - needs test  
+    {//TODO: statement or branch uncovered
+        _departingEdges = new List<IRoute>();//TODO: statement uncovered - needs test  
+        _city = city;                        //TODO: statement uncovered - needs test  
+        _airportId = GenerateId();           //TODO: statement uncovered - needs test  
+        _airportName = airportName;          //TODO: statement uncovered - needs test  
     }
 
     public Airport()

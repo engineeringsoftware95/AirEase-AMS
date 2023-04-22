@@ -20,7 +20,7 @@ namespace AirEase_AMS.App
             //defaultAircraft.SetAircraftId("111111");
             //defaultAircraft.UploadAircraft();
             //ApplicationConfiguration.Initialize();
-            System.Windows.Forms.Application.Run(new Login());
+            System.Windows.Forms.Application.Run(new Login()); 
 
             /*Customer testCust = new();
             Accountant testAcc = new();

@@ -2,7 +2,7 @@
 
 public class FlightManager : Employee
 {
-    FlightManager() : base() { }
+    FlightManager() : base() { } //TODO: statement or branch uncovered
     public FlightManager(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn)
     {
         _roleBit = 3;
@@ -19,7 +19,7 @@ public class FlightManager : Employee
         _userId = GenerateId();
     }
 
-    public FlightManager(string username, string password) : base(username, password)
+    public FlightManager(string username, string password) : base(username, password) //TODO: statement or branch uncovered
     {
 
     }
