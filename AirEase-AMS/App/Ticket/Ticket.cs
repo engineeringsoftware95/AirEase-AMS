@@ -16,11 +16,18 @@ public class Ticket : ITicket
     private string _startCity;
     private string _endCity;
     private bool _isRefunded;
-    private string _transactionId;
-    private string _customerId;
+    private string? _customerId;
+    private AirEase_AMS.Transaction.Transaction? _transaction;
 
     private List<Flight> flights;
 
+    /// <summary>
+    /// This constructor is designed to instantiate a new ticket.
+    /// </summary>
+    /// <param name="ticketCost">The total currency cost of the ticket.</param>
+    /// <param name="startCity">The origin city.</param>
+    /// <param name="endCity">The destination city.</param>
+    /// <param name="customerId">The ID of the purchasing customer.</param>
     public Ticket(decimal ticketCost, string startCity, string endCity, string customerId)
     {
         _straightLineMileage = 0;
@@ -30,10 +37,14 @@ public class Ticket : ITicket
         _endCity = endCity;
         _isRefunded = false;
         flights = new List<Flight>();
-        _transactionId = HLib.GenerateSixDigitId().ToString();
         _customerId = customerId;
+        _transaction = new AirEase_AMS.Transaction.Transaction(ticketCost, customerId);
     }
 
+    /// <summary>
+    /// This constructor is designed to instantiate an existing ticket.
+    /// </summary>
+    /// <param name="ticketId">The ticket we want to search for.</param>
     public Ticket(string ticketId)
     {
         _ticketId = ticketId;
@@ -66,19 +77,19 @@ public class Ticket : ITicket
         flights = new List<Flight>();
     }
 
+    /// <summary>
+    /// Attempts to upload this ticket class to the database.
+    /// </summary>
+    /// <returns>Whether or not the function succeeded.</returns>
     public bool UploadTicket()
     {
+        //If flights is empty or transaction is null, return false.
         if (flights.Count == 0) return false;
 
-        DatabaseAccessObject dao = new DatabaseAccessObject();
+        if (_transaction != null) _transaction.UploadTransaction();
+        else return false;
 
-        //While the ID isn't unique, make a new one.
-        _transactionId = (GenerateTicketId());
-        while (dao.Retrieve("SELECT * FROM TRANSACTIONS WHERE TransactionID=" + _transactionId + ";").Rows.Count > 0)
-        {
-            //Set ID until one is unique
-            _transactionId = (GenerateTicketId());
-        }
+        DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //While the ID isn't unique, make a new one.
         _ticketId = (GenerateTicketId());
@@ -88,19 +99,22 @@ public class Ticket : ITicket
             _ticketId = (GenerateTicketId());
         }
 
+        //Stored procedure for ticket insertion
         string query = String.Format("EXEC InsertTicket " +
             "@TicketID = {0}, @StartCity = '{1}', @EndCity  = '{2}', @TicketCost = {3}, " +
-            "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6}, @PointCost  = {7};", 
-            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transactionId,_customerId, HLib.ConvertToPoints(_ticketCost));
+            "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6};", 
+            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transaction._transactionId,_customerId);
 
         bool firstQuery = (dao.Update(query) > 0);
 
+        //For each flight in flights, update the tables in the database using a stored procedure.
         foreach(Flight flight in flights)
         {
             query = String.Format("EXEC UpdateFlights " +
             "@CustomerID = {0}, @FlightID = {1}, @DepartureID = {2}, @TicketID = {3};", _customerId, flight.GetFlightId(), flight.GetDepartureId(), _ticketId);
         }
 
+        //If both queries succeeded, return true.
         return (dao.Update(query) > 0) && firstQuery;
     }
 

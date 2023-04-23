@@ -56,6 +56,7 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             Ticket reused = new Ticket(ticket.GetTicketId());
             Assert.AreEqual(ticket.GetTicketCost(), reused.GetTicketCost());
+            Assert.AreEqual(ticket.GetStraightLineMileage(), reused.GetStraightLineMileage());
 
             HLib.NuclearRedButton();
         }
