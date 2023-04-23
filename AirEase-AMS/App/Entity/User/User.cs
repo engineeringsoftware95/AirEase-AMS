@@ -1,9 +1,10 @@
 ﻿using AirEase_AMS.App.Defs;
+using Microsoft.Identity.Client;
 using System.Security.Cryptography.X509Certificates;
 
 namespace AirEase_AMS.App.Entity.User;
 
-public class User : IUser
+public class User : Defs.IUser
 {
     protected int _roleBit;
     protected string _firstName;

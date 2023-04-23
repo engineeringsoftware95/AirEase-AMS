@@ -11,49 +11,52 @@ using Microsoft.Data;
 public class DatabaseAccessObject
 {
     SqlConnection? connection = null;
-    private bool isConnected = false;
+    private bool connectionSuccess = false;
+    SqlConnectionStringBuilder builder;
+
     /// <summary>
     /// This is the constructor for the database access object. It will initialize a connection to the database.
     /// </summary>
     public DatabaseAccessObject()
     {
+        builder = new SqlConnectionStringBuilder();
+
+        //We need to tell the connection object - WE WANT TO CONNECT USING TCP!
+        //Otherwise, we would need to be a trusted_connection, and talk via pipes.
+        //This works fine if we're only ever using localhost on your local windows device - not optimal!!
+        builder["Server"] = "tcp:localhost";
+
+        //We've spent millions on achieving the best security money can buy
+        builder.UserID = "SecretEntrance";
+        builder.Password = "123456";
+
+        //Our Database catalog
+        builder.InitialCatalog = "AirEase";
+
+        builder.Encrypt = false;
         try
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            //We need to tell the connection object - WE WANT TO CONNECT USING TCP!
-            //Otherwise, we would need to be a trusted_connection, and talk via pipes.
-            //This works fine if we're only ever using localhost on your local windows device - not optimal!!
-            builder["Server"] = "tcp:localhost";
-
-            //We've spent millions on achieving the best security money can buy
-            builder.UserID = "SecretEntrance";
-            builder.Password = "123456";
-
-            //Our Database catalog
-            builder.InitialCatalog = "AirEase";
-
-            //We could encrypt it - but then we would need to implement some certification method... but... lets call that a stretch goal, kay?
-            builder.Encrypt = false;
 
             //Establish a connection (possible point of failure)
             connection = new SqlConnection(builder.ConnectionString);
 
             //Once the connection is open, we have finished our job here!!
             connection.Open();
-            isConnected = true;
+            connectionSuccess = true;
+            connection.Close();
 
         }
         catch (SqlException e)
         {
             Console.WriteLine(e.ToString());
-            isConnected = false;
+            connectionSuccess = false;
             
         }
         catch(System.InvalidOperationException e)
         {
             Console.WriteLine(e.ToString());
-            isConnected = false;
+            connectionSuccess = false;
         }
     }
 
@@ -62,9 +65,9 @@ public class DatabaseAccessObject
     /// </summary>
     ~DatabaseAccessObject()
     {
-        if (connection != null) { connection.Close(); }
+        if (connection != null) { connection.Close(); connection.Dispose(); }
     }
-    public bool IsConnected { get { return isConnected; } }
+    public bool IsConnected { get { return connectionSuccess; } }
 
     /// <summary>
     /// A general function for database SELECTS. Expects to get some return value, or it returns null.
@@ -80,6 +83,31 @@ public class DatabaseAccessObject
             Console.WriteLine("Connection is null. Abort.");
             return new DataTable();
         }
+
+        try
+        {
+
+
+            //Establish a connection (possible point of failure)
+            connection = new SqlConnection(builder.ConnectionString);
+
+            //Once the connection is open, we have finished our job here!!
+            connection.Open();
+            connectionSuccess = true;
+
+        }
+        catch (SqlException e)
+        {
+            Console.WriteLine(e.ToString());
+            connectionSuccess = false;
+
+        }
+        catch (System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+            connectionSuccess = false;
+        }
+
         try
         {
             String sql = sqlQuery;
@@ -102,6 +130,10 @@ public class DatabaseAccessObject
                         //Load our data table for return.  
                         System.Data.DataTable dt = new System.Data.DataTable();
                         dt.Load(reader);
+
+                        //Close the connection when we're done
+                        connection.Close();
+
                         return dt;
                     }
                 }
@@ -116,6 +148,9 @@ public class DatabaseAccessObject
         {
             Console.WriteLine(e.ToString());
         }
+
+        connection.Close();
+
         //Looks like an exception occurred - return null.
         return new DataTable();
     }
@@ -134,6 +169,31 @@ public class DatabaseAccessObject
             Console.WriteLine("Connection is null. Abort.");
             return -1;
         }
+
+        try
+        {
+
+
+            //Establish a connection (possible point of failure)
+            connection = new SqlConnection(builder.ConnectionString);
+
+            //Once the connection is open, we have finished our job here!!
+            connection.Open();
+            connectionSuccess = true;
+
+        }
+        catch (SqlException e)
+        {
+            Console.WriteLine(e.ToString());
+            connectionSuccess = false;
+
+        }
+        catch (System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+            connectionSuccess = false;
+        }
+
         try
         {
 
@@ -144,8 +204,10 @@ public class DatabaseAccessObject
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
+                    int affectedRecords = reader.RecordsAffected;
+                    connection.Close();
                     //Return the number of rows affected by our input query.
-                    return reader.RecordsAffected;
+                    return affectedRecords;
                 }
             }
         }
@@ -158,6 +220,9 @@ public class DatabaseAccessObject
         {
             Console.WriteLine(e.ToString());
         }
+
+        connection.Close();
+
         //Looks like an exception occurred - return error code.
         return -1;
     }

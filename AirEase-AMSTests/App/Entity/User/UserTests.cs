@@ -17,6 +17,7 @@ using AirEase_AMS.App.Graph;
 namespace AirEase_AMS.App.Entity.User.Tests
 {
     [TestFixture()]
+    [SingleThreaded]
     public class UserTests
     {
         [Test()]
@@ -33,7 +34,6 @@ namespace AirEase_AMS.App.Entity.User.Tests
 
             Customer customer = new Customer(fName, lName, address, DateTime.Now.ToString(), password, phoneNum, email);
             bool successful = customer.AttemptAccountCreation();
-            Console.WriteLine("Was successful: " + successful);
 
             DataTable? dt = dao.Retrieve("SELECT * FROM CUSTOMER WHERE UserID=" + customer.GetUserId() + ";");
 
@@ -70,10 +70,22 @@ namespace AirEase_AMS.App.Entity.User.Tests
             HLib.NuclearRedButton();
         }
 
+        
         [Test()]
+        [TestCase()]
+        [TestCase()]
+        [TestCase()]
+
+        
         public void GetUpcomingTicketsTest()
         {
-            HLib.NuclearRedButton();
+            {
+                DatabaseAccessObject dao = new DatabaseAccessObject();
+
+                //Delete absolutely everything -- dear god
+                dao.Update("EXEC DeleteAllRecords;");
+            }
+
 
             AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
             defaultAircraft.SetAircraftId("111111");
@@ -85,36 +97,45 @@ namespace AirEase_AMS.App.Entity.User.Tests
 
             Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
             if(!customer.AttemptAccountCreation()) Assert.Fail();
-            Console.WriteLine(customer.GetUserId());
 
             Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
             origin.UploadAirport();
             Airport destination = new Airport("New York", "LaGuardia");
             destination.UploadAirport();
+
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 160);
             route.UploadRoute();
 
-            for(int i = -5; i < 5; i++)
+            for(int i = -5; i < 6; i++)
             {
                 Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
-                Flight flight = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight.UploadFlight();
                 ticket.AddFlight(flight);
-                Flight flight2 = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                Flight flight2 = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight2.UploadFlight();
                 ticket.AddFlight(flight2);
-                ticket.PurchaseTicket();
+                ticket.UploadTicket();
             }
 
 
             Assert.AreEqual(5, customer.GetUpcomingTickets().Count);
-            HLib.NuclearRedButton();
+
+            {
+                DatabaseAccessObject dao = new DatabaseAccessObject();
+
+                //Delete absolutely everything -- dear god
+                dao.Update("EXEC DeleteAllRecords;");
+            }
         }
 
         [Test()]
+        [TestCase()]
+        [TestCase()]
+        [TestCase()]
+
         public void GetPastTicketsTest()
         {
-
             HLib.NuclearRedButton();
 
             AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
@@ -125,11 +146,8 @@ namespace AirEase_AMS.App.Entity.User.Tests
             string yearWeekId = time.Year.ToString();
             yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
 
-            Console.WriteLine(yearWeekId);
-
             Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
             if (!customer.AttemptAccountCreation()) Assert.Fail();
-            Console.WriteLine(customer.GetUserId());
 
             Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
             origin.UploadAirport();
@@ -138,19 +156,19 @@ namespace AirEase_AMS.App.Entity.User.Tests
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 160);
             route.UploadRoute();
 
+            
             for (int i = -5; i < 5; i++)
             {
                 Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
-                Flight flight = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight.UploadFlight();
                 ticket.AddFlight(flight);
-                Flight flight2 = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
+                Flight flight2 = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight2.UploadFlight();
                 ticket.AddFlight(flight);
                 ticket.UploadTicket();
             }
-
-            Console.WriteLine("Here we are");
+            
             Assert.AreEqual(5, customer.GetPastTickets().Count);
 
             HLib.NuclearRedButton();
