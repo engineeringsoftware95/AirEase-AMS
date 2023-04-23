@@ -197,10 +197,19 @@ public class Ticket : ITicket
         else currencyCost = _transaction._currencyCost;
 
         DatabaseAccessObject dao = new DatabaseAccessObject();
-        string query = String.Format("EXEC CancelTicket @TicketID = {0}, @TicketCost = {1}, @PointCost = {2}", _ticketId, currencyCost, pointsCost);
+        string query = String.Format("EXEC CancelTicket @TicketID = {0}, @TicketCost = {1}, @PointCost = {2};", _ticketId, currencyCost, pointsCost);
 
         //Should alter one row by changing its IsRefunded attribute
-        return dao.Update(query) == 1;
+        bool success = dao.Update(query) == 1;
+
+        foreach(Flight flight in flights)
+        {
+            query = String.Format("EXEC UpdateFlightAfterCancel @FlightID = {0}, @CustomerID = {1};", flight.GetFlightId(), _customerId);
+
+            //If its false once we return false
+            success = success && dao.Update(query) > 0;
+        }
+        return success;
     }
 
 }

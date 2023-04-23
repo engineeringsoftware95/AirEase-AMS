@@ -18,8 +18,7 @@ public class Customer : User
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         System.Data.DataTable dt = dao.Retrieve(query);
-        Console.WriteLine("CUSTOMER: \n");
-        DatabaseAccessObject.PrintDataTable(dt);
+
         //Empty constructor
         if (dt.Rows.Count != 1)
         {
