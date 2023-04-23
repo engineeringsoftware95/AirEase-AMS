@@ -71,6 +71,8 @@ public class Route : IRoute, IComparable<Route>
             _routeId = (GenerateId());
         }
 
+        if (_origin.GetAirportId().Length < 6 || _destination.GetAirportId().Length < 6) return false;
+
         string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
         return (dao.Update(query) == 1);
     }

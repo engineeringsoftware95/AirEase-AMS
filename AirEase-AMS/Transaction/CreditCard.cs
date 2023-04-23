@@ -9,6 +9,7 @@ public class CreditCard
     private string _cvc;
     private string _accountHolderId;
     private string _billingZipCode;
+    private bool _validCard;
 
     /// <summary>
     /// Credit card constructor which sets the class members with info from the database.
@@ -25,6 +26,7 @@ public class CreditCard
         //Invalid read
         if (dt == null || dt.Rows.Count != 1)
         {
+            _validCard = false;
             _ccNum = "";
             _expDate = "";
             _cvc = "";
@@ -33,6 +35,7 @@ public class CreditCard
         }
         else
         {
+            _validCard = true;
             DataRow card = dt.Rows[0];
 
             //Return empty string on invalid read
@@ -54,11 +57,22 @@ public class CreditCard
     /// <param name="accountHolderId">User id of the user who owns the card.</param>
     public CreditCard(string ccNum, string expDate, string cvc, string billingZipCode, string accountHolderId) 
     {
+        _validCard = true;
+        DateTime validator = DateTime.Parse(expDate);
+        if (validator.CompareTo(DateTime.Now) < 0)
+        {
+            _validCard = false;
+            _expDate = "";
+        }
+        else _expDate = expDate;
         //Valid credit cards are 13 characters in length at LEAST
         //All characters must be NUMERIC
-        if (ccNum.Length < 13 || ccNum.Any(ch => ! char.IsNumber(ch))) _ccNum = "";
-        else _ccNum= ccNum;
-        _expDate = expDate;
+        if (ccNum.Length < 13 || ccNum.Any(ch => !char.IsNumber(ch)))
+        {
+            _validCard = false;
+            _ccNum = "";
+        }
+        else _ccNum = ccNum;
         _cvc= cvc;
         _accountHolderId = accountHolderId;
         _billingZipCode = billingZipCode;
@@ -70,6 +84,8 @@ public class CreditCard
     /// <returns>Returns whether or not the function succeeded.</returns>
     public bool SaveCreditCard()
     {
+        //Card isn't valid - don't try and upload it.
+        if (!_validCard) { return false; }
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         string query = String.Format("EXEC SaveCreditCard @CreditCardNum = '{0}', @ExpirationDate = '{1}', @CVC = {2}, @ZipCode = '{3}', @CustomerID = {4};", _ccNum, _expDate, _cvc, _billingZipCode, _accountHolderId);
@@ -77,6 +93,8 @@ public class CreditCard
         //If rows returned is equal to one, it means we updated one row in the database.
         return (dao.Update(query) == 1);
     }
+
+    public string GetExpirationDate() { return _expDate;  }
 
     public string GetCustomerId()
     {

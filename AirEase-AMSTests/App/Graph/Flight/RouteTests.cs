@@ -27,12 +27,9 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
             route.UploadRoute();
 
             Route reuse = new Route(route.GetRouteId());
-            string query = "SELECT * FROM FLIGHTROUTE;";
-            DatabaseAccessObject dao = new DatabaseAccessObject();
 
-            DatabaseAccessObject.PrintDataTable(dao.Retrieve(query));
-
-
+            Assert.AreEqual(route.GetDistance(), reuse.GetDistance());
+            Assert.AreEqual(route.GetRouteId(), reuse.GetRouteId());
             Assert.AreEqual(route.GetDistance(), reuse.GetDistance());
 
             HLib.NuclearRedButton();

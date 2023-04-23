@@ -207,7 +207,7 @@ public class Ticket : ITicket
             query = String.Format("EXEC UpdateFlightAfterCancel @FlightID = {0}, @CustomerID = {1};", flight.GetFlightId(), _customerId);
 
             //If its false once we return false
-            success = success && dao.Update(query) > 0;
+            success = success && dao.Update(query) == 1;
         }
         return success;
     }

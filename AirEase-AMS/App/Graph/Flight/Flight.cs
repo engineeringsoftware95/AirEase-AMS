@@ -1,11 +1,14 @@
 using AirEase_AMS.App.Entity.Aircraft;
 using System.Data;
+using System.Diagnostics;
+using System.Reflection.Metadata;
+
 namespace AirEase_AMS.App.Graph.Flight;
 
 public class Flight : Route
 {
     readonly DateTime _flightTime;
-    private readonly Aircraft _aircraft;
+    private Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;
     private decimal _flightCost;
@@ -108,6 +111,7 @@ public class Flight : Route
 
     public bool SetPlaneForFlight(string aircraftId)
     {
+        _aircraft = new Aircraft(aircraftId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("UPDATE FLIGHT_PLANE SET PlaneID = {0} WHERE FlightID = {1};", aircraftId, _flightId);
         return (dao.Update(query) == 1);
@@ -185,5 +189,10 @@ public class Flight : Route
     private int CalculateFlightPoints()
     {
         return HLib.ConvertToPoints(_flightCost);
+    }
+
+    public string GetAircraftID()
+    {
+        return _aircraft.GetAircraftId();
     }
 }
