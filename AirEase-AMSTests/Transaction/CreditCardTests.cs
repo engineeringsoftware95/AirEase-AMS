@@ -19,8 +19,7 @@ namespace AirEase_AMS.App.Ticket.Tests
         [TestCase("111222333444666", "420", "12121")]
         public void CreditCardTest(string ccNum, string cvc, string zip)
         {
-            DatabaseAccessObject dao = new DatabaseAccessObject();
-            dao.Update("DELETE FROM CUSTOMER_CREDITCARD; DELETE FROM CREDITCARD;");
+            HLib.NuclearRedButton();
 
             Customer customer = new Customer("bob","bobby", "Bobby Road, TX",DateTime.Now.ToString(),"password123","2223334444","@.");
             customer.AttemptAccountCreation();
@@ -29,9 +28,9 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             CreditCard reuse = new CreditCard(ccNum);
 
-            Assert.AreEqual(customer.GetUserId(), reuse.GetCustomerId());
+            Assert.AreEqual(card.GetCustomerId(), reuse.GetCustomerId());
 
-            dao.Update("DELETE FROM CUSTOMER_CREDITCARD; DELETE FROM CREDITCARD;");
+            HLib.NuclearRedButton();
         }
     }
 }

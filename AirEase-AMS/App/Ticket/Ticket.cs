@@ -63,19 +63,21 @@ public class Ticket : ITicket
             _startCity = ticket["StartCity"].ToString() ?? "";
             _endCity = ticket["EndCity"].ToString() ?? "";
         }
-
         flights = new List<Flight>();
     }
 
     public bool UploadTicket()
     {
+        if (flights.Count == 0) return false;
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
         //While the ID isn't unique, make a new one.
         _transactionId = (GenerateTicketId());
-        while (dao.Retrieve("SELECT * FROM TRANSACTION WHERE TransactionID=" + _transactionId + ";").Rows.Count > 0)
+        while (dao.Retrieve("SELECT * FROM TRANSACTIONS WHERE TransactionID=" + _transactionId + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
-            _ticketId = (GenerateTicketId());
+            _transactionId = (GenerateTicketId());
         }
 
         //While the ID isn't unique, make a new one.
@@ -91,13 +93,15 @@ public class Ticket : ITicket
             "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6}, @PointCost  = {7};", 
             _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transactionId,_customerId, HLib.ConvertToPoints(_ticketCost));
 
+        bool firstQuery = (dao.Update(query) > 0);
+
         foreach(Flight flight in flights)
         {
             query = String.Format("EXEC UpdateFlights " +
             "@CustomerID = {0}, @FlightID = {1}, @DepartureID = {2}, @TicketID = {3};", _customerId, flight.GetFlightId(), flight.GetDepartureId(), _ticketId);
         }
 
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) > 0) && firstQuery;
     }
 
     public void SetStraightLineMileage(double slm)

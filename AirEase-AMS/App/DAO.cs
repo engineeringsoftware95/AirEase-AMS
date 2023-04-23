@@ -154,6 +154,10 @@ public class DatabaseAccessObject
             //Print exception info
             Console.WriteLine(e.ToString());
         }
+        catch (System.InvalidOperationException e)
+        {
+            Console.WriteLine(e.ToString());
+        }
         //Looks like an exception occurred - return error code.
         return -1;
     }
@@ -162,7 +166,7 @@ public class DatabaseAccessObject
     /// DEBUG: Prints the attributes of a data table object.
     /// </summary>
     /// <param name="dt">The data table being printed.</param>
-    public void PrintDataTable(DataTable? dt)
+    public static void PrintDataTable(DataTable? dt)
     {
         if (dt != null)
         {

@@ -12,23 +12,42 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
     public class FlightTests
     {
         [Test()]
-        [TestCase("202315")]
-        [TestCase("314242421")]
-        [TestCase("")]
+        [TestCase()]
+        [TestCase()]
+        [TestCase()]
 
-        public void FlightTest(string yearWeekId)
+        public void FlightTest()
         {
-            DatabaseAccessObject dao = new DatabaseAccessObject();
-            dao.Update("DELETE FROM FLIGHT;");
-            Route route = new Route("Cleveland", "Atlanta", 150);
+            HLib.NuclearRedButton();
+
+            DateTime time = DateTime.Now;
+            string yearWeekId = time.Year.ToString();
+            yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+
+            AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
+            defaultAircraft.SetAircraftId("111111");
+            defaultAircraft.UploadAircraft();
+
+
+            Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
+            origin.UploadAirport();
+
+            Airport destination = new Airport("New York", "LaGuardia");
+            destination.UploadAirport();
+
+            Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 150);
             route.UploadRoute();
-            Flight flight = new Flight(route.GetRouteId(), "202314", DateTime.Now);
+
+            Flight flight = new Flight(route.GetRouteId(), yearWeekId, DateTime.Now);
             flight.UploadFlight();
 
             Flight reused = new Flight(flight.GetFlightId(), flight.GetDepartureId());
+
+            Assert.AreEqual(flight.GetFlightId(), reused.GetFlightId());
+            Assert.AreEqual(flight.GetDepartureId(), reused.GetDepartureId());
             Assert.AreEqual(flight.GetDistance(), reused.GetDistance());
-            Assert.Fail();
-            dao.Update("DELETE FROM FLIGHT;");
+
+            HLib.NuclearRedButton();
         }
     }
 }

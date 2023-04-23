@@ -13,11 +13,12 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
     {
         [Test()]
         [TestCase()]
+        [TestCase()]
+        [TestCase()]
+        [TestCase()]
         public void RouteTest()
         {
-            DatabaseAccessObject dao = new DatabaseAccessObject();
-            dao.Update("DELETE FROM AIRPORT;");
-            dao.Update("DELETE FROM FLIGHTROUTE;");
+            HLib.NuclearRedButton();
             Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
             origin.UploadAirport();
             Airport destination = new Airport("New York", "LaGuardia");
@@ -25,13 +26,16 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 160);
             route.UploadRoute();
 
-            Route reuse = new Route(route.RouteId());
+            Route reuse = new Route(route.GetRouteId());
+            string query = "SELECT * FROM FLIGHTROUTE;";
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+
+            DatabaseAccessObject.PrintDataTable(dao.Retrieve(query));
 
 
             Assert.AreEqual(route.GetDistance(), reuse.GetDistance());
 
-            dao.Update("DELETE FROM FLIGHTROUTE;");
-            dao.Update("DELETE FROM AIRPORT;");
+            HLib.NuclearRedButton();
         }
     }
 }

@@ -14,7 +14,7 @@ public class CreditCard
     /// Credit card constructor which sets the class members with info from the database.
     /// </summary>
     /// <param name="ccNum">The credit card number selected on.</param>
-    public CreditCard(string? ccNum)
+    public CreditCard(string ccNum)
     {
         _ccNum = ccNum;
         string query = String.Format("EXEC RetrieveCreditCard @CreditCardNum = '{0}';", _ccNum);

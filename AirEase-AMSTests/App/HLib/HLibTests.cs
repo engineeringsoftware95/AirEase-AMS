@@ -116,5 +116,14 @@ namespace AirEase_AMS.App.Tests
             Console.WriteLine("Result = " + result);
             Assert.AreEqual(result.Length, 6);
         }
+
+        [Test()]
+        public void DAOThreadingTest()
+        {
+            for(int i = 0; i < 101; i++)
+            {
+                DatabaseAccessObject dao = new DatabaseAccessObject();
+            }
+        }
     }
 }

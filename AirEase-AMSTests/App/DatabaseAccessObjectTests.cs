@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data;
 using AirEase_AMS.App.Entity.User;
 using System.Windows.Forms;
+using AirEase_AMS.App;
 
 namespace Tests
 {
@@ -24,6 +25,7 @@ namespace Tests
 
         public void RetrieveTest(string insertQuery, string retrieveQuery, string deleteQuery, int expectedTableSize)
         {
+            HLib.NuclearRedButton();
             DatabaseAccessObject dao = new DatabaseAccessObject();
 
             dao.Update(deleteQuery);
@@ -35,6 +37,7 @@ namespace Tests
             //If delete wasn't working then the test case would pass but there would be a primary key violation (UNLESS we planned for there to be one for a specific test case... which we did.)
             dao.Update(deleteQuery);
             Assert.AreEqual(expectedTableSize, dt.Rows.Count);
+            HLib.NuclearRedButton();
         }
 
 
@@ -48,6 +51,7 @@ namespace Tests
 
         public void UpdateTest(string insertQuery, string deleteQuery, int expectedInsertCount)
         {
+            HLib.NuclearRedButton();
             DatabaseAccessObject dao = new DatabaseAccessObject();
 
             int actualInsertCount = dao.Update(insertQuery);
@@ -55,6 +59,7 @@ namespace Tests
 
             dao.Update(deleteQuery);
             Assert.AreEqual(expectedInsertCount, actualInsertCount);
+            HLib.NuclearRedButton();
         }
     }
 }

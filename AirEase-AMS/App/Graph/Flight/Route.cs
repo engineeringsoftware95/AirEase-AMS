@@ -1,5 +1,6 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Windows.Forms;
 
@@ -31,7 +32,7 @@ public class Route : IRoute, IComparable<Route>
         System.Data.DataTable routeTable = dao.Retrieve(query);
         if (routeTable == null || routeTable.Rows.Count != 1)
         {
-            _routeId = "-1";
+            _routeId = "";
             _origin = new Airport("-1");
 
             _destination = new Airport("-1");
@@ -61,6 +62,7 @@ public class Route : IRoute, IComparable<Route>
     public bool UploadRoute()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
         //While the ID isn't unique, make a new one.
         _routeId = (GenerateId());
         while (dao.Retrieve("SELECT * FROM FLIGHTROUTE WHERE RouteID=" + _routeId + ";").Rows.Count > 0)
@@ -68,6 +70,7 @@ public class Route : IRoute, IComparable<Route>
             //Set ID until one is unique
             _routeId = (GenerateId());
         }
+
         string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
         return (dao.Update(query) == 1);
     }
@@ -162,12 +165,6 @@ public class Route : IRoute, IComparable<Route>
         // otherwise compare the values.
         int retval = lhs.GetDistance().CompareTo(rhs.GetDistance());
         return retval != 0 ? retval : lhs.CompareTo(rhs);
-    }
-
-
-    public string RouteId()
-    {
-        return _routeId;
     }
 
 

@@ -32,6 +32,7 @@ public class User : IUser
         _positionTitle = "";
         _userId = -1;
     }
+
     public User(string fName, string lName, string address, string date, string password, string phoneNum, string email)
     {
         _firstName = fName;
@@ -45,7 +46,6 @@ public class User : IUser
         _ssn = "";
         _positionTitle = "";
     }
-
 
     public void SetFirstName(string first)
     {
@@ -201,11 +201,11 @@ public class User : IUser
         if (!dao.IsConnected) return false;
 
         //While the ID isn't unique, make a new one.
-        SetId(GenerateId());
+        _userId = GenerateId();
         while (dao.Retrieve("SELECT * FROM " + table + " WHERE UserID=" + GetUserId() + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
-            SetId(GenerateId());
+            _userId = GenerateId();
         }
 
         //Now we have a unique ID and a user class loaded with information - we can attempt to push it to the Database
@@ -267,43 +267,72 @@ public class User : IUser
 
         //Login verified
         query = "SELECT * FROM " + table + " WHERE "+passwordColumn+" = '" + password + "' AND UserID = " + username + ";";
-        Console.WriteLine(query);
         
         //Return whether our select returned a match
         return (dao.Retrieve(query).Rows.Count == 1);
     }
 
+    /// <summary>
+    /// Gets any upcoming tickets related to this users account.
+    /// </summary>
+    /// <returns>A list of tickets.</returns>
     public List<App.Ticket.Ticket> GetUpcomingTickets()
     {
+        //The current date
         DateTime time = DateTime.Now;
+
+        //Calculate our yearWeekId
         string yearWeekId = time.Year.ToString();
         yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+
+        //Create our query to execute the stored procedure
         string query = String.Format("EXEC SelectFutureTickets @CustomerId = {0}, @YearWeekID={1};", _userId, yearWeekId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
+        //Get our table of ticket information
         System.Data.DataTable dt = dao.Retrieve(query);
 
+        //Initialize our return array of tickets
         List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
         foreach(System.Data.DataRow row in dt.Rows)
         {
+            //For each ticket in the table, add it to our list of tickets
             tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
         }
+
+        //Return our list of tickets
         return tickets;
     }
+
+    /// <summary>
+    /// Gets a history of tickets associated with this account.
+    /// </summary>
+    /// <returns>A list of tickets.</returns>
     public List<App.Ticket.Ticket> GetPastTickets()
     {
-
+        //The current date
         DateTime time = DateTime.Now;
+
+        //Calculate our yearWeekId
         string yearWeekId = time.Year.ToString();
         yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
+
+        //Create our query to execute the stored procedure
         string query = String.Format("EXEC SelectPastTickets @CustomerId = {0}, @YearWeekID={1};", _userId, yearWeekId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
+        //Get our table of ticket information
         System.Data.DataTable dt = dao.Retrieve(query);
 
+        //Initialize our return array of tickets
         List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
         foreach (System.Data.DataRow row in dt.Rows)
         {
+            //For each ticket in the table, add it to our list of tickets
             tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
         }
+
+        //Return our list of tickets
         return tickets;
     }
 
