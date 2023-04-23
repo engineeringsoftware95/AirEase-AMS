@@ -28,30 +28,30 @@ public class Route : IRoute, IComparable<Route>
     /// </summary>
     /// <param name="routeId">The key associated with the route we want.</param>
     public Route(string routeId)
-    {
+    {//TODO: statement or branch uncovered
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         _routeId = routeId;
         string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
         System.Data.DataTable routeTable = dao.Retrieve(query);
         if (routeTable == null || routeTable.Rows.Count != 1)
-        {
+        {//TODO: statement or branch uncovered
             _routeId = "-1";
             _origin = new Airport("-1");
 
             _destination = new Airport("-1");
             _flightsOnRoute = new List<Flight>();
             _distance = 0;
-        }
+        }//TODO: statement or branch uncovered
         else
-        {
+        {//TODO: statement or branch uncovered
             DataRow route = routeTable.Rows[0];
             _routeId = routeId;
             _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
             _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
             _flightsOnRoute = new List<Flight>();
             _distance = double.Parse(route["DistanceMiles"].ToString() ?? "-1");
-        }
+        }//TODO: statement or branch uncovered
     }
 
     public Route(string originAirportId, string destinationAirportId, int distanceMiles)
@@ -69,7 +69,7 @@ public class Route : IRoute, IComparable<Route>
         //While the ID isn't unique, make a new one.
         _routeId = (GenerateId());
         while (dao.Retrieve("SELECT * FROM FLIGHTROUTE WHERE RouteID=" + _routeId + ";").Rows.Count > 0)
-        {
+        {//TODO: statement or branch uncovered
             //Set ID until one is unique
             _routeId = (GenerateId());
         }
@@ -104,12 +104,12 @@ public class Route : IRoute, IComparable<Route>
     }
 
     public IGraphNode Origin()
-    {
+    {//TODO: statement or branch uncovered
         return _origin;
     }
 
     public IGraphNode Destination()
-    {
+    {//TODO: statement or branch uncovered
         return _destination;
     }
     
@@ -120,12 +120,12 @@ public class Route : IRoute, IComparable<Route>
     }
     
     public bool IsOrigin(string city)
-    {
+    {//TODO: statement or branch uncovered
         return _origin.GetCityName().Equals(city);
     }
 
     public DateTime GetTime()
-    {
+    {//TODO: statement or branch uncovered
         throw new NotImplementedException();
     }
 
@@ -134,14 +134,14 @@ public class Route : IRoute, IComparable<Route>
         _flightsOnRoute.Add(flight);
     }
     public double GetDistance()
-    {
+    {//TODO: statement or branch uncovered
         return _distance;
     }
 
-    public string GetRouteId() { return _routeId; } 
+    public string GetRouteId() { return _routeId; } //TODO: statement or branch uncovered
     
     public int CompareTo(Route? other)
-    {
+    {//TODO: statement or branch uncovered
         if (ReferenceEquals(this, other)) return 0;
         if (ReferenceEquals(null, other)) return 1;
         return GetDistance().CompareTo(other.GetDistance());
@@ -149,7 +149,7 @@ public class Route : IRoute, IComparable<Route>
     
     
     public static int CompareByDistance(Flight? lhs, Flight? rhs)
-    {
+    {//TODO: statement or branch uncovered
         if ((lhs == null))
         {
             if (rhs == null) // if lhs and rhs are null, they are equal
@@ -159,19 +159,19 @@ public class Route : IRoute, IComparable<Route>
 
             return -1; // If lhs is null and rhs is not, then lhs < rhs.
         }
-
+        //TODO: statement or branch uncovered
         if (rhs == null) // likewise, if we get here, lhs is not null, so lhs > rhs
         {
             return 1;
         }
         // otherwise compare the values.
-        int retval = lhs.GetDistance().CompareTo(rhs.GetDistance());
+        int retval = lhs.GetDistance().CompareTo(rhs.GetDistance());//TODO: statement or branch uncovered
         return retval != 0 ? retval : lhs.CompareTo(rhs);
     }
 
 
     public string RouteId()
-    {
+    {//TODO: statement or branch uncovered
         return _routeId;
     }
 

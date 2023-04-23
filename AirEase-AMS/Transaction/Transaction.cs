@@ -11,7 +11,7 @@ public class Transaction
     private Customer _customer;
 
     public Transaction(int transactionId, Ticket ticket, Customer customer)
-    {
+    {//TODO: statement or branch uncovered
         _transactionId = transactionId;
         _ticket = ticket;
         _customer = customer;
@@ -19,7 +19,7 @@ public class Transaction
 
 
     public void GenerateTransactionId()
-    {
+    {//TODO: statement or branch uncovered
         _transactionId = HLib.GenerateFiveDigitId();
     }
 }

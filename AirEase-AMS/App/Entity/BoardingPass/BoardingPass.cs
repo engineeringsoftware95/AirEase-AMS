@@ -18,9 +18,10 @@ namespace AirEase_AMS.App.Entity.BoardingPass
         DateTime arrivalTime_;
         string userID_;
 
+        //TODO: statement or branch uncovered
         BoardingPass(string flightID, string firstName, string lastName, string originCity, string destinationCity,
             DateTime departureTime, DateTime arrivalTime, string userID)
-        {
+        { 
             // search database for the given user
             flightID_ = flightID;
             firstName_ = firstName;
@@ -32,13 +33,13 @@ namespace AirEase_AMS.App.Entity.BoardingPass
             userID_ = userID;
         }
 
-        string printBoardingPass()
+        string printBoardingPass() //TODO: statement or branch uncovered
         {
             string boardingPass = createBoardingClassString();
             return boardingPass;
         }
         
-        string createBoardingClassString()
+        string createBoardingClassString() //TODO: statement or branch uncovered
         {
             string boardingPass = "" + flightID_ + "," + firstName_ + "," + lastName_ + "," + originCity_ + "," +
                 destinationCity_ + "," + departureTime_ + "," + arrivalTime_ + "," + userID_ + "\0";

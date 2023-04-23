@@ -16,7 +16,7 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
     private int _fuelCapacity;
 
 
-    public Aircraft(string aircraftId)
+    public Aircraft(string aircraftId) //TODO: statement or branch uncovered
     {
         _aircraftId = aircraftId;
         DatabaseAccessObject dao = new DatabaseAccessObject();
@@ -28,15 +28,15 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
             _modelName= "";
             _numberOfSeats = -1;
         }
-        else
+        else //TODO: statement or branch uncovered
         {
-            DataRow aircraft = dt.Rows[0];
+            DataRow aircraft = dt.Rows[0]; //TODO: statement uncovered - needs test  
             _modelName = aircraft["Aircraft"].ToString() ?? "";
             _numberOfSeats = int.Parse(aircraft["NumberOfSeats"].ToString() ?? "-1");
         }
     }
 
-    public Aircraft(string modelName, int numberOfSeats)
+    public Aircraft(string modelName, int numberOfSeats) //TODO: statement or branch uncovered
     {
         _aircraftId = HLib.GenerateSixDigitId().ToString();
         _modelName = modelName;
@@ -47,7 +47,7 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
     /// Attempts to upload the current rendition of this class to the database.
     /// </summary>
     /// <returns>Whether or not the function succeeded.</returns>
-    public bool UploadAircraft()
+    public bool UploadAircraft() //TODO: statement or branch uncovered
     {
         string query = String.Format("INSERT INTO PLANE VALUES({0}, '{1}', {2});", _aircraftId, _modelName, _numberOfSeats);
         DatabaseAccessObject dao = new DatabaseAccessObject();

@@ -95,7 +95,7 @@ namespace AirEase_AMS.App.Entity.User.Tests
             Route route = new Route("Cleveland", "Atlanta", 150);
             route.UploadRoute();
 
-            for (int i = -5; i < 5; i++)
+            for (int i = -5; i < 5; i++) 
             {
                 Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
                 Flight flight = new Flight(route.GetRouteId(), (yearWeekId + i).ToString(), DateTime.Now);
@@ -325,17 +325,7 @@ namespace AirEase_AMS.App.Entity.User.Tests
             Assert.Fail();
         }
 
-        [Test()]
-        public void GetUpcomingTicketsTest1()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetPastTicketsTest1()
-        {
-            Assert.Fail();
-        }
+     
 
         [Test()]
         public void UserTest2()

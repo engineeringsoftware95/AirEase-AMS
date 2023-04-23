@@ -47,7 +47,7 @@ public class Customer : User
             _salt = user["Salt"].ToString() ?? "";
             _email = user["Email"].ToString() ?? "";
         }
-    }
+    } //TODO: statement or branch uncovered
 
 
 }
