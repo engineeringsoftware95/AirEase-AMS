@@ -72,12 +72,14 @@ namespace AirEase_AMS.App.Entity.User.Tests
 
         
         [Test()]
-        [TestCase()]
-        [TestCase()]
-        [TestCase()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(9)]
 
-        
-        public void GetUpcomingTicketsTest()
+
+        public void GetUpcomingTicketsTest(int numUpcoming)
         {
             {
                 DatabaseAccessObject dao = new DatabaseAccessObject();
@@ -106,9 +108,9 @@ namespace AirEase_AMS.App.Entity.User.Tests
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 160);
             route.UploadRoute();
 
-            for(int i = -5; i < 6; i++)
+            for(int i = -5; i <= numUpcoming; i++)
             {
-                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
+                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
                 Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight.UploadFlight();
                 ticket.AddFlight(flight);
@@ -119,7 +121,7 @@ namespace AirEase_AMS.App.Entity.User.Tests
             }
 
 
-            Assert.AreEqual(5, customer.GetUpcomingTickets().Count);
+            Assert.AreEqual(numUpcoming, customer.GetUpcomingTickets().Count);
 
             {
                 DatabaseAccessObject dao = new DatabaseAccessObject();
@@ -130,11 +132,13 @@ namespace AirEase_AMS.App.Entity.User.Tests
         }
 
         [Test()]
-        [TestCase()]
-        [TestCase()]
-        [TestCase()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(9)]
 
-        public void GetPastTicketsTest()
+        public void GetPastTicketsTest(int numPastTickets)
         {
             HLib.NuclearRedButton();
 
@@ -157,9 +161,9 @@ namespace AirEase_AMS.App.Entity.User.Tests
             route.UploadRoute();
 
             
-            for (int i = -5; i < 5; i++)
+            for (int i = numPastTickets*-1; i < 5; i++)
             {
-                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString());
+                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
                 Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight.UploadFlight();
                 ticket.AddFlight(flight);
@@ -169,7 +173,7 @@ namespace AirEase_AMS.App.Entity.User.Tests
                 ticket.UploadTicket();
             }
             
-            Assert.AreEqual(5, customer.GetPastTickets().Count);
+            Assert.AreEqual(Math.Abs(numPastTickets), customer.GetPastTickets().Count);
 
             HLib.NuclearRedButton();
         }

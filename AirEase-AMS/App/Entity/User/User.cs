@@ -18,6 +18,8 @@ public class User : Defs.IUser
     protected string _ssn;
     protected string _positionTitle;
     protected int _userId;
+    public decimal _cashBalance { get; set; }
+    public int _pointBalance { get; set; }
 
     public User()
     {

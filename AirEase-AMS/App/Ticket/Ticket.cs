@@ -28,7 +28,7 @@ public class Ticket : ITicket
     /// <param name="startCity">The origin city.</param>
     /// <param name="endCity">The destination city.</param>
     /// <param name="customerId">The ID of the purchasing customer.</param>
-    public Ticket(decimal ticketCost, string startCity, string endCity, string customerId)
+    public Ticket(decimal ticketCost, string startCity, string endCity, string customerId, bool pointsUsed)
     {
         _straightLineMileage = 0;
         _ticketCost = ticketCost;
@@ -38,7 +38,9 @@ public class Ticket : ITicket
         _isRefunded = false;
         flights = new List<Flight>();
         _customerId = customerId;
-        _transaction = new AirEase_AMS.Transaction.Transaction(ticketCost, customerId);
+
+        //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
+        _transaction = new AirEase_AMS.Transaction.Transaction(pointsUsed ? 0 : ticketCost, pointsUsed ? HLib.ConvertToPoints(ticketCost) : 0, customerId);
     }
 
     /// <summary>
@@ -73,6 +75,7 @@ public class Ticket : ITicket
             //Return empty string on invalid read
             _startCity = ticket["StartCity"].ToString() ?? "";
             _endCity = ticket["EndCity"].ToString() ?? "";
+            _isRefunded = int.Parse(ticket["IsRefunded"].ToString() ?? "-1") > 0;
         }
         flights = new List<Flight>();
     }
@@ -132,6 +135,8 @@ public class Ticket : ITicket
         return _ticketId;
     }
 
+    public bool IsRefunded() { return _isRefunded; }
+
 
     public double CalculateStraightLineMileage()
     {
@@ -175,46 +180,6 @@ public class Ticket : ITicket
         return output;
     }
 
-    /// <summary>
-    /// Attempts to insert this ticket into the database.
-    /// </summary>
-    /// <returns>Whether or not the ticket was successfully inserted.</returns>
-    public bool PurchaseTicket()
-    {
-        DatabaseAccessObject dao = new DatabaseAccessObject();
-
-        //While the ID isn't unique, make a new one.
-        _ticketId = GenerateTicketId().ToString();
-        while (dao.Retrieve("SELECT * FROM TICKETS WHERE TicketID=" + _ticketId + ";").Rows.Count > 0)
-        {
-            //Set ID until one is unique
-            _ticketId = GenerateTicketId().ToString();
-        }
-
-
-        //Create query - isRefunded is always defaulted to zero when purchasing a ticket - because why would you refund a ticket while buying it.
-        string query = "INSERT INTO TICKETS VALUES(" + _ticketId + ", '" + _startCity + "', '" + _endCity + "', " + _ticketCost + ", " + _straightLineMileage + ", 0);";
-
-        //Number of rows altered should equal one on a successful insert
-        bool ticketInserted = dao.Update(query) == 1;
-
-        //If we already failed to insert the ticket, do not try to insert the ticket_flight relation.
-        if(!ticketInserted) { return false; }
-
-        //Insert each flight-ticket relation, if any one of them is false the whole thing fails.
-        bool flightRelationsInserted = true;
-        foreach (Flight flight in flights)
-        {
-            query = "INSERT INTO TICKETS_FLIGHT VALUES(" + _ticketId + ", " + flight.GetFlightId() + ");";
-            flightRelationsInserted = dao.Update(query) == 1;
-
-            //If one of the inserts fail, break out. Don't keep trying.
-            if (!flightRelationsInserted) break;
-        }
-
-        return flightRelationsInserted;
-        
-    }
 
     /// <summary>
     /// Attempts to cancel the ticket with this class' TicketID.
@@ -222,8 +187,17 @@ public class Ticket : ITicket
     /// <returns>Whether or not the ticket was successfully cancelled.</returns>
     public bool CancelTicket()
     {
+        _isRefunded = true;
+        int pointsCost;
+        if (_transaction == null) pointsCost = 0;
+        else pointsCost = _transaction._pointCost;
+
+        decimal currencyCost;
+        if (_transaction == null) currencyCost = 0;
+        else currencyCost = _transaction._currencyCost;
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
-        string query = "UPDATE TICKETS SET IsRefunded = 1 WHERE TicketID = " + _ticketId + ";";
+        string query = String.Format("EXEC CancelTicket @TicketID = {0}, @TicketCost = {1}, @PointCost = {2}", _ticketId, currencyCost, pointsCost);
 
         //Should alter one row by changing its IsRefunded attribute
         return dao.Update(query) == 1;

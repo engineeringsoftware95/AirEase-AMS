@@ -30,7 +30,7 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             DatabaseAccessObject dao = new DatabaseAccessObject();
 
-            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(),"Password123", "2223334444", "bob@bob.bob");
+            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
             customer.AttemptAccountCreation();
 
             Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
@@ -41,7 +41,7 @@ namespace AirEase_AMS.App.Ticket.Tests
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 150);
             route.UploadRoute();
 
-            Ticket ticket = new Ticket(ticketCost, startCity, endCity, customer.GetUserId().ToString());
+            Ticket ticket = new Ticket(ticketCost, startCity, endCity, customer.GetUserId().ToString(), false);
             for (int i = 0; i < numFlights; i++)
             {
                 Flight flight = new Flight(route.GetRouteId(), "202314", DateTime.Now);
@@ -57,6 +57,59 @@ namespace AirEase_AMS.App.Ticket.Tests
             Ticket reused = new Ticket(ticket.GetTicketId());
             Assert.AreEqual(ticket.GetTicketCost(), reused.GetTicketCost());
             Assert.AreEqual(ticket.GetStraightLineMileage(), reused.GetStraightLineMileage());
+
+            HLib.NuclearRedButton();
+        }
+
+        [Test()]
+        [TestCase(57.06, true)]
+        [TestCase(57.26, true)]
+        [TestCase(1, true)]
+        [TestCase(0, true)]
+        [TestCase(0, false)]
+        [TestCase(1, false)]
+        [TestCase(99.05, false)]
+        [TestCase(199.37, false)]
+
+        public void CancelTicketTest(decimal ticketCost, bool pointsUsed)
+        {
+            HLib.NuclearRedButton();
+
+            AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
+            defaultAircraft.SetAircraftId("111111");
+            defaultAircraft.UploadAircraft();
+
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+
+            Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
+            customer.AttemptAccountCreation();
+
+            Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
+            origin.UploadAirport();
+            Airport destination = new Airport("New York", "LaGuardia");
+            destination.UploadAirport();
+
+            Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 150);
+            route.UploadRoute();
+
+            Ticket ticket = new Ticket(ticketCost, "Cleveland", "New York", customer.GetUserId().ToString(), pointsUsed);
+            for (int i = 0; i < 2; i++)
+            {
+                Flight flight = new Flight(route.GetRouteId(), "202314", DateTime.Now);
+                flight.UploadFlight();
+                ticket.AddFlight(flight);
+            }
+
+            bool success = ticket.UploadTicket();
+            if (!success) Assert.Fail();
+
+            bool cancelledSuccess = ticket.CancelTicket();
+            Ticket reuse = new Ticket(ticket.GetTicketId());
+            Assert.AreEqual(true, reuse.IsRefunded());
+
+            Customer reuseCustomer = new Customer(customer.GetUserId().ToString(), customer.GetPassword());
+            Assert.AreEqual(pointsUsed ? 0 : ticketCost, reuseCustomer._cashBalance);
+            Assert.AreEqual(pointsUsed ? HLib.ConvertToPoints(ticketCost) : 0, reuseCustomer._pointBalance);
 
             HLib.NuclearRedButton();
         }

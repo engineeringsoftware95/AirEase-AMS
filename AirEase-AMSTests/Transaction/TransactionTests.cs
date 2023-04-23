@@ -17,15 +17,24 @@ namespace AirEase_AMS.Transaction.Tests
     public class TransactionTests
     {
         [Test()]
-        public void TransactionTest()
+        [TestCase(27.25, 0)]
+        [TestCase(0, 2725)]
+        [TestCase(2, 0)]
+        [TestCase(0, 3)]
+        [TestCase(3, 3)]
+        public void TransactionTest(decimal currency, int points)
         {
+            bool expected = true;
+            if(currency > 0 && points > 0) { expected = false; }
             HLib.NuclearRedButton();
 
             Customer customer = new Customer("bob", "bobby", "Bobby Road, TX", DateTime.Now.ToString(), "password123", "2223334444", "@.");
             customer.AttemptAccountCreation();
 
-            Transaction transaction = new Transaction(27.25m, customer.GetUserId().ToString());
-            transaction.UploadTransaction();
+            Transaction transaction = new Transaction(currency, points, customer.GetUserId().ToString());
+            bool actual = transaction.UploadTransaction();
+            if(!actual && !expected) Assert.Pass();
+            else if(!actual && expected) Assert.Fail();
 
             Transaction reused = new Transaction(transaction._transactionId);
 

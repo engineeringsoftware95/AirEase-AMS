@@ -17,12 +17,23 @@ public class Transaction
     /// <param name="currencyCost">The cost in USD.</param>
     /// <param name="pointCost">The points cost based on our currency-to-points metric.</param>
     /// <param name="customerId">The customer ID associated with this transaction.</param>
-    public Transaction(decimal currencyCost, string customerId)
+    public Transaction(decimal currencyCost, int pointsCost, string customerId)
     {
-        _transactionId = GenerateTransactionId();
-        _currencyCost = currencyCost;
-        _pointCost = HLib.ConvertToPoints(currencyCost);
-        _customerId = customerId;
+        //This class is currently in an invalid state
+        if(currencyCost != 0 && pointsCost != 0)
+        {
+            _transactionId = "-1";
+            _currencyCost = -1;
+            _pointCost = -1;
+            _customerId = "-1";
+        }
+        else
+        {
+            _transactionId = GenerateTransactionId();
+            _currencyCost = currencyCost;
+            _pointCost = pointsCost;
+            _customerId = customerId;
+        }
     }
 
     /// <summary>
@@ -64,7 +75,7 @@ public class Transaction
     {
         string query = String.Format("EXEC InsertTransaction @TransactionID = {0}, @TicketCost = {1}, @PointCost = {2}, @CustomerID = {3};", _transactionId, _currencyCost, _pointCost, _customerId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     public string GenerateTransactionId()
