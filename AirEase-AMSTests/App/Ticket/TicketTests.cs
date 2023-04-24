@@ -113,5 +113,89 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             HLib.NuclearRedButton();
         }
+
+        [Test()]
+        public void TicketTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void TicketTest2()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void UploadTicketTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void SetStraightLineMileageTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetStraightLineMileageTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTicketCostTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTicketIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CalculateStraightLineMileageTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CalculateTicketCostTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void AddFlightTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GenerateTicketIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTicketInformationTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void PurchaseTicketTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CancelTicketTest()
+        {
+            Assert.Fail();
+        }
     }
 }

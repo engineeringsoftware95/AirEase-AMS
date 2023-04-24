@@ -1,4 +1,4 @@
-﻿using AirEase_AMS.App.Defs;
+using AirEase_AMS.App.Defs;
 using Microsoft.Identity.Client;
 using System.Security.Cryptography.X509Certificates;
 
@@ -6,22 +6,22 @@ namespace AirEase_AMS.App.Entity.User;
 
 public class User : Defs.IUser
 {
-    protected int _roleBit;
-    protected string _firstName;
-    protected string _lastName;
-    protected string _email;
-    protected string _phoneNum;
-    protected string _address;
-    protected string _birthDate;
-    protected string _password;
-    protected string _salt;
-    protected string _ssn;
+    protected   int        _roleBit;
+    protected string     _firstName;
+    protected string      _lastName;
+    protected string         _email;
+    protected string      _phoneNum;
+    protected string       _address;
+    protected string     _birthDate;
+    protected string      _password;
+    protected string          _salt;
+    protected string           _ssn;
     protected string _positionTitle;
-    protected int _userId;
-    public decimal _cashBalance { get; set; }
-    public int _pointBalance { get; set; }
+    protected int           _userId;
+    public decimal      _cashBalance { get; set; }
+    public int         _pointBalance { get; set; }
 
-    public User()
+    public User() //TODO: statement or branch uncovered
     {
         _firstName = "";
         _lastName = "";
@@ -55,32 +55,32 @@ public class User : Defs.IUser
         _firstName = DatabaseAccessObject.SanitizeString(first);
     }
 
-    public void SetLastName(string last)
+    public void SetLastName(string last) //TODO: statement or branch uncovered
     {
         _lastName = DatabaseAccessObject.SanitizeString(last);
     }
 
-    public void SetPhoneNum(string num)
+    public void SetPhoneNum(string num) //TODO: statement or branch uncovered
     {
         _phoneNum = DatabaseAccessObject.SanitizeString(num);
     }
 
-    public void SetEmail(string email)
+    public void SetEmail(string email) //TODO: statement or branch uncovered
     {
         _email = DatabaseAccessObject.SanitizeString(email);
     }
 
-    public void SetBirthDate(string bday)
+    public void SetBirthDate(string bday) //TODO: statement or branch uncovered
     {
         _birthDate = bday;
     }
 
-    public void SetPassword(string pass)
+    public void SetPassword(string pass) //TODO: statement or branch uncovered
     {
         _password = DatabaseAccessObject.SanitizeString(pass);
     }
 
-    public void SetAddress(string addr)
+    public void SetAddress(string addr) //TODO: statement or branch uncovered
     {
         _address = DatabaseAccessObject.SanitizeString(addr);
     }
@@ -95,47 +95,47 @@ public class User : Defs.IUser
         _roleBit = role;
     }
 
-    public void SetSalt(string salt)
+    public void SetSalt(string salt) //TODO: statement or branch uncovered
     {
         _salt = DatabaseAccessObject.SanitizeString(salt);
     }
 
-    public void SetSsn(string ssn)
+    public void SetSsn(string ssn) //TODO: statement or branch uncovered
     {
         _ssn = DatabaseAccessObject.SanitizeString(ssn);
     }
 
-    public void SetTitle(string title)
+    public void SetTitle(string title) //TODO: statement or branch uncovered
     {
         _positionTitle = DatabaseAccessObject.SanitizeString(title);
     }
 
-    public string GetFirstName()
+    public string GetFirstName() //TODO: statement or branch uncovered
     {
         return _firstName;
     }
 
-    public string GetLastName()
+    public string GetLastName() //TODO: statement or branch uncovered
     {
         return _lastName;
     }
 
-    public string GetEmail()
+    public string GetEmail() //TODO: statement or branch uncovered
     {
         return _email;
     }
 
-    public string GetPassword()
+    public string GetPassword() //TODO: statement or branch uncovered
     {
         return _password;
     }
 
-    public string GetPhoneNum()
+    public string GetPhoneNum() //TODO: statement or branch uncovered
     {
         return _phoneNum;
     }
 
-    public string GetBirthDate()
+    public string GetBirthDate() //TODO: statement or branch uncovered
     {
         return _birthDate;
     }
@@ -145,7 +145,7 @@ public class User : Defs.IUser
         return _userId;
     }
 
-    public string GetAddress()
+    public string GetAddress() //TODO: statement or branch uncovered
     {
         return _address;
     }
@@ -155,18 +155,18 @@ public class User : Defs.IUser
         return _salt;
     }
 
-    public string GetSsn()
+    public string GetSsn() //TODO: statement or branch uncovered
     {
         return _ssn;
     }
 
-    public string GetTitle()
+    public string GetTitle() //TODO: statement or branch uncovered
     {
         return _positionTitle;
     }
 
-    public int GetRole()
-    {
+    public int GetRole() //TODO: statement or branch uncovered
+    { 
         return _roleBit;
     }
 
@@ -213,7 +213,7 @@ public class User : Defs.IUser
 
         //Now we have a unique ID and a user class loaded with information - we can attempt to push it to the Database
         //Customer
-        if(role == 1)
+        if(role == 1) //TODO: statement or branch uncovered
         {
             //Try to create the customer
             string query = "INSERT INTO CUSTOMER VALUES(" + GetUserId() + ", '" + GetPassword() + "', '" + GetFirstName() + "', '" + GetLastName() + "', '" + GetAddress() + "', '" + GetPhoneNum() + "', '" + GetBirthDate() + "', 0.0, 0, '" + GetSalt() + "', '" + GetEmail() + "');";
@@ -223,7 +223,7 @@ public class User : Defs.IUser
             return results > 0;
         }
         //Employee
-        else
+        else //TODO: statement or branch uncovered
         {
             //Try to create the employee
             string query = "INSERT INTO EMPLOYEE VALUES(" + GetUserId() + ", '" + GetPassword() + "', '" + GetFirstName() + "', '" + GetLastName() + "', '" + GetAddress() + "', '" + GetPhoneNum() + "', '" + GetBirthDate() + "', '" + GetSalt() + "', '" + GetEmail() + "', '"+GetSsn()+"', '"+GetTitle()+"');";
@@ -241,8 +241,8 @@ public class User : Defs.IUser
     /// <param name="username">The input username.</param>
     /// <param name="password">The input password.</param>
     /// <returns>If the login was successful.</returns>
-    public static bool AttemptLogin(string username, string password)
-    {
+    public static bool AttemptLogin(string username, string password) 
+    { //TODO: statement or branch uncovered
         if(String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password)) { return false; }
         char roleBit = username[0];
         string table = (roleBit == '1') ? "CUSTOMER" : "EMPLOYEE";
@@ -262,7 +262,7 @@ public class User : Defs.IUser
         System.Data.DataRow[] rows = dt.Select();
 
         //No match
-        if(rows.Length <= 0) { return false; }
+        if(rows.Length <= 0) { return false; } //TODO: statement or branch uncovered
 
         //Encrypt the password with our salt
         string salt = rows[0]["Salt"].ToString() ?? "";

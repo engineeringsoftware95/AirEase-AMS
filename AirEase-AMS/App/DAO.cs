@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -42,6 +42,7 @@ public class DatabaseAccessObject
             connection = new SqlConnection(builder.ConnectionString);
 
             //Once the connection is open, we have finished our job here!!
+            
             connection.Open();
             connectionSuccess = true;
             connection.Close();
@@ -53,7 +54,7 @@ public class DatabaseAccessObject
             connectionSuccess = false;
             
         }
-        catch(System.InvalidOperationException e)
+        catch(System.InvalidOperationException e) //TODO: statement or branch uncovered
         {
             Console.WriteLine(e.ToString());
             connectionSuccess = false;
@@ -79,8 +80,8 @@ public class DatabaseAccessObject
         if(sqlQuery== "") return new DataTable();
         //No connection established - return error
         if (connection == null)
-        {
-            Console.WriteLine("Connection is null. Abort.");
+        { //TODO: statement or branch uncovered
+            Console.WriteLine("Connection is null. Abort."); 
             return new DataTable();
         }
 
@@ -119,7 +120,7 @@ public class DatabaseAccessObject
                 {
                     //No return data - return null object
                     if (!reader.HasRows)
-                    {
+                    { //TODO: statement or branch uncovered
                         return new DataTable();
                     }
                     else
@@ -128,7 +129,7 @@ public class DatabaseAccessObject
                         //For that reason, it can not be returned here. The DataTable makes for a fine substitute.
 
                         //Load our data table for return.  
-                        System.Data.DataTable dt = new System.Data.DataTable();
+                        System.Data.DataTable dt = new System.Data.DataTable();//TODO: statement or branch uncovered
                         dt.Load(reader);
 
                         //Close the connection when we're done
@@ -140,7 +141,7 @@ public class DatabaseAccessObject
             }
         }
         catch (SqlException e)
-        {
+        {//TODO: statement or branch uncovered
             //Print exception info
             Console.WriteLine(e.ToString());
         }
@@ -165,7 +166,7 @@ public class DatabaseAccessObject
         if (sqlQuery == "") return 0;
         //No connection established - return error
         if (connection == null)
-        {
+        {//TODO: statement or branch uncovered
             Console.WriteLine("Connection is null. Abort.");
             return -1;
         }
@@ -206,13 +207,14 @@ public class DatabaseAccessObject
                 {
                     int affectedRecords = reader.RecordsAffected;
                     connection.Close();
+
                     //Return the number of rows affected by our input query.
                     return affectedRecords;
                 }
             }
         }
         catch (SqlException e)
-        {
+        {//TODO: statement or branch uncovered
             //Print exception info
             Console.WriteLine(e.ToString());
         }
@@ -224,7 +226,7 @@ public class DatabaseAccessObject
         connection.Close();
 
         //Looks like an exception occurred - return error code.
-        return -1;
+        return -1;//TODO: statement or branch uncovered
     }
 
     /// <summary>
@@ -234,17 +236,17 @@ public class DatabaseAccessObject
     public static void PrintDataTable(DataTable? dt)
     {
         if (dt != null)
-        {
+        {//TODO: statement or branch uncovered
 
             foreach (DataRow row in dt.Rows)
-            {
+            {//TODO: statement or branch uncovered
                 foreach (DataColumn col in dt.Columns)
                 {
-                    if (col.DataType.Equals(typeof(DateTime)))
+                    if (col.DataType.Equals(typeof(DateTime)))//TODO: statement or branch uncovered
                         Console.Write("{0,-14:d}", row[col]);
-                    else if (col.DataType.Equals(typeof(Decimal)))
+                    else if (col.DataType.Equals(typeof(Decimal)))//TODO: statement or branch uncovered
                         Console.Write("{0,-14:C}", row[col]);
-                    else
+                    else//TODO: statement or branch uncovered
                         Console.Write("{0,-14}", row[col]);
                 }
                 Console.WriteLine();
@@ -259,7 +261,7 @@ public class DatabaseAccessObject
     /// <param name="input">The input string to be sanitized.</param>
     /// <returns>Returns the sanitized string.</returns>
     public static string SanitizeString(string input)
-    {
+    {//TODO: statement or branch uncovered
         return input.Replace("'", "''");
     }
 }

@@ -11,7 +11,23 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
     [TestFixture()]
     public class RouteTests
     {
-        [Test()]
+        private Route ibilly;
+        private Flight ijoseph;
+        private DateTime begin;
+        private DateTime end;
+
+        [SetUp]
+        public void SetUp()
+        {
+            ibilly = new Route();
+            ibilly.SetOrigin("Flavor Town");
+            ibilly.SetDestination("Flavor Town, but further away");
+            ijoseph = new Flight();
+            ibilly.AddFlight(ijoseph);
+        }
+
+
+            [Test()]
         [TestCase()]
         [TestCase()]
         [TestCase()]
@@ -33,6 +49,105 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
             Assert.AreEqual(route.GetDistance(), reuse.GetDistance());
 
             HLib.NuclearRedButton();
+        }
+
+        [Test()]
+        public void RouteTest1()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void RouteTest2()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void UploadRouteTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void FlightExistsTest()
+        {
+           Assert.IsTrue(ibilly.FlightExists(ijoseph));
+        }
+
+        [Test()]
+        public void FindFlightsInRangeTest()
+        {
+            List<Flight> testList = new List<Flight>();
+            testList = ibilly.FindFlightsInRange(begin, end);
+
+            Assert.AreEqual(testList[0], ijoseph);
+        }
+
+        [Test()]
+        public void OriginTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void DestinationTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void IsDestinationTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void IsOriginTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetTimeTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetDistanceTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GetRouteIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CompareToTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CompareByDistanceTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void RouteIdTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void GenerateIdTest()
+        {
+            Assert.Fail();
         }
     }
 }

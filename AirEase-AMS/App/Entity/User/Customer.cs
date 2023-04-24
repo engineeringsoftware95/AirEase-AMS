@@ -52,7 +52,7 @@ public class Customer : User
             _cashBalance = decimal.Parse(user["UserCashBalance"].ToString() ?? "-1");
             _pointBalance = int.Parse(user["UserPointBalance"].ToString() ?? "-1");
         }
-    }
+    } //TODO: statement or branch uncovered
 
 
 
