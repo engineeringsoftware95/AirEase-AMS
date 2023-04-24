@@ -1,11 +1,14 @@
 using AirEase_AMS.App.Entity.Aircraft;
 using System.Data;
+using System.Diagnostics;
+using System.Reflection.Metadata;
+
 namespace AirEase_AMS.App.Graph.Flight;
 
 public class Flight : Route
 {
-    private DateTime _flightTime;
-    private readonly Aircraft _aircraft;
+    readonly DateTime _flightTime;
+    private Aircraft _aircraft;
     private string _flightId;
     private string _yearWeekId;
     private decimal _flightCost;
@@ -20,10 +23,13 @@ public class Flight : Route
     public Flight(string flightId, string departureId)
     {
         _flightId = flightId;
+        _departureId= departureId;
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         string query = String.Format("EXEC GetAllFlightInformation @DepartureID = {0}, @FlightID = {1};", departureId, flightId);
         System.Data.DataTable dt = dao.Retrieve(query);
+
         if(dt == null  || dt.Rows.Count != 1)
         {
             _flightTime = DateTime.UnixEpoch;
@@ -33,13 +39,15 @@ public class Flight : Route
         else
         {
             DataRow flight = dt.Rows[0];
+
             _yearWeekId = flight["YearWeekID"].ToString() ?? "-1";
-            _flightTime = DateTime.Parse(flight["DepartureTime"].ToString() ?? "-1");
-            //WORK IN PROGRESS
+            _flightTime = DateTime.Parse(flight["DepartureTime"].ToString() ?? "");
             _aircraft = new Aircraft(flight["PlaneID"].ToString() ?? "-1");
             _routeId = flight["RouteID"].ToString() ?? "-1";
+
             query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
             System.Data.DataTable routeTable = dao.Retrieve(query);
+
             if (routeTable == null || routeTable.Rows.Count != 1)
             {
                 _routeId = "-1";
@@ -53,10 +61,9 @@ public class Flight : Route
                 _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
                 _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
                 _flightsOnRoute = new List<Flight>();
+                _distance = double.Parse(route["DistanceMiles"].ToString() ?? "-1");
             }
-
         }
-        _departureId = HLib.GenerateSixDigitId().ToString();
         _flightCost = CalculateFlightCost();
         _flightPoints = CalculateFlightPoints();
 
@@ -67,7 +74,6 @@ public class Flight : Route
         _yearWeekId = yearWeekId;
         _flightTime = departureTime;
         _flightId = GenerateId();
-        _routeId = routeId;
 
         //Use the default aircraft ID
         _aircraft = new Aircraft("111111");
@@ -92,7 +98,7 @@ public class Flight : Route
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //While the ID isn't unique, make a new one.
-        _routeId = (GenerateId());
+        _flightId = (GenerateId());
         while (dao.Retrieve("SELECT * FROM FLIGHT WHERE FlightID=" + _flightId + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
@@ -101,20 +107,22 @@ public class Flight : Route
 
         //While the ID isn't unique, make a new one.
         _departureId = (GenerateId());
-        while (dao.Retrieve("SELECT * FROM DEPARTURE WHERE FlightID=" + _departureId + ";").Rows.Count > 0)
+        while (dao.Retrieve("SELECT * FROM DEPARTURES WHERE DepartureID=" + _departureId + ";").Rows.Count > 0)
         {
             //Set ID until one is unique
             _departureId = (GenerateId());
         }
 
-        string query = String.Format("EXEC InsertFlight @FlightID = {0}, @FlightCost = {1}, @FlightPoints = {2}, @RouteID = {3}, @DepartureID = {4}, @YearWeekID = {5}, @DepartureTime = {6}, @PlaneID = {7};", 
+        string query = String.Format("EXEC InsertFlight @FlightID = {0}, @FlightCost = {1}, @FlightPoints = {2}, @RouteID = {3}, @DepartureID = {4}, @YearWeekID = {5}, @DepartureTime = '{6}', @PlaneID = {7};", 
             _flightId, _flightCost, _flightPoints, _routeId,
             _departureId, _yearWeekId, _flightTime.TimeOfDay.ToString(), _aircraft.GetAircraftId());
+
         return (dao.Update(query) == 1);
     }
 
     public bool SetPlaneForFlight(string aircraftId)
-    {//TODO: statement or branch uncovered
+    {
+        _aircraft = new Aircraft(aircraftId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("UPDATE FLIGHT_PLANE SET PlaneID = {0} WHERE FlightID = {1};", aircraftId, _flightId);
         return (dao.Update(query) == 1);
@@ -171,8 +179,8 @@ public class Flight : Route
 
         runningTotal = _distance * .12;
         runningTotal += 50;
-         TimeSpan departureTime = _flightTime.TimeOfDay;
-         TimeSpan finalArrival = EstimateArrivalTime().TimeOfDay;
+        TimeSpan departureTime = _flightTime.TimeOfDay;
+        TimeSpan finalArrival = EstimateArrivalTime().TimeOfDay;
         if (departureTime.Hours is >= 0 and <= 5)
         {//TODO: statement or branch uncovered
             runningTotal *= .8;
@@ -192,5 +200,10 @@ public class Flight : Route
     private int CalculateFlightPoints()
     {//TODO: statement or branch uncovered
         return HLib.ConvertToPoints(_flightCost);
+    }
+
+    public string GetAircraftID()
+    {
+        return _aircraft.GetAircraftId();
     }
 }

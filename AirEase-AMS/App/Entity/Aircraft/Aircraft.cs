@@ -22,6 +22,8 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("SELECT * FROM PLANE WHERE PlaneID = {0};", aircraftId);
         System.Data.DataTable dt = dao.Retrieve(query);
+
+        
         if (dt == null || dt.Rows.Count != 1)
         {
             _aircraftId = "-1";

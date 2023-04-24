@@ -18,6 +18,7 @@ public class Customer : User
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         System.Data.DataTable dt = dao.Retrieve(query);
+
         //Empty constructor
         if (dt.Rows.Count != 1)
         {
@@ -32,6 +33,8 @@ public class Customer : User
             _ssn = "";
             _positionTitle = "";
             _userId = -1;
+            _cashBalance = -1;
+            _pointBalance = -1;
         }
         //Load info
         else
@@ -41,13 +44,16 @@ public class Customer : User
             _lastName = user["LastName"].ToString() ?? "";
             string id = user["UserID"].ToString() ?? "-1";
             _userId = int.Parse(id);
-            _address = user["EmployeeAddress"].ToString() ?? "";
+            _address = user["UserAddress"].ToString() ?? "";
             _phoneNum = user["PhoneNum"].ToString() ?? "";
-            _birthDate = user["BDate"].ToString() ?? "";
+            _birthDate = user["UserBirthDate"].ToString() ?? "";
             _salt = user["Salt"].ToString() ?? "";
             _email = user["Email"].ToString() ?? "";
+            _cashBalance = decimal.Parse(user["UserCashBalance"].ToString() ?? "-1");
+            _pointBalance = int.Parse(user["UserPointBalance"].ToString() ?? "-1");
         }
     } //TODO: statement or branch uncovered
+
 
 
 }

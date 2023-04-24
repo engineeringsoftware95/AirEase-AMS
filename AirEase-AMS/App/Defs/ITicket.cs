@@ -10,7 +10,7 @@ public interface ITicket
 
     public string GetTicketInformation();
 
-    public bool PurchaseTicket();
+    public bool UploadTicket();
 
     public bool CancelTicket();
 }

@@ -38,9 +38,7 @@ namespace AirEase_AMS.App.Graph.Tests
         [TestCase("123", "osf2 sfs")]
         public void AirportTest(string cityName, string airportName)
         {
-            DatabaseAccessObject dao = new DatabaseAccessObject();
-            string query = "DELETE FROM AIRPORT;";
-            dao.Update(query);
+            HLib.NuclearRedButton();
             Airport airport = new Airport(cityName, airportName);
             airport.UploadAirport();
 
@@ -48,7 +46,7 @@ namespace AirEase_AMS.App.Graph.Tests
 
 
             Assert.AreEqual(airport.GetCityName(), reuse.GetCityName());
-            dao.Update(query);
+            HLib.NuclearRedButton();
         }
         
 
