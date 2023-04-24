@@ -196,6 +196,7 @@ public class Ticket : ITicket
         if (_transaction == null) currencyCost = 0;
         else currencyCost = _transaction._currencyCost;
 
+        //Remove association between customer and flight in order to decrement the count of seats taken on a flight.
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("EXEC CancelTicket @TicketID = {0}, @TicketCost = {1}, @PointCost = {2};", _ticketId, currencyCost, pointsCost);
 
