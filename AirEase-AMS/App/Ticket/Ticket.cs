@@ -17,7 +17,7 @@ public class Ticket : ITicket
     private string _endCity;
     private bool _isRefunded;
     private string? _customerId;
-    private AirEase_AMS.Transaction.Transaction? _transaction;
+    private AirEase_AMS.Transaction.Transaction _transaction;
 
     private List<Flight> flights;
 
@@ -183,7 +183,7 @@ public class Ticket : ITicket
             output += String.Format("Layover from: ${0}  to: {1} \n", flights[i].Origin(), flights[i].Destination());
         }
 
-        output += String.Format("Invoice Number: ${0}\n", _transactionId);
+        output += String.Format("Invoice Number: ${0}\n", _transaction._transactionId);
         output += String.Format("Total cost: ${0}\n", _ticketCost.ToString());
         return output;
     }

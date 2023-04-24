@@ -109,12 +109,6 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
         }
 
         [Test()]
-        public void SetPlaneForFlightTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
         public void GetDepartureIdTest()
         {
             Assert.Fail();
