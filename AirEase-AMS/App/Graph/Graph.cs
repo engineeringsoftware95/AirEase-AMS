@@ -10,10 +10,16 @@ namespace AirEase_AMS.App.Graph;
 public class Graph : IGraph
 {
     private List<IGraphNode>? _airports;
-    private List<string>? _cityNames;
-    
 
+    public Graph()
+    {
+        _airports = new List<IGraphNode>();
+    }
 
+    public void add_node(Airport airport)
+    {
+        _airports?.Add(airport);
+    }
     public IRoute? FindFlight(string origin, string destination)
     {
         // Graph contains a list of airports.
@@ -27,28 +33,26 @@ public class Graph : IGraph
         // Search origin city's routes list.
         // If destination city is not there, return an error and exit.
         // Return the route.
-        if (!_cityNames.Contains(origin) || !_cityNames.Contains(destination))
-        {
-            return null;
-        }
-        foreach (var airport in _airports)
-        {
-            if (!airport.GetCityName().Equals(origin)) continue;
-            foreach (var route in airport.GetRoutes()!)
+        if (_airports != null)
+            foreach (var airport in _airports)
             {
-                if (route.IsDestination(destination))
+                if (!airport.GetCityName().Equals(origin)) continue; //TODO: statement or branch uncovered
+                foreach (var route in airport.DepartingFlights()!)
                 {
-                    return route;
+                    if (route.IsDestination(destination))
+                    {
+                        return route;
+                    }
                 }
             }
-        }
-        return null;
+
+        return null; //TODO: statement or branch uncovered
     }
 
     public List<Flight.Flight>? GetFlightsInRange(string origin, string destination, DateTime begin,
         DateTime end)
     {
-        List<Flight.Flight>? validFlights = null;
+        List<Flight.Flight>? validFlights = new List<Flight.Flight>();
         IRoute? route = FindFlight(origin, destination);
         validFlights = route?.FindFlightsInRange(begin, end);
         validFlights?.Sort();

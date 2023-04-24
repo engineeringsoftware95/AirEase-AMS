@@ -102,6 +102,17 @@ namespace AirEase_AMS.App
             }
         }
 
+        /// <summary>
+        /// Deletes everything in the database. This exists for debugging.
+        /// </summary>
+        public static void NuclearRedButton()
+        {
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+
+            //Delete absolutely everything -- dear god
+            dao.Update("EXEC DeleteAllRecords;");
+        }
+
     }
 
 }

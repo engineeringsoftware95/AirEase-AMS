@@ -5,35 +5,43 @@ namespace AirEase_AMS.App.Entity.Aircraft;
 
 public class Aircraft : IAircraft, IComparable<Aircraft>
 {
-    private string _aircraftId { get; set; }
-    private string _aircraftName { get; set; }
-    private int _numberOfSeats { get; set; }
+    public Aircraft()
+    {
+    }
+
+    private string _aircraftId;
+    private string _modelName;
+    private int _numberOfSeats;
+    private int _cruisingSpeed;
+    private int _fuelCapacity;
 
 
-    public Aircraft(string aircraftId)
+    public Aircraft(string aircraftId) //TODO: statement or branch uncovered
     {
         _aircraftId = aircraftId;
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("SELECT * FROM PLANE WHERE PlaneID = {0};", aircraftId);
         System.Data.DataTable dt = dao.Retrieve(query);
+
+        
         if (dt == null || dt.Rows.Count != 1)
         {
             _aircraftId = "-1";
-            _aircraftName= "";
+            _modelName= "";
             _numberOfSeats = -1;
         }
-        else
+        else //TODO: statement or branch uncovered
         {
-            DataRow aircraft = dt.Rows[0];
-            _aircraftName = aircraft["Aircraft"].ToString() ?? "";
+            DataRow aircraft = dt.Rows[0]; //TODO: statement uncovered - needs test  
+            _modelName = aircraft["Aircraft"].ToString() ?? "";
             _numberOfSeats = int.Parse(aircraft["NumberOfSeats"].ToString() ?? "-1");
         }
     }
 
-    public Aircraft(string aircraftName, int numberOfSeats)
+    public Aircraft(string modelName, int numberOfSeats) //TODO: statement or branch uncovered
     {
         _aircraftId = HLib.GenerateSixDigitId().ToString();
-        _aircraftName = aircraftName;
+        _modelName = modelName;
         _numberOfSeats = numberOfSeats;
     }
 
@@ -41,9 +49,9 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
     /// Attempts to upload the current rendition of this class to the database.
     /// </summary>
     /// <returns>Whether or not the function succeeded.</returns>
-    public bool UploadAircraft()
+    public bool UploadAircraft() //TODO: statement or branch uncovered
     {
-        string query = String.Format("INSERT INTO PLANE VALUES({0}, '{1}', {2});", _aircraftId, _aircraftName, _numberOfSeats);
+        string query = String.Format("INSERT INTO PLANE VALUES({0}, '{1}', {2});", _aircraftId, _modelName, _numberOfSeats);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         return (dao.Update(query) == 1);
     }
@@ -52,29 +60,34 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
         _aircraftId = aircraftId;
     }
 
-    public void SetCruisingSpeed()
+    public void SetCruisingSpeed(int speed)
     {
-        throw new NotImplementedException();
+        _cruisingSpeed = speed;
     }
 
-    public void SetModelName()
+    public void SetModelName(String name)
     {
-        throw new NotImplementedException();
+        _modelName = name;
     }
 
-    public void SetFuelCapacity()
+    public void SetFuelCapacity(int cap)
     {
-        throw new NotImplementedException();
+        _fuelCapacity = cap;
+    }
+
+    public void SetNumberOfSeats(int seats)
+    {
+        _numberOfSeats = seats;
     }
 
     public int GetCruisingSpeed()
     {
-        throw new NotImplementedException();
+        return _cruisingSpeed;
     }
 
     public string GetModelName()
     {
-        return _aircraftName;
+        return _modelName;
     }
 
     public int GetNumberOfSeats()
@@ -84,7 +97,7 @@ public class Aircraft : IAircraft, IComparable<Aircraft>
 
     public int GetFuelCapacity()
     {
-        throw new NotImplementedException();
+        return _fuelCapacity;
     }
     
     public int CompareTo(Aircraft? other)
