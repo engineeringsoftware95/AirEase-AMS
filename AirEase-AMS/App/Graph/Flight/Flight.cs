@@ -206,4 +206,9 @@ public class Flight : Route
     {
         return _aircraft.GetAircraftId();
     }
+
+    public int GetSeats()
+    {
+        return _aircraft.GetNumberOfSeats();
+    }
 }
