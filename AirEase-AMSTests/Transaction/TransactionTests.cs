@@ -36,12 +36,12 @@ namespace AirEase_AMS.Transaction.Tests
             if(!actual && !expected) Assert.Pass();
             else if(!actual && expected) Assert.Fail();
 
-            Transaction reused = new Transaction(transaction._transactionId);
+            Transaction reused = new Transaction(transaction.GetTransactionId());
 
             Assert.AreEqual(transaction._currencyCost, reused._currencyCost);
             Assert.AreEqual(transaction._pointCost, reused._pointCost);
             Assert.AreEqual(transaction._customerId, reused._customerId);
-            Assert.AreEqual(transaction._transactionId, reused._transactionId);
+            Assert.AreEqual(transaction.GetTransactionId(), reused.GetTransactionId());
 
             HLib.NuclearRedButton();
         }

@@ -106,7 +106,7 @@ public class Ticket : ITicket
         string query = String.Format("EXEC InsertTicket " +
             "@TicketID = {0}, @StartCity = '{1}', @EndCity  = '{2}', @TicketCost = {3}, " +
             "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6};", 
-            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transaction._transactionId,_customerId);
+            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transaction.GetTransactionId(),_customerId);
 
         bool firstQuery = (dao.Update(query) > 0);
 
@@ -183,7 +183,7 @@ public class Ticket : ITicket
             output += String.Format("Layover from: ${0}  to: {1} \n", flights[i].Origin(), flights[i].Destination());
         }
 
-        output += String.Format("Invoice Number: ${0}\n", _transaction._transactionId);
+        output += String.Format("Invoice Number: ${0}\n", _transaction.GetTransactionId());
         output += String.Format("Total cost: ${0}\n", _ticketCost.ToString());
         return output;
     }

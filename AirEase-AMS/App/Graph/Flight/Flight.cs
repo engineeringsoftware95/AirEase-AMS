@@ -5,6 +5,9 @@ using System.Reflection.Metadata;
 
 namespace AirEase_AMS.App.Graph.Flight;
 
+
+//We need a function to get the number of people on any given flight in the flight class. Number of people on flight needs to be a member variable
+
 public class Flight : Route
 {
     readonly DateTime _flightTime;
@@ -14,6 +17,7 @@ public class Flight : Route
     private decimal _flightCost;
     private int _flightPoints;
     private string _departureId;
+    private int _peopleOnFlight;
 
     /// <summary>
     /// Takes a flight and departure key, uses them to load this instance with data with identical keys in the database.
@@ -25,9 +29,13 @@ public class Flight : Route
         _flightId = flightId;
         _departureId= departureId;
 
+        string query = String.Format("EXEC GetAllCustomerFlights @FlightID = {0}, @DepartureID = {1};", flightId, departureId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
+        DataTable flightsTable = dao.Retrieve(query);
+        _peopleOnFlight = flightsTable.Rows.Count;
 
-        string query = String.Format("EXEC GetAllFlightInformation @DepartureID = {0}, @FlightID = {1};", departureId, flightId);
+
+        query = String.Format("EXEC GetAllFlightInformation @DepartureID = {0}, @FlightID = {1};", departureId, flightId);
         System.Data.DataTable dt = dao.Retrieve(query);
 
         if(dt == null  || dt.Rows.Count != 1)
@@ -211,4 +219,6 @@ public class Flight : Route
     {
         return _aircraft.GetNumberOfSeats();
     }
+
+    public int GetSeatsTaken() { return _peopleOnFlight; }
 }
