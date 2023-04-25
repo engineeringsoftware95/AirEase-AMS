@@ -117,7 +117,7 @@ public class Flight : Route
             _flightId, _flightCost, _flightPoints, _routeId,
             _departureId, _yearWeekId, _flightTime.TimeOfDay.ToString(), _aircraft.GetAircraftId());
 
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     public bool SetPlaneForFlight(string aircraftId)

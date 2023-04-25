@@ -66,6 +66,13 @@ namespace AirEase_AMS.App.Entity.User.Tests
 
             bool attempt = Customer.AttemptLogin(customer.GetUserId().ToString(), password);
             Assert.AreEqual(expected, attempt);
+            if (!expected) return;
+
+            //These should be identical
+            Customer reuse = new Customer(customer.GetUserId().ToString());
+            Assert.AreEqual(customer.GetLastName(), reuse.GetLastName());
+            Assert.AreEqual(customer.GetFirstName(), reuse.GetFirstName());
+            Assert.AreEqual(customer.GetUserId(), reuse.GetUserId());
 
             HLib.NuclearRedButton();
         }

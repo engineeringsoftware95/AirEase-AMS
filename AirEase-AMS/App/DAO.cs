@@ -121,6 +121,7 @@ public class DatabaseAccessObject
                     //No return data - return null object
                     if (!reader.HasRows)
                     { //TODO: statement or branch uncovered
+                        connection.Close();
                         return new DataTable();
                     }
                     else
