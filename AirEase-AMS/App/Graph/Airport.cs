@@ -43,7 +43,7 @@ public class Airport : IGraphNode
         _departingEdges = new List<IRoute>();//TODO: statement uncovered - needs test  
         _city = city;                        //TODO: statement uncovered - needs test  
         _airportId = GenerateId();           //TODO: statement uncovered - needs test  
-        _airportName = airportName;          //TODO: statement uncovered - needs test  
+        _airportName = DatabaseAccessObject.SanitizeString(airportName);          //TODO: statement uncovered - needs test  
     }
 
     public Airport()
@@ -70,6 +70,7 @@ public class Airport : IGraphNode
     public bool UploadAirport()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
         //While the ID isn't unique, make a new one.
         _airportId = (GenerateId());
         while (dao.Retrieve("SELECT * FROM AIRPORT WHERE AirportID=" + _airportId + ";").Rows.Count > 0)
@@ -77,8 +78,9 @@ public class Airport : IGraphNode
             //Set ID until one is unique
             _airportId = (GenerateId());
         }
+
         string query = String.Format("INSERT INTO AIRPORT VALUES({0}, '{1}', '{2}');", _airportId, _city, _airportName);
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     public void AddDeparture(IGraphNode destination, IRoute flight)
@@ -103,6 +105,8 @@ public class Airport : IGraphNode
     {
         return _city;
     }
+
+    public string GetAirportName() { return _airportName; }
     
     
 }

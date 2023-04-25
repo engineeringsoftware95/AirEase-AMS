@@ -35,7 +35,7 @@ public class Route : IRoute, IComparable<Route>
         _routeId = routeId;
         string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
         System.Data.DataTable routeTable = dao.Retrieve(query);
-        if (routeTable == null || routeTable.Rows.Count != 1)
+        if (routeTable == null || routeTable.Rows.Count < 1)
         {
             _routeId = "";
             _origin = new Airport("-1");
@@ -79,7 +79,7 @@ public class Route : IRoute, IComparable<Route>
         if (_origin.GetAirportId().Length < 6 || _destination.GetAirportId().Length < 6) return false;
 
         string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     public bool FlightExists(IRoute flight)
@@ -107,6 +107,9 @@ public class Route : IRoute, IComparable<Route>
         }
         return validFlights;
     }
+
+    public string GetOriginCity() { return _origin.GetCityName();  }
+    public string GetDestinationCity() {  return _destination.GetCityName(); }  
 
     public IGraphNode Origin()
     {//TODO: statement or branch uncovered

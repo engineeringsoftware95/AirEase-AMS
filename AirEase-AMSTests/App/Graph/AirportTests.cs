@@ -46,6 +46,8 @@ namespace AirEase_AMS.App.Graph.Tests
 
 
             Assert.AreEqual(airport.GetCityName(), reuse.GetCityName());
+            Assert.AreEqual(airport.GetAirportId(), reuse.GetAirportId());
+
             HLib.NuclearRedButton();
         }
         

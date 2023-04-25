@@ -15,6 +15,9 @@ namespace AirEase_AMS.App
         [STAThread]
         static void Main()
         {
+
+            HLib.NuclearRedButton();
+            HLib.LoadDatabase();
             //DatabaseAccessObject dao = new DatabaseAccessObject(); 
             //Aircraft defaultAircraft = new Aircraft("B-52", 5);
             //defaultAircraft.SetAircraftId("111111");

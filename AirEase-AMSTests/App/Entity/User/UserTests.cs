@@ -161,23 +161,22 @@ namespace AirEase_AMS.App.Entity.User.Tests
             if (!customer.AttemptAccountCreation()) Assert.Fail();
 
             Airport origin = new Airport("Cleveland", "Cleveland Hawkins");
-            origin.UploadAirport();
+            if(!origin.UploadAirport()) Assert.Fail();
             Airport destination = new Airport("New York", "LaGuardia");
-            destination.UploadAirport();
+            if(!destination.UploadAirport()) Assert.Fail();
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 160);
-            route.UploadRoute();
-
+            if(!route.UploadRoute()) Assert.Fail();
             
             for (int i = numPastTickets*-1; i < 5; i++)
             {
                 Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
                 Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
-                flight.UploadFlight();
+                if(!flight.UploadFlight())Assert.Fail();
                 ticket.AddFlight(flight);
                 Flight flight2 = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
-                flight2.UploadFlight();
+                if(!flight2.UploadFlight())Assert.Fail();
                 ticket.AddFlight(flight);
-                ticket.UploadTicket();
+                if(!ticket.UploadTicket())Assert.Fail();
             }
             
             Assert.AreEqual(Math.Abs(numPastTickets), customer.GetPastTickets().Count);

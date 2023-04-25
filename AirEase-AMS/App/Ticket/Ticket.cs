@@ -18,6 +18,7 @@ public class Ticket : ITicket
     private bool _isRefunded;
     private string? _customerId;
     private AirEase_AMS.Transaction.Transaction _transaction;
+    private bool _pointsUsed;
 
     private List<Flight> flights;
 
@@ -38,6 +39,7 @@ public class Ticket : ITicket
         _isRefunded = false;
         flights = new List<Flight>();
         _customerId = customerId;
+        _pointsUsed = pointsUsed;
 
         //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
         _transaction = new AirEase_AMS.Transaction.Transaction(pointsUsed ? 0 : ticketCost, pointsUsed ? HLib.ConvertToPoints(ticketCost) : 0, customerId);
@@ -86,13 +88,22 @@ public class Ticket : ITicket
     /// <returns>Whether or not the function succeeded.</returns>
     public bool UploadTicket()
     {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        string query = String.Format("SELECT UserPointBalance FROM CUSTOMER WHERE UserID = {0};", _customerId);
+        DataRow customerTable = dao.Retrieve(query).Rows[0];
+        int pointBalance = int.Parse(customerTable["UserPointBalance"].ToString() ?? "-1");
+
+        //We don't have enough points!
+        if (pointBalance < HLib.PointsEarned(_ticketCost) && _pointsUsed) return false;
+
         //If flights is empty or transaction is null, return false.
         if (flights.Count == 0) return false;
 
+        //If the transaction object is null, return false. Else, upload it.
         if (_transaction != null) _transaction.UploadTransaction();
         else return false;
-
-        DatabaseAccessObject dao = new DatabaseAccessObject();
+        _straightLineMileage = CalculateStraightLineMileage();
+        
 
         //While the ID isn't unique, make a new one.
         _ticketId = (GenerateTicketId());
@@ -103,7 +114,7 @@ public class Ticket : ITicket
         }
 
         //Stored procedure for ticket insertion
-        string query = String.Format("EXEC InsertTicket " +
+        query = String.Format("EXEC InsertTicket " +
             "@TicketID = {0}, @StartCity = '{1}', @EndCity  = '{2}', @TicketCost = {3}, " +
             "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6};", 
             _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transaction.GetTransactionId(),_customerId);
