@@ -16,6 +16,7 @@ namespace AirEase_AMS.App.Ticket.Tests
     {
         [Test()]
         [TestCase(5)]
+        [TestCase(6)]
         [TestCase(10)]
         [TestCase(100)]
         [TestCase(250)]

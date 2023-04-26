@@ -24,11 +24,11 @@ public class DatabaseAccessObject
         //We need to tell the connection object - WE WANT TO CONNECT USING TCP!
         //Otherwise, we would need to be a trusted_connection, and talk via pipes.
         //This works fine if we're only ever using localhost on your local windows device - not optimal!!
-        builder["Server"] = "tcp:localhost";
+        builder["Server"] = "localhost";
 
         //We've spent millions on achieving the best security money can buy
-        builder.UserID = "SecretEntrance";
-        builder.Password = "123456";
+        builder.IntegratedSecurity= true;
+        builder.TrustServerCertificate= true;
 
         //Our Database catalog
         builder.InitialCatalog = "AirEase";
