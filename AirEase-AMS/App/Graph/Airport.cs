@@ -11,8 +11,9 @@ public class Airport : IGraphNode
     private List<IRoute> _departingEdges;
     private string _city;
     private string _airportId;
-    private string _airportName;    
-
+    private string _airportName;
+    
+    
     /// <summary>
     /// Uses the key airportId to get set this class to some instance from the database with an identical key.
     /// </summary>
@@ -87,12 +88,14 @@ public class Airport : IGraphNode
         return (dao.Update(query) >= 1);
     }
 
-    public void AddDeparture(IGraphNode destination, IRoute flight)
+    
+    public void AddDeparture(IGraphNode destination, IRoute flight) 
     {
-        if(!_departingEdges.Contains(flight))
-        {
-         _departingEdges.Add(flight);
-        }
+
+            if (!_departingEdges.Contains(flight))
+            {
+                _departingEdges.Add(flight);
+            }
     }
     
     public List<IRoute> DepartingFlights()

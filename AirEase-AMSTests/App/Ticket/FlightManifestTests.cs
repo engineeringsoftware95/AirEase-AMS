@@ -1,3 +1,4 @@
+
 ﻿using NUnit.Framework;
 using AirEase_AMS.App.Ticket;
 using System;
@@ -103,4 +104,5 @@ namespace AirEase_AMS.App.Ticket.Tests
             HLib.NuclearRedButton();
         }
     }
+
 }

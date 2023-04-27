@@ -179,13 +179,12 @@ public class Flight : Route
     }
 
 
-    private decimal CalculateFlightCost()
+    public decimal CalculateFlightCost()
     {//TODO: statement or branch uncovered
        //Calculates the cost of an individual flight
-
-       double runningTotal = 0;
-
-        runningTotal = _distance * .12;
+       if (_distance == 0) return 0;
+       
+        double runningTotal = _distance * .12;
         runningTotal += 50;
         TimeSpan departureTime = _flightTime.TimeOfDay;
         TimeSpan finalArrival = EstimateArrivalTime().TimeOfDay;
@@ -220,5 +219,7 @@ public class Flight : Route
         return _aircraft.GetNumberOfSeats();
     }
 
+
     public int GetSeatsTaken() { return _peopleOnFlight; }
+
 }

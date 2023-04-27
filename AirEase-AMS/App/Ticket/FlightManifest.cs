@@ -1,3 +1,4 @@
+
 ﻿using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Graph.Flight;
 using System.Data;
@@ -53,4 +54,5 @@ public class FlightManifest
     {
         return _passengers.Count;
     }
+
 }

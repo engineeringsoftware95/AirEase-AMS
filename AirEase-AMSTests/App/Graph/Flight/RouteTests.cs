@@ -52,24 +52,6 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
         }
 
         [Test()]
-        public void RouteTest1()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void RouteTest2()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void UploadRouteTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
         public void FlightExistsTest()
         {
             Assert.IsTrue(ibilly.FlightExists(ijoseph));
@@ -83,6 +65,7 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
 
             Assert.AreEqual(testList[0], ijoseph);
         }
+
 
         [Test()]
         public void OriginTest()
@@ -213,5 +196,6 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
 
             HLib.NuclearRedButton();
         }
+
     }
 }
