@@ -17,9 +17,6 @@ namespace AirEase_AMS.Interface
     public partial class CustomerMain : Form
     {
         Customer currentUser;
-        Flight toPurchase;
-        private List<Flight> flights;
-        private List<Ticket> tickets;
 
         public CustomerMain(Customer loggedIn)
         {
@@ -42,6 +39,7 @@ namespace AirEase_AMS.Interface
             else if (CustomerTabControl.SelectedTab.Equals(UpcomingFlights))
             {
                 // update upcoming flights
+                dataGridView3.DataSource = currentUser.GetUpcomingTickets();
 
             }
             else if (CustomerTabControl.SelectedTab.Equals(Booking))
@@ -49,74 +47,6 @@ namespace AirEase_AMS.Interface
                 // update the table containing all bookable flights
 
             }
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab.Equals(PastFlights))
-            {
-                // update news feed and upcoming departure list
-            }
-            else if (tabControl1.SelectedTab.Equals(CanceledFlights))
-            {
-                // update flights with canceled flights
-
-            }
-        }
-
-        private void AccountHistory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fontDialog1_Apply(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Booking_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void monthCalendar2_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Button1 books the currently selected flight
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CustomerMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -143,15 +73,6 @@ namespace AirEase_AMS.Interface
 
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            /*
-             * set up the ticket object, query the database, find the departure time, check against current time
-             * if within 48 hours, allow printing of boarding pass
-             * if more than an hour before the flight, allow cancelation
-             */
-        }
-
         private void newPaymentMethod_Click(object sender, EventArgs e)
         {
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
@@ -176,7 +97,15 @@ namespace AirEase_AMS.Interface
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            string flights dataGridView4.SelectedRows.ToString();
+        }
 
+        private void Search_Click(object sender, EventArgs e)
+        {
+            // query database for inputted info and display list of flights that meet parameters
+            // first clear table
+            // get list of flights that match query
+            // update table
         }
     }
 }
