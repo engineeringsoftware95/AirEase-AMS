@@ -8,15 +8,5 @@ using System.Threading.Tasks;
 
 namespace AirEase_AMS.App.Entity.Aircraft.Tests
 {
-    [TestFixture()]
-    public class BoardingPassTests
-    {
-        [Test()]
-        [TestCase()]
 
-        public void BoardingPassTest(string aircraftName, int numberOfSeats)
-        {
-            Assert.Fail();
-        }
-    }
 }

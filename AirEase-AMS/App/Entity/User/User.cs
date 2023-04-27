@@ -21,6 +21,8 @@ public class User : Defs.IUser
     public decimal      _cashBalance { get; set; }
     public int         _pointBalance { get; set; }
 
+
+
     public User() //TODO: statement or branch uncovered
     {
         _firstName = "";

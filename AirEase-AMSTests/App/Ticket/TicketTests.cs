@@ -11,9 +11,17 @@ using AirEase_AMS.App.Graph;
 
 namespace AirEase_AMS.App.Ticket.Tests
 {
+  
+    
+    
     [TestFixture()]
     public class TicketTests
     {
+
+        private Ticket test_ticket;
+        private DateTime _dateTime;
+        
+        
         [Test()]
         [TestCase(87.0, "Cleveland", "Tennessee", 0, false)]
         [TestCase(182.20, "Cleveland", "Tennessee", 1, true)]
@@ -113,89 +121,85 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             HLib.NuclearRedButton();
         }
-
+        
         [Test()]
-        public void TicketTest1()
+        [TestCase(0,   0,0,    ExpectedResult = 0)]
+        [TestCase(150, 0,0,     ExpectedResult = 150)]
+        [TestCase(150, 200, 0,    ExpectedResult = 350)]
+        [TestCase(150, 200,100,  ExpectedResult = 450)]
+        public double CalculateStraightLineMileageTest(int dist1, int dist2, int dist3)
         {
-            Assert.Fail();
+            Flight f1 = new Flight();
+            Flight f2 = new Flight();
+            Flight f3 = new Flight();
+            f1.SetDistance(dist1);
+            f2.SetDistance(dist2);
+            f3.SetDistance(dist3);
+            test_ticket = new Ticket();
+            test_ticket.AddFlight(f1);
+            test_ticket.AddFlight(f2);
+            test_ticket.AddFlight(f3);
+
+
+            return test_ticket.CalculateStraightLineMileage();
         }
 
+        
         [Test()]
-        public void TicketTest2()
+        [TestCase(0,   0, 0, ExpectedResult = 0)]
+        [TestCase(200, 15, 1, ExpectedResult = 82)]
+        [TestCase(300, 15, 2, ExpectedResult = 102)]
+        [TestCase(300, 7, 2, ExpectedResult = 93.4)]
+        [TestCase(300, 2, 2, ExpectedResult = 84.8)]
+        [TestCase(800, 15, 3, ExpectedResult = 170)]
+        public double CalculateTicketCostTest(int miles, int depart, int num_fights)
         {
-            Assert.Fail();
+            Airport origin = new Airport("FlavorTown", "FLVT");
+            Airport dest = new Airport("New Jork", "La Quinta");
+            Airport lyovr1 = new Airport("The west coast, but closer", "Del Taco");
+            Airport lyovr2 = new Airport("a Pet Semetary, but for people", "Loboland");
+            DateTime begin = new DateTime(2019, 1, 20, depart, 20, 40);
+            
+                 
+            Flight flight = new Flight(origin, dest, begin);
+            flight.SetDistance(miles);
+            origin.AddDeparture(dest,flight);
+            
+            test_ticket = new Ticket();
+            test_ticket.AddFlight(flight);
+            for (int i = 1; i < num_fights; i++) 
+            {
+                test_ticket.AddFlight(new Flight());
+            }
+
+            return test_ticket.CalculateTicketCost();
         }
+        
 
         [Test()]
-        public void UploadTicketTest()
+        [TestCase(0, 0, "", 0, null, null, ExpectedResult = false)]
+        [TestCase(1, 0, "", 0, null, null, ExpectedResult = true)]
+        [TestCase(2, 0, "", 0, null, null, ExpectedResult = true)]
+        [TestCase(3, 0, "", 0, null, null, ExpectedResult = true)]
+        public bool GetTicketInformationTest(int num_flights,double cost, string ticketID, 
+            int miles, Airport origin, Airport dest)
         {
-            Assert.Fail();
+            Flight f1 = new Flight();
+            Flight f2 = new Flight();
+            Flight f3 = new Flight();
+            test_ticket = new Ticket();
+            test_ticket.SetStraightLineMileage(miles);
+            test_ticket.AddFlight(f1);
+            test_ticket.AddFlight(f2);
+            test_ticket.AddFlight(f3);
+            string output = "";
+            for (int i = 0; i < num_flights; i++)
+            {
+               output += test_ticket.GetTicketInformation();
+            }
+
+            return (output != "");
         }
 
-        [Test()]
-        public void SetStraightLineMileageTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetStraightLineMileageTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetTicketCostTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetTicketIdTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void CalculateStraightLineMileageTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void CalculateTicketCostTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void AddFlightTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GenerateTicketIdTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetTicketInformationTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void PurchaseTicketTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void CancelTicketTest()
-        {
-            Assert.Fail();
-        }
     }
 }
