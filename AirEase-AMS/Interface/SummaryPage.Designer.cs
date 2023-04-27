@@ -30,9 +30,7 @@
         {
             Reciept = new ListBox();
             pictureBox1 = new PictureBox();
-            button1 = new Button();
-            button2 = new Button();
-            checkBox1 = new CheckBox();
+            confirmationButton = new Button();
             AccountSummary = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -56,33 +54,15 @@
             pictureBox1.TabIndex = 22;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // confirmationButton
             // 
-            button1.Location = new Point(123, 385);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 23;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(287, 385);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 24;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(123, 351);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(83, 19);
-            checkBox1.TabIndex = 25;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            confirmationButton.Location = new Point(228, 385);
+            confirmationButton.Name = "confirmationButton";
+            confirmationButton.Size = new Size(75, 23);
+            confirmationButton.TabIndex = 24;
+            confirmationButton.Text = "Done";
+            confirmationButton.UseVisualStyleBackColor = true;
+            confirmationButton.Click += confirmationButton_Click;
             // 
             // AccountSummary
             // 
@@ -99,25 +79,21 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(AccountSummary);
-            Controls.Add(checkBox1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(confirmationButton);
             Controls.Add(pictureBox1);
             Controls.Add(Reciept);
             Name = "SummaryPage";
             Text = "Reciept View";
+            Load += SummaryPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private ListBox Reciept;
         private PictureBox pictureBox1;
-        private Button button1;
-        private Button button2;
-        private CheckBox checkBox1;
+        private Button confirmationButton;
         private ListBox AccountSummary;
     }
 }

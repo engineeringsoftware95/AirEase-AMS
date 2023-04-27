@@ -79,7 +79,7 @@
             Continue.TabIndex = 22;
             Continue.Text = "Continue";
             Continue.UseVisualStyleBackColor = true;
-            Continue.Click += purchase_Click;
+            Continue.Click += continue_Click;
             // 
             // CCNEntry
             // 

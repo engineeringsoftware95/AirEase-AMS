@@ -38,8 +38,7 @@ namespace AirEase_AMS.Interface
 
                     // Setup currentCustomer using a database query for the username
 
-                    Customer currentCustomer;
-                    CustomerMain customerInstance = new CustomerMain();
+                    CustomerMain customerInstance = new CustomerMain(loggedUser);
                     this.Hide();
                     customerInstance.ShowDialog();
                     this.Close();

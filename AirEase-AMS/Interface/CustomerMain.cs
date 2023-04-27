@@ -1,4 +1,6 @@
 ﻿using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Graph.Flight;
+using AirEase_AMS.App.Ticket;
 using Microsoft.IdentityModel.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -15,70 +17,36 @@ namespace AirEase_AMS.Interface
     public partial class CustomerMain : Form
     {
         Customer currentUser;
-        public CustomerMain()
+
+        public CustomerMain(Customer loggedIn)
         {
-            //currentUser = loggedIn;
+            currentUser = loggedIn;
             InitializeComponent();
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void CustomerTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (CustomerTabControl.SelectedTab.Equals(Home))
+            {
+                // update news feed and upcoming departure list
 
-        }
+            }
+            else if (CustomerTabControl.SelectedTab.Equals(AccountHistory))
+            {
+                // update flights with past flights
+                dataGridView2.DataSource = currentUser.GetPastTickets();
+            }
+            else if (CustomerTabControl.SelectedTab.Equals(UpcomingFlights))
+            {
+                // update upcoming flights
+                dataGridView3.DataSource = currentUser.GetUpcomingTickets();
 
-        private void AccountHistory_Click(object sender, EventArgs e)
-        {
+            }
+            else if (CustomerTabControl.SelectedTab.Equals(Booking))
+            {
+                // update the table containing all bookable flights
 
-        }
-
-        private void fontDialog1_Apply(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Booking_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void monthCalendar2_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Button1 books the currently selected flight
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CustomerMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            }
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -105,13 +73,39 @@ namespace AirEase_AMS.Interface
 
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void newPaymentMethod_Click(object sender, EventArgs e)
         {
-            /*
-             * set up the ticket object, query the database, find the departure time, check against current time
-             * if within 48 hours, allow printing of boarding pass
-             * if more than an hour before the flight, allow cancelation
-             */
+            PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
+            this.Hide();
+            enter.Show();
+        }
+
+        private void bookingButton_Click(object sender, EventArgs e)
+        {
+
+            if (RoundTrip.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+            //CustomerBilling customerBilling = new CustomerBilling(currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString);
+            //customerBilling.Show();
+        }
+
+        private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string flights dataGridView4.SelectedRows.ToString();
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+            // query database for inputted info and display list of flights that meet parameters
+            // first clear table
+            // get list of flights that match query
+            // update table
         }
     }
 }

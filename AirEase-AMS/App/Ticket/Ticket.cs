@@ -162,7 +162,7 @@ public class Ticket : ITicket
 
 
     
-    public double CalculateTicketCost()
+    public decimal CalculateTicketCost()
     {
         if (CalculateStraightLineMileage() == 0) return 0;
         return Convert.ToDouble(flights[0].CalculateFlightCost()) + (8 * num_flights);
