@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirEase_AMS.App.Entity.User;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,18 +13,28 @@ namespace AirEase_AMS.Interface
 {
     public partial class PaymentInformationEntry : Form
     {
-        public PaymentInformationEntry()
+        Customer currentUser;
+        Form parent;
+        public PaymentInformationEntry(Customer loggedIn, Form calledFrom)
         {
+            parent = calledFrom;
+            currentUser = loggedIn;
             InitializeComponent();
         }
 
-        private void purchase_Click(object sender, EventArgs e)
+        private void continue_Click(object sender, EventArgs e)
         {
-
+            // update database with payment info
+            this.Hide();
+            parent.Show();
+            this.Close();
         }
 
         private void cancel_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            parent.Show();
+            this.Close();
         }
 
         private void label1_Click(object sender, EventArgs e)

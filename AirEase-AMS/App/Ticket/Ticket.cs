@@ -151,10 +151,10 @@ public class Ticket : ITicket
 
 
     
-    public double CalculateTicketCost()
+    public decimal CalculateTicketCost()
     {
         //Summates the cost of all flights in this ticket, then adds layover costs.
-        return Convert.ToDouble(flights[0].GetFlightCost() + ((flights.Count-1)*8));
+        return Convert.ToDecimal(flights[0].GetFlightCost() + ((flights.Count-1)*8));
     }
 
     public void AddFlight(Flight flight) //TODO: statement uncovered - needs test  
