@@ -97,7 +97,7 @@ namespace AirEase_AMS.Interface
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string flights dataGridView4.SelectedRows.ToString();
+            string flights = dataGridView4.SelectedRows.ToString();
         }
 
         private void Search_Click(object sender, EventArgs e)
