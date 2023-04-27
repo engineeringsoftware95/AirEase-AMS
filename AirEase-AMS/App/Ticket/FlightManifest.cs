@@ -9,6 +9,12 @@ public class FlightManifest
     private Flight _flight;
     private string manifest;
 
+
+    public FlightManifest()
+    {
+        _passengers = new List<Customer>();
+        _flight = new Flight();
+    }
     public string GetFlightManifest()
     {
         return manifest;
@@ -28,5 +34,27 @@ public class FlightManifest
             manifest += c.GetUserId();
         }
     }
+    
+    public void SetFlight(Flight t)
+    {
+        _flight = t;
+    }
+
+    public Flight GetFlight()
+    {
+        return _flight;
+    }
+
+
+    public List<Customer> GetPassengerList()
+    {
+        return GetPassengerList();
+    }
+
+    public void AddCustomer(Customer c)
+    {
+        _passengers.Add(c);
+    }
+    
     
 }
