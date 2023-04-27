@@ -50,9 +50,9 @@ public class Route : IRoute, IComparable<Route>
             _routeId = routeId;
             _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
             _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
-            _flightsOnRoute = new List<Flight>();
             _distance = double.Parse(route["DistanceMiles"].ToString() ?? "-1");
         }//TODO: statement or branch uncovered
+        _flightsOnRoute = new List<Flight>();
     }
 
     public Route(string originAirportId, string destinationAirportId, int distanceMiles)
@@ -189,5 +189,20 @@ public class Route : IRoute, IComparable<Route>
     public void SetDestination(string destination)
     {
         _destination.SetCity(destination);
+    }
+
+    public int PopulateFlightsOnRoute()
+    {
+        string query = string.Format("EXEC GetFlightDeparturesWithRouteID @RouteID = {0};", _routeId);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        DataTable table = dao.Retrieve(query);
+        foreach(DataRow row in table.Rows)
+        {
+            string flightId = row["FlightID"].ToString() ?? "-1";
+            string departureId = row["DepartureID"].ToString() ?? "-1";
+            _flightsOnRoute.Add(new Flight(flightId, departureId));
+        }
+
+        return _flightsOnRoute.Count;
     }
 }

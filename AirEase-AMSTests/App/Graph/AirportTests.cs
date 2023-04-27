@@ -10,8 +10,8 @@ using AirEase_AMS.App.Graph.Flight;
 
 namespace AirEase_AMS.App.Graph.Tests
 {
-    
-    
+
+
     [TestFixture()]
     public class AirportTests
     {
@@ -22,16 +22,16 @@ namespace AirEase_AMS.App.Graph.Tests
         [SetUp]
         public void SetUp()
         {
-            _testGuy = new Airport(); 
+            _testGuy = new Airport();
             testRoute = new Route();
             testAirport = new Airport();
             testAirport.SetCity("FlavorTown");
             testRoute.SetDestination(testAirport.GetCityName());
         }
-        
-        
-        
-        
+
+
+
+
         [Test()]
         [TestCase("Cleveland", "Cleveland Hawkins")]
         [TestCase("", "")]
@@ -50,7 +50,7 @@ namespace AirEase_AMS.App.Graph.Tests
 
             HLib.NuclearRedButton();
         }
-        
+
 
         [Test()]
         public void UploadAirportTest()
@@ -70,12 +70,50 @@ namespace AirEase_AMS.App.Graph.Tests
             _testGuy.SetCity("FlavorTown");
             Assert.AreEqual(_testGuy.GetCityName(), "FlavorTown");
         }
-        
+
         [Test()]
         public void GetCityNameTest()
         {
             _testGuy.SetCity("FlavorTown");
-            Assert.IsTrue(Convert.ToInt32(_testGuy.GetAirportId())>9999);
+            Assert.IsTrue(Convert.ToInt32(_testGuy.GetAirportId()) > 9999);
+        }
+
+        [Test()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        public void PopulateEdgesTest(int numRoutes)
+        {
+            HLib.NuclearRedButton();
+            //This should be a good baseline
+            Airport tennessee = new Airport("Nashville", "Nashville International Aiport");
+            if (!tennessee.UploadAirport()) Assert.Fail();
+            Airport cleveland = new Airport("Cleveland", "Cleveland Hopkins International Airport");
+            if (!cleveland.UploadAirport()) Assert.Fail();
+            Airport washington = new Airport("Seattle", "Seattle-Tacoma International Aiport");
+            if (!washington.UploadAirport()) Assert.Fail();
+            Airport newyork = new Airport("New York", "LaGuardia International Airport");
+            if (!newyork.UploadAirport()) Assert.Fail();
+
+            for(int i = 0; i < numRoutes; i++) 
+            {
+                Route route1 = new Route(tennessee.GetAirportId(), washington.GetAirportId(), 150);
+                route1.UploadRoute();
+                Route route2 = new Route(cleveland.GetAirportId(), newyork.GetAirportId(), 150);
+                route2.UploadRoute();
+            }
+
+            tennessee.PopulateEdges();
+            Assert.AreEqual(numRoutes, tennessee.DepartingFlights().Count());
+            washington.PopulateEdges();
+            Assert.AreEqual(0, washington.DepartingFlights().Count());
+            cleveland.PopulateEdges();
+            Assert.AreEqual(numRoutes, cleveland.DepartingFlights().Count());
+            newyork.PopulateEdges();
+            Assert.AreEqual(0, newyork.DepartingFlights().Count());
+
+            HLib.NuclearRedButton();
         }
     }
 }

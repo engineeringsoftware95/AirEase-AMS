@@ -1,5 +1,6 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
+using AirEase_AMS.App.Graph.Flight;
 using System.Data;
 using System.Diagnostics;
 
@@ -91,7 +92,7 @@ public class Airport : IGraphNode
         }
     }
     
-    public List<IRoute>? DepartingFlights()
+    public List<IRoute> DepartingFlights()
     {
         return _departingEdges;
     }
@@ -107,6 +108,21 @@ public class Airport : IGraphNode
     }
 
     public string GetAirportName() { return _airportName; }
-    
+
+    /// <summary>
+    /// Populates the list of routes that are departing from this origin airport
+    /// </summary>
+    /// <returns>The number of routes we read in.</returns>
+    public int PopulateEdges()
+    {
+        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE OriginAirportID = {0};", _airportId);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        DataTable routes = dao.Retrieve(query);
+        foreach(DataRow row in routes.Rows)
+        {
+            _departingEdges.Add(new Route(row["RouteID"].ToString() ?? "-1"));
+        }
+        return _departingEdges.Count();
+    }
     
 }

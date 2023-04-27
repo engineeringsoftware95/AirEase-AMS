@@ -21,9 +21,6 @@ public class DatabaseAccessObject
     {
         builder = new SqlConnectionStringBuilder();
 
-        //We need to tell the connection object - WE WANT TO CONNECT USING TCP!
-        //Otherwise, we would need to be a trusted_connection, and talk via pipes.
-        //This works fine if we're only ever using localhost on your local windows device - not optimal!!
         builder["Server"] = "localhost";
 
         //We've spent millions on achieving the best security money can buy
