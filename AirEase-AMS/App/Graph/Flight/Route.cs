@@ -23,7 +23,6 @@ public class Route : IRoute, IComparable<Route>
         _flightsOnRoute = new List<Flight>();
     }
 
-
     /// <summary>
     /// Takes a route ID and instantiates this class with the route with routeID from the database.
     /// </summary>
@@ -187,4 +186,13 @@ public class Route : IRoute, IComparable<Route>
     {
         _destination.SetCity(destination);
     }
+    
+
+
+    public void SetDistance(int distance)
+    {
+         _distance = distance;
+    }
+    
+    
 }

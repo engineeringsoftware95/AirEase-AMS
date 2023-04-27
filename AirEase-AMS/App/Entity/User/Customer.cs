@@ -11,6 +11,11 @@ public class Customer : User
         SetRole(1);
         SetId(GenerateId());
     }
+    public Customer(string firstName)
+    {
+        _firstName = firstName;
+        _userId = GenerateId();
+    }
 
     public Customer(string username, string password)
     {
