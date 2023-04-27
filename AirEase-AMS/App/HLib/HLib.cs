@@ -7,6 +7,7 @@ using AirEase_AMS.App.Ticket;
 using AirEase_AMS.App.Entity.User.Employees;
 using AirEase_AMS.App.Entity.Aircraft;
 using AirEase_AMS.Transaction;
+using System.Data;
 // ReSharper disable All
 
 namespace AirEase_AMS.App
@@ -120,6 +121,80 @@ namespace AirEase_AMS.App
             yearWeekId += ((int)Math.Floor(dateTime.DayOfYear / 7.0)).ToString();
             return yearWeekId;
         }
+
+        /// <summary>
+        /// Select all flights stored in the database.
+        /// </summary>
+        /// <returns>A list of all flights.</returns>
+        public static List<Flight> SelectAllFlights()
+        {
+            string query = "SELECT * FROM FLIGHT_DEPARTURES;";
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+            DataTable dataTable = dao.Retrieve(query);
+            List<Flight> flights = new List<Flight>();
+            foreach(DataRow row in dataTable.Rows)
+            { 
+                string flightId = row["FlightID"].ToString() ?? "-1";
+                string departureeId = row["DepartureID"].ToString() ?? "-1";
+                flights.Add(new Flight(flightId, departureeId));
+            }
+            return flights;
+        }
+
+        /// <summary>
+        /// Select all routes stored in the database.
+        /// </summary>
+        /// <returns>A list of all routes.</returns>
+        public static List<Route> SelectAllRoutes()
+        {
+            string query = "SELECT * FROM FLIGHTROUTE;";
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+            DataTable dataTable = dao.Retrieve(query);
+            List<Route> routes = new List<Route>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string id = row["RouteID"].ToString() ?? "-1";
+                routes.Add(new Route(id));
+            }
+            return routes;
+        }
+
+        /// <summary>
+        /// Selects all aircraft stored in the database.
+        /// </summary>
+        /// <returns>A list of all aircraft.</returns>
+        public static List<Aircraft> SelectAllAircraft()
+        {
+            string query = "SELECT * FROM PLANE;";
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+            DataTable dataTable = dao.Retrieve(query);
+            List<Aircraft> planes = new List<Aircraft>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string id = row["PlaneID"].ToString() ?? "-1";
+                planes.Add(new Aircraft(id));
+            }
+            return planes;
+        }
+
+        /// <summary>
+        /// Selects all airports from the database.
+        /// </summary>
+        /// <returns>A list of all airports.</returns>
+        public static List<Airport> SelectAllAirports()
+        {
+            string query = "SELECT * FROM AIRPORT;";
+            DatabaseAccessObject dao = new DatabaseAccessObject();
+            DataTable dataTable = dao.Retrieve(query);
+            List<Airport> airports = new List<Airport>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string id = row["AirportID"].ToString() ?? "-1";
+                airports.Add(new Airport(id));
+            }
+            return airports;
+        }
+
 
         /// <summary>
         /// Earn ten points on the dollar. 100$ would return 10 points.

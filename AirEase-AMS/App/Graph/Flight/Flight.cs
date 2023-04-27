@@ -53,7 +53,7 @@ public class Flight : Route
             _aircraft = new Aircraft(flight["PlaneID"].ToString() ?? "-1");
             _routeId = flight["RouteID"].ToString() ?? "-1";
 
-            query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
+            query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0};", _routeId);
             System.Data.DataTable routeTable = dao.Retrieve(query);
 
             if (routeTable == null || routeTable.Rows.Count != 1)

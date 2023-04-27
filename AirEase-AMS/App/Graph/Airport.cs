@@ -19,7 +19,7 @@ public class Airport : IGraphNode
     /// <param name="airportId">The key used to set the class.</param>
     public Airport(string airportId) 
     {
-        string query = String.Format("SELECT * FROM AIRPORT WHERE AirportID = {0}", airportId);
+        string query = String.Format("SELECT * FROM AIRPORT WHERE AirportID = {0};", airportId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         System.Data.DataTable dt = dao.Retrieve(query);
 
@@ -28,6 +28,7 @@ public class Airport : IGraphNode
             _city = "";
             _airportId = "-1";
             _airportName = "";
+            _departingEdges = new List<IRoute>();
         }
         else
         {//TODO: statement or branch uncovered
@@ -37,20 +38,22 @@ public class Airport : IGraphNode
             _airportId = airportId;                             //TODO: statement uncovered - needs test  
         }
         _departingEdges = new List<IRoute>();
+                
     }
 
     public Airport(string city, string airportName)//TODO: statement uncovered - needs test  
     {//TODO: statement or branch uncovered
-        _departingEdges = new List<IRoute>();//TODO: statement uncovered - needs test  
         _city = city;                        //TODO: statement uncovered - needs test  
         _airportId = GenerateId();           //TODO: statement uncovered - needs test  
         _airportName = DatabaseAccessObject.SanitizeString(airportName);          //TODO: statement uncovered - needs test  
+        _departingEdges = new List<IRoute>();
     }
 
     public Airport()
     {
-        _departingEdges = new List<IRoute>();
         _airportId = GenerateId();
+
+        _departingEdges = new List<IRoute>();
     }
 
     protected string GenerateId()
@@ -115,14 +118,14 @@ public class Airport : IGraphNode
     /// <returns>The number of routes we read in.</returns>
     public int PopulateEdges()
     {
-        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE OriginAirportID = {0};", _airportId);
+        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE FLIGHTROUTE.OriginAirportID = {0};", _airportId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         DataTable routes = dao.Retrieve(query);
+        _departingEdges= new List<IRoute>();
         foreach(DataRow row in routes.Rows)
         {
             _departingEdges.Add(new Route(row["RouteID"].ToString() ?? "-1"));
         }
         return _departingEdges.Count();
     }
-    
 }

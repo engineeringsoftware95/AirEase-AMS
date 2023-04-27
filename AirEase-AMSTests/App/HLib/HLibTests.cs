@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
+using AirEase_AMS.App.Graph.Flight;
+using AirEase_AMS.App.Graph;
+using Microsoft.VisualBasic.Devices;
 
 namespace AirEase_AMS.App.Tests
 {
@@ -120,10 +123,137 @@ namespace AirEase_AMS.App.Tests
         [Test()]
         public void DAOThreadingTest()
         {
-            for(int i = 0; i < 101; i++)
+            for (int i = 0; i < 101; i++)
             {
                 DatabaseAccessObject dao = new DatabaseAccessObject();
             }
+        }
+
+        [Test()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(20)]
+        public void SelectAllFlightsTest(int numFlights)
+        {
+
+            HLib.NuclearRedButton();
+
+            AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
+            defaultAircraft.SetAircraftId("111111");
+            defaultAircraft.UploadAircraft();
+
+
+            //This should be a good baseline
+            Airport tennessee = new Airport("Nashville", "Nashville International Aiport");
+            if (!tennessee.UploadAirport()) Assert.Fail();
+            Airport cleveland = new Airport("Cleveland", "Cleveland Hopkins International Airport");
+            if (!cleveland.UploadAirport()) Assert.Fail();
+            Airport washington = new Airport("Seattle", "Seattle-Tacoma International Aiport");
+            if (!washington.UploadAirport()) Assert.Fail();
+            Airport newyork = new Airport("New York", "LaGuardia International Airport");
+            if (!newyork.UploadAirport()) Assert.Fail();
+
+            Route route1 = new Route(tennessee.GetAirportId(), cleveland.GetAirportId(), 24);
+            route1.UploadRoute();
+            Route route2 = new Route(washington.GetAirportId(), cleveland.GetAirportId(), 24);
+            route2.UploadRoute();
+            Route route3 = new Route(tennessee.GetAirportId(), newyork.GetAirportId(), 24);
+            route3.UploadRoute();
+            Route route4 = new Route(washington.GetAirportId(), newyork.GetAirportId(), 24);
+            route4.UploadRoute();
+
+
+            for (int i = 0; i < numFlights; i++)
+            {
+                Random rand = new Random();
+                DateTime dateTime;
+                //Sufficiently randomize the date and hours
+                dateTime = DateTime.Now.AddMonths(rand.Next(0, 7)).AddDays(rand.Next(0, 27));
+                dateTime.AddHours(rand.Next(0, 23)).AddMinutes(rand.Next(0, 59));
+                Flight flight = new Flight(route1.GetRouteId(), HLib.GenerateYearWeekID(dateTime), dateTime);
+                if(!flight.UploadFlight()) Assert.Fail();
+            }
+
+
+            Assert.AreEqual(numFlights, HLib.SelectAllFlights().Count());
+            HLib.NuclearRedButton();
+        }
+
+        [Test()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(20)]
+        public void SelectAllRoutesTest(int numRoutes)
+        {
+            HLib.NuclearRedButton();
+
+            AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
+            defaultAircraft.SetAircraftId("111111");
+            defaultAircraft.UploadAircraft();
+
+
+            //This should be a good baseline
+            Airport tennessee = new Airport("Nashville", "Nashville International Aiport");
+            if (!tennessee.UploadAirport()) Assert.Fail();
+            Airport cleveland = new Airport("Cleveland", "Cleveland Hopkins International Airport");
+            if (!cleveland.UploadAirport()) Assert.Fail();
+            Airport washington = new Airport("Seattle", "Seattle-Tacoma International Aiport");
+            if (!washington.UploadAirport()) Assert.Fail();
+            Airport newyork = new Airport("New York", "LaGuardia International Airport");
+            if (!newyork.UploadAirport()) Assert.Fail();
+
+            for (int i = 0; i < numRoutes; i++)
+            {
+                Route route = new Route(washington.GetAirportId(), newyork.GetAirportId(), 24);
+                if(!route.UploadRoute()) Assert.Fail();
+            }
+
+
+            Assert.AreEqual(numRoutes, HLib.SelectAllRoutes().Count());
+            HLib.NuclearRedButton();
+        }
+
+        [Test()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(20)]
+
+        public void SelectAllAircraftTest(int numAircraft)
+        {
+            HLib.NuclearRedButton();
+            for (int i = 0; i < numAircraft; i++)
+            {
+                AirEase_AMS.App.Entity.Aircraft.Aircraft defaultAircraft = new AirEase_AMS.App.Entity.Aircraft.Aircraft("B-52", 5);
+                if (!defaultAircraft.UploadAircraft()) Assert.Fail();
+            }
+
+            Assert.AreEqual(numAircraft, HLib.SelectAllAircraft().Count());
+            HLib.NuclearRedButton();
+        }
+
+        [Test()]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(20)]
+        public void SelectAllAirportsTest(int numAirports)
+        {
+            HLib.NuclearRedButton();
+            for (int i = 0; i < numAirports; i++)
+            {
+                Airport newyork = new Airport("New York", "LaGuardia International Airport");
+                if (!newyork.UploadAirport()) Assert.Fail();
+            }
+
+            Assert.AreEqual(numAirports, HLib.SelectAllAirports().Count());
+            HLib.NuclearRedButton();
         }
     }
 }

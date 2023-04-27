@@ -30,10 +30,11 @@ public class Route : IRoute, IComparable<Route>
     /// <param name="routeId">The key associated with the route we want.</param>
     public Route(string routeId)
     {//TODO: statement or branch uncovered
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         _routeId = routeId;
-        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
+        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0};", _routeId);
         System.Data.DataTable routeTable = dao.Retrieve(query);
         if (routeTable == null || routeTable.Rows.Count < 1)
         {
@@ -193,6 +194,7 @@ public class Route : IRoute, IComparable<Route>
 
     public int PopulateFlightsOnRoute()
     {
+        _flightsOnRoute = new List<Flight>();
         string query = string.Format("EXEC GetFlightDeparturesWithRouteID @RouteID = {0};", _routeId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         DataTable table = dao.Retrieve(query);
