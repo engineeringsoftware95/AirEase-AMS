@@ -170,9 +170,9 @@ namespace AirEase_AMS.Interface
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            FlightManifest manifest = new FlightManifest();
-            manifest.PopulateManifest();
-            flightManifestWindow.DataSource = manifest.GetFlightManifest();
+            //FlightManifest manifest = new FlightManifest();
+            //manifest.PopulateManifest();
+            //flightManifestWindow.DataSource = manifest.GetFlightManifest();
         }
     }
 }
