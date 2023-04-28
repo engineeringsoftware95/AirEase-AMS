@@ -26,13 +26,13 @@ namespace AirEase_AMS.Interface
         private void SummaryPage_Load(object sender, EventArgs e)
         {
             // show ticket(s) info under reciept, show current user info under account summary
-            AccountSummary.Items.Add(currentuser.GetUserId());
-            AccountSummary.Items.Add(currentuser.GetFirstName());
-            AccountSummary.Items.Add(currentuser.GetLastName());
-            AccountSummary.Items.Add(currentuser.GetPhoneNum());
-            AccountSummary.Items.Add(currentuser.GetEmail());
+            AccountSummary.Items.Add(currentuser.GetUserId() + "\n");
+            AccountSummary.Items.Add(currentuser.GetFirstName() + "\n");
+            AccountSummary.Items.Add(currentuser.GetLastName() + "\n");
+            AccountSummary.Items.Add(currentuser.GetPhoneNum() + "\n");
+            AccountSummary.Items.Add(currentuser.GetEmail() + "\n");
 
-            Reciept.Items.Add(purchasedTicket.GetTicketInformation());
+            Reciept.Items.Add(purchasedTicket.GetTicketInformation() + "\n");
         }
 
         private void confirmationButton_Click(object sender, EventArgs e)
@@ -40,6 +40,11 @@ namespace AirEase_AMS.Interface
             CustomerMain customerInstance = new CustomerMain(currentuser);
             this.Hide();
             customerInstance.ShowDialog();
+        }
+
+        private void AccountSummary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

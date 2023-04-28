@@ -1,5 +1,6 @@
 ﻿using AirEase_AMS.App.Defs;
 using AirEase_AMS.App.Defs.Struct;
+using AirEase_AMS.App.Graph.Flight;
 using System.Data;
 using System.Diagnostics;
 
@@ -19,7 +20,7 @@ public class Airport : IGraphNode
     /// <param name="airportId">The key used to set the class.</param>
     public Airport(string airportId) 
     {
-        string query = String.Format("SELECT * FROM AIRPORT WHERE AirportID = {0}", airportId);
+        string query = String.Format("SELECT * FROM AIRPORT WHERE AirportID = {0};", airportId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         System.Data.DataTable dt = dao.Retrieve(query);
 
@@ -28,6 +29,7 @@ public class Airport : IGraphNode
             _city = "";
             _airportId = "-1";
             _airportName = "";
+            _departingEdges = new List<IRoute>();
         }
         else
         {//TODO: statement or branch uncovered
@@ -37,20 +39,22 @@ public class Airport : IGraphNode
             _airportId = airportId;                             //TODO: statement uncovered - needs test  
         }
         _departingEdges = new List<IRoute>();
+                
     }
 
     public Airport(string city, string airportName)//TODO: statement uncovered - needs test  
     {//TODO: statement or branch uncovered
-        _departingEdges = new List<IRoute>();//TODO: statement uncovered - needs test  
         _city = city;                        //TODO: statement uncovered - needs test  
         _airportId = GenerateId();           //TODO: statement uncovered - needs test  
-        _airportName = airportName;          //TODO: statement uncovered - needs test  
+        _airportName = DatabaseAccessObject.SanitizeString(airportName);          //TODO: statement uncovered - needs test  
+        _departingEdges = new List<IRoute>();
     }
 
     public Airport()
     {
-        _departingEdges = new List<IRoute>();
         _airportId = GenerateId();
+
+        _departingEdges = new List<IRoute>();
     }
 
     protected string GenerateId()
@@ -71,6 +75,7 @@ public class Airport : IGraphNode
     public bool UploadAirport()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
         //While the ID isn't unique, make a new one.
         _airportId = (GenerateId());
         while (dao.Retrieve("SELECT * FROM AIRPORT WHERE AirportID=" + _airportId + ";").Rows.Count > 0)
@@ -78,8 +83,9 @@ public class Airport : IGraphNode
             //Set ID until one is unique
             _airportId = (GenerateId());
         }
+
         string query = String.Format("INSERT INTO AIRPORT VALUES({0}, '{1}', '{2}');", _airportId, _city, _airportName);
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     
@@ -92,7 +98,7 @@ public class Airport : IGraphNode
             }
     }
     
-    public List<IRoute>? DepartingFlights()
+    public List<IRoute> DepartingFlights()
     {
         return _departingEdges;
     }
@@ -106,6 +112,23 @@ public class Airport : IGraphNode
     {
         return _city;
     }
-    
-    
+
+    public string GetAirportName() { return _airportName; }
+
+    /// <summary>
+    /// Populates the list of routes that are departing from this origin airport
+    /// </summary>
+    /// <returns>The number of routes we read in.</returns>
+    public int PopulateEdges()
+    {
+        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE FLIGHTROUTE.OriginAirportID = {0};", _airportId);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        DataTable routes = dao.Retrieve(query);
+        _departingEdges= new List<IRoute>();
+        foreach(DataRow row in routes.Rows)
+        {
+            _departingEdges.Add(new Route(row["RouteID"].ToString() ?? "-1"));
+        }
+        return _departingEdges.Count();
+    }
 }

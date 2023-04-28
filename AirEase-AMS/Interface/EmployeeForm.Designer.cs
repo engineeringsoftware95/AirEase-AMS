@@ -35,6 +35,7 @@
             pictureBox2 = new PictureBox();
             richTextBox1 = new RichTextBox();
             MarketsTab = new TabPage();
+            pictureBox4 = new PictureBox();
             label4 = new Label();
             button3 = new Button();
             comboBox1 = new ComboBox();
@@ -60,11 +61,11 @@
             summaryReportWindow = new DataGridView();
             button1 = new Button();
             pictureBox1 = new PictureBox();
-            pictureBox4 = new PictureBox();
             tabControl1.SuspendLayout();
             HomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             MarketsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             FlightsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -76,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)summaryReportWindow).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -116,12 +116,14 @@
             // 
             // listBox1
             // 
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
             listBox1.Location = new Point(270, 10);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(378, 409);
             listBox1.TabIndex = 2;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // pictureBox2
             // 
@@ -135,7 +137,7 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             richTextBox1.Location = new Point(6, 89);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
@@ -161,18 +163,31 @@
             MarketsTab.Text = "Plane Manager";
             MarketsTab.UseVisualStyleBackColor = true;
             // 
+            // pictureBox4
+            // 
+            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox4.Image = Properties.Resources.number2;
+            pictureBox4.Location = new Point(3, 3);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(163, 79);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 15;
+            pictureBox4.TabStop = false;
+            // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             label4.AutoSize = true;
-            label4.Location = new Point(70, 145);
+            label4.Location = new Point(95, 168);
             label4.Name = "label4";
-            label4.Size = new Size(37, 15);
+            label4.Size = new Size(178, 15);
             label4.TabIndex = 3;
-            label4.Text = "Flight";
+            label4.Text = "Select Aircraft for selected flight:";
             label4.Click += label4_Click;
             // 
             // button3
             // 
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             button3.Location = new Point(123, 233);
             button3.Name = "button3";
             button3.Size = new Size(121, 23);
@@ -180,17 +195,20 @@
             button3.Tag = "UpdateButton";
             button3.Text = "Set";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // comboBox1
             // 
+            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(123, 137);
+            comboBox1.Location = new Point(123, 186);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 0;
             // 
             // dataGridView2
             // 
+            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(325, 3);
             dataGridView2.Name = "dataGridView2";
@@ -213,6 +231,7 @@
             // 
             // pictureBox5
             // 
+            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox5.Image = Properties.Resources.number2;
             pictureBox5.Location = new Point(3, 3);
             pictureBox5.Name = "pictureBox5";
@@ -223,6 +242,7 @@
             // 
             // flightManifestWindow
             // 
+            flightManifestWindow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flightManifestWindow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             flightManifestWindow.Location = new Point(39, 139);
             flightManifestWindow.Name = "flightManifestWindow";
@@ -234,12 +254,14 @@
             // 
             // button2
             // 
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             button2.Location = new Point(39, 110);
             button2.Name = "button2";
             button2.Size = new Size(178, 23);
             button2.TabIndex = 3;
             button2.Text = "Generate Flight Manifest";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_2;
             // 
             // RoutesTab
             // 
@@ -265,6 +287,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(331, -1);
             dataGridView1.Name = "dataGridView1";
@@ -285,6 +308,7 @@
             // 
             // AddFlightButton
             // 
+            AddFlightButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddFlightButton.Location = new Point(84, 370);
             AddFlightButton.Name = "AddFlightButton";
             AddFlightButton.Size = new Size(227, 23);
@@ -296,6 +320,7 @@
             // 
             // flightTimePicker
             // 
+            flightTimePicker.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             flightTimePicker.Location = new Point(85, 327);
             flightTimePicker.Name = "flightTimePicker";
             flightTimePicker.Size = new Size(226, 23);
@@ -304,6 +329,7 @@
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Location = new Point(11, 287);
             label3.Name = "label3";
@@ -313,14 +339,16 @@
             // 
             // comboBox3
             // 
+            comboBox3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(85, 279);
+            comboBox3.Location = new Point(84, 279);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(226, 23);
             comboBox3.TabIndex = 8;
             // 
             // UpdateButton
             // 
+            UpdateButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             UpdateButton.Location = new Point(84, 219);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(227, 29);
@@ -351,6 +379,7 @@
             // 
             // destinationCombo
             // 
+            destinationCombo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             destinationCombo.FormattingEnabled = true;
             destinationCombo.Location = new Point(84, 178);
             destinationCombo.Name = "destinationCombo";
@@ -360,6 +389,7 @@
             // 
             // originView
             // 
+            originView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             originView.FormattingEnabled = true;
             originView.Location = new Point(84, 133);
             originView.Name = "originView";
@@ -382,6 +412,7 @@
             // 
             // pictureBox6
             // 
+            pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox6.Image = Properties.Resources.number2;
             pictureBox6.Location = new Point(3, 3);
             pictureBox6.Name = "pictureBox6";
@@ -392,6 +423,7 @@
             // 
             // summaryReportWindow
             // 
+            summaryReportWindow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             summaryReportWindow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             summaryReportWindow.Location = new Point(20, 125);
             summaryReportWindow.Name = "summaryReportWindow";
@@ -420,16 +452,6 @@
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.number2;
-            pictureBox4.Location = new Point(3, 3);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(163, 79);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox4.TabIndex = 15;
-            pictureBox4.TabStop = false;
-            // 
             // EmployeeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -446,6 +468,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             MarketsTab.ResumeLayout(false);
             MarketsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             FlightsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -458,7 +481,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)summaryReportWindow).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
         }
 

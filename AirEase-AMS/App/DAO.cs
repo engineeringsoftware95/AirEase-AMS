@@ -20,10 +20,18 @@ public class DatabaseAccessObject
     public DatabaseAccessObject()
     {
         builder = new SqlConnectionStringBuilder();
+
+        builder["Server"] = "localhost";
+
+        //We've spent millions on achieving the best security money can buy
+        builder.IntegratedSecurity= true;
+        builder.TrustServerCertificate= true;
+
         builder["Server"] = "localhost";
         //We've spent millions on achieving the best security money can buy
         builder.IntegratedSecurity = true;
         builder.TrustServerCertificate = true;
+
         //Our Database catalog
         builder.InitialCatalog = "AirEase";
         builder.Encrypt = false;
@@ -108,6 +116,7 @@ public class DatabaseAccessObject
                     //No return data - return null object
                     if (!reader.HasRows)
                     { //TODO: statement or branch uncovered
+                        connection.Close();
                         return new DataTable();
                     }
                     else
