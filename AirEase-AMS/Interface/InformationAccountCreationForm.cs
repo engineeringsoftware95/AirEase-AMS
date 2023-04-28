@@ -137,5 +137,10 @@ namespace AirEase_AMS.Interface
             login.ShowDialog();
             this.Close();
         }
+
+        private void SubmitButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
