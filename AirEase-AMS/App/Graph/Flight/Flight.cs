@@ -75,10 +75,10 @@ public class Flight : Route
         _flightCost = CalculateFlightCost();
         _flightPoints = CalculateFlightPoints();
 
-    }//TODO: statement or branch uncovered
+    }
 
     public Flight(string routeId, string yearWeekId, DateTime departureTime) : base(routeId)
-    {//TODO: statement or branch uncovered
+    {
         _yearWeekId = yearWeekId;
         _flightTime = departureTime;
         _flightId = GenerateId();
@@ -102,7 +102,7 @@ public class Flight : Route
     }
 
     public bool UploadFlight()
-    {//TODO: statement or branch uncovered
+    {
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //While the ID isn't unique, make a new one.
@@ -136,7 +136,7 @@ public class Flight : Route
         return (dao.Update(query) == 1);
     }
 
-    public string GetDepartureId() {  return _departureId; }//TODO: statement or branch uncovered
+    public string GetDepartureId() {  return _departureId; }
 
 
     public DateTime GetTime()
@@ -145,7 +145,7 @@ public class Flight : Route
     }
 
     public bool Equals(Flight? other)
-    {//TODO: statement or branch uncovered
+    {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return _flightTime.Equals(other._flightTime)
@@ -158,29 +158,29 @@ public class Flight : Route
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;//TODO: statement or branch uncovered
+        if (obj.GetType() != this.GetType()) return false;
         return Equals((Flight)obj);
     }
 
     public override int GetHashCode()
-    {//TODO: statement or branch uncovered
+    {
         return HashCode.Combine(_flightTime, _aircraft);
     }
 
     public DateTime EstimateArrivalTime()
-    {//TODO: statement or branch uncovered
+    {
         DateTime arrivalTime = _flightTime.AddHours((_distance / 500.0) + 0.5);
         return arrivalTime;
     }
 
     public string GetFlightId()
-    {//TODO: statement or branch uncovered
+    {
         return _flightId;
     }
 
 
     public decimal CalculateFlightCost()
-    {//TODO: statement or branch uncovered
+    {
        //Calculates the cost of an individual flight
        if (_distance == 0) return 0;
        
@@ -189,23 +189,23 @@ public class Flight : Route
         TimeSpan departureTime = _flightTime.TimeOfDay;
         TimeSpan finalArrival = EstimateArrivalTime().TimeOfDay;
         if (departureTime.Hours is >= 0 and <= 5)
-        {//TODO: statement or branch uncovered
+        {
             runningTotal *= .8;
         }
         else if (departureTime.Hours <= 8 || finalArrival.Hours >= 19)
-        {//TODO: statement or branch uncovered
+        {
             runningTotal *= .9;
-        }//TODO: statement or branch uncovered
+        }
         return Convert.ToDecimal(runningTotal);
     }
 
     public decimal GetFlightCost()
-    {//TODO: statement or branch uncovered
+    {
         return _flightCost;
     }
 
     private int CalculateFlightPoints()
-    {//TODO: statement or branch uncovered
+    {
         return HLib.ConvertToPoints(_flightCost);
     }
 
@@ -219,7 +219,9 @@ public class Flight : Route
         return _aircraft.GetNumberOfSeats();
     }
 
-
-    public int GetSeatsTaken() { return _peopleOnFlight; }
+    public int GetSeatsTaken()
+    {
+        return _aircraft.GetNumberOfSeats() - GetSeats();
+    }
 
 }

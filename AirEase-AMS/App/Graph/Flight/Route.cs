@@ -136,7 +136,13 @@ public class Route : IRoute, IComparable<Route>
     {//TODO: statement or branch uncovered
         throw new NotImplementedException();
     }
-
+    
+    public void SetDistance(double dist)
+    {
+        _distance = dist;
+    }
+    
+    
     public void AddFlight(Flight flight)
     {
         _flightsOnRoute.Add(flight);
