@@ -25,19 +25,17 @@ namespace AirEase_AMS.Interface
         double costInMoney;
         Ticket ticketToBuy;
         Ticket ifRoundTrip;
-        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, Ticket firstTicket)
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime)
         {
             parent = calledFrom;
             currentUser = loggedIn;
             origin = originCity;
             destination = destinationCity;
             departureTime = depatureDateTime;
-            ticketToBuy = new Ticket();
-            ticketToBuy = firstTicket;
             InitializeComponent();
         }
 
-        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, string secondDeparture, Ticket firstTicket, Ticket secondTicket)
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, string secondDeparture)
         {
             parent = calledFrom;
             currentUser = loggedIn;
@@ -45,8 +43,6 @@ namespace AirEase_AMS.Interface
             destination = destinationCity;
             departureTime = depatureDateTime;
             returnTime = secondDeparture;
-            ticketToBuy = firstTicket;
-            ifRoundTrip = secondTicket;
             InitializeComponent();
         }
 
