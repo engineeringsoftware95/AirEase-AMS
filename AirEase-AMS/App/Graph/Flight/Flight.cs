@@ -62,6 +62,7 @@ public class Flight : Route
                 _origin = new Airport("-1");
                 _destination = new Airport("-1");
                 _flightsOnRoute = new List<Flight>();
+                _distance = -1;
             }
             else
             {
