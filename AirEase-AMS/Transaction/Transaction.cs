@@ -6,7 +6,7 @@ namespace AirEase_AMS.Transaction;
 
 public class Transaction
 {
-    public string _transactionId { get; }
+    private string _transactionId;
     public decimal _currencyCost { get; }
     public int _pointCost { get; }
     public string _customerId { get; }
@@ -67,14 +67,25 @@ public class Transaction
         }
     }
 
+    public string GetTransactionId() { return _transactionId; }
+
     /// <summary>
     /// This function attempts to upload this transaction object to the database. The transaction must be created before the ticket.
     /// </summary>
     /// <returns>Whether or not the function succeeded.</returns>
     public bool UploadTransaction()
     {
-        string query = String.Format("EXEC InsertTransaction @TransactionID = {0}, @TicketCost = {1}, @PointCost = {2}, @CustomerID = {3};", _transactionId, _currencyCost, _pointCost, _customerId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
+
+        //While the ID isn't unique, make a new one.
+        _transactionId = (GenerateTransactionId());
+        while (dao.Retrieve("SELECT * FROM TRANSACTIONS WHERE TransactionID=" + _transactionId + ";").Rows.Count > 0)
+        {
+            //Set ID until one is unique
+            _transactionId = (GenerateTransactionId());
+        }
+
+        string query = String.Format("EXEC InsertTransaction @TransactionID = {0}, @TicketCost = {1}, @PointCost = {2}, @CustomerID = {3};", _transactionId, _currencyCost, _pointCost, _customerId);
         return (dao.Update(query) >= 1);
     }
 
