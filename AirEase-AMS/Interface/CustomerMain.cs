@@ -62,20 +62,20 @@ namespace AirEase_AMS.Interface
 
             if (RoundTrip.Checked)
             {
-
+                // do the thing to create two tickets...
             }
             else
             {
-
+                // do the thing to create one ticket...
             }
             CustomerBilling customerBilling = new CustomerBilling(this, currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString());
             this.Hide();
-            customerBilling.Show();
+            customerBilling.ShowDialog();
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void Search_Click(object sender, EventArgs e)
@@ -115,7 +115,7 @@ namespace AirEase_AMS.Interface
 
             // update upcoming flights
             dataGridView3.DataSource = currentUser.GetUpcomingTickets();
-            
+
             // set combo boxes source to a list of all airports
             //comboBox3.DataSource = ;
             //comboBox2.DataSource = ;

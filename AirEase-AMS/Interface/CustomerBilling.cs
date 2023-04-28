@@ -1,4 +1,5 @@
 ﻿using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Graph.Flight;
 using AirEase_AMS.App.Ticket;
 using System;
 using System.Collections.Generic;
@@ -18,19 +19,39 @@ namespace AirEase_AMS.Interface
         Customer currentUser;
         string origin;
         string destination;
-        string departureDate;
-        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDate)
+        string departureTime;
+        int costInPoints;
+        double costInMoney;
+        Ticket ticketToBuy;
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime)
         {
             parent = calledFrom;
             currentUser = loggedIn;
             origin = originCity;
             destination = destinationCity;
+            departureTime = depatureDateTime;
+            ticketToBuy = new Ticket();
             InitializeComponent();
         }
 
         private void CustomerBilling_Load(object sender, EventArgs e)
         {
+            flightInfo.Clear();
+            flightInfo.Text = ticketToBuy.ToString();
 
+            comboBox1.Items.Clear();
+
+            //if (currentUser._pointbalance > costInPoints)
+            //{
+            //    comboBox1.Items.Add(currentUser._pointBalance);
+            //}
+            //else
+            //{
+            //    if (currentUser._cashBalance < )    // ticket price
+            //        comboBox1.Items.Add();          //add current users credit card number
+            //    else
+            //        comboBox1.Items.Add(currentUser._pointBalance);
+            //}
         }
 
         private void newPaymentMethod_Click(object sender, EventArgs e)
@@ -61,6 +82,11 @@ namespace AirEase_AMS.Interface
             parent.Update();
             parent.Show();
             this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

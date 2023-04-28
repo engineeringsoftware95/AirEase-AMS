@@ -40,6 +40,7 @@
             // 
             // purchase
             // 
+            purchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             purchase.Location = new Point(369, 414);
             purchase.Name = "purchase";
             purchase.Size = new Size(176, 23);
@@ -50,6 +51,7 @@
             // 
             // makePaymentDefault
             // 
+            makePaymentDefault.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             makePaymentDefault.AutoSize = true;
             makePaymentDefault.Location = new Point(369, 343);
             makePaymentDefault.Name = "makePaymentDefault";
@@ -60,6 +62,7 @@
             // 
             // flightInfo
             // 
+            flightInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flightInfo.Location = new Point(124, 12);
             flightInfo.Multiline = true;
             flightInfo.Name = "flightInfo";
@@ -69,14 +72,17 @@
             // 
             // comboBox1
             // 
+            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(303, 314);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(295, 23);
             comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // cancel
             // 
+            cancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             cancel.Location = new Point(124, 414);
             cancel.Name = "cancel";
             cancel.Size = new Size(113, 23);
@@ -87,6 +93,7 @@
             // 
             // newPaymentMethod
             // 
+            newPaymentMethod.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             newPaymentMethod.Location = new Point(613, 314);
             newPaymentMethod.Name = "newPaymentMethod";
             newPaymentMethod.Size = new Size(163, 23);
