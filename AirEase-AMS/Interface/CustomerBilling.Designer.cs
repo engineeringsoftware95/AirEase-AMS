@@ -46,6 +46,7 @@
             purchase.TabIndex = 0;
             purchase.Text = "Purchase";
             purchase.UseVisualStyleBackColor = true;
+            purchase.Click += purchase_Click;
             // 
             // makePaymentDefault
             // 
@@ -90,6 +91,7 @@
             newPaymentMethod.TabIndex = 7;
             newPaymentMethod.Text = "Enter new payment method";
             newPaymentMethod.UseVisualStyleBackColor = true;
+            newPaymentMethod.Click += newPaymentMethod_Click;
             // 
             // pictureBox1
             // 

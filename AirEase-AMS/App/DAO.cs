@@ -27,31 +27,29 @@ public class DatabaseAccessObject
         builder.IntegratedSecurity= true;
         builder.TrustServerCertificate= true;
 
+        builder["Server"] = "localhost";
+        //We've spent millions on achieving the best security money can buy
+        builder.IntegratedSecurity = true;
+        builder.TrustServerCertificate = true;
+
         //Our Database catalog
         builder.InitialCatalog = "AirEase";
-
         builder.Encrypt = false;
         try
         {
-
-
             //Establish a connection (possible point of failure)
             connection = new SqlConnection(builder.ConnectionString);
-
             //Once the connection is open, we have finished our job here!!
-            
             connection.Open();
             connectionSuccess = true;
             connection.Close();
-
         }
         catch (SqlException e)
         {
             Console.WriteLine(e.ToString());
             connectionSuccess = false;
-            
         }
-        catch(System.InvalidOperationException e) //TODO: statement or branch uncovered
+        catch (System.InvalidOperationException e) //TODO: statement or branch uncovered
         {
             Console.WriteLine(e.ToString());
             connectionSuccess = false;
