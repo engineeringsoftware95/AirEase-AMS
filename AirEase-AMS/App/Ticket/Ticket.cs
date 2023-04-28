@@ -171,7 +171,6 @@ public class Ticket : ITicket
         return mileage;
     }
 
-
     
     public double CalculateTicketCost()
     {

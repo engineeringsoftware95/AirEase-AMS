@@ -1,4 +1,4 @@
-
+﻿
 ﻿using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Graph.Flight;
 using System.Data;
@@ -12,7 +12,8 @@ public class FlightManifest
     private string _manifest;
     private string _flightId;
     private string _departureId;
-
+    
+    
     public FlightManifest(string flightId, string departureId)
     {
         _flightId = flightId;
