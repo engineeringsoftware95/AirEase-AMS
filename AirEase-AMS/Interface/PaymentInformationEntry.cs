@@ -15,10 +15,11 @@ namespace AirEase_AMS.Interface
     {
         Customer currentUser;
         Form parent;
+
         public PaymentInformationEntry(Customer loggedIn, Form calledFrom)
         {
-            parent = calledFrom;
             currentUser = loggedIn;
+            parent = calledFrom;
             InitializeComponent();
         }
 
@@ -26,6 +27,7 @@ namespace AirEase_AMS.Interface
         {
             // update database with payment info
             this.Hide();
+            parent.Update();
             parent.Show();
             this.Close();
         }
@@ -33,6 +35,7 @@ namespace AirEase_AMS.Interface
         private void cancel_Click(object sender, EventArgs e)
         {
             this.Hide();
+            parent.Update();
             parent.Show();
             this.Close();
         }

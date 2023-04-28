@@ -17,36 +17,12 @@ namespace AirEase_AMS.Interface
     public partial class CustomerMain : Form
     {
         Customer currentUser;
+        Flight toPurchase;
 
         public CustomerMain(Customer loggedIn)
         {
             currentUser = loggedIn;
             InitializeComponent();
-        }
-
-        private void CustomerTabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (CustomerTabControl.SelectedTab.Equals(Home))
-            {
-                // update news feed and upcoming departure list
-
-            }
-            else if (CustomerTabControl.SelectedTab.Equals(AccountHistory))
-            {
-                // update flights with past flights
-                dataGridView2.DataSource = currentUser.GetPastTickets();
-            }
-            else if (CustomerTabControl.SelectedTab.Equals(UpcomingFlights))
-            {
-                // update upcoming flights
-                dataGridView3.DataSource = currentUser.GetUpcomingTickets();
-
-            }
-            else if (CustomerTabControl.SelectedTab.Equals(Booking))
-            {
-                // update the table containing all bookable flights
-
-            }
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,6 +42,7 @@ namespace AirEase_AMS.Interface
                 label1.Visible = false;
                 dateTimePicker3.Visible = false;
             }
+            this.Update();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -77,7 +54,7 @@ namespace AirEase_AMS.Interface
         {
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
             this.Hide();
-            enter.Show();
+            enter.ShowDialog();
         }
 
         private void bookingButton_Click(object sender, EventArgs e)
@@ -85,19 +62,20 @@ namespace AirEase_AMS.Interface
 
             if (RoundTrip.Checked)
             {
-
+                // do the thing to create two tickets...
             }
             else
             {
-
+                // do the thing to create one ticket...
             }
-            //CustomerBilling customerBilling = new CustomerBilling(currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString);
-            //customerBilling.Show();
+            CustomerBilling customerBilling = new CustomerBilling(this, currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString());
+            this.Hide();
+            customerBilling.ShowDialog();
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string flights = dataGridView4.SelectedRows.ToString();
+
         }
 
         private void Search_Click(object sender, EventArgs e)
@@ -106,6 +84,47 @@ namespace AirEase_AMS.Interface
             // first clear table
             // get list of flights that match query
             // update table
+        }
+
+        private void Home_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AccountHistory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpcomingFlights_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerMain_Load(object sender, EventArgs e)
+        {
+            // update news feed and upcoming departure list
+            NewsFeed.Items.Clear();
+            NewsFeed.Items.Add("Coconuts are not migratory.");
+
+            upcomingDepartureList.Items.Clear();
+            upcomingDepartureList.Items.Add(currentUser.GetUpcomingTickets());
+
+            // update flights with past flights
+            dataGridView2.DataSource = currentUser.GetPastTickets();
+
+            // update upcoming flights
+            dataGridView3.DataSource = currentUser.GetUpcomingTickets();
+
+            // set combo boxes source to a list of all airports
+            //comboBox3.DataSource = ;
+            //comboBox2.DataSource = ;
+
+            //have the user select a date and a time
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker3.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "MM/dd/yyyy    HH:mm";
+            dateTimePicker3.CustomFormat = "MM/dd/yyyy    HH:mm";
         }
     }
 }
