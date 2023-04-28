@@ -36,7 +36,6 @@ public class FlightManifest
         return _manifest;
     }
 
-
     public void PopulateManifest()
     {
         _manifest = _flight.GetFlightId();

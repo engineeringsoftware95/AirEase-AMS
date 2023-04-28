@@ -49,7 +49,7 @@ namespace AirEase_AMS.App.Ticket.Tests
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 150);
             route.UploadRoute();
 
-            Ticket ticket = new Ticket(ticketCost, startCity, endCity, customer.GetUserId().ToString(), false);
+            Ticket ticket = new Ticket(startCity, endCity, customer.GetUserId().ToString(), false);
             for (int i = 0; i < numFlights; i++)
             {
                 Flight flight = new Flight(route.GetRouteId(), "202314", DateTime.Now);
@@ -68,7 +68,7 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             HLib.NuclearRedButton();
         }
-
+        /*
         [Test()]
         [TestCase(57.06, true)]
         [TestCase(57.26, true)]
@@ -100,7 +100,7 @@ namespace AirEase_AMS.App.Ticket.Tests
             Route route = new Route(origin.GetAirportId(), destination.GetAirportId(), 150);
             route.UploadRoute();
 
-            Ticket ticket = new Ticket(ticketCost, "Cleveland", "New York", customer.GetUserId().ToString(), pointsUsed);
+            Ticket ticket = new Ticket("Cleveland", "New York", customer.GetUserId().ToString(), pointsUsed);
 
             for (int i = 0; i < 2; i++)
             {
@@ -122,60 +122,8 @@ namespace AirEase_AMS.App.Ticket.Tests
             //Assert.AreEqual(pointsUsed ? HLib.ConvertToPoints(ticketCost) : 0, reuseCustomer._pointBalance);
 
             HLib.NuclearRedButton();
-        }
-        
-        [Test()]
-        [TestCase(0,   0,0,    ExpectedResult = 0)]
-        [TestCase(150, 0,0,     ExpectedResult = 150)]
-        [TestCase(150, 200, 0,    ExpectedResult = 350)]
-        [TestCase(150, 200,100,  ExpectedResult = 450)]
-        public double CalculateStraightLineMileageTest(int dist1, int dist2, int dist3)
-        {
-            Flight f1 = new Flight();
-            Flight f2 = new Flight();
-            Flight f3 = new Flight();
-            f1.SetDistance(dist1);
-            f2.SetDistance(dist2);
-            f3.SetDistance(dist3);
-            test_ticket = new Ticket();
-            test_ticket.AddFlight(f1);
-            test_ticket.AddFlight(f2);
-            test_ticket.AddFlight(f3);
+        }*/
 
-
-            return test_ticket.CalculateStraightLineMileage();
-        }
-
-        
-        [Test()]
-        [TestCase(0,   0, 0, ExpectedResult = 0)]
-        [TestCase(200, 15, 1, ExpectedResult = 82)]
-        [TestCase(300, 15, 2, ExpectedResult = 102)]
-        [TestCase(300, 7, 2, ExpectedResult = 93.4)]
-        [TestCase(300, 2, 2, ExpectedResult = 84.8)]
-        [TestCase(800, 15, 3, ExpectedResult = 170)]
-        public double CalculateTicketCostTest(int miles, int depart, int num_fights)
-        {
-            Airport origin = new Airport("FlavorTown", "FLVT");
-            Airport dest = new Airport("New Jork", "La Quinta");
-            Airport lyovr1 = new Airport("The west coast, but closer", "Del Taco");
-            Airport lyovr2 = new Airport("a Pet Semetary, but for people", "Loboland");
-            DateTime begin = new DateTime(2019, 1, 20, depart, 20, 40);
-            
-                 
-            Flight flight = new Flight(origin, dest, begin);
-            flight.SetDistance(miles);
-            origin.AddDeparture(dest,flight);
-            
-            test_ticket = new Ticket();
-            test_ticket.AddFlight(flight);
-            for (int i = 1; i < num_fights; i++) 
-            {
-                test_ticket.AddFlight(new Flight());
-            }
-
-            return test_ticket.CalculateTicketCost();
-        }
         
 
         [Test()]

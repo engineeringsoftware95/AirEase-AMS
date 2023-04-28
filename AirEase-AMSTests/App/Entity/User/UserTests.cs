@@ -117,7 +117,7 @@ namespace AirEase_AMS.App.Entity.User.Tests
 
             for(int i = -5; i <= numUpcoming; i++)
             {
-                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
+                Ticket.Ticket ticket = new Ticket.Ticket("Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
                 Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 flight.UploadFlight();
                 ticket.AddFlight(flight);
@@ -169,7 +169,7 @@ namespace AirEase_AMS.App.Entity.User.Tests
             
             for (int i = numPastTickets*-1; i < 5; i++)
             {
-                Ticket.Ticket ticket = new Ticket.Ticket(100, "Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
+                Ticket.Ticket ticket = new Ticket.Ticket("Cleveland", "Atlanta", customer.GetUserId().ToString(), false);
                 Flight flight = new Flight(route.GetRouteId(), (int.Parse(yearWeekId) + i).ToString(), DateTime.Now);
                 if(!flight.UploadFlight())Assert.Fail();
                 ticket.AddFlight(flight);

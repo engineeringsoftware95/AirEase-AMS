@@ -1,4 +1,5 @@
 ﻿using AirEase_AMS.App.Defs;
+using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Graph.Flight;
 using System.Data;
 using System.Reflection.Metadata;
@@ -11,7 +12,7 @@ public class Ticket : ITicket
 
 
     private double _straightLineMileage;
-    private decimal _ticketCost;
+    private double _ticketCost;
     private string _ticketId;
     private string _startCity;
     private string _endCity;
@@ -40,10 +41,10 @@ public class Ticket : ITicket
     /// <param name="startCity">The origin city.</param>
     /// <param name="endCity">The destination city.</param>
     /// <param name="customerId">The ID of the purchasing customer.</param>
-    public Ticket(decimal ticketCost, string startCity, string endCity, string customerId, bool pointsUsed)
+    public Ticket(string startCity, string endCity, string customerId, bool pointsUsed)
     {
         _straightLineMileage = 0;
-        _ticketCost = ticketCost;
+        _ticketCost = 0;
         _ticketId = GenerateTicketId().ToString();
         _startCity = startCity;
         _endCity = endCity;
@@ -52,8 +53,6 @@ public class Ticket : ITicket
         _customerId = customerId;
         _pointsUsed = pointsUsed;
 
-        //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
-        _transaction = new AirEase_AMS.Transaction.Transaction(pointsUsed ? 0 : ticketCost, pointsUsed ? HLib.ConvertToPoints(ticketCost) : 0, customerId);
     }
 
     /// <summary>
@@ -83,7 +82,7 @@ public class Ticket : ITicket
 
             //Set argument to -1 if ticket returns null
             _straightLineMileage = double.Parse(ticket["DistanceMiles"].ToString() ?? "-1");
-            _ticketCost = decimal.Parse(ticket["TicketCost"].ToString() ?? "-1");
+            _ticketCost = double.Parse(ticket["TicketCost"].ToString() ?? "-1");
 
             //Return empty string on invalid read
             _startCity = ticket["StartCity"].ToString() ?? "";
@@ -99,13 +98,18 @@ public class Ticket : ITicket
     /// <returns>Whether or not the function succeeded.</returns>
     public bool UploadTicket()
     {
+        CalculateStraightLineMileage();
+        CalculateTicketCost();
+
+        //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
+        _transaction = new AirEase_AMS.Transaction.Transaction(_pointsUsed ? 0 : (decimal)_ticketCost, _pointsUsed ? HLib.ConvertToPoints((decimal)_ticketCost) : 0, _customerId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("SELECT UserPointBalance FROM CUSTOMER WHERE UserID = {0};", _customerId);
         DataRow customerTable = dao.Retrieve(query).Rows[0];
         int pointBalance = int.Parse(customerTable["UserPointBalance"].ToString() ?? "-1");
 
         //We don't have enough points!
-        if (pointBalance < HLib.PointsEarned(_ticketCost) && _pointsUsed) return false;
+        if (pointBalance < HLib.PointsEarned((decimal)_ticketCost) && _pointsUsed) return false;
 
         //If flights is empty or transaction is null, return false.
         if (flights.Count == 0) return false;
@@ -150,7 +154,7 @@ public class Ticket : ITicket
 
     public double GetStraightLineMileage() { return _straightLineMileage; }
 
-    public decimal GetTicketCost() { return _ticketCost; }
+    public double GetTicketCost() { return _ticketCost; }
 
     public string GetTicketId()
     {
