@@ -29,12 +29,13 @@ public class Route : IRoute, IComparable<Route>
     /// <param name="routeId">The key associated with the route we want.</param>
     public Route(string routeId)
     {//TODO: statement or branch uncovered
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         _routeId = routeId;
-        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0}", _routeId);
+        string query = String.Format("SELECT * FROM FLIGHTROUTE WHERE RouteID = {0};", _routeId);
         System.Data.DataTable routeTable = dao.Retrieve(query);
-        if (routeTable == null || routeTable.Rows.Count != 1)
+        if (routeTable == null || routeTable.Rows.Count < 1)
         {
             _routeId = "";
             _origin = new Airport("-1");
@@ -49,9 +50,9 @@ public class Route : IRoute, IComparable<Route>
             _routeId = routeId;
             _origin = new Airport(route["OriginAirportID"].ToString() ?? "-1");
             _destination = new Airport(route["DestinationAirportID"].ToString() ?? "-1");
-            _flightsOnRoute = new List<Flight>();
             _distance = double.Parse(route["DistanceMiles"].ToString() ?? "-1");
         }//TODO: statement or branch uncovered
+        _flightsOnRoute = new List<Flight>();
     }
 
     public Route(string originAirportId, string destinationAirportId, int distanceMiles)
@@ -78,7 +79,7 @@ public class Route : IRoute, IComparable<Route>
         if (_origin.GetAirportId().Length < 6 || _destination.GetAirportId().Length < 6) return false;
 
         string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     public bool FlightExists(IRoute flight)
@@ -106,6 +107,9 @@ public class Route : IRoute, IComparable<Route>
         }
         return validFlights;
     }
+
+    public string GetOriginCity() { return _origin.GetCityName();  }
+    public string GetDestinationCity() {  return _destination.GetCityName(); }  
 
     public IGraphNode Origin()
     {//TODO: statement or branch uncovered
@@ -186,13 +190,22 @@ public class Route : IRoute, IComparable<Route>
     {
         _destination.SetCity(destination);
     }
-    
 
 
-    public void SetDistance(int distance)
+    public int PopulateFlightsOnRoute()
     {
-         _distance = distance;
+        _flightsOnRoute = new List<Flight>();
+        string query = string.Format("EXEC GetFlightDeparturesWithRouteID @RouteID = {0};", _routeId);
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        DataTable table = dao.Retrieve(query);
+        foreach(DataRow row in table.Rows)
+        {
+            string flightId = row["FlightID"].ToString() ?? "-1";
+            string departureId = row["DepartureID"].ToString() ?? "-1";
+            _flightsOnRoute.Add(new Flight(flightId, departureId));
+        }
+
+        return _flightsOnRoute.Count;
     }
-    
-    
+
 }

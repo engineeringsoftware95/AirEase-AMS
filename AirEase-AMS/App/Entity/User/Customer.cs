@@ -59,6 +59,48 @@ public class Customer : User
         }
     } //TODO: statement or branch uncovered
 
+    public Customer(string userId)
+    {
+        string query = "SELECT * FROM Customer WHERE UserID = " + userId + ";";
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+
+        System.Data.DataTable dt = dao.Retrieve(query);
+
+        //Empty constructor
+        if (dt.Rows.Count != 1)
+        {
+            _firstName = "";
+            _lastName = "";
+            _email = "";
+            _phoneNum = "";
+            _address = "";
+            _birthDate = "";
+            _password = "";
+            _salt = "";
+            _ssn = "";
+            _positionTitle = "";
+            _userId = -1;
+            _cashBalance = -1;
+            _pointBalance = -1;
+        }
+        //Load info
+        else
+        {
+            DataRow user = dt.Rows[0];
+            _firstName = user["FirstName"].ToString() ?? "";
+            _lastName = user["LastName"].ToString() ?? "";
+            string id = user["UserID"].ToString() ?? "-1";
+            _userId = int.Parse(id);
+            _address = user["UserAddress"].ToString() ?? "";
+            _phoneNum = user["PhoneNum"].ToString() ?? "";
+            _birthDate = user["UserBirthDate"].ToString() ?? "";
+            _salt = user["Salt"].ToString() ?? "";
+            _email = user["Email"].ToString() ?? "";
+            _cashBalance = decimal.Parse(user["UserCashBalance"].ToString() ?? "-1");
+            _pointBalance = int.Parse(user["UserPointBalance"].ToString() ?? "-1");
+        }
+    } //TODO: statement or branch uncovered
+
 
 
 }
