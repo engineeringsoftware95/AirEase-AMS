@@ -20,10 +20,61 @@ namespace AirEase_AMS.Interface
         Employee user;
         public EmployeeForm(Employee loggedUser)
         {
-            user = loggedUser;
             InitializeComponent();
+            user = loggedUser;
             flightTimePicker.MinDate = DateTime.Now;
             flightTimePicker.MaxDate = DateTime.Now.AddMonths(7);
+
+            listBox1.Items.Clear();
+            listBox1.Items.Add("Nothing to see here...");
+
+            richTextBox1.Clear();
+            richTextBox1.Text = "Hello World!";
+
+            string username = user.GetUserId().ToString();
+            switch (username[0])
+            {
+                case '2':
+                    //remove all tabs accountant doesnt need
+                    MarketsTab.Hide();
+                    FlightsTab.Hide();
+                    RoutesTab.Hide();
+                    break;
+                case '3':
+                    //remove all tabs flight manager doesnt need
+                    tabControl1.TabPages.Remove(MarketsTab);
+                    tabControl1.TabPages.Remove(RoutesTab);
+                    tabControl1.TabPages.Remove(AccountsTab);
+                    break;
+                case '4':
+                    //remove all tabs load engineer doesnt need
+                    tabControl1.TabPages.Remove(MarketsTab);
+                    tabControl1.TabPages.Remove(FlightsTab);
+                    tabControl1.TabPages.Remove(AccountsTab);
+
+                    originView.Items.Clear();
+                    //originView.Items.Add(); // list of all cities in graph
+                    destinationCombo.Items.Clear();
+                    //destinationCombo.Items.Add(); // list of all cities in graph
+                    comboBox3.Items.Clear();
+                    //comboBox3.Items.Add();    // list of all routes
+                    break;
+                case '5':
+                    //remove all tabs market manager doesnt need
+                    tabControl1.TabPages.Remove(FlightsTab);
+                    tabControl1.TabPages.Remove(RoutesTab);
+                    tabControl1.TabPages.Remove(AccountsTab);
+
+                    comboBox1.Items.Clear();
+                    //comboBox1.Items.Add(); // add a list of aircrafts
+                    break;
+                default:
+                    //Error
+                    return;
+            }
+
+            flightTimePicker.Format = DateTimePickerFormat.Custom;
+            flightTimePicker.CustomFormat = "MM/dd/yyyy    HH:mm";
 
         }
 
@@ -95,14 +146,14 @@ namespace AirEase_AMS.Interface
             richTextBox1.Clear();
             richTextBox1.Text = "Hello World!";
 
-            string username = "" + user.GetUserId();
+            string username = user.GetUserId().ToString();
             switch (username[0])
             {
                 case '2':
                     //remove all tabs accountant doesnt need
-                    tabControl1.TabPages.Remove(MarketsTab);
-                    tabControl1.TabPages.Remove(FlightsTab);
-                    tabControl1.TabPages.Remove(RoutesTab);
+                    MarketsTab.Hide();
+                    FlightsTab.Hide();
+                    RoutesTab.Hide();
                     break;
                 case '3':
                     //remove all tabs flight manager doesnt need

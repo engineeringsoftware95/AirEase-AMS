@@ -210,6 +210,7 @@
             Controls.Add(pictureBox1);
             Name = "InformationAccountCreationForm";
             Text = "InformationAccountCreationForm";
+            Load += InformationAccountCreationForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

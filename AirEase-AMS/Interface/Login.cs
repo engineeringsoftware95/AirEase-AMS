@@ -80,10 +80,7 @@ namespace AirEase_AMS.Interface
 
                     }
                     employeeForm.ShowDialog();
-
-
                 }
-
                 //Close out login form
                 this.Close();
             }

@@ -67,10 +67,11 @@ namespace AirEase_AMS.Interface
             else
             {
                 // do the thing to create one ticket...
+
+                CustomerBilling customerBilling = new CustomerBilling(this, currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString());
+                this.Hide();
+                customerBilling.ShowDialog();
             }
-            CustomerBilling customerBilling = new CustomerBilling(this, currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString());
-            this.Hide();
-            customerBilling.ShowDialog();
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -105,7 +106,7 @@ namespace AirEase_AMS.Interface
         {
             // update news feed and upcoming departure list
             NewsFeed.Items.Clear();
-            NewsFeed.Items.Add("Coconuts are not migratory.");
+            NewsFeed.Items.Add("Air-Ease has been released!");
 
             upcomingDepartureList.Items.Clear();
             upcomingDepartureList.Items.Add(currentUser.GetUpcomingTickets());

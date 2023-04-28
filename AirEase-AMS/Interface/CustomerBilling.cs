@@ -20,10 +20,12 @@ namespace AirEase_AMS.Interface
         string origin;
         string destination;
         string departureTime;
+        string returnTime;
         int costInPoints;
         double costInMoney;
         Ticket ticketToBuy;
-        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime)
+        Ticket ifRoundTrip;
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, Ticket firstTicket)
         {
             parent = calledFrom;
             currentUser = loggedIn;
@@ -31,6 +33,20 @@ namespace AirEase_AMS.Interface
             destination = destinationCity;
             departureTime = depatureDateTime;
             ticketToBuy = new Ticket();
+            ticketToBuy = firstTicket;
+            InitializeComponent();
+        }
+
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, string secondDeparture, Ticket firstTicket, Ticket secondTicket)
+        {
+            parent = calledFrom;
+            currentUser = loggedIn;
+            origin = originCity;
+            destination = destinationCity;
+            departureTime = depatureDateTime;
+            returnTime = secondDeparture;
+            ticketToBuy = firstTicket;
+            ifRoundTrip = secondTicket;
             InitializeComponent();
         }
 
@@ -41,7 +57,7 @@ namespace AirEase_AMS.Interface
 
             comboBox1.Items.Clear();
 
-            //if (currentUser._pointbalance > costInPoints)
+            //if (currentUser._pointBalance > costInPoints)
             //{
             //    comboBox1.Items.Add(currentUser._pointBalance);
             //}

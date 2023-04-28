@@ -57,7 +57,8 @@ namespace AirEase_AMS.Interface
                 ((firstNameMissing || lastNameMissing || addressMissing || birthDateMissing || passwordsMissing) ? "Please fill out all information.\r\n" : "") +
                 (emailFormatCorrect ? "" : "Email is not formatted correctly.\r\n") +
                 (phoneFormatCorrect ? "" : "Phone number is not formatted correctly.\r\n") +
-                ((passwordsMatch) ? "" : "Passwords do not match.");
+                ((passwordsMatch) ? "" : "Passwords do not match.\r\n") +
+                (BirthDateCalendar.Equals(DateTime.Now) ? "" : "Birthdate cannot be today.");
 
             if (passwordsMatch)
             {
@@ -136,6 +137,11 @@ namespace AirEase_AMS.Interface
             this.Hide();
             login.ShowDialog();
             this.Close();
+        }
+
+        private void InformationAccountCreationForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
