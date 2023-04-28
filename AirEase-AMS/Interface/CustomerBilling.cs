@@ -37,7 +37,7 @@ namespace AirEase_AMS.Interface
         private void CustomerBilling_Load(object sender, EventArgs e)
         {
             flightInfo.Clear();
-            flightInfo.Text = ticketToBuy.ToString();
+            flightInfo.Text = ticketToBuy.GetTicketInformation();
 
             comboBox1.Items.Clear();
 
