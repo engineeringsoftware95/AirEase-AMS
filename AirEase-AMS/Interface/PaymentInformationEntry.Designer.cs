@@ -46,6 +46,7 @@
             // 
             // FullNameEntry
             // 
+            FullNameEntry.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             FullNameEntry.Location = new Point(277, 71);
             FullNameEntry.Name = "FullNameEntry";
             FullNameEntry.Size = new Size(446, 23);
@@ -63,6 +64,7 @@
             // 
             // cancel
             // 
+            cancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             cancel.Location = new Point(157, 316);
             cancel.Name = "cancel";
             cancel.Size = new Size(113, 23);
@@ -73,6 +75,7 @@
             // 
             // Continue
             // 
+            Continue.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             Continue.Location = new Point(435, 316);
             Continue.Name = "Continue";
             Continue.Size = new Size(176, 23);
@@ -83,6 +86,7 @@
             // 
             // CCNEntry
             // 
+            CCNEntry.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             CCNEntry.Location = new Point(277, 100);
             CCNEntry.Name = "CCNEntry";
             CCNEntry.Size = new Size(446, 23);
@@ -90,6 +94,7 @@
             // 
             // textBox3
             // 
+            textBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBox3.Location = new Point(277, 158);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(446, 23);
@@ -144,6 +149,7 @@
             // 
             // textBox1
             // 
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBox1.Location = new Point(277, 187);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(446, 23);
@@ -152,6 +158,7 @@
             // 
             // textBox4
             // 
+            textBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBox4.Location = new Point(277, 129);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(446, 23);

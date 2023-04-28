@@ -72,6 +72,7 @@
             AccountSummary.Name = "AccountSummary";
             AccountSummary.Size = new Size(295, 319);
             AccountSummary.TabIndex = 26;
+            AccountSummary.SelectedIndexChanged += AccountSummary_SelectedIndexChanged;
             // 
             // SummaryPage
             // 

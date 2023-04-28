@@ -44,6 +44,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.number2;
             pictureBox1.Location = new Point(280, 34);
             pictureBox1.Name = "pictureBox1";
@@ -55,6 +56,7 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             button1.Location = new Point(345, 284);
             button1.Name = "button1";
             button1.Size = new Size(100, 23);
@@ -65,6 +67,7 @@
             // 
             // UsernameBox
             // 
+            UsernameBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             UsernameBox.Location = new Point(345, 201);
             UsernameBox.Name = "UsernameBox";
             UsernameBox.PlaceholderText = "Username";
@@ -75,6 +78,7 @@
             // 
             // PasswordBox
             // 
+            PasswordBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PasswordBox.Location = new Point(345, 242);
             PasswordBox.Name = "PasswordBox";
             PasswordBox.PasswordChar = '*';
@@ -86,6 +90,7 @@
             // 
             // linkLabel1
             // 
+            linkLabel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel1.AutoSize = true;
             linkLabel1.Location = new Point(345, 330);
             linkLabel1.Name = "linkLabel1";
@@ -105,6 +110,7 @@
             // 
             // LoginFailureLabel
             // 
+            LoginFailureLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LoginFailureLabel.AutoSize = true;
             LoginFailureLabel.Location = new Point(345, 164);
             LoginFailureLabel.Name = "LoginFailureLabel";

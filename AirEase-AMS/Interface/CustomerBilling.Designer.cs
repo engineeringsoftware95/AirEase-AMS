@@ -65,6 +65,7 @@
             flightInfo.Name = "flightInfo";
             flightInfo.Size = new Size(664, 296);
             flightInfo.TabIndex = 3;
+            flightInfo.TextChanged += flightInfo_TextChanged;
             // 
             // comboBox1
             // 
@@ -82,6 +83,7 @@
             cancel.TabIndex = 6;
             cancel.Text = "Cancel";
             cancel.UseVisualStyleBackColor = true;
+            cancel.Click += cancel_Click;
             // 
             // newPaymentMethod
             // 

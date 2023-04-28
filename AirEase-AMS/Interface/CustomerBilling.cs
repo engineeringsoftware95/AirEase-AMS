@@ -14,17 +14,17 @@ namespace AirEase_AMS.Interface
 {
     public partial class CustomerBilling : Form
     {
+        Form parent;
         Customer currentUser;
         string origin;
         string destination;
-        decimal ticketCost;
         string departureDate;
-        public CustomerBilling(Customer loggedIn, string originCity, string destinationCity)
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDate)
         {
+            parent = calledFrom;
             currentUser = loggedIn;
             origin = originCity;
             destination = destinationCity;
-            //ticketCost = ;
             InitializeComponent();
         }
 
@@ -36,7 +36,7 @@ namespace AirEase_AMS.Interface
         private void newPaymentMethod_Click(object sender, EventArgs e)
         {
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
-            this.Hide(); 
+            this.Hide();
             enter.Show();
             // update payment methods list with new credit card if one has been entered
         }
@@ -47,6 +47,19 @@ namespace AirEase_AMS.Interface
             //SummaryPage summaryPage = new SummaryPage(currentUser);
             this.Hide();
             //summaryPage.Show();
+            this.Close();
+        }
+
+        private void flightInfo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            parent.Update();
+            parent.Show();
             this.Close();
         }
     }
