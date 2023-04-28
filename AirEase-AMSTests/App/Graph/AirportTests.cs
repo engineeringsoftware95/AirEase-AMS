@@ -45,9 +45,9 @@ namespace AirEase_AMS.App.Graph.Tests
         [TestCase("123", "osf2 sfs", ExpectedResult = false)]
         public bool AirportTest(string cityName, string airportName)
         {
-          HLib.NuclearRedButton();
+            HLib.NuclearRedButton();
             Airport airport = new Airport(cityName, airportName);
-            airport.UploadAirport();
+            if(!airport.UploadAirport())Assert.Fail();
 
             Airport reuse = new Airport(airport.GetAirportId());
 

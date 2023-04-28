@@ -426,7 +426,7 @@ namespace AirEase_AMS.App
                 //Customer purchases the ticket (50%)
                 if (purchase > 50)
                 {
-                    AirEase_AMS.App.Ticket.Ticket ticket = new Ticket.Ticket(flight.GetFlightCost(), flight.GetOriginCity(), flight.GetDestinationCity(), customerList[customerIndex].GetUserId().ToString(), false);
+                    AirEase_AMS.App.Ticket.Ticket ticket = new Ticket.Ticket(flight.GetOriginCity(), flight.GetDestinationCity(), customerList[customerIndex].GetUserId().ToString(), false);
                     ticket.AddFlight(flight);
                     ticket.UploadTicket();
                     if (purchase > 90)

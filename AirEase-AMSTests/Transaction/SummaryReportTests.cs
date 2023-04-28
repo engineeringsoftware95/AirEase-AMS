@@ -55,7 +55,7 @@ namespace AirEase_AMS.Transaction.Tests
                 {
                     Customer customer = new Customer("Bob", "Bob", "Testaddress", DateTime.Now.ToString(), "Password123", "2223334444", "bob@bob.bob");
                     customer.AttemptAccountCreation();
-                    Ticket ticket = new Ticket(15.27m, "Cleveland", "Tennessee", customer.GetUserId().ToString(), false);
+                    Ticket ticket = new Ticket("Cleveland", "Tennessee", customer.GetUserId().ToString(), false);
                     ticket.AddFlight(flight);
                     if (!ticket.UploadTicket()) Assert.Fail();
                 }
