@@ -76,10 +76,13 @@ namespace AirEase_AMS.Interface
 
         private void purchase_Click(object sender, EventArgs e)
         {
-            //Ticket purchasing = new Ticket();
-            //SummaryPage summaryPage = new SummaryPage(currentUser);
+            if (returnTime == null)
+            {
+                Ticket purchasing = new Ticket();
+                SummaryPage summaryPage = new SummaryPage(currentUser, purchasing);
+                summaryPage.Show();
+            }
             this.Hide();
-            //summaryPage.Show();
             this.Close();
         }
 

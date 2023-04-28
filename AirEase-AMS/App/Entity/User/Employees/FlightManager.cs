@@ -19,7 +19,7 @@ public class FlightManager : Employee
         _userId = GenerateId();
     }
 
-    public FlightManager(string username, string password) : base(username, password) //TODO: statement or branch uncovered
+    public FlightManager(string username) : base(username) //TODO: statement or branch uncovered
     {
 
     }

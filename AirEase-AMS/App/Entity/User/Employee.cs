@@ -14,9 +14,9 @@ public class Employee : User
         _positionTitle = "";
     }
 
-    public Employee(string username, string password) //TODO: statement or branch uncovered
+    public Employee(string username) //TODO: statement or branch uncovered
     {
-        string query = "SELECT * FROM EMPLOYEE WHERE EmployeePassword = '" + password + "' AND UserID = " + username + ";";
+        string query = "SELECT * FROM EMPLOYEE WHERE UserID = " + username + ";";
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         System.Data.DataTable dt = dao.Retrieve(query);

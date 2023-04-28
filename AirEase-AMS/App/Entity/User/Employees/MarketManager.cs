@@ -21,7 +21,7 @@ public class MarketManager : Employee
         _userId = GenerateId();
     }
 
-    public MarketManager(string username, string password) : base(username, password) //TODO: statement or branch uncovered
+    public MarketManager(string username) : base(username) //TODO: statement or branch uncovered
     {
 
     }

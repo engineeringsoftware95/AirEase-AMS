@@ -16,15 +16,18 @@ namespace AirEase_AMS.App
         static void Main()
         {
 
-            
-            HLib.NuclearRedButton();
-            HLib.LoadDatabase();
+
+            //HLib.NuclearRedButton();
+            //HLib.LoadDatabase();
 
 
             //DatabaseAccessObject dao = new DatabaseAccessObject(); 
             //Aircraft defaultAircraft = new Aircraft("B-52", 5);
             //defaultAircraft.SetAircraftId("111111");
             //defaultAircraft.UploadAircraft();
+
+            //Console.WriteLine(HLib.SelectAllAircraft().ToArray()[0].GetModelName());
+
             //ApplicationConfiguration.Initialize();
 
             System.Windows.Forms.Application.Run(new Login()); 

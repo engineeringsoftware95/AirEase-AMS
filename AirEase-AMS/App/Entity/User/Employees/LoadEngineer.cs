@@ -20,7 +20,7 @@ public class LoadEngineer : Employee
         _userId = GenerateId();
     }
 
-    public LoadEngineer(string username, string password) : base(username, password) //TODO: statement or branch uncovered
+    public LoadEngineer(string username) : base(username) //TODO: statement or branch uncovered
     {
 
     }

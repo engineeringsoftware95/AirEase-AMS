@@ -19,7 +19,7 @@ public class Accountant : Employee
         _userId = GenerateId();
     }
 
-    public Accountant(string username, string password) : base(username, password) //TODO: statement or branch uncovered
+    public Accountant(string username) : base(username) //TODO: statement or branch uncovered
     {
 
     }
