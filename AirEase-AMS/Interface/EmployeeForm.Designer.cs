@@ -116,7 +116,7 @@
             // 
             // listBox1
             // 
-            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
             listBox1.Location = new Point(270, 10);
@@ -137,7 +137,7 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             richTextBox1.Location = new Point(6, 89);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
@@ -165,7 +165,6 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox4.Image = Properties.Resources.number2;
             pictureBox4.Location = new Point(3, 3);
             pictureBox4.Name = "pictureBox4";
@@ -176,7 +175,6 @@
             // 
             // label4
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             label4.AutoSize = true;
             label4.Location = new Point(95, 168);
             label4.Name = "label4";
@@ -187,7 +185,6 @@
             // 
             // button3
             // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             button3.Location = new Point(123, 233);
             button3.Name = "button3";
             button3.Size = new Size(121, 23);
@@ -199,7 +196,6 @@
             // 
             // comboBox1
             // 
-            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(123, 186);
             comboBox1.Name = "comboBox1";
@@ -208,7 +204,7 @@
             // 
             // dataGridView2
             // 
-            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(325, 3);
             dataGridView2.Name = "dataGridView2";
@@ -231,7 +227,6 @@
             // 
             // pictureBox5
             // 
-            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox5.Image = Properties.Resources.number2;
             pictureBox5.Location = new Point(3, 3);
             pictureBox5.Name = "pictureBox5";
@@ -242,20 +237,20 @@
             // 
             // flightManifestWindow
             // 
-            flightManifestWindow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flightManifestWindow.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flightManifestWindow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            flightManifestWindow.Location = new Point(39, 139);
+            flightManifestWindow.Location = new Point(3, 179);
             flightManifestWindow.Name = "flightManifestWindow";
             flightManifestWindow.ReadOnly = true;
             flightManifestWindow.RowTemplate.Height = 25;
-            flightManifestWindow.Size = new Size(568, 242);
+            flightManifestWindow.Size = new Size(645, 242);
             flightManifestWindow.TabIndex = 4;
             flightManifestWindow.Tag = "flightManifestWindow";
             // 
             // button2
             // 
             button2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            button2.Location = new Point(39, 110);
+            button2.Location = new Point(221, 150);
             button2.Name = "button2";
             button2.Size = new Size(178, 23);
             button2.TabIndex = 3;
@@ -287,7 +282,7 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(331, -1);
             dataGridView1.Name = "dataGridView1";
@@ -308,7 +303,6 @@
             // 
             // AddFlightButton
             // 
-            AddFlightButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddFlightButton.Location = new Point(84, 370);
             AddFlightButton.Name = "AddFlightButton";
             AddFlightButton.Size = new Size(227, 23);
@@ -320,7 +314,7 @@
             // 
             // flightTimePicker
             // 
-            flightTimePicker.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            flightTimePicker.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             flightTimePicker.Location = new Point(85, 327);
             flightTimePicker.Name = "flightTimePicker";
             flightTimePicker.Size = new Size(226, 23);
@@ -329,7 +323,7 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Location = new Point(11, 287);
             label3.Name = "label3";
@@ -339,7 +333,7 @@
             // 
             // comboBox3
             // 
-            comboBox3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            comboBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             comboBox3.FormattingEnabled = true;
             comboBox3.Location = new Point(84, 279);
             comboBox3.Name = "comboBox3";
@@ -348,7 +342,6 @@
             // 
             // UpdateButton
             // 
-            UpdateButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             UpdateButton.Location = new Point(84, 219);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(227, 29);
@@ -412,7 +405,6 @@
             // 
             // pictureBox6
             // 
-            pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox6.Image = Properties.Resources.number2;
             pictureBox6.Location = new Point(3, 3);
             pictureBox6.Name = "pictureBox6";
@@ -423,18 +415,20 @@
             // 
             // summaryReportWindow
             // 
-            summaryReportWindow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            summaryReportWindow.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             summaryReportWindow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            summaryReportWindow.Location = new Point(20, 125);
+            summaryReportWindow.Location = new Point(3, 179);
             summaryReportWindow.Name = "summaryReportWindow";
             summaryReportWindow.RowTemplate.Height = 25;
-            summaryReportWindow.Size = new Size(568, 242);
+            summaryReportWindow.Size = new Size(645, 242);
             summaryReportWindow.TabIndex = 2;
             summaryReportWindow.Tag = "summaryReportWindow";
+            summaryReportWindow.CellContentClick += summaryReportWindow_CellContentClick;
             // 
             // button1
             // 
-            button1.Location = new Point(20, 96);
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            button1.Location = new Point(206, 141);
             button1.Name = "button1";
             button1.Size = new Size(178, 23);
             button1.TabIndex = 1;

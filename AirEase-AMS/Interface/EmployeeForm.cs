@@ -174,5 +174,10 @@ namespace AirEase_AMS.Interface
             //manifest.PopulateManifest();
             //flightManifestWindow.DataSource = manifest.GetFlightManifest();
         }
+
+        private void summaryReportWindow_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

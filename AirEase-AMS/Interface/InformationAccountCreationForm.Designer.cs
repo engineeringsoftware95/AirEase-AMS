@@ -42,6 +42,7 @@
             process1 = new System.Diagnostics.Process();
             BirthDateCalendar = new DateTimePicker();
             EmailBox = new TextBox();
+            Cancel = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -104,7 +105,7 @@
             // 
             // SubmitButton
             // 
-            SubmitButton.Location = new Point(293, 206);
+            SubmitButton.Location = new Point(366, 186);
             SubmitButton.Name = "SubmitButton";
             SubmitButton.Size = new Size(116, 23);
             SubmitButton.TabIndex = 21;
@@ -179,11 +180,22 @@
             EmailBox.Tag = "EmailBox";
             EmailBox.TextChanged += EmailBox_TextChanged;
             // 
+            // Cancel
+            // 
+            Cancel.Location = new Point(366, 401);
+            Cancel.Name = "Cancel";
+            Cancel.Size = new Size(116, 23);
+            Cancel.TabIndex = 24;
+            Cancel.Text = "Cancel";
+            Cancel.UseVisualStyleBackColor = true;
+            Cancel.Click += Cancel_Click;
+            // 
             // InformationAccountCreationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Cancel);
             Controls.Add(EmailBox);
             Controls.Add(BirthDateCalendar);
             Controls.Add(SubmitButton);
@@ -218,5 +230,6 @@
         private System.Diagnostics.Process process1;
         private DateTimePicker BirthDateCalendar;
         private TextBox EmailBox;
+        private Button Cancel;
     }
 }

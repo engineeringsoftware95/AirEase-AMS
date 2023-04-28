@@ -49,7 +49,7 @@ namespace AirEase_AMS.Interface
 
             //If one of the passwords is null or if they are not equal
             bool passwordsMatch = passwordsMissing ? true : PasswordFirst.Text.Equals(PasswordVerify.Text);
-            
+
 
             string errorMessage = "Create a secure password.\r\nPasswords should be:\r\nGreater than eight characters in length\r\nContain at least one special character\r\nContain at least one number\r\nContain at least one upper case letter\r\nContain at least one lower case letter\r\n\t\n";
 
@@ -128,6 +128,14 @@ namespace AirEase_AMS.Interface
         private void ErrorMessageBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            this.Hide();
+            login.ShowDialog();
+            this.Close();
         }
     }
 }
