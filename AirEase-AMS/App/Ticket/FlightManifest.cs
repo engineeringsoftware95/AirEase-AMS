@@ -1,5 +1,5 @@
 ﻿
-﻿using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Graph.Flight;
 using System.Data;
 
