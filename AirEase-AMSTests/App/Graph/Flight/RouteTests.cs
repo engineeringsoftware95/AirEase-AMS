@@ -52,24 +52,6 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
         }
 
         [Test()]
-        public void RouteTest1()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void RouteTest2()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void UploadRouteTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
         public void FlightExistsTest()
         {
            Assert.IsTrue(ibilly.FlightExists(ijoseph));
@@ -83,71 +65,6 @@ namespace AirEase_AMS.App.Graph.Flight.Tests
 
             Assert.AreEqual(testList[0], ijoseph);
         }
-
-        [Test()]
-        public void OriginTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void DestinationTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void IsDestinationTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void IsOriginTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetTimeTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetDistanceTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GetRouteIdTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void CompareToTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void CompareByDistanceTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void RouteIdTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void GenerateIdTest()
-        {
-            Assert.Fail();
-        }
+        
     }
 }

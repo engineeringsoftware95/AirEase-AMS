@@ -17,10 +17,21 @@ public class Ticket : ITicket
     private string _endCity;
     private bool _isRefunded;
     private string? _customerId;
+    private int num_flights;
     private AirEase_AMS.Transaction.Transaction _transaction;
 
     private List<Flight> flights;
 
+    
+    public Ticket()
+    {
+        _startCity = "";
+        _endCity = "";
+        _ticketId = GenerateTicketId().ToString();
+        flights = new List<Flight>();
+        num_flights = 0;
+    }
+    
     /// <summary>
     /// This constructor is designed to instantiate a new ticket.
     /// </summary>
@@ -153,14 +164,17 @@ public class Ticket : ITicket
     
     public decimal CalculateTicketCost()
     {
-        //Summates the cost of all flights in this ticket, then adds layover costs.
-        return Convert.ToDecimal(flights[0].GetFlightCost() + ((flights.Count-1)*8));
+        if (CalculateStraightLineMileage() == 0) return 0;
+        return Convert.ToDouble(flights[0].CalculateFlightCost()) + (8 * num_flights);
     }
 
     public void AddFlight(Flight flight) //TODO: statement uncovered - needs test  
     {
-        if(flights.Count <= 3)
+        if (flights.Count <= 3)
+        {
             flights.Add(flight);
+            num_flights++;
+        }
     }
 
     public string GenerateTicketId()
