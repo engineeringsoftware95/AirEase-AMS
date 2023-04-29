@@ -84,11 +84,6 @@ namespace AirEase_AMS.Interface
             }
         }
 
-        private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void Search_Click(object sender, EventArgs e)
         {
             // first clear table
@@ -97,6 +92,11 @@ namespace AirEase_AMS.Interface
             dataGridView4.Rows.Clear();
             // populate the rows with all of the flights that match the given parameters
             // allow selection of ticketID
+        }
+
+        private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         private void Home_Click(object sender, EventArgs e)

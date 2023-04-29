@@ -127,7 +127,7 @@ namespace AirEase_AMS.Interface
             List<Aircraft> aircraft = HLib.SelectAllAircraft();
             List<Flight> flights = HLib.SelectAllFlights();
             string aircraftID = aircraft[comboBox1.SelectedIndex].GetAircraftId();
-            flights[comboBox3.SelectedIndex].SetPlaneForFlight(aircraftID);
+            flights[comboBox2.SelectedIndex].SetPlaneForFlight(aircraftID);
 
             setUp();
         }

@@ -48,7 +48,7 @@ namespace AirEase_AMS.Interface
             Reciept.Items.Add(purchasedTicket.GetTicketInformation());
             if(!string.IsNullOrEmpty(returnTicket.GetOriginCity()))
             {
-                Reciept.Items.Add("");
+                Reciept.Items.Add(" ");
                 Reciept.Items.Add(returnTicket.GetTicketInformation());
             }
         }

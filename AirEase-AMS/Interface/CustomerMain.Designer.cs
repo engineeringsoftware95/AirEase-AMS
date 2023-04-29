@@ -50,15 +50,15 @@
             dateTimePicker1 = new DateTimePicker();
             RoundTrip = new CheckBox();
             dataGridView4 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
             bookingButton = new Button();
             comboBox3 = new ComboBox();
             comboBox2 = new ComboBox();
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -318,30 +318,6 @@
             dataGridView4.TabIndex = 6;
             dataGridView4.CellContentClick += dataGridView4_CellContentClick;
             // 
-            // Column1
-            // 
-            Column1.HeaderText = "Origin City";
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Destination City";
-            Column2.Name = "Column2";
-            Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Departure Date and Time";
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "FlightID";
-            Column4.Name = "Column4";
-            Column4.ReadOnly = true;
-            // 
             // bookingButton
             // 
             bookingButton.Location = new Point(51, 384);
@@ -385,6 +361,30 @@
             // 
             FlightID.HeaderText = "FlightID";
             FlightID.Name = "FlightID";
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Origin City";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Destination City";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Departure Date and Time";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "TicketID";
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
             // 
             // CustomerMain
             // 
@@ -435,13 +435,13 @@
         private Button newPaymentMethod;
         private DataGridView dataGridView2;
         private Button Search;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
         private Label label2;
         private ComboBox comboBox1;
         private Label label3;
         private ComboBox comboBox4;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
     }
 }
