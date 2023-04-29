@@ -144,4 +144,24 @@ public class CreditCard
     {
         return _accountHolderId;
     }
+
+    public string GetCCNum()
+    {
+        return _ccNum;
+    }
+
+    public string GetCVC()
+    {
+        return _cvc;
+    }
+
+    public string GetBillZip()
+    {
+        return _billingZipCode;
+    }
+
+    public bool IsValid()
+    {
+        return _validCard;
+    }
 }

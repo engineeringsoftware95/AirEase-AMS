@@ -62,7 +62,7 @@
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(303, 314);
+            comboBox1.Location = new Point(293, 314);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(295, 23);
             comboBox1.TabIndex = 5;
@@ -82,7 +82,7 @@
             // newPaymentMethod
             // 
             newPaymentMethod.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            newPaymentMethod.Location = new Point(613, 314);
+            newPaymentMethod.Location = new Point(603, 314);
             newPaymentMethod.Name = "newPaymentMethod";
             newPaymentMethod.Size = new Size(163, 23);
             newPaymentMethod.TabIndex = 7;

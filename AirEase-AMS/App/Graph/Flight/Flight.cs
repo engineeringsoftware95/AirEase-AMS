@@ -178,6 +178,10 @@ public class Flight : Route
         return _flightId;
     }
 
+    public DateTime GetDepartureTime()
+    {
+        return _flightTime;
+    }
 
     public decimal CalculateFlightCost()
     {
