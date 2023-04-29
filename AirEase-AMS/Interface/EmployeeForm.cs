@@ -40,7 +40,6 @@ namespace AirEase_AMS.Interface
 
             flightTimePicker.Format = DateTimePickerFormat.Custom;
             flightTimePicker.CustomFormat = "MM/dd/yyyy    HH:mm";
-
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,14 +57,13 @@ namespace AirEase_AMS.Interface
             //Gather string from SummaryReport class
             SummaryReport summaryReport = new SummaryReport();
             summaryReport.GenerateReport();
-            string summaryText;
 
-            //if (!string.IsNullOrEmpty(summaryReport.ToString()))
-            //    summaryText = summaryReport.ToString();
-            //else
-                summaryText = "Error occured when generating summary report";
             //Set string in SummaryReportBox (textbox)
-            summaryReportBox.Items.Add(summaryText);
+            if (!string.IsNullOrEmpty(summaryReport.ToString()))
+                summaryReportBox.Text = summaryReport.ToString();
+            else
+                summaryReportBox.Text = "Error occured when generating summary report";
+            
         }
 
         private void RoutesTab_Click(object sender, EventArgs e)
@@ -80,7 +78,13 @@ namespace AirEase_AMS.Interface
 
         private void button2_Click(object sender, EventArgs e)
         {
+            List<Airport> airports = HLib.SelectAllAirports();
+            string origin = airports[originView.SelectedIndex].GetAirportId();
+            string destination = airports[destinationCombo.SelectedIndex].GetAirportId();
+            Route toAdd = new Route(origin, destination, (int)numericUpDown1.Value);
+            toAdd.UploadRoute();
 
+            setUp();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -100,8 +104,6 @@ namespace AirEase_AMS.Interface
 
             richTextBox1.Clear();
             richTextBox1.Text = "Hello World!";
-
-            setUp();
 
             flightTimePicker.Format = DateTimePickerFormat.Custom;
             flightTimePicker.CustomFormat = "MM/dd/yyyy    HH:mm";
@@ -138,7 +140,7 @@ namespace AirEase_AMS.Interface
         {
             //FlightManifest manifest = new FlightManifest();
             //manifest.PopulateManifest();
-            //flightManifestWindow.DataSource = manifest.GetFlightManifest();
+            //richTextBox1.Text = manifest.GetFlightManifest();
         }
 
         private void summaryReportWindow_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -167,6 +169,12 @@ namespace AirEase_AMS.Interface
                     tabControl1.TabPages.Remove(MarketsTab);
                     tabControl1.TabPages.Remove(RoutesTab);
                     tabControl1.TabPages.Remove(AccountsTab);
+
+                    comboBox4.Items.Clear();
+                    foreach (Flight flight in HLib.SelectAllFlights())
+                    {
+                        comboBox4.Items.Add("" + flight.GetFlightId() + ", " + flight.GetDepartureTime());
+                    }
                     break;
                 case '4':
                     //remove all tabs load engineer doesnt need
@@ -178,17 +186,16 @@ namespace AirEase_AMS.Interface
                     destinationCombo.Items.Clear();
                     foreach (Airport city in HLib.SelectAllAirports())
                     {
-                        originView.Items.Add(city.GetAirportName());         // list of all cities in graph
-                        destinationCombo.Items.Add(city.GetAirportName());
+                        originView.Items.Add(city.GetCityName());         // list of all cities in graph
+                        destinationCombo.Items.Add(city.GetCityName());
                     }
 
                     comboBox3.Items.Clear();
-                    dataGridView1.Rows.Clear();
-
+                    loadEnginList.Rows.Clear();
                     foreach (Route route in HLib.SelectAllRoutes())
                     {
                         comboBox3.Items.Add(route.GetRouteId());            // list of all routes
-                        dataGridView1.Rows.Add(route);
+                        loadEnginList.Rows.Add(route.GetRouteId(), route.GetOriginCity(), route.GetDestinationCity());
                     }
                     break;
                 case '5':
@@ -198,9 +205,19 @@ namespace AirEase_AMS.Interface
                     tabControl1.TabPages.Remove(AccountsTab);
 
                     comboBox1.Items.Clear();
+                    comboBox2.Items.Clear();
+                    dataGridView1.Rows.Clear();
+                    dataGridView2.Rows.Clear();
                     foreach (Aircraft plane in HLib.SelectAllAircraft())
                     {
-                        comboBox3.Items.Add(plane.GetModelName());            // list of all routes
+                        comboBox1.Items.Add(plane.GetModelName());            // list of all routes
+                        dataGridView1.Rows.Add(plane.GetAircraftId(), plane.GetModelName());
+                    }
+
+                    foreach (Flight flight in HLib.SelectAllFlights())
+                    {
+                        comboBox2.Items.Add("" + flight.GetFlightId() + ", " + flight.GetDepartureTime().ToString());
+                        dataGridView2.Rows.Add(flight.GetFlightId(), flight.GetOriginCity(), flight.GetDestinationCity());
                     }
                     break;
                 default:
@@ -212,13 +229,37 @@ namespace AirEase_AMS.Interface
         private void AddFlightButton_Click(object sender, EventArgs e)
         {
             //add route between the two cities selected
+            Route toAdd = new Route(comboBox3.SelectedText);
 
             //then update the route combo box
             comboBox3.Items.Clear();
             foreach (Route route in HLib.SelectAllRoutes())
             {
-                flightManifestWindow.Rows.Add(route);            // list of all routes
+                comboBox3.Items.Add(route.GetRouteId());
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddFlightButton_Click_1(object sender, EventArgs e)
+        {
+            List<Route> routes = HLib.SelectAllRoutes();
+            string routeid = routes[comboBox3.SelectedIndex].GetRouteId();
+            Flight toAdd = new Flight(routeid, HLib.GenerateYearWeekID(flightTimePicker.Value), flightTimePicker.Value);
+            toAdd.UploadFlight();
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void originView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
