@@ -31,6 +31,7 @@ public class Ticket : ITicket
         _endCity = "";
         _ticketId = GenerateTicketId().ToString();
         flights = new List<Flight>();
+        _transaction = new Transaction.Transaction(0, 0, " ");
         num_flights = 0;
     }
     
@@ -52,6 +53,7 @@ public class Ticket : ITicket
         flights = new List<Flight>();
         _customerId = customerId;
         _pointsUsed = pointsUsed;
+        num_flights = 0;
 
     }
 
@@ -61,9 +63,11 @@ public class Ticket : ITicket
     /// <param name="ticketId">The ticket we want to search for.</param>
     public Ticket(string ticketId)
     {
+        num_flights= 0;
         _ticketId = ticketId;
         //Selecting for primary key - the result should ALWAYS be one ticket
         string query = "SELECT * FROM TICKETS WHERE TicketID = " + ticketId + ";";
+        _transaction = new Transaction.Transaction(0, 0, " ");
         DatabaseAccessObject dao = new DatabaseAccessObject();
         DataTable dt = dao.Retrieve(query);
 
@@ -98,11 +102,12 @@ public class Ticket : ITicket
     /// <returns>Whether or not the function succeeded.</returns>
     public bool UploadTicket()
     {
-        CalculateStraightLineMileage();
-        CalculateTicketCost();
+        _straightLineMileage = CalculateStraightLineMileage();
+        _ticketCost =CalculateTicketCost();
 
         //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
         _transaction = new AirEase_AMS.Transaction.Transaction(_pointsUsed ? 0 : (decimal)_ticketCost, _pointsUsed ? HLib.ConvertToPoints((decimal)_ticketCost) : 0, _customerId);
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("SELECT UserPointBalance FROM CUSTOMER WHERE UserID = {0};", _customerId);
         DataRow customerTable = dao.Retrieve(query).Rows[0];
@@ -117,7 +122,6 @@ public class Ticket : ITicket
         //If the transaction object is null, return false. Else, upload it.
         if (_transaction != null) _transaction.UploadTransaction();
         else return false;
-        _straightLineMileage = CalculateStraightLineMileage();
         
 
         //While the ID isn't unique, make a new one.
@@ -171,6 +175,7 @@ public class Ticket : ITicket
         {
            mileage += f.GetDistance();
         }
+
 
         return mileage;
     }
@@ -248,4 +253,18 @@ public class Ticket : ITicket
         return success;
     }
 
+    public string GetOriginCity()
+    {
+        return _startCity;
+    }
+
+    public string GetDestinationCity()
+    {
+        return _endCity;
+    }
+
+    public List<Flight> GetFlights()
+    {
+        return flights;
+    }
 }

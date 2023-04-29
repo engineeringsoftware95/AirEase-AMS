@@ -61,6 +61,7 @@ public class Flight : Route
                 _origin = new Airport("-1");
                 _destination = new Airport("-1");
                 _flightsOnRoute = new List<Flight>();
+                _distance = -1;
             }
             else
             {
@@ -176,6 +177,10 @@ public class Flight : Route
         return _flightId;
     }
 
+    public DateTime GetDepartureTime()
+    {
+        return _flightTime;
+    }
     public decimal CalculateFlightCost()
     {
        //Calculates the cost of an individual flight

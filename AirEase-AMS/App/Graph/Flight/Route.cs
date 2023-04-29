@@ -76,8 +76,6 @@ public class Route : IRoute, IComparable<Route>
             _routeId = (GenerateId());
         }
 
-        if (_origin.GetAirportId().Length < 6 || _destination.GetAirportId().Length < 6) return false;
-
         string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
         return (dao.Update(query) >= 1);
     }
@@ -131,11 +129,6 @@ public class Route : IRoute, IComparable<Route>
     public bool IsOrigin(string city)
     {//TODO: statement or branch uncovered
         return _origin.GetCityName().Equals(city);
-    }
-
-    public DateTime GetTime()
-    {//TODO: statement or branch uncovered
-        throw new NotImplementedException();
     }
     
     public void SetDistance(double dist)

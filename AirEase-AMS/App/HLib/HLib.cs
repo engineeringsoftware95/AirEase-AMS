@@ -235,7 +235,7 @@ namespace AirEase_AMS.App
 
             //This should be a good baseline
             Airport tennessee = new Airport("Nashville", "Nashville International Aiport");
-            tennessee.UploadAirport();
+            Console.WriteLine(tennessee.UploadAirport());
             Airport cleveland = new Airport("Cleveland", "Cleveland Hopkins International Airport");
             cleveland.UploadAirport();
             Airport washington = new Airport("Seattle", "Seattle-Tacoma International Aiport");

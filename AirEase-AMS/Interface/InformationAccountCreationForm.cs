@@ -141,7 +141,9 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
-        private void InformationAccountCreationForm_Load(object sender, EventArgs e)
+
+        private void SubmitButton_Click_1(object sender, EventArgs e)
+
         {
 
         }
