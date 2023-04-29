@@ -187,7 +187,7 @@ public class Ticket : ITicket
         return Convert.ToDouble(flights[0].CalculateFlightCost()) + (8 * num_flights);
     }
 
-    public void AddFlight(Flight flight) //TODO: statement uncovered - needs test  
+    public void AddFlight(Flight flight)
     {
         if (flights.Count <= 3)
         {
@@ -198,10 +198,10 @@ public class Ticket : ITicket
 
     public string GenerateTicketId()
     {
-       return HLib.GenerateSixDigitId().ToString(); //TODO: statement uncovered - needs test  
+       return HLib.GenerateSixDigitId().ToString(); 
     }
 
-    public string GetTicketInformation() //TODO: statement uncovered - needs test  
+    public string GetTicketInformation() 
     {
         //Don't argue with me.
         string output = ""; 
@@ -225,7 +225,7 @@ public class Ticket : ITicket
     /// Attempts to cancel the ticket with this class' TicketID.
     /// </summary>
     /// <returns>Whether or not the ticket was successfully cancelled.</returns>
-    public bool CancelTicket() //TODO: statement uncovered - needs test  
+    public bool CancelTicket() 
     {
         _isRefunded = true;
         int pointsCost;

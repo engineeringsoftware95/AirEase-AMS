@@ -21,11 +21,11 @@ public class DatabaseAccessObject
     {
         builder = new SqlConnectionStringBuilder();
 
-        builder["Server"] = "localhost";
+       // builder["Server"] = "localhost";
 
-        //We've spent millions on achieving the best security money can buy
+        /*//We've spent millions on achieving the best security money can buy
         builder.IntegratedSecurity= true;
-        builder.TrustServerCertificate= true;
+        builder.TrustServerCertificate= true;*/
 
         builder["Server"] = "localhost";
         //We've spent millions on achieving the best security money can buy
@@ -115,7 +115,7 @@ public class DatabaseAccessObject
                 {
                     //No return data - return null object
                     if (!reader.HasRows)
-                    { //TODO: statement or branch uncovered
+                    { 
                         connection.Close();
                         return new DataTable();
                     }
@@ -125,8 +125,7 @@ public class DatabaseAccessObject
                         //For that reason, it can not be returned here. The DataTable makes for a fine substitute.
 
                         //Load our data table for return.  
-                        System.Data.DataTable dt = new System.Data.DataTable();//TODO: statement or branch uncovered
-                        dt.Load(reader);
+                        System.Data.DataTable dt = new System.Data.DataTable();
 
                         //Close the connection when we're done
                         connection.Close();

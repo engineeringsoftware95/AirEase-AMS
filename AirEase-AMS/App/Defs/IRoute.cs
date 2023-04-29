@@ -9,7 +9,7 @@ public interface IRoute
     double GetDistance();
     IGraphNode Origin();
     IGraphNode Destination();
-    List<Flight>? FindFlightsInRange(DateTime begin, DateTime end);
+    List<Flight> FindFlightsInRange(DateTime begin, DateTime end);
     bool IsDestination(string city);
     bool IsOrigin(string city);
     void SetDestination(string destination);
