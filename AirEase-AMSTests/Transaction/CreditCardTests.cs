@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework.Constraints;
 using AirEase_AMS.App.Entity.User;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AirEase_AMS.App.Ticket.Tests
 {
@@ -24,12 +25,13 @@ namespace AirEase_AMS.App.Ticket.Tests
             HLib.NuclearRedButton();
 
             Customer customer = new Customer("bob","bobby", "Bobby Road, TX",DateTime.Now.ToString(),"password123","2223334444","@.");
-            customer.AttemptAccountCreation();
+            if (!customer.AttemptAccountCreation()) Assert.Fail();
             CreditCard card = new CreditCard(ccNum, DateTime.Now.AddDays(4).ToString(), cvc, zip, customer.GetUserId().ToString());
             bool actual = card.SaveCreditCard();
             if(!expect)
             {
                 Assert.AreEqual(expect, actual);
+                return;
             }
             else
             {
@@ -39,6 +41,9 @@ namespace AirEase_AMS.App.Ticket.Tests
 
             CreditCard card2 = new CreditCard(ccNum, DateTime.Now.AddDays(-1).ToString(), cvc, zip, customer.GetUserId().ToString());
             Assert.AreEqual("", card2.GetExpirationDate());
+            CreditCard card3 = new CreditCard(customer.GetUserId());
+            Assert.AreEqual(cvc, card3.GetCVC());
+            Assert.AreEqual(ccNum, card3.GetCreditCardNum());
             HLib.NuclearRedButton();
         }
     }
