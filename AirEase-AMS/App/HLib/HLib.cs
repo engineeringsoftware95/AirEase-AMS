@@ -457,9 +457,6 @@ namespace AirEase_AMS.App
             mmPatsy.AttemptAccountCreation();
             MarketManager mmKate = new MarketManager("Kate", "Tate", " 440 Forest Hill Ln, Dallas, TX", DateTime.Now.AddYears(-26).AddMonths(8).ToString(), "vdg35435!$sAgdg4", "2214436677", "kate.tate@airease.com", "999887777");
             mmKate.AttemptAccountCreation();
-            
-
-            
         }
     }
 }
