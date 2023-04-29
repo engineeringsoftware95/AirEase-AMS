@@ -24,16 +24,17 @@ public class Ticket : ITicket
 
     private List<Flight> flights;
 
-    
+
     public Ticket()
     {
         _startCity = "";
         _endCity = "";
         _ticketId = GenerateTicketId().ToString();
         flights = new List<Flight>();
+        _transaction = new Transaction.Transaction(0, 0, " ");
         num_flights = 0;
     }
-    
+
     /// <summary>
     /// This constructor is designed to instantiate a new ticket.
     /// </summary>
@@ -52,6 +53,7 @@ public class Ticket : ITicket
         flights = new List<Flight>();
         _customerId = customerId;
         _pointsUsed = pointsUsed;
+        num_flights = 0;
 
     }
 
@@ -61,19 +63,21 @@ public class Ticket : ITicket
     /// <param name="ticketId">The ticket we want to search for.</param>
     public Ticket(string ticketId)
     {
+        num_flights = 0;
         _ticketId = ticketId;
         //Selecting for primary key - the result should ALWAYS be one ticket
         string query = "SELECT * FROM TICKETS WHERE TicketID = " + ticketId + ";";
+        _transaction = new Transaction.Transaction(0, 0, " ");
         DatabaseAccessObject dao = new DatabaseAccessObject();
         DataTable dt = dao.Retrieve(query);
 
         //Invalid read
-        if(dt == null || dt.Rows.Count != 1) 
+        if (dt == null || dt.Rows.Count != 1)
         {
             _straightLineMileage = 0;
             _ticketCost = 0;
-            _startCity= string.Empty;
-            _endCity= string.Empty;
+            _startCity = string.Empty;
+            _endCity = string.Empty;
             _isRefunded = false;
         }
         else
@@ -98,11 +102,12 @@ public class Ticket : ITicket
     /// <returns>Whether or not the function succeeded.</returns>
     public bool UploadTicket()
     {
-        CalculateStraightLineMileage();
-        CalculateTicketCost();
+        _straightLineMileage = CalculateStraightLineMileage();
+        _ticketCost = CalculateTicketCost();
 
         //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
         _transaction = new AirEase_AMS.Transaction.Transaction(_pointsUsed ? 0 : (decimal)_ticketCost, _pointsUsed ? HLib.ConvertToPoints((decimal)_ticketCost) : 0, _customerId);
+
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("SELECT UserPointBalance FROM CUSTOMER WHERE UserID = {0};", _customerId);
         DataRow customerTable = dao.Retrieve(query).Rows[0];
@@ -117,8 +122,7 @@ public class Ticket : ITicket
         //If the transaction object is null, return false. Else, upload it.
         if (_transaction != null) _transaction.UploadTransaction();
         else return false;
-        _straightLineMileage = CalculateStraightLineMileage();
-        
+
 
         //While the ID isn't unique, make a new one.
         _ticketId = (GenerateTicketId());
@@ -131,13 +135,13 @@ public class Ticket : ITicket
         //Stored procedure for ticket insertion
         query = String.Format("EXEC InsertTicket " +
             "@TicketID = {0}, @StartCity = '{1}', @EndCity  = '{2}', @TicketCost = {3}, " +
-            "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6};", 
-            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transaction.GetTransactionId(),_customerId);
+            "@DistanceMiles  = {4}, @TransactionID  = {5}, @CustomerID  = {6};",
+            _ticketId, _startCity, _endCity, _ticketCost, _straightLineMileage, _transaction.GetTransactionId(), _customerId);
 
         bool firstQuery = (dao.Update(query) > 0);
 
         //For each flight in flights, update the tables in the database using a stored procedure.
-        foreach(Flight flight in flights)
+        foreach (Flight flight in flights)
         {
             query = String.Format("EXEC UpdateFlights " +
             "@CustomerID = {0}, @FlightID = {1}, @DepartureID = {2}, @TicketID = {3};", _customerId, flight.GetFlightId(), flight.GetDepartureId(), _ticketId);
@@ -169,20 +173,21 @@ public class Ticket : ITicket
         double mileage = 0;
         foreach (Flight f in flights)
         {
-           mileage += f.GetDistance();
+            mileage += f.GetDistance();
         }
+
 
         return mileage;
     }
 
-    
+
     public double CalculateTicketCost()
     {
         if (CalculateStraightLineMileage() == 0) return 0;
         return Convert.ToDouble(flights[0].CalculateFlightCost()) + (8 * num_flights);
     }
 
-    public void AddFlight(Flight flight) //TODO: statement uncovered - needs test  
+    public void AddFlight(Flight flight)
     {
         if (flights.Count <= 3)
         {
@@ -193,13 +198,13 @@ public class Ticket : ITicket
 
     public string GenerateTicketId()
     {
-       return HLib.GenerateSixDigitId().ToString(); //TODO: statement uncovered - needs test  
+        return HLib.GenerateSixDigitId().ToString();
     }
 
-    public string GetTicketInformation() //TODO: statement uncovered - needs test  
+    public string GetTicketInformation()
     {
         //Don't argue with me.
-        string output = ""; 
+        string output = "";
 
         output += String.Format("Ticket ID: ${0}\n", _ticketId);
         output += String.Format("Customer ID: ${0}\n", _customerId);
@@ -220,7 +225,7 @@ public class Ticket : ITicket
     /// Attempts to cancel the ticket with this class' TicketID.
     /// </summary>
     /// <returns>Whether or not the ticket was successfully cancelled.</returns>
-    public bool CancelTicket() //TODO: statement uncovered - needs test  
+    public bool CancelTicket()
     {
         _isRefunded = true;
         int pointsCost;
@@ -238,7 +243,7 @@ public class Ticket : ITicket
         //Should alter one row by changing its IsRefunded attribute
         bool success = dao.Update(query) == 1;
 
-        foreach(Flight flight in flights)
+        foreach (Flight flight in flights)
         {
             query = String.Format("EXEC UpdateFlightAfterCancel @FlightID = {0}, @CustomerID = {1};", flight.GetFlightId(), _customerId);
 
@@ -248,4 +253,18 @@ public class Ticket : ITicket
         return success;
     }
 
+    public string GetOriginCity()
+    {
+        return _startCity;
+    }
+
+    public string GetDestinationCity()
+    {
+        return _endCity;
+    }
+
+    public List<Flight> GetFlights()
+    {
+        return flights;
+    }
 }

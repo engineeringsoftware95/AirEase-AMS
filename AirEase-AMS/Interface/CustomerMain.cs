@@ -1,4 +1,7 @@
-﻿using AirEase_AMS.App.Entity.User;
+﻿using AirEase_AMS.App;
+using AirEase_AMS.App.Entity.BoardingPass;
+using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Graph;
 using AirEase_AMS.App.Graph.Flight;
 using AirEase_AMS.App.Ticket;
 using Microsoft.IdentityModel.Abstractions;
@@ -17,12 +20,23 @@ namespace AirEase_AMS.Interface
     public partial class CustomerMain : Form
     {
         Customer currentUser;
-        Flight toPurchase;
 
         public CustomerMain(Customer loggedIn)
         {
             currentUser = loggedIn;
+            //foreach (Ticket tickets in return list of functions)
+            //{
+
+            //}
+
             InitializeComponent();
+
+            // set combo boxes source to a list of all airports
+            foreach (Airport city in HLib.SelectAllAirports())
+            {
+                comboBox2.Items.Add(city.GetCityName());
+                comboBox3.Items.Add(city.GetCityName());
+            }
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -32,16 +46,11 @@ namespace AirEase_AMS.Interface
 
         private void RoundTrip_CheckedChanged(object sender, EventArgs e)
         {
-            if (RoundTrip.Checked)
-            {
-                label1.Visible = true;
-                dateTimePicker3.Visible = true;
-            }
-            else
-            {
-                label1.Visible = false;
-                dateTimePicker3.Visible = false;
-            }
+
+            label1.Visible = RoundTrip.Checked;
+            dateTimePicker3.Visible = RoundTrip.Checked;
+            comboBox4.Visible = RoundTrip.Checked;
+            label3.Visible = RoundTrip.Checked;
             this.Update();
         }
 
@@ -62,29 +71,31 @@ namespace AirEase_AMS.Interface
 
             if (RoundTrip.Checked)
             {
-                // do the thing to create two tickets...
+                // do the thing to create two tickets then send to customer billing
             }
             else
             {
-                // do the thing to create one ticket...
+                // do the thing to create one ticket then send to customer billing
 
-                CustomerBilling customerBilling = new CustomerBilling(this, currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString());
+                //CustomerBilling customerBilling = new CustomerBilling(this, currentUser, comboBox3.Text, comboBox2.Text, dateTimePicker1.Value.ToString());
                 this.Hide();
-                customerBilling.ShowDialog();
+                //customerBilling.ShowDialog();
             }
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+            // first clear table
+            // get list of flights that match query
+            // update table
+            dataGridView4.Rows.Clear();
+            // populate the rows with all of the flights that match the given parameters
+            // allow selection of ticketID
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void Search_Click(object sender, EventArgs e)
-        {
-            // query database for inputted info and display list of flights that meet parameters
-            // first clear table
-            // get list of flights that match query
-            // update table
         }
 
         private void Home_Click(object sender, EventArgs e)
@@ -112,20 +123,123 @@ namespace AirEase_AMS.Interface
             upcomingDepartureList.Items.Add(currentUser.GetUpcomingTickets());
 
             // update flights with past flights
-            dataGridView2.DataSource = currentUser.GetPastTickets();
+            listBox2.Items.Clear();
+            listBox2.Items.Add("TicketID: Flight ID: Origin City, Destination City, Departure Time and Date");
+            foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+            {
+                foreach (Flight flight in ticket.GetFlights())
+                {
+                    string info = ticket.GetTicketId() + ": ";
+                    info.Concat(flight.GetFlightId() + ": ");
+                    info.Concat(flight.GetOriginCity() + ", ");
+                    info.Concat(flight.GetDestinationCity() + ", ");
+                    info.Concat(flight.GetTime().ToString());
+                    listBox2.Items.Add(info);
+                }
+            }
 
             // update upcoming flights
-            dataGridView3.DataSource = currentUser.GetUpcomingTickets();
+            comboBox5.Items.Clear();
+            comboBox6.Items.Clear();
+            listBox1.Items.Clear();
+            foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+            {
+                comboBox5.Items.Add(ticket.GetTicketId());
+                listBox1.Items.Add(ticket.GetTicketInformation());
+                foreach(Flight flight in ticket.GetFlights())
+                {
+                    comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
+                }
+            }
+        }
 
-            // set combo boxes source to a list of all airports
-            //comboBox3.DataSource = ;
-            //comboBox2.DataSource = ;
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-            //have the user select a date and a time
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "MM/dd/yyyy    HH:mm";
-            dateTimePicker3.CustomFormat = "MM/dd/yyyy    HH:mm";
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.ShowDialog();
+            this.Close();
+        }
+
+        private void Booking_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BoardingPass_Click(object sender, EventArgs e)
+        {
+            if (comboBox3.SelectedItem != null)
+            {
+                List<Flight> flights = new List<Flight>();
+                foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+                {
+                    foreach (Flight flight in ticket.GetFlights())
+                    {
+                        flights.Add(flight);
+                    }
+                }
+
+                BoardingPass boarding = new BoardingPass(flights[comboBox3.SelectedIndex].GetFlightId(), currentUser.GetFirstName(),
+                    currentUser.GetLastName(), flights[comboBox3.SelectedIndex].GetOriginCity(), flights[comboBox3.SelectedIndex].GetDestinationCity(),
+                    flights[comboBox3.SelectedIndex].GetTime(), flights[comboBox3.SelectedIndex].EstimateArrivalTime(), currentUser.GetUserId().ToString());
+                ShowBoardingPass pass = new ShowBoardingPass(boarding);
+                
+                pass.ShowDialog();
+            }
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            if(comboBox3.SelectedItem != null)
+            {
+                currentUser.GetUpcomingTickets()[comboBox3.SelectedIndex].CancelTicket();
+
+                NewsFeed.Items.Clear();
+                NewsFeed.Items.Add("Air-Ease has been released!");
+
+                upcomingDepartureList.Items.Clear();
+                upcomingDepartureList.Items.Add(currentUser.GetUpcomingTickets());
+
+                // update flights with past flights
+                listBox2.Items.Clear();
+                listBox2.Items.Add("TicketID: Flight ID: Origin City, Destination City, Departure Time and Date");
+                foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+                {
+                    foreach (Flight flight in ticket.GetFlights())
+                    {
+                        string info = ticket.GetTicketId() + ": ";
+                        info.Concat(flight.GetFlightId() + ": ");
+                        info.Concat(flight.GetOriginCity() + ", ");
+                        info.Concat(flight.GetDestinationCity() + ", ");
+                        info.Concat(flight.GetTime().ToString());
+                        listBox2.Items.Add(info);
+                    }
+                }
+
+                // update upcoming flights
+                comboBox5.Items.Clear();
+                comboBox6.Items.Clear();
+                listBox1.Items.Clear();
+                foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+                {
+                    comboBox5.Items.Add(ticket.GetTicketId());
+                    listBox1.Items.Add(ticket.GetTicketInformation());
+                    foreach (Flight flight in ticket.GetFlights())
+                    {
+                        comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
+                    }
+                }
+            }
         }
     }
 }
