@@ -2,7 +2,6 @@ using AirEase_AMS.App.Entity.Aircraft;
 using System.Data;
 using System.Diagnostics;
 using System.Reflection.Metadata;
-
 namespace AirEase_AMS.App.Graph.Flight;
 
 

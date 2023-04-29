@@ -58,9 +58,9 @@
             originView = new ComboBox();
             AccountsTab = new TabPage();
             pictureBox6 = new PictureBox();
-            summaryReportWindow = new DataGridView();
             button1 = new Button();
             pictureBox1 = new PictureBox();
+            summaryReportBox = new ListBox();
             tabControl1.SuspendLayout();
             HomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -75,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             AccountsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)summaryReportWindow).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -201,6 +200,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 0;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // dataGridView2
             // 
@@ -239,18 +239,18 @@
             // 
             flightManifestWindow.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flightManifestWindow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            flightManifestWindow.Location = new Point(3, 179);
+            flightManifestWindow.Location = new Point(3, 130);
             flightManifestWindow.Name = "flightManifestWindow";
             flightManifestWindow.ReadOnly = true;
             flightManifestWindow.RowTemplate.Height = 25;
-            flightManifestWindow.Size = new Size(645, 242);
+            flightManifestWindow.Size = new Size(645, 291);
             flightManifestWindow.TabIndex = 4;
             flightManifestWindow.Tag = "flightManifestWindow";
             // 
             // button2
             // 
             button2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            button2.Location = new Point(221, 150);
+            button2.Location = new Point(214, 101);
             button2.Name = "button2";
             button2.Size = new Size(178, 23);
             button2.TabIndex = 3;
@@ -284,10 +284,10 @@
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(331, -1);
+            dataGridView1.Location = new Point(317, -1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(320, 418);
+            dataGridView1.Size = new Size(334, 418);
             dataGridView1.TabIndex = 13;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -310,7 +310,6 @@
             AddFlightButton.Tag = "AddFlightButton";
             AddFlightButton.Text = "Add Flight";
             AddFlightButton.UseVisualStyleBackColor = true;
-            AddFlightButton.Click += button2_Click_1;
             // 
             // flightTimePicker
             // 
@@ -392,8 +391,8 @@
             // 
             // AccountsTab
             // 
+            AccountsTab.Controls.Add(summaryReportBox);
             AccountsTab.Controls.Add(pictureBox6);
-            AccountsTab.Controls.Add(summaryReportWindow);
             AccountsTab.Controls.Add(button1);
             AccountsTab.Location = new Point(50, 4);
             AccountsTab.Name = "AccountsTab";
@@ -413,22 +412,10 @@
             pictureBox6.TabIndex = 13;
             pictureBox6.TabStop = false;
             // 
-            // summaryReportWindow
-            // 
-            summaryReportWindow.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            summaryReportWindow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            summaryReportWindow.Location = new Point(3, 179);
-            summaryReportWindow.Name = "summaryReportWindow";
-            summaryReportWindow.RowTemplate.Height = 25;
-            summaryReportWindow.Size = new Size(645, 242);
-            summaryReportWindow.TabIndex = 2;
-            summaryReportWindow.Tag = "summaryReportWindow";
-            summaryReportWindow.CellContentClick += summaryReportWindow_CellContentClick;
-            // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            button1.Location = new Point(206, 141);
+            button1.Location = new Point(230, 118);
             button1.Name = "button1";
             button1.Size = new Size(178, 23);
             button1.TabIndex = 1;
@@ -445,6 +432,15 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
+            // 
+            // summaryReportBox
+            // 
+            summaryReportBox.FormattingEnabled = true;
+            summaryReportBox.ItemHeight = 15;
+            summaryReportBox.Location = new Point(3, 147);
+            summaryReportBox.Name = "summaryReportBox";
+            summaryReportBox.Size = new Size(645, 274);
+            summaryReportBox.TabIndex = 14;
             // 
             // EmployeeForm
             // 
@@ -473,7 +469,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             AccountsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)summaryReportWindow).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -502,7 +497,6 @@
         private PictureBox pictureBox3;
         private DataGridView flightManifestWindow;
         private Button button2;
-        private DataGridView summaryReportWindow;
         private ListBox listBox1;
         private DataGridView dataGridView1;
         private PictureBox pictureBox5;
@@ -512,5 +506,6 @@
         private ComboBox comboBox1;
         private DataGridView dataGridView2;
         private PictureBox pictureBox4;
+        private ListBox summaryReportBox;
     }
 }

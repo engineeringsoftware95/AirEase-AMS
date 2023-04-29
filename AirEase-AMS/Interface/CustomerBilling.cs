@@ -20,9 +20,11 @@ namespace AirEase_AMS.Interface
         string origin;
         string destination;
         string departureTime;
+        string returnTime;
         int costInPoints;
         double costInMoney;
         Ticket ticketToBuy;
+        Ticket ifRoundTrip;
         public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime)
         {
             parent = calledFrom;
@@ -30,7 +32,17 @@ namespace AirEase_AMS.Interface
             origin = originCity;
             destination = destinationCity;
             departureTime = depatureDateTime;
-            ticketToBuy = new Ticket();
+            InitializeComponent();
+        }
+
+        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, string secondDeparture)
+        {
+            parent = calledFrom;
+            currentUser = loggedIn;
+            origin = originCity;
+            destination = destinationCity;
+            departureTime = depatureDateTime;
+            returnTime = secondDeparture;
             InitializeComponent();
         }
 
@@ -41,7 +53,7 @@ namespace AirEase_AMS.Interface
 
             comboBox1.Items.Clear();
 
-            //if (currentUser._pointbalance > costInPoints)
+            //if (currentUser._pointBalance > costInPoints)
             //{
             //    comboBox1.Items.Add(currentUser._pointBalance);
             //}
@@ -64,10 +76,13 @@ namespace AirEase_AMS.Interface
 
         private void purchase_Click(object sender, EventArgs e)
         {
-            //Ticket purchasing = new Ticket();
-            //SummaryPage summaryPage = new SummaryPage(currentUser);
+            if (returnTime == null)
+            {
+                Ticket purchasing = new Ticket();
+                SummaryPage summaryPage = new SummaryPage(currentUser, purchasing);
+                summaryPage.Show();
+            }
             this.Hide();
-            //summaryPage.Show();
             this.Close();
         }
 
