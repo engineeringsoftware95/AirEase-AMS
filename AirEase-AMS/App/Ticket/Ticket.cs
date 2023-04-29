@@ -31,6 +31,7 @@ public class Ticket : ITicket
         _endCity = "";
         _ticketId = GenerateTicketId().ToString();
         flights = new List<Flight>();
+        _transaction = new Transaction.Transaction(0, 0, " ");
         num_flights = 0;
     }
     
@@ -52,7 +53,7 @@ public class Ticket : ITicket
         flights = new List<Flight>();
         _customerId = customerId;
         _pointsUsed = pointsUsed;
-
+        _transaction = new Transaction.Transaction(0, 0, " ");
     }
 
     /// <summary>
@@ -64,6 +65,7 @@ public class Ticket : ITicket
         _ticketId = ticketId;
         //Selecting for primary key - the result should ALWAYS be one ticket
         string query = "SELECT * FROM TICKETS WHERE TicketID = " + ticketId + ";";
+        _transaction = new Transaction.Transaction(0, 0, " ");
         DatabaseAccessObject dao = new DatabaseAccessObject();
         DataTable dt = dao.Retrieve(query);
 
@@ -248,4 +250,8 @@ public class Ticket : ITicket
         return success;
     }
 
+    public string GetOriginCity()
+    {
+        return _startCity;
+    }
 }

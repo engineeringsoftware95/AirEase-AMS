@@ -347,7 +347,7 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            button2.Location = new Point(214, 101);
+            button2.Location = new Point(214, 87);
             button2.Name = "button2";
             button2.Size = new Size(178, 23);
             button2.TabIndex = 3;

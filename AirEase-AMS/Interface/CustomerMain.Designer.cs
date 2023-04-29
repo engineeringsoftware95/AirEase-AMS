@@ -39,6 +39,10 @@
             UpcomingFlights = new TabPage();
             dataGridView3 = new DataGridView();
             Booking = new TabPage();
+            label3 = new Label();
+            comboBox4 = new ComboBox();
+            label2 = new Label();
+            comboBox1 = new ComboBox();
             Search = new Button();
             label1 = new Label();
             SelectDepartureDate = new Label();
@@ -46,6 +50,10 @@
             dateTimePicker1 = new DateTimePicker();
             RoundTrip = new CheckBox();
             dataGridView4 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
             bookingButton = new Button();
             comboBox3 = new ComboBox();
             comboBox2 = new ComboBox();
@@ -183,6 +191,10 @@
             // 
             // Booking
             // 
+            Booking.Controls.Add(label3);
+            Booking.Controls.Add(comboBox4);
+            Booking.Controls.Add(label2);
+            Booking.Controls.Add(comboBox1);
             Booking.Controls.Add(Search);
             Booking.Controls.Add(label1);
             Booking.Controls.Add(SelectDepartureDate);
@@ -201,9 +213,43 @@
             Booking.Text = "Booking";
             Booking.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(6, 308);
+            label3.Name = "label3";
+            label3.Size = new Size(113, 15);
+            label3.TabIndex = 17;
+            label3.Text = "Select Return Ticket:";
+            // 
+            // comboBox4
+            // 
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(3, 326);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(248, 23);
+            comboBox4.TabIndex = 16;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 253);
+            label2.Name = "label2";
+            label2.Size = new Size(75, 15);
+            label2.TabIndex = 15;
+            label2.Text = "Select Ticket:";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(3, 271);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(248, 23);
+            comboBox1.TabIndex = 14;
+            // 
             // Search
             // 
-            Search.Location = new Point(87, 340);
+            Search.Location = new Point(86, 355);
             Search.Name = "Search";
             Search.Size = new Size(75, 23);
             Search.TabIndex = 13;
@@ -214,44 +260,45 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 232);
+            label1.Location = new Point(5, 195);
             label1.Name = "label1";
-            label1.Size = new Size(243, 15);
+            label1.Size = new Size(246, 15);
             label1.TabIndex = 12;
-            label1.Text = "Select Return Flight Departure Date and Time";
+            label1.Text = "Select Return Flight Departure Date and Time:";
             label1.Visible = false;
             // 
             // SelectDepartureDate
             // 
             SelectDepartureDate.AutoSize = true;
-            SelectDepartureDate.Location = new Point(23, 116);
+            SelectDepartureDate.Location = new Point(5, 116);
             SelectDepartureDate.Name = "SelectDepartureDate";
-            SelectDepartureDate.Size = new Size(172, 15);
+            SelectDepartureDate.Size = new Size(175, 15);
             SelectDepartureDate.TabIndex = 11;
-            SelectDepartureDate.Text = "Select Departure Date and Time";
+            SelectDepartureDate.Text = "Select Departure Date and Time:";
             SelectDepartureDate.Click += label1_Click;
             // 
             // dateTimePicker3
             // 
             dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.Location = new Point(28, 260);
+            dateTimePicker3.Location = new Point(3, 213);
             dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(200, 23);
+            dateTimePicker3.Size = new Size(245, 23);
             dateTimePicker3.TabIndex = 10;
             dateTimePicker3.Visible = false;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(28, 134);
+            dateTimePicker1.Location = new Point(6, 134);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.Size = new Size(242, 23);
             dateTimePicker1.TabIndex = 8;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // RoundTrip
             // 
             RoundTrip.AutoSize = true;
-            RoundTrip.Location = new Point(79, 210);
+            RoundTrip.Location = new Point(64, 173);
             RoundTrip.Name = "RoundTrip";
             RoundTrip.Size = new Size(83, 19);
             RoundTrip.TabIndex = 7;
@@ -263,16 +310,41 @@
             // 
             dataGridView4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView4.Location = new Point(274, 3);
+            dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
+            dataGridView4.Location = new Point(254, 3);
             dataGridView4.Name = "dataGridView4";
             dataGridView4.RowTemplate.Height = 25;
-            dataGridView4.Size = new Size(371, 433);
+            dataGridView4.Size = new Size(391, 433);
             dataGridView4.TabIndex = 6;
             dataGridView4.CellContentClick += dataGridView4_CellContentClick;
             // 
+            // Column1
+            // 
+            Column1.HeaderText = "Origin City";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Destination City";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Departure Date and Time";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "FlightID";
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
+            // 
             // bookingButton
             // 
-            bookingButton.Location = new Point(52, 384);
+            bookingButton.Location = new Point(51, 384);
             bookingButton.Name = "bookingButton";
             bookingButton.Size = new Size(143, 38);
             bookingButton.TabIndex = 4;
@@ -283,16 +355,17 @@
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(23, 40);
+            comboBox3.Location = new Point(5, 40);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(227, 23);
             comboBox3.TabIndex = 1;
             comboBox3.Text = "{Select origin city}";
+            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(23, 74);
+            comboBox2.Location = new Point(5, 69);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(227, 23);
             comboBox2.TabIndex = 0;
@@ -362,5 +435,13 @@
         private Button newPaymentMethod;
         private DataGridView dataGridView2;
         private Button Search;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private Label label2;
+        private ComboBox comboBox1;
+        private Label label3;
+        private ComboBox comboBox4;
     }
 }

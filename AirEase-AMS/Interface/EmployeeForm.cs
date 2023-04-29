@@ -31,10 +31,10 @@ namespace AirEase_AMS.Interface
             flightTimePicker.MaxDate = DateTime.Now.AddMonths(7);
 
             listBox1.Items.Clear();
-            listBox1.Items.Add("Nothing to see here...");
+            listBox1.Items.Add("Welcome to the company!");
 
             richTextBox1.Clear();
-            richTextBox1.Text = "Hello World!";
+            richTextBox1.Text = "Hello valued employee!";
 
             setUp();
 
@@ -58,11 +58,12 @@ namespace AirEase_AMS.Interface
             SummaryReport summaryReport = new SummaryReport();
             summaryReport.GenerateReport();
 
+            summaryReportBox.Items.Clear();
             //Set string in SummaryReportBox (textbox)
             if (!string.IsNullOrEmpty(summaryReport.ToString()))
                 summaryReportBox.Text = summaryReport.ToString();
             else
-                summaryReportBox.Text = "Error occured when generating summary report";
+                summaryReportBox.Text = "No summary report to display.";
 
         }
 

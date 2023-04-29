@@ -16,23 +16,41 @@ namespace AirEase_AMS.Interface
     {
         Customer currentuser;
         Ticket purchasedTicket;
+        Ticket returnTicket;
+
         public SummaryPage(Customer loggedIn, Ticket ticket)
         {
             currentuser = loggedIn;
             purchasedTicket = ticket;
+            returnTicket = new Ticket();
+            InitializeComponent();
+        }
+        public SummaryPage(Customer loggedIn, Ticket ticket, Ticket secondTicket)
+        {
+            currentuser = loggedIn;
+            purchasedTicket = ticket;
+            returnTicket = secondTicket;
             InitializeComponent();
         }
 
         private void SummaryPage_Load(object sender, EventArgs e)
         {
             // show ticket(s) info under reciept, show current user info under account summary
-            AccountSummary.Items.Add(currentuser.GetUserId() + "\n");
-            AccountSummary.Items.Add(currentuser.GetFirstName() + "\n");
-            AccountSummary.Items.Add(currentuser.GetLastName() + "\n");
-            AccountSummary.Items.Add(currentuser.GetPhoneNum() + "\n");
-            AccountSummary.Items.Add(currentuser.GetEmail() + "\n");
+            AccountSummary.Items.Add(currentuser.GetUserId());
+            AccountSummary.Items.Add(currentuser.GetFirstName());
+            AccountSummary.Items.Add(currentuser.GetLastName());
+            AccountSummary.Items.Add(currentuser.GetPhoneNum());
+            AccountSummary.Items.Add(currentuser.GetEmail());
+            CreditCard creditCard = new CreditCard(currentuser.GetUserId().ToString());
+            AccountSummary.Items.Add(creditCard.GetCCNum());
+            AccountSummary.Items.Add(creditCard.GetExpirationDate());
 
-            Reciept.Items.Add(purchasedTicket.GetTicketInformation() + "\n");
+            Reciept.Items.Add(purchasedTicket.GetTicketInformation());
+            if(!string.IsNullOrEmpty(returnTicket.GetOriginCity()))
+            {
+                Reciept.Items.Add("");
+                Reciept.Items.Add(returnTicket.GetTicketInformation());
+            }
         }
 
         private void confirmationButton_Click(object sender, EventArgs e)

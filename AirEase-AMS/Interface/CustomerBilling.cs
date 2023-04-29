@@ -17,32 +17,24 @@ namespace AirEase_AMS.Interface
     {
         Form parent;
         Customer currentUser;
-        string origin;
-        string destination;
-        string departureTime;
-        string returnTime;
-        int costInPoints;
-        double costInMoney;
         Ticket ticketToBuy;
         Ticket ifRoundTrip;
-        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime)
+
+        public CustomerBilling(Form calledFrom, Customer loggedIn, Ticket ticketOne)
         {
             parent = calledFrom;
             currentUser = loggedIn;
-            origin = originCity;
-            destination = destinationCity;
-            departureTime = depatureDateTime;
+            ticketToBuy = ticketOne;
+            ifRoundTrip = new Ticket();
             InitializeComponent();
         }
 
-        public CustomerBilling(Form calledFrom, Customer loggedIn, string originCity, string destinationCity, string depatureDateTime, string secondDeparture)
+        public CustomerBilling(Form calledFrom, Customer loggedIn, Ticket ticketOne, Ticket ticketTwo)
         {
             parent = calledFrom;
             currentUser = loggedIn;
-            origin = originCity;
-            destination = destinationCity;
-            departureTime = depatureDateTime;
-            returnTime = secondDeparture;
+            ticketToBuy = ticketOne;
+            ifRoundTrip = ticketTwo;
             InitializeComponent();
         }
 
@@ -76,11 +68,11 @@ namespace AirEase_AMS.Interface
 
         private void purchase_Click(object sender, EventArgs e)
         {
-            if (returnTime == null)
+            // buy the ticket
+            ticketToBuy.UploadTicket();
+            if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
             {
-                Ticket purchasing = new Ticket();
-                SummaryPage summaryPage = new SummaryPage(currentUser, purchasing);
-                summaryPage.Show();
+                ifRoundTrip.UploadTicket();
             }
             this.Hide();
             this.Close();
