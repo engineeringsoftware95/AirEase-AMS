@@ -87,6 +87,7 @@ public class Route : IRoute, IComparable<Route>
         return _flightsOnRoute.Contains(flight);
     }
 
+    
     /*
      * Find flights before
      * Given a DateTime object, populate a list of flights which

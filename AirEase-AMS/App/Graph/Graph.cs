@@ -102,9 +102,6 @@ public class Graph : IGraph
 
         return master_list;
     }
-
-
-
     public Airport GetAirport(string city)
     {
         Airport orig_airport = new Airport();
@@ -123,36 +120,21 @@ public class Graph : IGraph
     public List<List<Flight.Flight>> GetFlightsInRange(string origin, string destination, DateTime begin,
         DateTime end)
     {
-        List<Flight.Flight> validFlights = new List<Flight.Flight>();
-        List<List<IRoute>> all_routes = FindRoutes(origin, destination);
-        List<List<Flight.Flight>> flights_found = new List<List<Flight.Flight>>();
-        foreach (List<IRoute> routes_with_layover in all_routes)
-        {
-            foreach (Route r in routes_with_layover)
-            {
-                if (r.GetDestinationCity() == destination)
-                {
-                    if (r.GetOriginCity() != origin)
-                    {
-                        List<Flight.Flight> tempList = new List<Flight.Flight>();
-                        tempList = r.FindFlightsInRange(begin, end);
-                        foreach (Flight.Flight flight in tempList)
-                        {
-                            if ((DateTime.Compare(flight.EstimateArrivalTime(), flight.GetTime().AddMinutes(-40)) >= 0))
-                            {
-                                validFlights = r.FindFlightsInRange(begin, end);
-                            }
-                            else
-                            {
-                                validFlights = r.FindFlightsInRange(begin, end);
-                            }
-                        }
+        List<List<Flight.Flight>> foundFlights = new List<List<Flight.Flight>>();
+        List<Flight.Flight> flightList = new List<Flight.Flight>();
+        List<List<IRoute>> allRoutes = new List<List<IRoute>>();
+        allRoutes = FindRoutes(origin, destination);
 
-                        flights_found.Add(validFlights);
-                    }
+        foreach (List<IRoute> route in allRoutes)
+        {
+            foreach (Route r in route)
+            {
+                foreach (Flight.Flight flight in r.FindFlightsInRange(begin, end))
+                {
+                    flightList.Add(flight);
                 }
             }
         }
-        return flights_found;
+        return foundFlights;
     }
 }
