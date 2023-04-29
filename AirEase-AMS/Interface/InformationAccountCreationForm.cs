@@ -20,7 +20,7 @@ namespace AirEase_AMS.Interface
             InitializeComponent();
 
             //Max date is... today. If you were born today, you probably aren't creating an account..? Right?
-            BirthDateCalendar.MaxDate = DateTime.Now;
+            BirthDateCalendar.MaxDate = DateTime.Now.AddYears(-18);
 
             //Arbitrarily sets the minimum date to 1900. We don't really want users saying they were born in the 1800's or earlier anyways.
             BirthDateCalendar.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -54,7 +54,9 @@ namespace AirEase_AMS.Interface
             string errorMessage = "Create a secure password.\r\nPasswords should be:\r\nGreater than eight characters in length\r\nContain at least one special character\r\nContain at least one number\r\nContain at least one upper case letter\r\nContain at least one lower case letter\r\n\t\n";
 
             errorMessage +=
-                ((firstNameMissing || lastNameMissing || addressMissing || birthDateMissing || passwordsMissing) ? "Please fill out all information.\r\n" : "") +
+                ((firstNameMissing || lastNameMissing || addressMissing || birthDateMissing || passwordsMissing)
+                    ? "Please fill out all information.\r\n"
+                    : "") +
                 (emailFormatCorrect ? "" : "Email is not formatted correctly.\r\n") +
                 (phoneFormatCorrect ? "" : "Phone number is not formatted correctly.\r\n") +
                 ((passwordsMatch) ? "" : "Passwords do not match.\r\n") +
