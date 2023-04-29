@@ -40,7 +40,7 @@
             SecurityCode = new Label();
             Zip = new Label();
             textBox1 = new TextBox();
-            textBox4 = new TextBox();
+            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -156,26 +156,25 @@
             textBox1.TabIndex = 35;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // textBox4
+            // dateTimePicker1
             // 
-            textBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox4.Location = new Point(277, 129);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(446, 23);
-            textBox4.TabIndex = 26;
+            dateTimePicker1.Location = new Point(277, 129);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(446, 23);
+            dateTimePicker1.TabIndex = 37;
             // 
             // PaymentInformationEntry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dateTimePicker1);
             Controls.Add(Zip);
             Controls.Add(textBox1);
             Controls.Add(SecurityCode);
             Controls.Add(ExpDate);
             Controls.Add(CCN);
             Controls.Add(name);
-            Controls.Add(textBox4);
             Controls.Add(textBox3);
             Controls.Add(CCNEntry);
             Controls.Add(cancel);
@@ -204,6 +203,6 @@
         private Label SecurityCode;
         private Label Zip;
         private TextBox textBox1;
-        private TextBox textBox4;
+        private DateTimePicker dateTimePicker1;
     }
 }

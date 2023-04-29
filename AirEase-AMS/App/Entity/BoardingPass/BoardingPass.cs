@@ -18,7 +18,7 @@ namespace AirEase_AMS.App.Entity.BoardingPass
         DateTime arrivalTime_;
         string userID_;
         
-        BoardingPass(string flightID, string firstName, string lastName, string originCity, string destinationCity,
+        public BoardingPass(string flightID, string firstName, string lastName, string originCity, string destinationCity,
             DateTime departureTime, DateTime arrivalTime, string userID)
         { 
             // search database for the given user
@@ -32,7 +32,7 @@ namespace AirEase_AMS.App.Entity.BoardingPass
             userID_ = userID;
         }
 
-        string printBoardingPass() 
+        public string printBoardingPass() 
         {
             string boardingPass = createBoardingClassString();
             return boardingPass;

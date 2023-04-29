@@ -1,4 +1,5 @@
 ﻿using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Ticket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,12 +21,16 @@ namespace AirEase_AMS.Interface
         {
             currentUser = loggedIn;
             parent = calledFrom;
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "HH:mm";
             InitializeComponent();
         }
 
         private void continue_Click(object sender, EventArgs e)
         {
             // update database with payment info
+            CreditCard newCard = new CreditCard(CCNEntry.Text, dateTimePicker1.Value.ToString(), textBox3.Text, textBox1.Text, currentUser.GetUserId().ToString());
+            newCard.SaveCreditCard();
             this.Hide();
             parent.Update();
             parent.Show();
