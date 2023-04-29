@@ -46,6 +46,48 @@ public class CreditCard
             _accountHolderId = card["UserId"].ToString() ?? "";
         }
     }
+    /// <summary>
+    /// Loads the credit card object using the relevant customer id. 
+    /// </summary>
+    /// <param name="customerId">The customer id who owns the credit card.</param>
+    public CreditCard(int customerId)
+    {
+        DatabaseAccessObject dao = new DatabaseAccessObject();
+        string customerQuery = String.Format("SELECT * FROM CUSTOMER_CREDITCARD WHERE UserID = {0};", customerId);
+        DataTable customer = dao.Retrieve(customerQuery);
+        if (customer.Rows.Count > 0)
+        {
+            _ccNum = customer.Rows[0]["CreditCardNum"].ToString() ?? "-1";
+        }
+        else _ccNum = "-1";
+        string query = String.Format("EXEC RetrieveCreditCard @CreditCardNum = '{0}';", _ccNum);
+
+        System.Data.DataTable dt = dao.Retrieve(query);
+
+        //Invalid read
+        if (dt == null || dt.Rows.Count != 1)
+        {
+            _validCard = false;
+            _ccNum = "";
+            _expDate = "";
+            _cvc = "";
+            _accountHolderId = "";
+            _billingZipCode = "";
+        }
+        else
+        {
+            _validCard = true;
+            DataRow card = dt.Rows[0];
+
+            //Return empty string on invalid read
+            _ccNum = card["CreditCardNum"].ToString() ?? "";
+            _expDate = card["ExpirationDate"].ToString() ?? "";
+            _cvc = card["CVC"].ToString() ?? "";
+            _billingZipCode = card["ZipCode"].ToString() ?? "";
+            _accountHolderId = card["UserId"].ToString() ?? "";
+        }
+    }
+
 
     /// <summary>
     /// This constructor is designed to create a new credit card object.
@@ -95,9 +137,27 @@ public class CreditCard
     }
 
     public string GetExpirationDate() { return _expDate;  }
+    public string GetCreditCardNum() {  return _ccNum; }
+    public string GetCVC() { return _cvc; }
 
     public string GetCustomerId()
     {
         return _accountHolderId;
+    }
+
+    public string GetCCNum()
+    {
+        return _ccNum;
+    }
+    
+
+    public string GetBillZip()
+    {
+        return _billingZipCode;
+    }
+
+    public bool IsValid()
+    {
+        return _validCard;
     }
 }
