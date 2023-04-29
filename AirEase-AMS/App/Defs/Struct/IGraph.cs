@@ -4,7 +4,7 @@ namespace AirEase_AMS.App.Defs.Struct;
 
 public interface IGraph
 {
-    IRoute? FindFlight(string origin, string destination);
+    public List<List<IRoute>> FindRoutes(string origin, string destination);
 
     List<Flight>? GetFlightsInRange(string origin, string destination, DateTime begin,
         DateTime end);

@@ -104,8 +104,19 @@ public class Graph : IGraph
         DateTime end)
     {
         List<Flight.Flight>? validFlights = new List<Flight.Flight>();
-        IRoute? route = FindFlight(origin, destination);
-        validFlights = route?.FindFlightsInRange(begin, end);
+        List<List<IRoute>> all_routes = FindRoutes(origin, destination);
+
+        foreach (List<IRoute> routes_with_layover in all_routes)
+        {
+            foreach (Route r in routes_with_layover)
+            {
+                if (r.GetDestinationCity() == destination)
+                {
+               //     validFlights.Add(r.FindFlightsInRange(begin, end));
+                }
+            }
+        }
+     //   validFlights = route?.FindFlightsInRange(begin, end);
         validFlights?.Sort();
         return validFlights;
     }

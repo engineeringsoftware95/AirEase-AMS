@@ -136,8 +136,7 @@ public class Flight : Route
     }
 
     public string GetDepartureId() {  return _departureId; }
-
-
+    
     public DateTime GetTime()
     {
         return _flightTime;
@@ -176,7 +175,6 @@ public class Flight : Route
     {
         return _flightId;
     }
-
 
     public decimal CalculateFlightCost()
     {
