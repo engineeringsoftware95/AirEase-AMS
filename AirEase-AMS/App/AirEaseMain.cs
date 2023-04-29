@@ -16,7 +16,6 @@ namespace AirEase_AMS.App
         static void Main()
         {
 
-
             HLib.NuclearRedButton();
             HLib.LoadDatabase();
 

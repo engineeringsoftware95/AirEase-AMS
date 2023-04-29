@@ -233,6 +233,7 @@ namespace AirEase_AMS.App
             Aircraft boeing777 = new Aircraft("Boeing 777", 320);
             boeing777.UploadAircraft();
 
+            
             //This should be a good baseline
             Airport tennessee = new Airport("Nashville", "Nashville International Aiport");
             Console.WriteLine(tennessee.UploadAirport());
@@ -360,7 +361,7 @@ namespace AirEase_AMS.App
             texascalifornia.UploadRoute();
             routeIds.Add(texascalifornia.GetRouteId());
 
-            List<Flight> listOfFlights = new List<Flight>();
+            /*List<Flight> listOfFlights = new List<Flight>();
 
             //Upload a fair selection of flights for the next seven months
             foreach(string routeid in routeIds)
@@ -456,7 +457,7 @@ namespace AirEase_AMS.App
             MarketManager mmPatsy = new MarketManager("Patricia", "Pattinson", "123 Market Road, Dallas, TX", DateTime.Now.AddYears(-26).AddMonths(6).ToString(), "P4tsyP4tt1ns0n", "9991112222", "patsy.pattinson@airease.com", "123456789");
             mmPatsy.AttemptAccountCreation();
             MarketManager mmKate = new MarketManager("Kate", "Tate", " 440 Forest Hill Ln, Dallas, TX", DateTime.Now.AddYears(-26).AddMonths(8).ToString(), "vdg35435!$sAgdg4", "2214436677", "kate.tate@airease.com", "999887777");
-            mmKate.AttemptAccountCreation();
+            mmKate.AttemptAccountCreation();*/
         }
     }
 }
