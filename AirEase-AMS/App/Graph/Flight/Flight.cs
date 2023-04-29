@@ -2,7 +2,6 @@ using AirEase_AMS.App.Entity.Aircraft;
 using System.Data;
 using System.Diagnostics;
 using System.Reflection.Metadata;
-
 namespace AirEase_AMS.App.Graph.Flight;
 
 
@@ -62,6 +61,7 @@ public class Flight : Route
                 _origin = new Airport("-1");
                 _destination = new Airport("-1");
                 _flightsOnRoute = new List<Flight>();
+                _distance = -1;
             }
             else
             {

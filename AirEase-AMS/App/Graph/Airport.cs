@@ -39,7 +39,6 @@ public class Airport : IGraphNode
             _airportId = airportId;                             //TODO: statement uncovered - needs test  
         }
         _departingEdges = new List<IRoute>();
-                
     }
 
     public Airport(string city, string airportName)//TODO: statement uncovered - needs test  
@@ -52,8 +51,7 @@ public class Airport : IGraphNode
 
     public Airport()
     {
-        _airportId = GenerateId();
-
+        //_airportId = GenerateId();
         _departingEdges = new List<IRoute>();
     }
 

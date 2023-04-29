@@ -235,7 +235,7 @@ namespace AirEase_AMS.App
 
             //This should be a good baseline
             Airport tennessee = new Airport("Nashville", "Nashville International Aiport");
-            tennessee.UploadAirport();
+            Console.WriteLine(tennessee.UploadAirport());
             Airport cleveland = new Airport("Cleveland", "Cleveland Hopkins International Airport");
             cleveland.UploadAirport();
             Airport washington = new Airport("Seattle", "Seattle-Tacoma International Aiport");
@@ -457,9 +457,6 @@ namespace AirEase_AMS.App
             mmPatsy.AttemptAccountCreation();
             MarketManager mmKate = new MarketManager("Kate", "Tate", " 440 Forest Hill Ln, Dallas, TX", DateTime.Now.AddYears(-26).AddMonths(8).ToString(), "vdg35435!$sAgdg4", "2214436677", "kate.tate@airease.com", "999887777");
             mmKate.AttemptAccountCreation();
-            
-
-            
         }
     }
 }
