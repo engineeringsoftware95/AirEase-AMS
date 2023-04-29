@@ -194,9 +194,9 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(52, 349);
+            comboBox2.Location = new Point(3, 349);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
+            comboBox2.Size = new Size(241, 23);
             comboBox2.TabIndex = 17;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
@@ -207,7 +207,7 @@
             dataGridView1.Location = new Point(0, 98);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(219, 171);
+            dataGridView1.Size = new Size(244, 171);
             dataGridView1.TabIndex = 16;
             // 
             // Column1
@@ -256,9 +256,9 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(52, 305);
+            comboBox1.Location = new Point(0, 305);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
+            comboBox1.Size = new Size(244, 23);
             comboBox1.TabIndex = 0;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
@@ -267,10 +267,10 @@
             dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { FlightID, Column4, gridView2Col2, Column3, PlaneModel });
-            dataGridView2.Location = new Point(221, 3);
+            dataGridView2.Location = new Point(250, 6);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(438, 418);
+            dataGridView2.Size = new Size(412, 418);
             dataGridView2.TabIndex = 14;
             // 
             // FlightID

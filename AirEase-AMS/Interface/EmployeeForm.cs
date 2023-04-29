@@ -63,7 +63,7 @@ namespace AirEase_AMS.Interface
                 summaryReportBox.Text = summaryReport.ToString();
             else
                 summaryReportBox.Text = "Error occured when generating summary report";
-            
+
         }
 
         private void RoutesTab_Click(object sender, EventArgs e)
@@ -87,11 +87,6 @@ namespace AirEase_AMS.Interface
             setUp();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void flightTimePicker_ValueChanged(object sender, EventArgs e)
         {
 
@@ -107,11 +102,6 @@ namespace AirEase_AMS.Interface
 
             flightTimePicker.Format = DateTimePickerFormat.Custom;
             flightTimePicker.CustomFormat = "MM/dd/yyyy    HH:mm";
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void HomeTab_Click(object sender, EventArgs e)
@@ -131,21 +121,24 @@ namespace AirEase_AMS.Interface
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // get info selected by datagridview2
-            // find flight associated with the info
-            // set the aircraft for the selected flight
+            // get info selected by combobox1 for aircraft info
+            // find flight associated combobox2
+            List<Aircraft> aircraft = HLib.SelectAllAircraft();
+            List<Flight> flights = HLib.SelectAllFlights();
+            string aircraftID = aircraft[comboBox1.SelectedIndex].GetAircraftId();
+            flights[comboBox3.SelectedIndex].SetPlaneForFlight(aircraftID);
+
+            setUp();
         }
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            //FlightManifest manifest = new FlightManifest();
-            //manifest.PopulateManifest();
-            //richTextBox1.Text = manifest.GetFlightManifest();
-        }
-
-        private void summaryReportWindow_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            List<Flight> flights = HLib.SelectAllFlights();
+            string flightID = flights[comboBox4.SelectedIndex].GetFlightId();
+            string departureID = flights[comboBox4.SelectedIndex].GetDepartureId();
+            FlightManifest manifest = new FlightManifest(flightID, departureID);
+            manifest.PopulateManifest();
+            richTextBox2.Text = manifest.GetFlightManifest();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -210,32 +203,19 @@ namespace AirEase_AMS.Interface
                     dataGridView2.Rows.Clear();
                     foreach (Aircraft plane in HLib.SelectAllAircraft())
                     {
-                        comboBox1.Items.Add(plane.GetModelName());            // list of all routes
+                        comboBox1.Items.Add(plane.GetModelName());                  // list of all planes
                         dataGridView1.Rows.Add(plane.GetAircraftId(), plane.GetModelName());
                     }
 
                     foreach (Flight flight in HLib.SelectAllFlights())
                     {
                         comboBox2.Items.Add("" + flight.GetFlightId() + ", " + flight.GetDepartureTime().ToString());
-                        dataGridView2.Rows.Add(flight.GetFlightId(), flight.GetOriginCity(), flight.GetDestinationCity());
+                        dataGridView2.Rows.Add(flight.GetFlightId(), flight.GetDepartureTime(), flight.GetOriginCity(), flight.GetDestinationCity(), flight.GetAircraftID());
                     }
                     break;
                 default:
                     Console.WriteLine("Error!");
                     return;
-            }
-        }
-
-        private void AddFlightButton_Click(object sender, EventArgs e)
-        {
-            //add route between the two cities selected
-            Route toAdd = new Route(comboBox3.SelectedText);
-
-            //then update the route combo box
-            comboBox3.Items.Clear();
-            foreach (Route route in HLib.SelectAllRoutes())
-            {
-                comboBox3.Items.Add(route.GetRouteId());
             }
         }
 
@@ -259,7 +239,7 @@ namespace AirEase_AMS.Interface
 
         private void originView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
