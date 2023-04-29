@@ -179,7 +179,7 @@ namespace AirEase_AMS.Interface
                     }
                 }
 
-                BoardingPass boarding = new BoardingPass(flights[comboBox3.SelectedIndex].GetFlightId(), );
+                //BoardingPass boarding = new BoardingPass(flights[comboBox3.SelectedIndex].GetFlightId(), );
             }
         }
 

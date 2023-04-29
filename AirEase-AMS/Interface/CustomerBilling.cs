@@ -102,13 +102,13 @@ namespace AirEase_AMS.Interface
         {
             comboBox1.Items.Clear();
 
-            //CreditCard credit = new CreditCard(currentUser.GetUserId());
+            CreditCard credit = new CreditCard(currentUser.GetUserId());
 
-            //comboBox1.Items.Add(credit.GetCCNum());
-            //if (HLib.ConvertToPoints((decimal)ticketToBuy.GetTicketCost()) < currentUser._pointBalance)
-            //{
-            //    comboBox1.Items.Add("Points");
-            //}
+            comboBox1.Items.Add(credit.GetCCNum());
+            if (HLib.ConvertToPoints((decimal)ticketToBuy.GetTicketCost()) < currentUser._pointBalance)
+            {
+                comboBox1.Items.Add("Points");
+            }
         }
     }
 }
