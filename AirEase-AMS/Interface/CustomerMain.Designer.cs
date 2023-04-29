@@ -35,9 +35,11 @@
             upcomingDepartureList = new ListBox();
             NewsFeed = new ListBox();
             AccountHistory = new TabPage();
-            dataGridView2 = new DataGridView();
             UpcomingFlights = new TabPage();
-            dataGridView3 = new DataGridView();
+            listBox1 = new ListBox();
+            comboBox5 = new ComboBox();
+            BoardingPass = new Button();
+            Cancel = new Button();
             Booking = new TabPage();
             label3 = new Label();
             comboBox4 = new ComboBox();
@@ -60,12 +62,11 @@
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
+            listBox2 = new ListBox();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             UpcomingFlights.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             Booking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -148,7 +149,7 @@
             // 
             // AccountHistory
             // 
-            AccountHistory.Controls.Add(dataGridView2);
+            AccountHistory.Controls.Add(listBox2);
             AccountHistory.Location = new Point(41, 4);
             AccountHistory.Name = "AccountHistory";
             AccountHistory.Padding = new Padding(3);
@@ -158,19 +159,12 @@
             AccountHistory.UseVisualStyleBackColor = true;
             AccountHistory.Click += AccountHistory_Click;
             // 
-            // dataGridView2
-            // 
-            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(6, 3);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(636, 429);
-            dataGridView2.TabIndex = 5;
-            // 
             // UpcomingFlights
             // 
-            UpcomingFlights.Controls.Add(dataGridView3);
+            UpcomingFlights.Controls.Add(listBox1);
+            UpcomingFlights.Controls.Add(comboBox5);
+            UpcomingFlights.Controls.Add(BoardingPass);
+            UpcomingFlights.Controls.Add(Cancel);
             UpcomingFlights.Location = new Point(41, 4);
             UpcomingFlights.Name = "UpcomingFlights";
             UpcomingFlights.Padding = new Padding(3);
@@ -180,15 +174,43 @@
             UpcomingFlights.UseVisualStyleBackColor = true;
             UpcomingFlights.Click += UpcomingFlights_Click;
             // 
-            // dataGridView3
+            // listBox1
             // 
-            dataGridView3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(6, 3);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.RowTemplate.Height = 25;
-            dataGridView3.Size = new Size(636, 429);
-            dataGridView3.TabIndex = 4;
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(202, 6);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(443, 424);
+            listBox1.TabIndex = 8;
+            // 
+            // comboBox5
+            // 
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Location = new Point(23, 169);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(170, 23);
+            comboBox5.TabIndex = 7;
+            // 
+            // BoardingPass
+            // 
+            BoardingPass.Location = new Point(23, 244);
+            BoardingPass.Name = "BoardingPass";
+            BoardingPass.Size = new Size(170, 23);
+            BoardingPass.TabIndex = 6;
+            BoardingPass.Text = "Print Boarding Pass";
+            BoardingPass.UseVisualStyleBackColor = true;
+            BoardingPass.Click += BoardingPass_Click;
+            // 
+            // Cancel
+            // 
+            Cancel.Location = new Point(23, 311);
+            Cancel.Name = "Cancel";
+            Cancel.Size = new Size(170, 23);
+            Cancel.TabIndex = 5;
+            Cancel.Text = "Cancel flight";
+            Cancel.UseVisualStyleBackColor = true;
+            Cancel.Click += Cancel_Click;
             // 
             // Booking
             // 
@@ -213,11 +235,12 @@
             Booking.TabIndex = 3;
             Booking.Text = "Booking";
             Booking.UseVisualStyleBackColor = true;
+            Booking.Click += Booking_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(6, 308);
+            label3.Location = new Point(6, 333);
             label3.Name = "label3";
             label3.Size = new Size(113, 15);
             label3.TabIndex = 17;
@@ -226,7 +249,7 @@
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(3, 326);
+            comboBox4.Location = new Point(3, 351);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(248, 23);
             comboBox4.TabIndex = 16;
@@ -234,7 +257,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(6, 253);
+            label2.Location = new Point(6, 278);
             label2.Name = "label2";
             label2.Size = new Size(75, 15);
             label2.TabIndex = 15;
@@ -243,14 +266,14 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(3, 271);
+            comboBox1.Location = new Point(3, 296);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(248, 23);
             comboBox1.TabIndex = 14;
             // 
             // Search
             // 
-            Search.Location = new Point(86, 355);
+            Search.Location = new Point(89, 115);
             Search.Name = "Search";
             Search.Size = new Size(75, 23);
             Search.TabIndex = 13;
@@ -261,7 +284,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(5, 195);
+            label1.Location = new Point(5, 227);
             label1.Name = "label1";
             label1.Size = new Size(246, 15);
             label1.TabIndex = 12;
@@ -271,7 +294,7 @@
             // SelectDepartureDate
             // 
             SelectDepartureDate.AutoSize = true;
-            SelectDepartureDate.Location = new Point(5, 116);
+            SelectDepartureDate.Location = new Point(5, 158);
             SelectDepartureDate.Name = "SelectDepartureDate";
             SelectDepartureDate.Size = new Size(175, 15);
             SelectDepartureDate.TabIndex = 11;
@@ -281,7 +304,7 @@
             // dateTimePicker3
             // 
             dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.Location = new Point(3, 213);
+            dateTimePicker3.Location = new Point(3, 245);
             dateTimePicker3.Name = "dateTimePicker3";
             dateTimePicker3.Size = new Size(245, 23);
             dateTimePicker3.TabIndex = 10;
@@ -290,7 +313,7 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(6, 134);
+            dateTimePicker1.Location = new Point(6, 176);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(242, 23);
             dateTimePicker1.TabIndex = 8;
@@ -299,7 +322,7 @@
             // RoundTrip
             // 
             RoundTrip.AutoSize = true;
-            RoundTrip.Location = new Point(64, 173);
+            RoundTrip.Location = new Point(64, 205);
             RoundTrip.Name = "RoundTrip";
             RoundTrip.Size = new Size(83, 19);
             RoundTrip.TabIndex = 7;
@@ -358,7 +381,7 @@
             comboBox3.FormattingEnabled = true;
             comboBox3.Location = new Point(5, 40);
             comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(227, 23);
+            comboBox3.Size = new Size(243, 23);
             comboBox3.TabIndex = 1;
             comboBox3.Text = "{Select origin city}";
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
@@ -368,7 +391,7 @@
             comboBox2.FormattingEnabled = true;
             comboBox2.Location = new Point(5, 69);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(227, 23);
+            comboBox2.Size = new Size(243, 23);
             comboBox2.TabIndex = 0;
             comboBox2.Text = "{Select destination city}";
             // 
@@ -397,6 +420,16 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // listBox2
+            // 
+            listBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new Point(3, 6);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(639, 424);
+            listBox2.TabIndex = 9;
+            // 
             // CustomerMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -411,9 +444,7 @@
             CustomerTabControl.ResumeLayout(false);
             Home.ResumeLayout(false);
             AccountHistory.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             UpcomingFlights.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             Booking.ResumeLayout(false);
             Booking.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
@@ -437,7 +468,6 @@
         private ComboBox comboBox2;
         private PictureBox pictureBox1;
         private DataGridViewTextBoxColumn FlightID;
-        private DataGridView dataGridView3;
         private DataGridView dataGridView4;
         private DateTimePicker dateTimePicker3;
         private DateTimePicker dateTimePicker1;
@@ -445,7 +475,6 @@
         private Label SelectDepartureDate;
         private Label label1;
         private Button newPaymentMethod;
-        private DataGridView dataGridView2;
         private Button Search;
         private Label label2;
         private ComboBox comboBox1;
@@ -456,5 +485,10 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private Button button1;
+        private ComboBox comboBox5;
+        private Button BoardingPass;
+        private Button Cancel;
+        private ListBox listBox1;
+        private ListBox listBox2;
     }
 }

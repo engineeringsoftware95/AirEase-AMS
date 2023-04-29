@@ -1,4 +1,5 @@
 ﻿using AirEase_AMS.App;
+using AirEase_AMS.App.Entity.BoardingPass;
 using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Graph;
 using AirEase_AMS.App.Graph.Flight;
@@ -122,16 +123,24 @@ namespace AirEase_AMS.Interface
             upcomingDepartureList.Items.Add(currentUser.GetUpcomingTickets());
 
             // update flights with past flights
-            dataGridView2.DataSource = currentUser.GetPastTickets();
+            listBox2.Items.Clear();
+            foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+            {
+                string info = ticket.GetTicketId();
+                foreach (Flight flight in ticket.GetFlights())
+                {
+                    
+                }
+            }
 
             // update upcoming flights
-            dataGridView3.DataSource = currentUser.GetUpcomingTickets();
-
-            //have the user select a date and a time
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "MM/dd/yyyy    HH:mm";
-            dateTimePicker3.CustomFormat = "MM/dd/yyyy    HH:mm";
+            comboBox5.Items.Clear();
+            listBox1.Items.Clear();
+            foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+            {
+                comboBox5.Items.Add(ticket.GetTicketId());
+                listBox1.Items.Add(ticket.GetTicketInformation());
+            }
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,6 +159,33 @@ namespace AirEase_AMS.Interface
             Login login = new Login();
             login.ShowDialog();
             this.Close();
+        }
+
+        private void Booking_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BoardingPass_Click(object sender, EventArgs e)
+        {
+            if(comboBox3.SelectedItem != null)
+            {
+                List<Flight> flights = new List<Flight>();
+                foreach(Ticket ticket in currentUser.GetUpcomingTickets())
+                {
+                    foreach(Flight flight in ticket.GetFlights())
+                    {
+                        flights.Add(flight);
+                    }
+                }
+
+                BoardingPass boarding = new BoardingPass(flights[comboBox3.SelectedIndex].GetFlightId(), );
+            }
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -41,9 +41,9 @@ namespace AirEase_AMS.Interface
             AccountSummary.Items.Add(currentuser.GetLastName());
             AccountSummary.Items.Add(currentuser.GetPhoneNum());
             AccountSummary.Items.Add(currentuser.GetEmail());
-            CreditCard creditCard = new CreditCard(currentuser.GetUserId());
-            AccountSummary.Items.Add(creditCard.GetCCNum());
-            AccountSummary.Items.Add(creditCard.GetExpirationDate());
+            //CreditCard creditCard = new CreditCard(currentuser.GetUserId());
+            //AccountSummary.Items.Add(creditCard.GetCCNum());
+            //AccountSummary.Items.Add(creditCard.GetExpirationDate());
 
             Reciept.Items.Add(purchasedTicket.GetTicketInformation());
             if(!string.IsNullOrEmpty(returnTicket.GetOriginCity()))

@@ -254,4 +254,14 @@ public class Ticket : ITicket
     {
         return _startCity;
     }
+
+    public string GetDestinationCity()
+    {
+        return _endCity;
+    }
+
+    public List<Flight> GetFlights()
+    {
+        return flights;
+    }
 }
