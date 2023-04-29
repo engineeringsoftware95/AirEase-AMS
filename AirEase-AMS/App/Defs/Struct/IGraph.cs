@@ -6,7 +6,7 @@ public interface IGraph
 {
     public List<List<IRoute>> FindRoutes(string origin, string destination);
 
-    List<Flight>? GetFlightsInRange(string origin, string destination, DateTime begin,
+    List<List<Flight>>  GetFlightsInRange(string origin, string destination, DateTime begin,
         DateTime end);
 
 }

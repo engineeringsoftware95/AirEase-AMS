@@ -95,14 +95,14 @@ public class Route : IRoute, IComparable<Route>
      * search for flights for hours, days, months, etc. with a single function,
      * which are before a certain departure time.
      */
-    public List<Flight>? FindFlightsInRange(DateTime begin, DateTime end)
+    public List<Flight> FindFlightsInRange(DateTime begin, DateTime end)
     {
-        List<Flight>? validFlights = new List<Flight>();
-        foreach(var route in _flightsOnRoute)
+        List<Flight>validFlights = new List<Flight>();
+        foreach(var flight in _flightsOnRoute)
         {
-            if ((DateTime.Compare(route.GetTime(), begin) >= 0) && (DateTime.Compare(route.GetTime(), end) <= 0))
+            if ((DateTime.Compare(flight.GetTime(), begin) >= 0) && (DateTime.Compare(flight.GetTime(), end) <= 0))
             {
-                    validFlights?.Add(route);
+                    validFlights.Add(flight);
             }
         }
         return validFlights;
