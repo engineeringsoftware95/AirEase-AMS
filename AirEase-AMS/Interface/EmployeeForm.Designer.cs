@@ -77,6 +77,7 @@
             pictureBox6 = new PictureBox();
             button1 = new Button();
             pictureBox1 = new PictureBox();
+            button4 = new Button();
             tabControl1.SuspendLayout();
             HomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -580,11 +581,22 @@
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
+            // button4
+            // 
+            button4.Location = new Point(12, 418);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 2;
+            button4.Text = "Logout";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // EmployeeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button4);
             Controls.Add(pictureBox1);
             Controls.Add(tabControl1);
             Margin = new Padding(3, 2, 3, 2);
@@ -663,5 +675,6 @@
         private Label label6;
         private NumericUpDown numericUpDown1;
         private Label label7;
+        private Button button4;
     }
 }

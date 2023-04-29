@@ -143,5 +143,13 @@ namespace AirEase_AMS.Interface
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.ShowDialog();
+            this.Close();
+        }
     }
 }
