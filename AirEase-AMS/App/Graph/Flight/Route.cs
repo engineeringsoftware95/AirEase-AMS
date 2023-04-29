@@ -76,8 +76,6 @@ public class Route : IRoute, IComparable<Route>
             _routeId = (GenerateId());
         }
 
-        if (_origin.GetAirportId().Length < 6 || _destination.GetAirportId().Length < 6) return false;
-
         string query = String.Format("INSERT INTO FLIGHTROUTE VALUES({0}, {1}, {2}, {3});", _routeId, _origin.GetAirportId(), _destination.GetAirportId(), _distance);
         return (dao.Update(query) >= 1);
     }
@@ -87,6 +85,7 @@ public class Route : IRoute, IComparable<Route>
         return _flightsOnRoute.Contains(flight);
     }
 
+    
     /*
      * Find flights before
      * Given a DateTime object, populate a list of flights which
@@ -95,14 +94,14 @@ public class Route : IRoute, IComparable<Route>
      * search for flights for hours, days, months, etc. with a single function,
      * which are before a certain departure time.
      */
-    public List<Flight>? FindFlightsInRange(DateTime begin, DateTime end)
+    public List<Flight> FindFlightsInRange(DateTime begin, DateTime end)
     {
-        List<Flight>? validFlights = new List<Flight>();
-        foreach(var route in _flightsOnRoute)
+        List<Flight>validFlights = new List<Flight>();
+        foreach(var flight in _flightsOnRoute)
         {
-            if ((DateTime.Compare(route.GetTime(), begin) >= 0) && (DateTime.Compare(route.GetTime(), end) <= 0))
+            if ((DateTime.Compare(flight.GetTime(), begin) >= 0) && (DateTime.Compare(flight.GetTime(), end) <= 0))
             {
-                    validFlights?.Add(route);
+                    validFlights.Add(flight);
             }
         }
         return validFlights;
@@ -130,11 +129,6 @@ public class Route : IRoute, IComparable<Route>
     public bool IsOrigin(string city)
     {//TODO: statement or branch uncovered
         return _origin.GetCityName().Equals(city);
-    }
-
-    public DateTime GetTime()
-    {//TODO: statement or branch uncovered
-        throw new NotImplementedException();
     }
     
     public void SetDistance(double dist)
