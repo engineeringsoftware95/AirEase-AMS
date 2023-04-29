@@ -1,4 +1,5 @@
-﻿using AirEase_AMS.App.Entity.User;
+﻿using AirEase_AMS.App;
+using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Graph.Flight;
 using AirEase_AMS.App.Ticket;
 using System;
@@ -27,6 +28,8 @@ namespace AirEase_AMS.Interface
             ticketToBuy = ticketOne;
             ifRoundTrip = new Ticket();
             InitializeComponent();
+
+            setUp();
         }
 
         public CustomerBilling(Form calledFrom, Customer loggedIn, Ticket ticketOne, Ticket ticketTwo)
@@ -36,6 +39,8 @@ namespace AirEase_AMS.Interface
             ticketToBuy = ticketOne;
             ifRoundTrip = ticketTwo;
             InitializeComponent();
+
+            setUp();
         }
 
         private void CustomerBilling_Load(object sender, EventArgs e)
@@ -43,19 +48,7 @@ namespace AirEase_AMS.Interface
             flightInfo.Clear();
             flightInfo.Text = ticketToBuy.GetTicketInformation();
 
-            comboBox1.Items.Clear();
-
-            //if (currentUser._pointBalance > costInPoints)
-            //{
-            //    comboBox1.Items.Add(currentUser._pointBalance);
-            //}
-            //else
-            //{
-            //    if (currentUser._cashBalance < )    // ticket price
-            //        comboBox1.Items.Add();          //add current users credit card number
-            //    else
-            //        comboBox1.Items.Add(currentUser._pointBalance);
-            //}
+            setUp();
         }
 
         private void newPaymentMethod_Click(object sender, EventArgs e)
@@ -63,7 +56,6 @@ namespace AirEase_AMS.Interface
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
             this.Hide();
             enter.Show();
-            // update payment methods list with new credit card if one has been entered
         }
 
         private void purchase_Click(object sender, EventArgs e)
@@ -74,7 +66,17 @@ namespace AirEase_AMS.Interface
             {
                 ifRoundTrip.UploadTicket();
             }
+            SummaryPage summary;
+            if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
+            {
+                summary = new SummaryPage(currentUser, ticketToBuy, ifRoundTrip);
+            }
+            else
+            {
+                summary = new SummaryPage(currentUser, ticketToBuy);
+            }
             this.Hide();
+            summary.ShowDialog();
             this.Close();
         }
 
@@ -94,6 +96,19 @@ namespace AirEase_AMS.Interface
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public void setUp()
+        {
+            comboBox1.Items.Clear();
+
+            CreditCard credit = new CreditCard(currentUser.GetUserId());
+
+            comboBox1.Items.Add(credit.GetCCNum());
+            if (HLib.ConvertToPoints((decimal)ticketToBuy.GetTicketCost()) < currentUser._pointBalance)
+            {
+                comboBox1.Items.Add("Points");
+            }
         }
     }
 }

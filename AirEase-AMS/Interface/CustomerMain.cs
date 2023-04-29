@@ -23,6 +23,12 @@ namespace AirEase_AMS.Interface
         public CustomerMain(Customer loggedIn)
         {
             currentUser = loggedIn;
+            //foreach (Ticket tickets in return list of functions)
+            //{
+
+            //}
+
+            InitializeComponent();
 
             // set combo boxes source to a list of all airports
             foreach (Airport city in HLib.SelectAllAirports())
@@ -30,14 +36,6 @@ namespace AirEase_AMS.Interface
                 comboBox2.Items.Add(city.GetCityName());
                 comboBox3.Items.Add(city.GetCityName());
             }
-
-
-            //foreach (Ticket tickets in return list of functions)
-            //{
-
-            //}
-
-            InitializeComponent();
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
