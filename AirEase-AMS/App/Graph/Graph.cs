@@ -52,8 +52,11 @@ public class Graph : IGraph
                     Route start_route = new Route(); // so initialize the route which connects the origin city (start point) and the potential layover spot.
                     foreach (Route d in orig_airport.DepartingFlights()) // find the start route
                     {
-                        if (d.Destination() == airport) start_route=d;
-                        break;
+                        if (d.GetDestinationCity() == airport.GetCityName())
+                        {
+                            start_route = d;
+                            break;
+                        }
                     }
                     foreach (Route k in  airport.DepartingFlights()) // now, for each route in the potential layover spot's departures
                     {
