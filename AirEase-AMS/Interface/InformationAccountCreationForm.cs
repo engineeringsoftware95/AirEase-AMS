@@ -19,7 +19,7 @@ namespace AirEase_AMS.Interface
         {
             InitializeComponent();
 
-            //Max date is... today. If you were born today, you probably aren't creating an account..? Right?
+            //Max date is... today but 18 years in the past. If you were born 18 years ago, you probably aren't creating an account..? Right?
             BirthDateCalendar.MaxDate = DateTime.Now.AddYears(-18);
 
             //Arbitrarily sets the minimum date to 1900. We don't really want users saying they were born in the 1800's or earlier anyways.
@@ -141,9 +141,7 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
-
-        private void SubmitButton_Click_1(object sender, EventArgs e)
-
+        private void InformationAccountCreationForm_Load(object sender, EventArgs e)
         {
 
         }
