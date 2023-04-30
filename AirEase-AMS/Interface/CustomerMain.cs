@@ -108,20 +108,17 @@ namespace AirEase_AMS.Interface
             {
                 Console.Write(originToDestination.Count + " " + routesToDestination.Count + " "); Console.WriteLine("List of Route");
                 Ticket t = new Ticket();
+                t.SetStartCity(origin.GetCityName());
+                t.SetEndCity(dest.GetCityName());
                 foreach (IRoute route in originToDestination)
                 {
                     Console.WriteLine("Route");
                     foreach (Flight flight in route.GetFlightsOnRoute())
                     {
-                        Console.WriteLine("added "+route.Origin().GetCityName()+" to "+route.Destination().GetCityName());
-                        t.SetStraightLineMileage(flight.GetDistance());
-                        t.GenerateTicketId();
-                        t.SetStartCity(route.Origin().GetCityName());
-                        t.SetEndCity(route.Destination().GetCityName());
+
                         t.SetCost();
                         t.AddFlight(flight);
                         t.SetCustomerId(currentUser.GetUserId().ToString()); // how to get current customer ID?
-                        t.IncrementFlightNum();
                     }
                 }
                 availableTickets.Add(t);
