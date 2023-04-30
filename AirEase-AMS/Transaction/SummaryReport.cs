@@ -81,6 +81,9 @@ public class SummaryReport
         return _listOfFlights.Count();
     }
 
-
+    public string GetReport()
+    {
+        return report;
+    }
 
 }
