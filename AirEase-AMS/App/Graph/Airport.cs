@@ -67,6 +67,18 @@ public class Airport : IGraphNode
         return _airportId;
     }
 
+    public bool RouteExists(string orig, string dest)
+    {
+        foreach (IRoute route in _departingEdges)
+        {
+            if (route.Origin().GetCityName() == orig && route.Destination().GetCityName() == dest)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /// <summary>
     /// Attempts to upload the current rendition of this class to the database.

@@ -110,12 +110,9 @@ namespace AirEase_AMS.Interface
 
         private void PasswordFirst_TextChanged(object sender, EventArgs e)
         {
-
         }
-
         private void PasswordVerify_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -127,7 +124,6 @@ namespace AirEase_AMS.Interface
         {
 
         }
-
         private void ErrorMessageBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -143,7 +139,6 @@ namespace AirEase_AMS.Interface
 
         private void InformationAccountCreationForm_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
