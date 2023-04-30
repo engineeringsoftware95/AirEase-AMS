@@ -43,6 +43,7 @@ namespace AirEase_AMS.Interface
             setUp();
         }
 
+        // handler for when this winform loads
         private void CustomerBilling_Load(object sender, EventArgs e)
         {
             flightInfo.Clear();
@@ -51,6 +52,7 @@ namespace AirEase_AMS.Interface
             setUp();
         }
 
+        // handler for when the new payment button is clicked
         private void newPaymentMethod_Click(object sender, EventArgs e)
         {
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
@@ -58,6 +60,7 @@ namespace AirEase_AMS.Interface
             enter.Show();
         }
 
+        // handler for when the purchase button is clicked
         private void purchase_Click(object sender, EventArgs e)
         {
             // buy the ticket
@@ -80,11 +83,13 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
+        // handler for when the text changes in the listbox called flightInfo (only listbox in this winform page)
         private void flightInfo_TextChanged(object sender, EventArgs e)
         {
 
         }
 
+        // handler for when the cancel button is clicked
         private void cancel_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -93,11 +98,13 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
+        // handler for when the payment method dropdown box has a new thing selected
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        // helper method to setup the information in the winform dropdown and list boxes
         public void setUp()
         {
             comboBox1.Items.Clear();

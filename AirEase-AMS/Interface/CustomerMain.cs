@@ -38,12 +38,13 @@ namespace AirEase_AMS.Interface
                 comboBox3.Items.Add(city.GetCityName());
             }
         }
-
+        // Dont care about this listbox handler
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        // this will update the visibility of elements when the round trip check box is interacted with
         private void RoundTrip_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -53,12 +54,14 @@ namespace AirEase_AMS.Interface
             label3.Visible = RoundTrip.Checked;
             this.Update();
         }
-
+        
+        // do nothing when the label is clicked
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
+        // this is the button on the home screen and opens up the new payment method window
         private void newPaymentMethod_Click(object sender, EventArgs e)
         {
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
@@ -66,6 +69,7 @@ namespace AirEase_AMS.Interface
             enter.ShowDialog();
         }
 
+        // this is the handler for the book ticket button in the booking tab
         private void bookingButton_Click(object sender, EventArgs e)
         {
 
@@ -83,6 +87,7 @@ namespace AirEase_AMS.Interface
             }
         }
 
+        // this is the handler for the search button in the customer booking tab
         private void Search_Click(object sender, EventArgs e)
         {
             // first clear table
@@ -93,26 +98,31 @@ namespace AirEase_AMS.Interface
             // allow selection of ticketID
         }
 
+        // this is the handler for clicking the ticket cells in the list of tickets in the booking tab
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
+        
+        // handler for when the home tab is clicked
         private void Home_Click(object sender, EventArgs e)
         {
 
         }
 
+        // handler for when the account history tab is clicked
         private void AccountHistory_Click(object sender, EventArgs e)
         {
 
         }
 
+        // handler for when the upcoming flights tab is clicked
         private void UpcomingFlights_Click(object sender, EventArgs e)
         {
 
         }
 
+        // handler for when the winform loads
         private void CustomerMain_Load(object sender, EventArgs e)
         {
             // update news feed and upcoming departure list
@@ -153,16 +163,19 @@ namespace AirEase_AMS.Interface
             }
         }
 
+        // handler for when the origin city dropdown box in the booking tab has a new item selected
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        // handler for when the value of datetime picker for the first ticket is changed
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
         }
 
+        // handler for the logout button
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -171,11 +184,13 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
+        // handler for when the button to book a flight is clicked
         private void Booking_Click(object sender, EventArgs e)
         {
 
         }
 
+        // handler for when the button to print a boarding pass is clicked
         private void BoardingPass_Click(object sender, EventArgs e)
         {
             if (comboBox3.SelectedItem != null)
@@ -198,6 +213,7 @@ namespace AirEase_AMS.Interface
             }
         }
 
+        // handler for when the button to cancel a ticket is clicked
         private void Cancel_Click(object sender, EventArgs e)
         {
             if(comboBox3.SelectedItem != null)
