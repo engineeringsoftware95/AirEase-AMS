@@ -1,6 +1,7 @@
 using AirEase_AMS.App;
 using AirEase_AMS.App.Entity.User;
 using AirEase_AMS.App.Ticket;
+using System.Data;
 
 namespace AirEase_AMS.Transaction;
 
@@ -76,6 +77,9 @@ public class Transaction
     public bool UploadTransaction()
     {
         DatabaseAccessObject dao = new DatabaseAccessObject();
+        string query = String.Format("SELECT UserCashBalance FROM CUSTOMER WHERE UserID = {0};", _customerId);
+        DataRow customerTable = dao.Retrieve(query).Rows[0];
+        decimal cashBalance = decimal.Parse(customerTable["UserCashBalance"].ToString() ?? "-1");
 
         //While the ID isn't unique, make a new one.
         _transactionId = (GenerateTransactionId());
@@ -85,7 +89,7 @@ public class Transaction
             _transactionId = (GenerateTransactionId());
         }
 
-        string query = String.Format("EXEC InsertTransaction @TransactionID = {0}, @TicketCost = {1}, @PointCost = {2}, @CustomerID = {3};", _transactionId, _currencyCost, _pointCost, _customerId);
+        query = String.Format("EXEC InsertTransaction @TransactionID = {0}, @TicketCost = {1}, @PointCost = {2}, @CustomerID = {3}, @UserCashBalance={4};", _transactionId, _currencyCost, _pointCost, _customerId, cashBalance);
         return (dao.Update(query) >= 1);
     }
 

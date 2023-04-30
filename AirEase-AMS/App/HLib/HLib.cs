@@ -418,13 +418,13 @@ namespace AirEase_AMS.App
             customer8.AttemptAccountCreation();
             customerList.Add(customer8);
 
-            foreach(Flight flight in listOfFlights)
+            foreach (Flight flight in listOfFlights)
             {
                 Random rand = new Random();
                 int customerIndex = rand.Next(0, customerList.Count);
                 int purchase = rand.Next(0, 100);
 
-               
+
                 //Customer purchases the ticket (50%)
                 if (purchase > 50)
                 {
@@ -436,8 +436,8 @@ namespace AirEase_AMS.App
                         ticket.CancelTicket();
                     }
                 }
-
             }
+            
 
             //Create a varied list of employees
             Accountant acTabitha = new Accountant("Tabitha", "Shelton", "123 Tabby Street, Dallas, TX", DateTime.Now.AddYears(-35).AddMonths(12).ToString(), "SecureShelton$123", "1112223333", "tabitha.shelton@airease.com", "123456789");

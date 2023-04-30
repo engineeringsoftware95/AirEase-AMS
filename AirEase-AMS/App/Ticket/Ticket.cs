@@ -105,7 +105,7 @@ public class Ticket : ITicket
         _ticketCost = CalculateTicketCost();
 
         //Only one of these can have a value. If points were used, we put the cost in points and zero dollars in currency cost.
-        _transaction = new AirEase_AMS.Transaction.Transaction(_pointsUsed ? 0 : (decimal)_ticketCost, _pointsUsed ? HLib.ConvertToPoints((decimal)_ticketCost) : 0, _customerId);
+        _transaction = new AirEase_AMS.Transaction.Transaction(_pointsUsed ? 0 : (decimal)_ticketCost, _pointsUsed ? HLib.ConvertToPoints((decimal)_ticketCost) : 0, _customerId ?? "-1");
 
         DatabaseAccessObject dao = new DatabaseAccessObject();
         string query = String.Format("SELECT UserPointBalance FROM CUSTOMER WHERE UserID = {0};", _customerId);
