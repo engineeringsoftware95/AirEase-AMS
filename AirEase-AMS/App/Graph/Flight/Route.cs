@@ -197,7 +197,7 @@ public class Route : IRoute, IComparable<Route>
         _destination.SetCity(destination);
     }
 
-
+    
     public int PopulateFlightsOnRoute()
     {
         _flightsOnRoute = new List<Flight>();
@@ -212,6 +212,12 @@ public class Route : IRoute, IComparable<Route>
         }
 
         return _flightsOnRoute.Count;
+    }
+
+
+    public List<Flight> GetFlightsOnRoute()
+    {
+        return _flightsOnRoute;
     }
 
 }

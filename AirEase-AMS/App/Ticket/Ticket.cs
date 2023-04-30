@@ -9,8 +9,7 @@ namespace AirEase_AMS.App.Ticket;
 
 public class Ticket : ITicket
 {
-
-
+    
     private double _straightLineMileage;
     private double _ticketCost;
     private string _ticketId;
@@ -266,5 +265,30 @@ public class Ticket : ITicket
     public List<Flight> GetFlights()
     {
         return flights;
+    }
+    
+    public void SetCost()
+    {
+        _ticketCost = CalculateTicketCost();
+    }
+
+    public void SetCustomerId(string id)
+    {
+        _customerId = id;
+    }
+
+    public void IncrementFlightNum()
+    {
+        num_flights++;
+    }
+
+    public void SetStartCity(string name)
+    {
+        _startCity = name;
+    }
+    
+    public void SetEndCity(string name)
+    {
+        _endCity = name;
     }
 }

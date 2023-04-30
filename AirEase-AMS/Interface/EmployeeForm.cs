@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AirEase_AMS.App.Defs.Struct;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace AirEase_AMS.Interface
@@ -78,7 +79,7 @@ namespace AirEase_AMS.Interface
 
         private void button2_Click(object sender, EventArgs e)
         {
-            List<Airport> airports = HLib.SelectAllAirports();
+            List<IGraphNode> airports = HLib.SelectAllAirports();
             string origin = airports[originView.SelectedIndex].GetAirportId();
             string destination = airports[destinationCombo.SelectedIndex].GetAirportId();
             Route toAdd = new Route(origin, destination, (int)numericUpDown1.Value);
@@ -133,7 +134,7 @@ namespace AirEase_AMS.Interface
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            List<Flight> flights = HLib.SelectAllFlights();
+            List<Flight> flights =  HLib.SelectAllFlights();
             string flightID = flights[comboBox4.SelectedIndex].GetFlightId();
             string departureID = flights[comboBox4.SelectedIndex].GetDepartureId();
             FlightManifest manifest = new FlightManifest(flightID, departureID);
@@ -244,10 +245,9 @@ namespace AirEase_AMS.Interface
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Login login = new Login();
             login.ShowDialog();
-            this.Close();
+            Close();
         }
     }
 }
