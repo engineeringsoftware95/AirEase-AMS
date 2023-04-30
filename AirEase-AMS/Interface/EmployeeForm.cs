@@ -60,7 +60,7 @@ namespace AirEase_AMS.Interface
 
             summaryReportBox.Items.Clear();
             //Set string in SummaryReportBox (textbox)
-            if (!string.IsNullOrEmpty(summaryReport.GetReport())
+            if (!string.IsNullOrEmpty(summaryReport.GetReport()))
                 summaryReportBox.Text = summaryReport.GetReport();
             else
                 summaryReportBox.Text = "No summary report to display.";
