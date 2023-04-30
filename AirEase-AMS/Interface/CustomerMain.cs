@@ -103,7 +103,12 @@ namespace AirEase_AMS.Interface
             // first clear table
             // get list of flights that match query
             // update table
-            dataGridView4.Rows.Clear();
+            selectedDeparture_OW = DateTimePicker_OW.Value.Date;
+            if (RoundTrip.Checked)
+            {
+                selectedDeparture_RT = DateTimePicker_OW.Value.Date;
+            }
+           // dataGridView4.Rows.Clear();
             // populate the rows with all of the flights that match the given parameters
             // allow selection of ticketID
         }
@@ -187,12 +192,12 @@ namespace AirEase_AMS.Interface
         // handler for when the value of datetime picker for the first ticket is changed
         private void DateTimePicker_OW_ValueChanged(object sender, EventArgs e)
         {
-
+        
         }
 
         private void DateTimePicker_RT_ValueChanged(object sender, EventArgs e)
         {
-            
+            selectedDeparture_OW = DateTimePicker_OW.Value.Date;
         }
 
         // handler for the logout button
