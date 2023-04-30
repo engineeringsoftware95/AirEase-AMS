@@ -61,10 +61,9 @@ namespace AirEase_AMS.Interface
             summaryReportBox.Items.Clear();
             //Set string in SummaryReportBox (textbox)
             if (!string.IsNullOrEmpty(summaryReport.GetReport()))
-                summaryReportBox.Text = summaryReport.GetReport();
+                summaryReportBox.Items.Add(summaryReport.GetReport());
             else
-                summaryReportBox.Text = "No summary report to display.";
-
+                summaryReportBox.Items.Add("No summary report to display.");
         }
 
         private void RoutesTab_Click(object sender, EventArgs e)

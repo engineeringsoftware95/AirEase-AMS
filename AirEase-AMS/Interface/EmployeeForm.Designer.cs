@@ -543,11 +543,12 @@
             // 
             // summaryReportBox
             // 
+            summaryReportBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             summaryReportBox.FormattingEnabled = true;
             summaryReportBox.ItemHeight = 15;
             summaryReportBox.Location = new Point(3, 147);
             summaryReportBox.Name = "summaryReportBox";
-            summaryReportBox.Size = new Size(645, 274);
+            summaryReportBox.Size = new Size(659, 274);
             summaryReportBox.TabIndex = 14;
             // 
             // pictureBox6
