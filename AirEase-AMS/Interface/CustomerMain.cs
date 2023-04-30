@@ -20,9 +20,16 @@ namespace AirEase_AMS.Interface
     public partial class CustomerMain : Form
     {
         Customer currentUser;
-
+        private Airport origin;
+        private Airport dest;
+        private Graph airportGraph;
+        private List<Ticket> availableTickets;
         public CustomerMain(Customer loggedIn)
         {
+            origin = new Airport();
+            dest   = new Airport();
+            airportGraph = new Graph();
+            
             currentUser = loggedIn;
             //foreach (Ticket tickets in return list of functions)
             //{
@@ -166,12 +173,14 @@ namespace AirEase_AMS.Interface
         // handler for when the origin city dropdown box in the booking tab has a new item selected
         private void OriginCityDropDownBox_IndexChanged(object sender, EventArgs e)
         {
-
+            string k = OriginCityDropDown.GetItemText(OriginCityDropDown.SelectedItem);
+            origin = airportGraph.GetAirport(k);
         }
 
         private void DestinationCityDropDownBox_IndexChanged(object sender, EventArgs e)
         {
-            
+            string k = DestinationCityDropDown.GetItemText(DestinationCityDropDown.SelectedItem);
+            dest = airportGraph.GetAirport(k);
         }
 
         // handler for when the value of datetime picker for the first ticket is changed
@@ -243,9 +252,9 @@ namespace AirEase_AMS.Interface
                 {
                     foreach (Flight flight in ticket.GetFlights())
                     {
-                        string info = ticket.GetTicketId() + ": ";
-                        info.Concat(flight.GetFlightId() + ": ");
-                        info.Concat(flight.GetOriginCity() + ", ");
+                        string info = ticket.GetTicketId()      + ": ";
+                        info.Concat(flight.GetFlightId()        + ": ");
+                        info.Concat(flight.GetOriginCity()      + ", ");
                         info.Concat(flight.GetDestinationCity() + ", ");
                         info.Concat(flight.GetTime().ToString());
                         listBox2.Items.Add(info);

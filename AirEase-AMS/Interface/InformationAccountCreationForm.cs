@@ -59,8 +59,7 @@ namespace AirEase_AMS.Interface
                     : "") +
                 (emailFormatCorrect ? "" : "Email is not formatted correctly.\r\n") +
                 (phoneFormatCorrect ? "" : "Phone number is not formatted correctly.\r\n") +
-                ((passwordsMatch) ? "" : "Passwords do not match.\r\n") +
-                (BirthDateCalendar.Equals(DateTime.Now) ? "" : "Birthdate cannot be today.");
+                ((passwordsMatch) ? "" : "Passwords do not match.\r\n");
 
             if (passwordsMatch)
             {
@@ -136,9 +135,8 @@ namespace AirEase_AMS.Interface
         private void Cancel_Click(object sender, EventArgs e)
         {
             Login login = new Login();
-            this.Hide();
-            login.ShowDialog();
-            this.Close();
+            login.ShowDialog(); 
+            Close();
         }
 
 
