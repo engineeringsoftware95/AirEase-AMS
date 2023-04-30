@@ -52,8 +52,8 @@
             Search = new Button();
             label1 = new Label();
             SelectDepartureDate = new Label();
-            dateTimePicker3 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
+            DateTimePicker_RT = new DateTimePicker();
+            DateTimePicker_OW = new DateTimePicker();
             RoundTrip = new CheckBox();
             dataGridView4 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
@@ -61,8 +61,8 @@
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             bookingButton = new Button();
-            comboBox3 = new ComboBox();
-            comboBox2 = new ComboBox();
+            OriginCityDropDown = new ComboBox();
+            DestinationCityDropDown = new ComboBox();
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
@@ -263,13 +263,13 @@
             Booking.Controls.Add(Search);
             Booking.Controls.Add(label1);
             Booking.Controls.Add(SelectDepartureDate);
-            Booking.Controls.Add(dateTimePicker3);
-            Booking.Controls.Add(dateTimePicker1);
+            Booking.Controls.Add(DateTimePicker_RT);
+            Booking.Controls.Add(DateTimePicker_OW);
             Booking.Controls.Add(RoundTrip);
             Booking.Controls.Add(dataGridView4);
             Booking.Controls.Add(bookingButton);
-            Booking.Controls.Add(comboBox3);
-            Booking.Controls.Add(comboBox2);
+            Booking.Controls.Add(OriginCityDropDown);
+            Booking.Controls.Add(DestinationCityDropDown);
             Booking.Location = new Point(41, 4);
             Booking.Name = "Booking";
             Booking.Padding = new Padding(3);
@@ -343,23 +343,23 @@
             SelectDepartureDate.Text = "Select Departure Date and Time:";
             SelectDepartureDate.Click += label1_Click;
             // 
-            // dateTimePicker3
+            // DateTimePicker_RT
             // 
-            dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.Location = new Point(3, 245);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(245, 23);
-            dateTimePicker3.TabIndex = 10;
-            dateTimePicker3.Visible = false;
+            DateTimePicker_RT.Format = DateTimePickerFormat.Custom;
+            DateTimePicker_RT.Location = new Point(3, 245);
+            DateTimePicker_RT.Name = "DateTimePicker_RT";
+            DateTimePicker_RT.Size = new Size(245, 23);
+            DateTimePicker_RT.TabIndex = 10;
+            DateTimePicker_RT.Visible = false;
             // 
-            // dateTimePicker1
+            // DateTimePicker_OW
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(6, 176);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(242, 23);
-            dateTimePicker1.TabIndex = 8;
-            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            DateTimePicker_OW.Format = DateTimePickerFormat.Custom;
+            DateTimePicker_OW.Location = new Point(6, 176);
+            DateTimePicker_OW.Name = "DateTimePicker_OW";
+            DateTimePicker_OW.Size = new Size(242, 23);
+            DateTimePicker_OW.TabIndex = 8;
+            DateTimePicker_OW.ValueChanged += DateTimePicker_OW_ValueChanged;
             // 
             // RoundTrip
             // 
@@ -418,24 +418,25 @@
             bookingButton.UseVisualStyleBackColor = true;
             bookingButton.Click += bookingButton_Click;
             // 
-            // comboBox3
+            // OriginCityDropDown
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(5, 40);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(243, 23);
-            comboBox3.TabIndex = 1;
-            comboBox3.Text = "{Select origin city}";
-            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+            OriginCityDropDown.FormattingEnabled = true;
+            OriginCityDropDown.Location = new Point(5, 40);
+            OriginCityDropDown.Name = "OriginCityDropDown";
+            OriginCityDropDown.Size = new Size(243, 23);
+            OriginCityDropDown.TabIndex = 1;
+            OriginCityDropDown.Text = "{Select origin city}";
+            OriginCityDropDown.SelectedIndexChanged += OriginCityDropDownBox_IndexChanged;
             // 
-            // comboBox2
+            // DestinationCityDropDown
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(5, 69);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(243, 23);
-            comboBox2.TabIndex = 0;
-            comboBox2.Text = "{Select destination city}";
+            DestinationCityDropDown.FormattingEnabled = true;
+            DestinationCityDropDown.Location = new Point(5, 69);
+            DestinationCityDropDown.Name = "DestinationCityDropDown";
+            DestinationCityDropDown.Size = new Size(243, 23);
+            DestinationCityDropDown.TabIndex = 0;
+            DestinationCityDropDown.Text = "{Select destination city}";
+            DestinationCityDropDown.SelectedIndexChanged += DestinationCityDropDownBox_IndexChanged;
             // 
             // pictureBox1
             // 
@@ -497,13 +498,13 @@
         private MonthCalendar monthCalendar1;
         private ListBox upcomingDepartureList;
         private ListBox NewsFeed;
-        private ComboBox comboBox3;
-        private ComboBox comboBox2;
+        private ComboBox OriginCityDropDown;
+        private ComboBox DestinationCityDropDown;
         private PictureBox pictureBox1;
         private DataGridViewTextBoxColumn FlightID;
         private DataGridView dataGridView4;
-        private DateTimePicker dateTimePicker3;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker DateTimePicker_RT;
+        private DateTimePicker DateTimePicker_OW;
         private CheckBox RoundTrip;
         private Label SelectDepartureDate;
         private Label label1;
