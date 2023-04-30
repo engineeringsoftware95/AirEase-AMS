@@ -176,14 +176,12 @@ namespace AirEase_AMS.Interface
         // handler for when the origin city dropdown box in the booking tab has a new item selected
         private void OriginCityDropDownBox_IndexChanged(object sender, EventArgs e)
         {
-            string k = OriginCityDropDown.GetItemText(OriginCityDropDown.SelectedItem);
-            origin = airportGraph.GetAirport(k);
+            origin = airportGraph.GetAirport(OriginCityDropDown.GetItemText(OriginCityDropDown.SelectedItem));
         }
 
         private void DestinationCityDropDownBox_IndexChanged(object sender, EventArgs e)
         {
-            string k = DestinationCityDropDown.GetItemText(DestinationCityDropDown.SelectedItem);
-            dest = airportGraph.GetAirport(k);
+            dest = airportGraph.GetAirport(DestinationCityDropDown.GetItemText(DestinationCityDropDown.SelectedItem));
         }
 
         // handler for when the value of datetime picker for the first ticket is changed

@@ -18,7 +18,7 @@ namespace AirEase_AMS.App
 
 
           //  HLib.NuclearRedButton();
-            HLib.LoadDatabase();
+           // HLib.LoadDatabase();
 
 
             //DatabaseAccessObject dao = new DatabaseAccessObject(); 
