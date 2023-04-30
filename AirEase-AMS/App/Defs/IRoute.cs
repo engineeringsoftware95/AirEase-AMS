@@ -8,6 +8,7 @@ public interface IRoute
     bool FlightExists(IRoute flight);
     double GetDistance();
     IGraphNode Origin();
+    int PopulateFlightsOnRoute();
     IGraphNode Destination();
     List<Flight>? FindFlightsInRange(DateTime begin, DateTime end);
     bool IsDestination(string city);

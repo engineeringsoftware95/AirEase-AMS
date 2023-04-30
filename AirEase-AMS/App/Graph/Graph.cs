@@ -137,4 +137,22 @@ public class Graph : IGraph
         }
         return foundFlights;
     }
+
+
+
+    public void GraphInit()
+    {
+        _airports = HLib.SelectAllAirports();
+        foreach (Airport airport in _airports)
+        {
+            airport.PopulateEdges();
+            foreach (IRoute route in airport.DepartingFlights())
+            {
+                route.PopulateFlightsOnRoute();
+            }
+        }
+        
+    }
+    
+    
 }

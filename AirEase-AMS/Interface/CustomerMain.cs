@@ -24,13 +24,16 @@ namespace AirEase_AMS.Interface
         private Airport dest;
         private Graph airportGraph;
         private List<Ticket> availableTickets;
+        private DateTime selectedDeparture_OW;
+        private DateTime selectedDeparture_RT;
         public CustomerMain(Customer loggedIn)
         {
             origin = new Airport();
             dest   = new Airport();
             airportGraph = new Graph();
-            
+            airportGraph.GraphInit();
             currentUser = loggedIn;
+            
             //foreach (Ticket tickets in return list of functions)
             //{
 

@@ -8,6 +8,8 @@ using AirEase_AMS.App.Entity.User.Employees;
 using AirEase_AMS.App.Entity.Aircraft;
 using AirEase_AMS.Transaction;
 using System.Data;
+using AirEase_AMS.App.Defs.Struct;
+
 // ReSharper disable All
 
 namespace AirEase_AMS.App
@@ -181,12 +183,12 @@ namespace AirEase_AMS.App
         /// Selects all airports from the database.
         /// </summary>
         /// <returns>A list of all airports.</returns>
-        public static List<Airport> SelectAllAirports()
+        public static List<IGraphNode> SelectAllAirports()
         {
             string query = "SELECT * FROM AIRPORT;";
             DatabaseAccessObject dao = new DatabaseAccessObject();
             DataTable dataTable = dao.Retrieve(query);
-            List<Airport> airports = new List<Airport>();
+            List<IGraphNode> airports = new List<IGraphNode>();
             foreach (DataRow row in dataTable.Rows)
             {
                 string id = row["AirportID"].ToString() ?? "-1";

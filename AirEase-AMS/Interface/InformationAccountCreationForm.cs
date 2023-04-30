@@ -19,7 +19,7 @@ namespace AirEase_AMS.Interface
         {
             InitializeComponent();
 
-            //Max date is... today. If you were born today, you probably aren't creating an account..? Right?
+            //Max date is... today but 18 years in the past. If you were born 18 years ago, you probably aren't creating an account..? Right?
             BirthDateCalendar.MaxDate = DateTime.Now.AddYears(-18);
 
             //Arbitrarily sets the minimum date to 1900. We don't really want users saying they were born in the 1800's or earlier anyways.
@@ -59,7 +59,8 @@ namespace AirEase_AMS.Interface
                     : "") +
                 (emailFormatCorrect ? "" : "Email is not formatted correctly.\r\n") +
                 (phoneFormatCorrect ? "" : "Phone number is not formatted correctly.\r\n") +
-                ((passwordsMatch) ? "" : "Passwords do not match.\r\n");
+                ((passwordsMatch) ? "" : "Passwords do not match.\r\n") +
+                (BirthDateCalendar.Equals(DateTime.Now) ? "" : "Birthdate cannot be today.");
 
             if (passwordsMatch)
             {
@@ -109,12 +110,9 @@ namespace AirEase_AMS.Interface
 
         private void PasswordFirst_TextChanged(object sender, EventArgs e)
         {
-
         }
-
         private void PasswordVerify_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -126,7 +124,6 @@ namespace AirEase_AMS.Interface
         {
 
         }
-
         private void ErrorMessageBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -135,15 +132,13 @@ namespace AirEase_AMS.Interface
         private void Cancel_Click(object sender, EventArgs e)
         {
             Login login = new Login();
-            login.ShowDialog(); 
-            Close();
+            this.Hide();
+            login.ShowDialog();
+            this.Close();
         }
 
-
-        private void SubmitButton_Click_1(object sender, EventArgs e)
-
+        private void InformationAccountCreationForm_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
