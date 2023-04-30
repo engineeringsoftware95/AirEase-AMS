@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AirEase_AMS.App.Defs;
 
 namespace AirEase_AMS.Interface
 {
@@ -100,6 +101,31 @@ namespace AirEase_AMS.Interface
         // this is the handler for the search button in the customer booking tab
         private void Search_Click(object sender, EventArgs e)
         {
+            availableTickets = new List<Ticket>();
+            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
+            
+            foreach (List<IRoute> originToDestination in routesToDestination)
+            {
+                Console.Write(originToDestination.Count + " " + routesToDestination.Count + " "); Console.WriteLine("List of Route");
+                Ticket t = new Ticket();
+                foreach (IRoute route in originToDestination)
+                {
+                    Console.WriteLine("Route");
+                    foreach (Flight flight in route.GetFlightsOnRoute())
+                    {
+                        Console.WriteLine("added "+route.Origin().GetCityName()+" to "+route.Destination().GetCityName());
+                        t.SetStraightLineMileage(flight.GetDistance());
+                        t.GenerateTicketId();
+                        t.SetStartCity(route.Origin().GetCityName());
+                        t.SetEndCity(route.Destination().GetCityName());
+                        t.SetCost();
+                        t.AddFlight(flight);
+                        t.SetCustomerId(currentUser.GetUserId().ToString()); // how to get current customer ID?
+                        t.IncrementFlightNum();
+                    }
+                }
+                availableTickets.Add(t);
+            }
             // first clear table
             // get list of flights that match query
             // update table
@@ -107,8 +133,8 @@ namespace AirEase_AMS.Interface
             if (RoundTrip.Checked)
             {
                 selectedDeparture_RT = DateTimePicker_OW.Value.Date;
-            }
-           // dataGridView4.Rows.Clear();
+            } 
+            // dataGridView4.Rows.Clear();
             // populate the rows with all of the flights that match the given parameters
             // allow selection of ticketID
         }

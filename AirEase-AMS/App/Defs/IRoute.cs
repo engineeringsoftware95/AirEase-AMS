@@ -16,4 +16,5 @@ public interface IRoute
     void SetDestination(string destination);
     void SetOrigin(string origin);
     void AddFlight(Flight flight);
+    List<Flight> GetFlightsOnRoute();
 }
