@@ -37,6 +37,8 @@
             AccountHistory = new TabPage();
             listBox2 = new ListBox();
             UpcomingFlights = new TabPage();
+            label7 = new Label();
+            label6 = new Label();
             comboBox6 = new ComboBox();
             label5 = new Label();
             label4 = new Label();
@@ -68,8 +70,6 @@
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
-            label6 = new Label();
-            label7 = new Label();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -196,6 +196,24 @@
             UpcomingFlights.UseVisualStyleBackColor = true;
             UpcomingFlights.Click += UpcomingFlights_Click;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(23, 311);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 13;
+            label7.Text = "label7";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(23, 119);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 12;
+            label6.Text = "label6";
+            // 
             // comboBox6
             // 
             comboBox6.FormattingEnabled = true;
@@ -239,6 +257,7 @@
             comboBox5.Name = "comboBox5";
             comboBox5.Size = new Size(170, 23);
             comboBox5.TabIndex = 7;
+            comboBox5.SelectedIndexChanged += comboBox5_SelectedIndexChanged;
             // 
             // BoardingPass
             // 
@@ -301,6 +320,7 @@
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(248, 23);
             comboBox4.TabIndex = 16;
+            comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -318,6 +338,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(248, 23);
             comboBox1.TabIndex = 14;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // Search
             // 
@@ -357,6 +378,7 @@
             DateTimePicker_RT.Size = new Size(245, 23);
             DateTimePicker_RT.TabIndex = 10;
             DateTimePicker_RT.Visible = false;
+            DateTimePicker_RT.ValueChanged += DateTimePicker_RT_ValueChanged;
             // 
             // DateTimePicker_OW
             // 
@@ -480,24 +502,6 @@
             button1.Text = "Logout";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(23, 119);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 12;
-            label6.Text = "label6";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(23, 311);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 13;
-            label7.Text = "label7";
             // 
             // CustomerMain
             // 

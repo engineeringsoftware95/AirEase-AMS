@@ -376,5 +376,20 @@ namespace AirEase_AMS.Interface
                 label7.Text = "Please select a ticket.";
             }
         }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
