@@ -83,18 +83,23 @@ namespace AirEase_AMS.Interface
         // this is the handler for the book ticket button in the booking tab
         private void bookingButton_Click(object sender, EventArgs e)
         {
-
             if (RoundTrip.Checked)
             {
-                // do the thing to create two tickets then send to customer billing
+                // get ticket selected in combobox 1
+                Ticket firstTicket = new Ticket();
+                // get ticket selected in combobox 4
+                Ticket secondTicket = new Ticket();
+                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket, secondTicket);
+                this.Hide();
+                billing.ShowDialog();
             }
             else
             {
-                // do the thing to create one ticket then send to customer billing
-
-                //CustomerBilling customerBilling = new CustomerBilling(this, currentUser, OriginCityDropDown.Text, DestinationCityDropDown.Text, DateTimePicker_OW.Value.ToString());
-                Hide();
-                //customerBilling.ShowDialog();
+                // get ticket selected in combobox 1
+                Ticket firstTicket = new Ticket();
+                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket);
+                this.Hide();
+                billing.ShowDialog();
             }
         }
 
@@ -270,23 +275,10 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
-        // handler for when the button to book a flight is clicked
+        // handler for when the booking tab is clicked
         private void Booking_Click(object sender, EventArgs e)
         {
-            if(RoundTrip.Checked)
-            {
-                // get ticket selected in combobox 1
-                Ticket firstTicket = new Ticket();
-                // get ticket selected in combobox 4
-                Ticket secondTicket = new Ticket();
-                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket, secondTicket);
-            }
-            else
-            {
-                // get ticket selected in combobox 1
-                Ticket firstTicket = new Ticket();
-                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket);
-            }
+            
         }
 
         // handler for when the button to print a boarding pass is clicked
