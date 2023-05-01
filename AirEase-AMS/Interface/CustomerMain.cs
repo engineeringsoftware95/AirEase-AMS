@@ -100,8 +100,8 @@ namespace AirEase_AMS.Interface
                 }
                 else
                 {
-                    label8.Visible = true;
-                    label8.Text = "No tickets were found for these cities. Please select different origin or destination.";
+                    label9.Visible = true;
+                    label9.Text = "No tickets were found for these cities. Please select different origin or destination.";
                 }
 
                 if (RoundTrip.Checked)
@@ -139,15 +139,15 @@ namespace AirEase_AMS.Interface
                             }
                             else
                             {
-                                label8.Visible = true;
-                                label8.Text =
+                                label9.Visible = true;
+                                label9.Text =
                                     "No round-trips were found for these cities. Please select different origin or destination.";
                             }
                         }
                         else
                         {
-                            label8.Visible = true;
-                            label8.Text = "Something went wrong. Please try again.";
+                            label9.Visible = true;
+                            label9.Text = "Something went wrong. Please try again.";
                         }
                     }
                 }
@@ -160,14 +160,14 @@ namespace AirEase_AMS.Interface
                 }
                 else
                 {
-                    label8.Visible = true;
-                    label8.Text = "Please select a ticket.";
+                    label9.Visible = true;
+                    label9.Text = "Please select a ticket.";
                 }
             }
             else
             {
-                label8.Visible = true;
-                label8.Text = "Please select an origin and a destination.";
+                label9.Visible = true;
+                label9.Text = "Please select an origin and a destination.";
             }
         }
 
@@ -202,8 +202,8 @@ namespace AirEase_AMS.Interface
                 }
                 else
                 {
-                    label6.Visible = true;
-                    label6.Text = "No routes were found. Please select a new Origin or Destination city.";
+                    label8.Visible = true;
+                    label8.Text = "No routes were found. Please select a new Origin or Destination city.";
                 }
 
                 if (RoundTrip.Checked)
