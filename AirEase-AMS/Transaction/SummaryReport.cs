@@ -22,17 +22,17 @@ public class SummaryReport
 
     public void GenerateReport()
     {
-        report = "";
+        report = "Transactions:" + Environment.NewLine + Environment.NewLine;
         foreach (Transaction t in _transactions)
         {
-            report += t.GetTransactionId() + ",";
-            report += t._currencyCost + ",";
+            report += t.GetTransactionId() + ": $";
+            report += t._currencyCost + Environment.NewLine;
         }
 
-        report += ":";
+        report += Environment.NewLine + "Flights: " + Environment.NewLine;
         foreach (Flight f in _listOfFlights)
         {
-            report += f.GetFlightId() + "," + f.GetSeats();
+            report += f.GetFlightId() + ": " + f.GetSeatsTaken() + "/" + f.GetSeats() + " seats booked." + Environment.NewLine;
         }
     }
 

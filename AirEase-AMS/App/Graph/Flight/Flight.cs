@@ -98,6 +98,15 @@ public class Flight : Route
         _origin = testOrigin;
         _destination = destination;
         _flightTime = departureTime;
+        _yearWeekId = HLib.GenerateYearWeekID(departureTime);
+        _flightTime = departureTime;
+        _flightId = GenerateId();
+
+        //Use the default aircraft ID
+        _aircraft = new Aircraft("111111");
+        _flightCost = CalculateFlightCost();
+        _flightPoints = CalculateFlightPoints();
+        _departureId = HLib.GenerateSixDigitId().ToString();
     }
 
     public bool UploadFlight()

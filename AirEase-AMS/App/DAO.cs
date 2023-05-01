@@ -159,7 +159,7 @@ public class DatabaseAccessObject
     /// <returns>The number of rows altered by the input query.</returns>
     public int Update(string sqlQuery)
     {
-     
+
         if (sqlQuery == "") return 0;
         //No connection established - return error
         if (connection == null)
