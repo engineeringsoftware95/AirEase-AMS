@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             purchase = new Button();
-            makePaymentDefault = new CheckBox();
             flightInfo = new TextBox();
             comboBox1 = new ComboBox();
             cancel = new Button();
@@ -40,56 +39,56 @@
             // 
             // purchase
             // 
+            purchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             purchase.Location = new Point(369, 414);
             purchase.Name = "purchase";
             purchase.Size = new Size(176, 23);
             purchase.TabIndex = 0;
             purchase.Text = "Purchase";
             purchase.UseVisualStyleBackColor = true;
-            // 
-            // makePaymentDefault
-            // 
-            makePaymentDefault.AutoSize = true;
-            makePaymentDefault.Location = new Point(369, 343);
-            makePaymentDefault.Name = "makePaymentDefault";
-            makePaymentDefault.Size = new Size(191, 19);
-            makePaymentDefault.TabIndex = 1;
-            makePaymentDefault.Text = "Make Payment Method Default";
-            makePaymentDefault.UseVisualStyleBackColor = true;
+            purchase.Click += purchase_Click;
             // 
             // flightInfo
             // 
+            flightInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flightInfo.Location = new Point(124, 12);
             flightInfo.Multiline = true;
             flightInfo.Name = "flightInfo";
             flightInfo.Size = new Size(664, 296);
             flightInfo.TabIndex = 3;
+            flightInfo.TextChanged += flightInfo_TextChanged;
             // 
             // comboBox1
             // 
+            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(303, 314);
+            comboBox1.Location = new Point(293, 314);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(295, 23);
             comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // cancel
             // 
+            cancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             cancel.Location = new Point(124, 414);
             cancel.Name = "cancel";
             cancel.Size = new Size(113, 23);
             cancel.TabIndex = 6;
             cancel.Text = "Cancel";
             cancel.UseVisualStyleBackColor = true;
+            cancel.Click += cancel_Click;
             // 
             // newPaymentMethod
             // 
-            newPaymentMethod.Location = new Point(613, 314);
+            newPaymentMethod.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            newPaymentMethod.Location = new Point(603, 314);
             newPaymentMethod.Name = "newPaymentMethod";
             newPaymentMethod.Size = new Size(163, 23);
             newPaymentMethod.TabIndex = 7;
             newPaymentMethod.Text = "Enter new payment method";
             newPaymentMethod.UseVisualStyleBackColor = true;
+            newPaymentMethod.Click += newPaymentMethod_Click;
             // 
             // pictureBox1
             // 
@@ -111,7 +110,6 @@
             Controls.Add(cancel);
             Controls.Add(comboBox1);
             Controls.Add(flightInfo);
-            Controls.Add(makePaymentDefault);
             Controls.Add(purchase);
             Name = "CustomerBilling";
             Text = "Billing Preview Page";
@@ -124,7 +122,6 @@
         #endregion
 
         private Button purchase;
-        private CheckBox makePaymentDefault;
         private TextBox flightInfo;
         private ComboBox comboBox1;
         private Button cancel;

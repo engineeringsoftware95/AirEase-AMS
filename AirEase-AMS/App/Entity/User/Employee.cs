@@ -5,7 +5,7 @@ namespace AirEase_AMS.App.Entity.User;
 
 public class Employee : User
 {
-    public Employee() { }
+    public Employee() { } //TODO: statement or branch uncovered
     public Employee(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn) : base(fName, lName, email, phoneNum, address, date, password)
     {
         _salt = HLib.GenerateSalt(32);
@@ -14,14 +14,14 @@ public class Employee : User
         _positionTitle = "";
     }
 
-    public Employee(string username, string password)
+    public Employee(string username) //TODO: statement or branch uncovered
     {
-        string query = "SELECT * FROM EMPLOYEE WHERE EmployeePassword = '" + password + "' AND UserID = " + username + ";";
+        string query = "SELECT * FROM EMPLOYEE WHERE UserID = " + username + ";";
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         System.Data.DataTable dt = dao.Retrieve(query);
         //Empty constructor
-        if (dt.Rows.Count != 1)
+        if (dt.Rows.Count != 1) //TODO: statement or branch uncovered
         {
             _firstName = "";
             _lastName = "";
@@ -36,8 +36,8 @@ public class Employee : User
             _userId = -1;
         }
         //Load info
-        else
-        {
+        else //TODO: statement or branch uncovered
+        { 
             DataRow user = dt.Rows[0];
             _firstName = user["FirstName"].ToString() ?? "";
             _lastName = user["LastName"].ToString() ?? "";

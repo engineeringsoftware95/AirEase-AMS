@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirEase_AMS.App.Entity.User;
+using AirEase_AMS.App.Ticket;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,18 +14,44 @@ namespace AirEase_AMS.Interface
 {
     public partial class PaymentInformationEntry : Form
     {
-        public PaymentInformationEntry()
+        Customer currentUser;
+        Form parent;
+
+        public PaymentInformationEntry(Customer loggedIn, Form calledFrom)
         {
+            currentUser = loggedIn;
+            parent = calledFrom;
             InitializeComponent();
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "MM/yy";
         }
 
-        private void purchase_Click(object sender, EventArgs e)
+        private void continue_Click(object sender, EventArgs e)
         {
+            // update database with payment info
+            if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox3.Text) && !string.IsNullOrEmpty(CCNEntry.Text))
+            {
+                CreditCard newCard = new CreditCard(CCNEntry.Text, dateTimePicker1.Value.ToString(), textBox3.Text, textBox1.Text, currentUser.GetUserId().ToString());
+                newCard.SaveCreditCard();
+                this.Hide();
+                parent.Update();
+                parent.Show();
+                this.Close();
+            }
+            else
+            {
+                ErrorLabel.Text = "Please fill out all fields.";
+                ErrorLabel.Visible = true;
 
+            }
         }
 
         private void cancel_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            parent.Update();
+            parent.Show();
+            this.Close();
         }
 
         private void label1_Click(object sender, EventArgs e)

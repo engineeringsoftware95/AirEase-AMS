@@ -38,8 +38,7 @@ namespace AirEase_AMS.Interface
 
                     // Setup currentCustomer using a database query for the username
 
-                    Customer currentCustomer;
-                    CustomerMain customerInstance = new CustomerMain();
+                    CustomerMain customerInstance = new CustomerMain(loggedUser);
                     this.Hide();
                     customerInstance.ShowDialog();
                     this.Close();
@@ -54,24 +53,24 @@ namespace AirEase_AMS.Interface
                     switch (username[0])
                     {
                         case '2':
-                            Accountant loggedAcc = new Accountant(username, password);
+                            Accountant loggedAcc = new Accountant(username);
                             //Load employee form
                             employeeForm = new EmployeeForm(loggedAcc);
 
                             break;
                         case '3':
-                            FlightManager loggedFm = new FlightManager(username, password);
+                            FlightManager loggedFm = new FlightManager(username);
                             //Load employee form
                             employeeForm = new EmployeeForm(loggedFm);
                             break;
                         case '4':
-                            LoadEngineer loggedLe = new LoadEngineer(username, password);
+                            LoadEngineer loggedLe = new LoadEngineer(username);
                             //Load employee form
                             employeeForm = new EmployeeForm(loggedLe);
 
                             break;
                         case '5':
-                            MarketManager loggedMm = new MarketManager(username, password);
+                            MarketManager loggedMm = new MarketManager(username);
                             //Load employee form
                             employeeForm = new EmployeeForm(loggedMm);
                             break;
@@ -81,10 +80,7 @@ namespace AirEase_AMS.Interface
 
                     }
                     employeeForm.ShowDialog();
-
-
                 }
-
                 //Close out login form
                 this.Close();
             }

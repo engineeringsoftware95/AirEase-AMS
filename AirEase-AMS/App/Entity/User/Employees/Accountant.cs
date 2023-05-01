@@ -2,7 +2,7 @@
 
 public class Accountant : Employee
 {
-    Accountant() : base() { }
+    Accountant() : base() { } //TODO: statement or branch uncovered
     public Accountant(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn)
     {
         _roleBit = 2;
@@ -19,7 +19,7 @@ public class Accountant : Employee
         _userId = GenerateId();
     }
 
-    public Accountant(string username, string password) : base(username, password)
+    public Accountant(string username) : base(username) //TODO: statement or branch uncovered
     {
 
     }

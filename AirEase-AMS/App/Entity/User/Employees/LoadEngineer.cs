@@ -1,8 +1,8 @@
 ﻿namespace AirEase_AMS.App.Entity.User.Employees;
 
 public class LoadEngineer : Employee
-{
-    LoadEngineer() : base() { }
+{ 
+    LoadEngineer() : base()  { } //TODO: statement or branch uncovered
 
     public LoadEngineer(string fName, string lName, string address, string date, string password, string phoneNum, string email, string ssn)
     {
@@ -20,7 +20,7 @@ public class LoadEngineer : Employee
         _userId = GenerateId();
     }
 
-    public LoadEngineer(string username, string password) : base(username, password)
+    public LoadEngineer(string username) : base(username) //TODO: statement or branch uncovered
     {
 
     }
