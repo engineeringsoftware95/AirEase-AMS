@@ -47,6 +47,8 @@
             BoardingPass = new Button();
             Cancel = new Button();
             Booking = new TabPage();
+            label9 = new Label();
+            label8 = new Label();
             label3 = new Label();
             comboBox4 = new ComboBox();
             label2 = new Label();
@@ -70,8 +72,6 @@
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
-            label8 = new Label();
-            label9 = new Label();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -310,6 +310,26 @@
             Booking.UseVisualStyleBackColor = true;
             Booking.Click += Booking_Click;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(6, 366);
+            label9.Name = "label9";
+            label9.Size = new Size(38, 15);
+            label9.TabIndex = 19;
+            label9.Text = "label9";
+            label9.Visible = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(6, 108);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 18;
+            label8.Text = "label8";
+            label8.Visible = false;
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -508,24 +528,6 @@
             button1.Text = "Logout";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(6, 108);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 18;
-            label8.Text = "label8";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(6, 366);
-            label9.Name = "label9";
-            label9.Size = new Size(38, 15);
-            label9.TabIndex = 19;
-            label9.Text = "label9";
             // 
             // CustomerMain
             // 

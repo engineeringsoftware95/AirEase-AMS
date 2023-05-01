@@ -134,7 +134,7 @@ namespace AirEase_AMS.Interface
         // this is the handler for the search button in the customer booking tab
         private void Search_Click(object sender, EventArgs e)
         {
-            if(OriginCityDropDown.SelectedItem != null && DestinationCityDropDown.SelectedItem != null &&
+            if (OriginCityDropDown.SelectedItem != null && DestinationCityDropDown.SelectedItem != null &&
                 OriginCityDropDown.SelectedItem != DestinationCityDropDown.SelectedItem)
             {
                 label8.Visible = false;
@@ -176,7 +176,7 @@ namespace AirEase_AMS.Interface
                 // populate the rows with all of the flights that match the given parameters
                 // allow selection of ticketID
             }
-            else if(OriginCityDropDown.SelectedItem == DestinationCityDropDown.SelectedItem && OriginCityDropDown.SelectedItem != null)
+            else if (OriginCityDropDown.SelectedItem == DestinationCityDropDown.SelectedItem && OriginCityDropDown.SelectedItem != null)
             {
                 label8.Visible = true;
                 label8.Text = "No flights have the same origin and destination.";
