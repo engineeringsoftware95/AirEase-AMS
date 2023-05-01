@@ -177,11 +177,20 @@ namespace AirEase_AMS.Interface
                     returnTickets = GetTickets(dest.GetCityName(), origin.GetCityName());
                 }
 
-                foreach (Ticket ticket in availableTickets)
+                if (availableTickets != null)
                 {
-                    comboBox1.Items.Add(ticket.GetTicketId());
-                    dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(), ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
-                        ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+                    foreach (Ticket ticket in availableTickets)
+                    {
+                        comboBox1.Items.Add(ticket.GetTicketId());
+                        dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
+                            ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
+                            ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+                    }
+                }
+                else
+                {
+                    label6.Visible = true;
+                    label6.Text = "No routes were found. Please select a new Origin or Destination city.";
                 }
 
                 if (RoundTrip.Checked)
@@ -225,109 +234,116 @@ namespace AirEase_AMS.Interface
             List<Flight> OriginDepartures = new List<Flight>();
             List<Flight> LayoverDepartures = new List<Flight>();
             // get direct flights
-            foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
-            {
-                t.SetStartCity(startCity);
-                t.SetEndCity(endCity);
-                t.AddFlight(f);
-                tickets.Add(t);
-                t = new Ticket();
-            }
-
-
-            if (routesToDestination[1].Count > 0) // Create list of origin and layover
-            {
-                for (int i = 0; i < routesToDestination[1].Count; i++)
+                if (routesToDestination[0].Count > 0)
                 {
-                    foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
+                    foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
                     {
-                        if (f.Origin().GetCityName() == origin.GetCityName())
-                        {
-                            OriginDepartures.Add(f);
-                            continue;
-                        }
-
-                        LayoverDepartures.Add(f);
+                        t.SetStartCity(startCity);
+                        t.SetEndCity(endCity);
+                        t.AddFlight(f);
+                        tickets.Add(t);
+                        t = new Ticket();
                     }
                 }
 
-                foreach (Flight orig in OriginDepartures)
+                if (routesToDestination[1].Count > 0) // Create list of origin and layover
                 {
-                    foreach (Flight lyvr in LayoverDepartures)
+                    for (int i = 0; i < routesToDestination[1].Count; i++)
                     {
-                        TimeSpan departureTime = orig.EstimateArrivalTime().TimeOfDay;
-                        TimeSpan finalArrival = lyvr.GetTime().TimeOfDay;
-                        if (finalArrival.TotalMinutes >= departureTime.TotalMinutes + 40)
+                        foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
                         {
-                            t = new Ticket();
-                            t.SetStartCity(startCity);
-                            t.SetEndCity(endCity);
-                            t.AddFlight(orig);
-                            t.AddFlight(lyvr);
-                            tickets.Add(t);
-                        }
-                    }
-                }
-            }
-
-
-            if (routesToDestination[2].Count > 0) // Create list of origin and layover
-            {
-                OriginDepartures = new List<Flight>();
-                LayoverDepartures = new List<Flight>();
-                List<Flight> FinalLayovers = new List<Flight>();
-                for (int i = 0; i < routesToDestination[1].Count; i++)
-                {
-                    foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
-                    {
-                        if (f.Origin().GetCityName() == origin.GetCityName())
-                        {
-                            OriginDepartures.Add(f);
-                            continue;
-                        }
-
-                        LayoverDepartures.Add(f);
-                    }
-                }
-
-                foreach (Flight f in LayoverDepartures)
-                {
-                    if (f.Destination().GetCityName() == dest.GetCityName())
-                    {
-                        FinalLayovers.Add(f);
-                        LayoverDepartures.Remove(f);
-                    }
-                }
-
-
-                foreach (Flight orig in OriginDepartures)
-                {
-                    foreach (Flight lyvr in LayoverDepartures)
-                    {
-                        TimeSpan departureTime = orig.EstimateArrivalTime().TimeOfDay;
-                        TimeSpan finalArrival = lyvr.GetTime().TimeOfDay;
-                        if (finalArrival.TotalMinutes >= departureTime.TotalMinutes + 40)
-                        {
-                            foreach (Flight finalLayover in FinalLayovers)
+                            if (f.Origin().GetCityName() == origin.GetCityName())
                             {
-                                TimeSpan layoverTime = finalLayover.EstimateArrivalTime().TimeOfDay;
-                                TimeSpan finalLayoverDepartureTime = finalLayover.GetTime().TimeOfDay;
-                                if (finalLayoverDepartureTime.TotalMinutes >= layoverTime.TotalMinutes + 40)
+                                OriginDepartures.Add(f);
+                                continue;
+                            }
+
+                            LayoverDepartures.Add(f);
+                        }
+                    }
+
+                    foreach (Flight orig in OriginDepartures)
+                    {
+                        foreach (Flight lyvr in LayoverDepartures)
+                        {
+                            TimeSpan departureTime = orig.EstimateArrivalTime().TimeOfDay;
+                            TimeSpan finalArrival = lyvr.GetTime().TimeOfDay;
+                            if (finalArrival.TotalMinutes >= departureTime.TotalMinutes + 40)
+                            {
+                                t = new Ticket();
+                                t.SetStartCity(startCity);
+                                t.SetEndCity(endCity);
+                                t.AddFlight(orig);
+                                t.AddFlight(lyvr);
+                                tickets.Add(t);
+                            }
+                        }
+                    }
+                }
+
+
+                if (routesToDestination[2].Count > 0) // Create list of origin and layover
+                {
+                    OriginDepartures = new List<Flight>();
+                    LayoverDepartures = new List<Flight>();
+                    List<Flight> FinalLayovers = new List<Flight>();
+                    for (int i = 0; i < routesToDestination[1].Count; i++)
+                    {
+                        foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
+                        {
+                            if (f.Origin().GetCityName() == origin.GetCityName())
+                            {
+                                OriginDepartures.Add(f);
+                                continue;
+                            }
+
+                            LayoverDepartures.Add(f);
+                        }
+                    }
+
+                    foreach (Flight f in LayoverDepartures)
+                    {
+                        if (f.Destination().GetCityName() == dest.GetCityName())
+                        {
+                            FinalLayovers.Add(f);
+                            LayoverDepartures.Remove(f);
+                        }
+                    }
+
+
+                    foreach (Flight orig in OriginDepartures)
+                    {
+                        foreach (Flight lyvr in LayoverDepartures)
+                        {
+                            TimeSpan departureTime = orig.EstimateArrivalTime().TimeOfDay;
+                            TimeSpan finalArrival = lyvr.GetTime().TimeOfDay;
+                            if (finalArrival.TotalMinutes >= departureTime.TotalMinutes + 40)
+                            {
+                                foreach (Flight finalLayover in FinalLayovers)
                                 {
-                                    t = new Ticket();
-                                    t.SetStartCity(startCity);
-                                    t.SetEndCity(endCity);
-                                    t.AddFlight(orig);
-                                    t.AddFlight(lyvr);
-                                    t.AddFlight(finalLayover);
-                                    tickets.Add(t);
+                                    TimeSpan layoverTime = finalLayover.EstimateArrivalTime().TimeOfDay;
+                                    TimeSpan finalLayoverDepartureTime = finalLayover.GetTime().TimeOfDay;
+                                    if (finalLayoverDepartureTime.TotalMinutes >= layoverTime.TotalMinutes + 40)
+                                    {
+                                        t = new Ticket();
+                                        t.SetStartCity(startCity);
+                                        t.SetEndCity(endCity);
+                                        t.AddFlight(orig);
+                                        t.AddFlight(lyvr);
+                                        t.AddFlight(finalLayover);
+                                        tickets.Add(t);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
 
+
+                if(tickets.Count <= 0)
+            {
+                return null;
+            }
             return tickets;
         }
 
