@@ -318,6 +318,7 @@
             label9.Size = new Size(38, 15);
             label9.TabIndex = 19;
             label9.Text = "label9";
+            label9.Visible = false;
             // 
             // label8
             // 
@@ -327,6 +328,7 @@
             label8.Size = new Size(38, 15);
             label8.TabIndex = 18;
             label8.Text = "label8";
+            label8.Visible = false;
             // 
             // label3
             // 
@@ -336,6 +338,7 @@
             label3.Size = new Size(113, 15);
             label3.TabIndex = 17;
             label3.Text = "Select Return Ticket:";
+            label3.Visible = false;
             // 
             // comboBox4
             // 
@@ -344,6 +347,7 @@
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(248, 23);
             comboBox4.TabIndex = 16;
+            comboBox4.Visible = false;
             comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
             // 
             // label2
