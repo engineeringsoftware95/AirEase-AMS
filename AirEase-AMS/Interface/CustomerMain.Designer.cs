@@ -204,6 +204,7 @@
             label7.Size = new Size(38, 15);
             label7.TabIndex = 13;
             label7.Text = "label7";
+            label7.Visible = false;
             // 
             // label6
             // 
@@ -213,6 +214,7 @@
             label6.Size = new Size(38, 15);
             label6.TabIndex = 12;
             label6.Text = "label6";
+            label6.Visible = false;
             // 
             // comboBox6
             // 

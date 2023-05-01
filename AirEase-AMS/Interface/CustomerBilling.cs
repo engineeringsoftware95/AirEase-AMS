@@ -63,25 +63,33 @@ namespace AirEase_AMS.Interface
         // handler for when the purchase button is clicked
         private void purchase_Click(object sender, EventArgs e)
         {
-            // buy the ticket
-            ticketToBuy.UploadTicket();
-            if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
+            if (comboBox1.SelectedItem != null)
             {
-                ifRoundTrip.UploadTicket();
-            }
+                // buy the ticket
+                ticketToBuy.UploadTicket();
+                if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
+                {
+                    ifRoundTrip.UploadTicket();
+                }
 
-            SummaryPage summary;
-            if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
-            {
-                summary = new SummaryPage(parent, currentUser, ticketToBuy, ifRoundTrip);
+                SummaryPage summary;
+                if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
+                {
+                    summary = new SummaryPage(parent, currentUser, ticketToBuy, ifRoundTrip);
+                }
+                else
+                {
+                    summary = new SummaryPage(parent, currentUser, ticketToBuy);
+                }
+                this.Hide();
+                summary.ShowDialog();
+                this.Close();
             }
             else
             {
-                summary = new SummaryPage(parent, currentUser, ticketToBuy);
+                label1.Visible = true;
+                label1.Text = "Please select a payment method";
             }
-            this.Hide();
-            summary.ShowDialog();
-            this.Close();
         }
 
         // handler for when the text changes in the listbox called flightInfo (only listbox in this winform page)
@@ -102,7 +110,7 @@ namespace AirEase_AMS.Interface
         // handler for when the payment method dropdown box has a new thing selected
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            label1.Visible = false;
         }
 
         // helper method to setup the information in the winform dropdown and list boxes

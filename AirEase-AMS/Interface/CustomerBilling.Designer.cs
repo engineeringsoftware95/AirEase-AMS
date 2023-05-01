@@ -34,6 +34,7 @@
             cancel = new Button();
             newPaymentMethod = new Button();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(293, 314);
+            comboBox1.Location = new Point(289, 314);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(295, 23);
             comboBox1.TabIndex = 5;
@@ -100,11 +101,22 @@
             pictureBox1.TabIndex = 21;
             pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(369, 396);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 22;
+            label1.Text = "label1";
+            label1.Visible = false;
+            // 
             // CustomerBilling
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(pictureBox1);
             Controls.Add(newPaymentMethod);
             Controls.Add(cancel);
@@ -127,5 +139,6 @@
         private Button cancel;
         private Button newPaymentMethod;
         private PictureBox pictureBox1;
+        private Label label1;
     }
 }
