@@ -194,10 +194,11 @@ namespace AirEase_AMS.Interface
                 {
                     foreach (Ticket ticket in availableTickets)
                     {
+                        ticket.PopulateTicketCost();
                         comboBox1.Items.Add(ticket.GetTicketId());
                         dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
                             ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
-                            ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+                            ticket.GetDestinationCity(),(ticket.GetFlights()[0].GetSeats() - ticket.GetFlights()[0].GetSeatsTaken()));
                     }
                 }
                 else
@@ -211,6 +212,7 @@ namespace AirEase_AMS.Interface
                     comboBox4.Items.Clear();
                     foreach (Ticket ticket in returnTickets)
                     {
+                        ticket.PopulateTicketCost();
                         comboBox4.Items.Add(ticket.GetTicketId());
                         dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
                             ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
