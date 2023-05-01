@@ -35,6 +35,7 @@
             pictureBox2 = new PictureBox();
             richTextBox1 = new RichTextBox();
             MarketsTab = new TabPage();
+            ErrorLabel1 = new Label();
             label5 = new Label();
             comboBox2 = new ComboBox();
             dataGridView1 = new DataGridView();
@@ -51,11 +52,14 @@
             Column3 = new DataGridViewTextBoxColumn();
             PlaneModel = new DataGridViewTextBoxColumn();
             FlightsTab = new TabPage();
+            ErrorLabel2 = new Label();
             comboBox4 = new ComboBox();
             richTextBox2 = new RichTextBox();
             pictureBox5 = new PictureBox();
             button2 = new Button();
             RoutesTab = new TabPage();
+            label9 = new Label();
+            label8 = new Label();
             numericUpDown1 = new NumericUpDown();
             label6 = new Label();
             loadEnginList = new DataGridView();
@@ -165,6 +169,7 @@
             // 
             // MarketsTab
             // 
+            MarketsTab.Controls.Add(ErrorLabel1);
             MarketsTab.Controls.Add(label5);
             MarketsTab.Controls.Add(comboBox2);
             MarketsTab.Controls.Add(dataGridView1);
@@ -182,6 +187,17 @@
             MarketsTab.Tag = "MarketsTab";
             MarketsTab.Text = "Plane Manager";
             MarketsTab.UseVisualStyleBackColor = true;
+            MarketsTab.Click += MarketsTab_Click;
+            // 
+            // ErrorLabel1
+            // 
+            ErrorLabel1.AutoSize = true;
+            ErrorLabel1.Location = new Point(3, 375);
+            ErrorLabel1.Name = "ErrorLabel1";
+            ErrorLabel1.Size = new Size(63, 15);
+            ErrorLabel1.TabIndex = 19;
+            ErrorLabel1.Text = "Error Label";
+            ErrorLabel1.Visible = false;
             // 
             // label5
             // 
@@ -245,7 +261,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(52, 378);
+            button3.Location = new Point(52, 393);
             button3.Name = "button3";
             button3.Size = new Size(121, 23);
             button3.TabIndex = 5;
@@ -306,6 +322,7 @@
             // 
             // FlightsTab
             // 
+            FlightsTab.Controls.Add(ErrorLabel2);
             FlightsTab.Controls.Add(comboBox4);
             FlightsTab.Controls.Add(richTextBox2);
             FlightsTab.Controls.Add(pictureBox5);
@@ -318,10 +335,20 @@
             FlightsTab.Text = "Print Manifest";
             FlightsTab.UseVisualStyleBackColor = true;
             // 
+            // ErrorLabel2
+            // 
+            ErrorLabel2.AutoSize = true;
+            ErrorLabel2.Location = new Point(214, 57);
+            ErrorLabel2.Name = "ErrorLabel2";
+            ErrorLabel2.Size = new Size(63, 15);
+            ErrorLabel2.TabIndex = 16;
+            ErrorLabel2.Text = "Error Label";
+            ErrorLabel2.Visible = false;
+            // 
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(214, 42);
+            comboBox4.Location = new Point(214, 21);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(440, 23);
             comboBox4.TabIndex = 15;
@@ -358,6 +385,8 @@
             // 
             // RoutesTab
             // 
+            RoutesTab.Controls.Add(label9);
+            RoutesTab.Controls.Add(label8);
             RoutesTab.Controls.Add(numericUpDown1);
             RoutesTab.Controls.Add(label6);
             RoutesTab.Controls.Add(loadEnginList);
@@ -379,6 +408,26 @@
             RoutesTab.Text = "Route Manager";
             RoutesTab.UseVisualStyleBackColor = true;
             RoutesTab.Click += RoutesTab_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(15, 362);
+            label9.Name = "label9";
+            label9.Size = new Size(38, 15);
+            label9.TabIndex = 18;
+            label9.Text = "label9";
+            label9.Visible = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(13, 224);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 17;
+            label8.Text = "label8";
+            label8.Visible = false;
             // 
             // numericUpDown1
             // 
@@ -440,7 +489,7 @@
             // 
             // AddFlightButton
             // 
-            AddFlightButton.Location = new Point(84, 370);
+            AddFlightButton.Location = new Point(82, 380);
             AddFlightButton.Name = "AddFlightButton";
             AddFlightButton.Size = new Size(227, 23);
             AddFlightButton.TabIndex = 11;
@@ -479,7 +528,7 @@
             // 
             // UpdateButton
             // 
-            UpdateButton.Location = new Point(82, 225);
+            UpdateButton.Location = new Point(82, 244);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(227, 29);
             UpdateButton.TabIndex = 7;
@@ -613,6 +662,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             FlightsTab.ResumeLayout(false);
+            FlightsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             RoutesTab.ResumeLayout(false);
             RoutesTab.PerformLayout();
@@ -677,5 +727,9 @@
         private NumericUpDown numericUpDown1;
         private Label label7;
         private Button button4;
+        private Label ErrorLabel1;
+        private Label ErrorLabel2;
+        private Label label9;
+        private Label label8;
     }
 }

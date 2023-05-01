@@ -56,18 +56,20 @@
             DateTimePicker_OW = new DateTimePicker();
             RoundTrip = new CheckBox();
             dataGridView4 = new DataGridView();
-            bookingButton = new Button();
-            OriginCityDropDown = new ComboBox();
-            DestinationCityDropDown = new ComboBox();
-            pictureBox1 = new PictureBox();
-            FlightID = new DataGridViewTextBoxColumn();
-            button1 = new Button();
             Column1 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
+            bookingButton = new Button();
+            OriginCityDropDown = new ComboBox();
+            DestinationCityDropDown = new ComboBox();
+            pictureBox1 = new PictureBox();
+            FlightID = new DataGridViewTextBoxColumn();
+            button1 = new Button();
+            label6 = new Label();
+            label7 = new Label();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -176,6 +178,8 @@
             // 
             // UpcomingFlights
             // 
+            UpcomingFlights.Controls.Add(label7);
+            UpcomingFlights.Controls.Add(label6);
             UpcomingFlights.Controls.Add(comboBox6);
             UpcomingFlights.Controls.Add(label5);
             UpcomingFlights.Controls.Add(label4);
@@ -238,7 +242,7 @@
             // 
             // BoardingPass
             // 
-            BoardingPass.Location = new Point(23, 110);
+            BoardingPass.Location = new Point(23, 146);
             BoardingPass.Name = "BoardingPass";
             BoardingPass.Size = new Size(170, 23);
             BoardingPass.TabIndex = 6;
@@ -248,7 +252,7 @@
             // 
             // Cancel
             // 
-            Cancel.Location = new Point(23, 311);
+            Cancel.Location = new Point(23, 329);
             Cancel.Name = "Cancel";
             Cancel.Size = new Size(170, 23);
             Cancel.TabIndex = 5;
@@ -379,12 +383,48 @@
             dataGridView4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column1, Column6, Column5, Column3, Column4, Column2 });
-            dataGridView4.Location = new Point(254, 3);
+            dataGridView4.Location = new Point(257, 3);
             dataGridView4.Name = "dataGridView4";
             dataGridView4.RowTemplate.Height = 25;
-            dataGridView4.Size = new Size(391, 433);
+            dataGridView4.Size = new Size(388, 433);
             dataGridView4.TabIndex = 6;
             dataGridView4.CellContentClick += dataGridView4_CellContentClick;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Ticket ID";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Price";
+            Column6.Name = "Column6";
+            Column6.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            Column5.HeaderText = "Departure Date and Time";
+            Column5.Name = "Column5";
+            Column5.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Origin City";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Destination City";
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Seats Available";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
             // 
             // bookingButton
             // 
@@ -392,7 +432,7 @@
             bookingButton.Name = "bookingButton";
             bookingButton.Size = new Size(143, 38);
             bookingButton.TabIndex = 4;
-            bookingButton.Text = "Book Flight";
+            bookingButton.Text = "Book Ticket";
             bookingButton.UseVisualStyleBackColor = true;
             bookingButton.Click += bookingButton_Click;
             // 
@@ -441,41 +481,23 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // Column1
+            // label6
             // 
-            Column1.HeaderText = "Ticket ID";
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
+            label6.AutoSize = true;
+            label6.Location = new Point(23, 119);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 12;
+            label6.Text = "label6";
             // 
-            // Column6
+            // label7
             // 
-            Column6.HeaderText = "Price";
-            Column6.Name = "Column6";
-            Column6.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Departure Date and Time";
-            Column5.Name = "Column5";
-            Column5.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Origin City";
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Destination City";
-            Column4.Name = "Column4";
-            Column4.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Seats Available";
-            Column2.Name = "Column2";
-            Column2.ReadOnly = true;
+            label7.AutoSize = true;
+            label7.Location = new Point(23, 311);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 13;
+            label7.Text = "label7";
             // 
             // CustomerMain
             // 
@@ -543,5 +565,7 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column2;
+        private Label label7;
+        private Label label6;
     }
 }

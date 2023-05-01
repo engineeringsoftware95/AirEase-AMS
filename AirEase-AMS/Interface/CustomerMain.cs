@@ -94,7 +94,7 @@ namespace AirEase_AMS.Interface
                     break;
                 }
             }
-            if(RoundTrip.Checked)
+            if (RoundTrip.Checked)
             {
                 // get ticket selected in combobox 1
                 // get ticket selected in combobox 4
@@ -294,14 +294,15 @@ namespace AirEase_AMS.Interface
         // handler for when the booking tab is clicked
         private void Booking_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         // handler for when the button to print a boarding pass is clicked
         private void BoardingPass_Click(object sender, EventArgs e)
         {
-            if (OriginCityDropDown.SelectedItem != null)
+            if (comboBox5.SelectedItem != null)
             {
+                label6.Visible = false;
                 List<Flight> flights = new List<Flight>();
                 foreach (Ticket ticket in currentUser.GetUpcomingTickets())
                 {
@@ -311,21 +312,27 @@ namespace AirEase_AMS.Interface
                     }
                 }
 
-                BoardingPass boarding = new BoardingPass(flights[OriginCityDropDown.SelectedIndex].GetFlightId(), currentUser.GetFirstName(),
-                    currentUser.GetLastName(), flights[OriginCityDropDown.SelectedIndex].GetOriginCity(), flights[OriginCityDropDown.SelectedIndex].GetDestinationCity(),
-                    flights[OriginCityDropDown.SelectedIndex].GetTime(), flights[OriginCityDropDown.SelectedIndex].EstimateArrivalTime(), currentUser.GetUserId().ToString());
+                BoardingPass boarding = new BoardingPass(flights[comboBox5.SelectedIndex].GetFlightId(), currentUser.GetFirstName(),
+                    currentUser.GetLastName(), flights[comboBox5.SelectedIndex].GetOriginCity(), flights[comboBox5.SelectedIndex].GetDestinationCity(),
+                    flights[comboBox5.SelectedIndex].GetTime(), flights[comboBox5.SelectedIndex].EstimateArrivalTime(), currentUser.GetUserId().ToString());
                 ShowBoardingPass pass = new ShowBoardingPass(boarding);
 
                 pass.ShowDialog();
+            }
+            else
+            {
+                label6.Visible = true;
+                label6.Text = "Please select a flight.";
             }
         }
 
         // handler for when the button to cancel a ticket is clicked
         private void Cancel_Click(object sender, EventArgs e)
         {
-            if (OriginCityDropDown.SelectedItem != null)
+            if (comboBox6.SelectedItem != null)
             {
-                currentUser.GetUpcomingTickets()[OriginCityDropDown.SelectedIndex].CancelTicket();
+                label7.Visible = false;
+                currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
 
                 NewsFeed.Items.Clear();
                 NewsFeed.Items.Add("Air-Ease has been released!");
@@ -362,6 +369,11 @@ namespace AirEase_AMS.Interface
                         comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
                     }
                 }
+            }
+            else
+            {
+                label7.Visible = true;
+                label7.Text = "Please select a ticket.";
             }
         }
     }

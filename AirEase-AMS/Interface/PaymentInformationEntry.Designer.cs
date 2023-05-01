@@ -28,29 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            FullNameEntry = new TextBox();
             pictureBox1 = new PictureBox();
             cancel = new Button();
             Continue = new Button();
             CCNEntry = new TextBox();
             textBox3 = new TextBox();
-            name = new Label();
             CCN = new Label();
             ExpDate = new Label();
             SecurityCode = new Label();
             Zip = new Label();
             textBox1 = new TextBox();
             dateTimePicker1 = new DateTimePicker();
+            ErrorLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // FullNameEntry
-            // 
-            FullNameEntry.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            FullNameEntry.Location = new Point(277, 71);
-            FullNameEntry.Name = "FullNameEntry";
-            FullNameEntry.Size = new Size(446, 23);
-            FullNameEntry.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -99,16 +90,6 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(446, 23);
             textBox3.TabIndex = 25;
-            // 
-            // name
-            // 
-            name.AutoSize = true;
-            name.Location = new Point(157, 74);
-            name.Name = "name";
-            name.Size = new Size(89, 15);
-            name.TabIndex = 31;
-            name.Text = "Name On Card:";
-            name.Click += label1_Click;
             // 
             // CCN
             // 
@@ -163,24 +144,34 @@
             dateTimePicker1.Size = new Size(446, 23);
             dateTimePicker1.TabIndex = 37;
             // 
+            // ErrorLabel
+            // 
+            ErrorLabel.AutoSize = true;
+            ErrorLabel.Location = new Point(435, 298);
+            ErrorLabel.Name = "ErrorLabel";
+            ErrorLabel.RightToLeft = RightToLeft.Yes;
+            ErrorLabel.Size = new Size(60, 15);
+            ErrorLabel.TabIndex = 38;
+            ErrorLabel.Text = "ErrorLabel";
+            ErrorLabel.Visible = false;
+            // 
             // PaymentInformationEntry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ErrorLabel);
             Controls.Add(dateTimePicker1);
             Controls.Add(Zip);
             Controls.Add(textBox1);
             Controls.Add(SecurityCode);
             Controls.Add(ExpDate);
             Controls.Add(CCN);
-            Controls.Add(name);
             Controls.Add(textBox3);
             Controls.Add(CCNEntry);
             Controls.Add(cancel);
             Controls.Add(Continue);
             Controls.Add(pictureBox1);
-            Controls.Add(FullNameEntry);
             Name = "PaymentInformationEntry";
             Text = "New Payment Information";
             Load += PaymentInformationEntry_Load;
@@ -190,19 +181,17 @@
         }
 
         #endregion
-
-        private TextBox FullNameEntry;
         private PictureBox pictureBox1;
         private Button cancel;
         private Button Continue;
         private TextBox CCNEntry;
         private TextBox textBox3;
-        private Label name;
         private Label CCN;
         private Label ExpDate;
         private Label SecurityCode;
         private Label Zip;
         private TextBox textBox1;
         private DateTimePicker dateTimePicker1;
+        private Label ErrorLabel;
     }
 }
