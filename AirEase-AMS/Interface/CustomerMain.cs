@@ -55,6 +55,7 @@ namespace AirEase_AMS.Interface
         // Dont care about this listbox handler
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+
         }
 
         // this will update the visibility of elements when the round trip check box is interacted with
@@ -70,6 +71,7 @@ namespace AirEase_AMS.Interface
         // do nothing when the label is clicked
         private void label1_Click(object sender, EventArgs e)
         {
+
         }
 
         // this is the button on the home screen and opens up the new payment method window
@@ -290,21 +292,25 @@ namespace AirEase_AMS.Interface
         // this is the handler for clicking the ticket cells in the list of tickets in the booking tab
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
         }
 
         // handler for when the home tab is clicked
         private void Home_Click(object sender, EventArgs e)
         {
+
         }
 
         // handler for when the account history tab is clicked
         private void AccountHistory_Click(object sender, EventArgs e)
         {
+
         }
 
         // handler for when the upcoming flights tab is clicked
         private void UpcomingFlights_Click(object sender, EventArgs e)
         {
+
         }
 
         // handler for when the winform loads
@@ -362,6 +368,7 @@ namespace AirEase_AMS.Interface
         // handler for when the value of datetime picker for the first ticket is changed
         private void DateTimePicker_OW_ValueChanged(object sender, EventArgs e)
         {
+
         }
 
         private void DateTimePicker_RT_ValueChanged(object sender, EventArgs e)
@@ -381,6 +388,7 @@ namespace AirEase_AMS.Interface
         // handler for when the booking tab is clicked
         private void Booking_Click(object sender, EventArgs e)
         {
+
         }
 
         // handler for when the button to print a boarding pass is clicked

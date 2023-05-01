@@ -29,660 +29,587 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.HomeTab = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.MarketsTab = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.FlightID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridView2Col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PlaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlightsTab = new System.Windows.Forms.TabPage();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.RoutesTab = new System.Windows.Forms.TabPage();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.loadEnginList = new System.Windows.Forms.DataGridView();
-            this.RouteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DestinationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.AddFlightButton = new System.Windows.Forms.Button();
-            this.flightTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.UpdateButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.destinationCombo = new System.Windows.Forms.ComboBox();
-            this.originView = new System.Windows.Forms.ComboBox();
-            this.AccountsTab = new System.Windows.Forms.TabPage();
-            this.summaryReportBox = new System.Windows.Forms.RichTextBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.HomeTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.MarketsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.FlightsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            this.RoutesTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loadEnginList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.AccountsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
-
+            tabControl1 = new TabControl();
+            HomeTab = new TabPage();
+            listBox1 = new ListBox();
+            pictureBox2 = new PictureBox();
+            richTextBox1 = new RichTextBox();
+            MarketsTab = new TabPage();
+            label5 = new Label();
+            comboBox2 = new ComboBox();
+            dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            pictureBox4 = new PictureBox();
+            label4 = new Label();
+            button3 = new Button();
+            comboBox1 = new ComboBox();
+            dataGridView2 = new DataGridView();
+            FlightID = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            gridView2Col2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            PlaneModel = new DataGridViewTextBoxColumn();
+            FlightsTab = new TabPage();
+            comboBox4 = new ComboBox();
+            richTextBox2 = new RichTextBox();
+            pictureBox5 = new PictureBox();
+            button2 = new Button();
+            RoutesTab = new TabPage();
+            numericUpDown1 = new NumericUpDown();
+            label6 = new Label();
+            loadEnginList = new DataGridView();
+            RouteID = new DataGridViewTextBoxColumn();
+            OriginCity = new DataGridViewTextBoxColumn();
+            DestinationCity = new DataGridViewTextBoxColumn();
+            pictureBox3 = new PictureBox();
+            AddFlightButton = new Button();
+            flightTimePicker = new DateTimePicker();
+            label3 = new Label();
+            comboBox3 = new ComboBox();
+            UpdateButton = new Button();
+            label2 = new Label();
+            label1 = new Label();
+            destinationCombo = new ComboBox();
+            originView = new ComboBox();
+            AccountsTab = new TabPage();
+            summaryReportBox = new RichTextBox();
+            pictureBox6 = new PictureBox();
+            button1 = new Button();
+            pictureBox1 = new PictureBox();
+            button4 = new Button();
+            tabControl1.SuspendLayout();
+            HomeTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            MarketsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            FlightsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            RoutesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)loadEnginList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            AccountsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.HomeTab);
-            this.tabControl1.Controls.Add(this.MarketsTab);
-            this.tabControl1.Controls.Add(this.FlightsTab);
-            this.tabControl1.Controls.Add(this.RoutesTab);
-            this.tabControl1.Controls.Add(this.AccountsTab);
-            this.tabControl1.Location = new System.Drawing.Point(84, 9);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(719, 432);
-            this.tabControl1.TabIndex = 0;
+            tabControl1.Alignment = TabAlignment.Left;
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl1.Controls.Add(HomeTab);
+            tabControl1.Controls.Add(MarketsTab);
+            tabControl1.Controls.Add(FlightsTab);
+            tabControl1.Controls.Add(RoutesTab);
+            tabControl1.Controls.Add(AccountsTab);
+            tabControl1.Location = new Point(84, 9);
+            tabControl1.Margin = new Padding(3, 2, 3, 2);
+            tabControl1.Multiline = true;
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(719, 432);
+            tabControl1.TabIndex = 0;
             // 
             // HomeTab
             // 
-            this.HomeTab.Controls.Add(this.listBox1);
-            this.HomeTab.Controls.Add(this.pictureBox2);
-            this.HomeTab.Controls.Add(this.richTextBox1);
-            this.HomeTab.Location = new System.Drawing.Point(50, 4);
-            this.HomeTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.HomeTab.Name = "HomeTab";
-            this.HomeTab.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.HomeTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.HomeTab.Size = new System.Drawing.Size(665, 424);
-            this.HomeTab.TabIndex = 0;
-            this.HomeTab.Tag = "HomeTab";
-            this.HomeTab.Text = "Home";
-            this.HomeTab.UseVisualStyleBackColor = true;
+            HomeTab.Controls.Add(listBox1);
+            HomeTab.Controls.Add(pictureBox2);
+            HomeTab.Controls.Add(richTextBox1);
+            HomeTab.Location = new Point(50, 4);
+            HomeTab.Margin = new Padding(3, 2, 3, 2);
+            HomeTab.Name = "HomeTab";
+            HomeTab.Padding = new Padding(3, 2, 3, 2);
+            HomeTab.RightToLeft = RightToLeft.No;
+            HomeTab.Size = new Size(665, 424);
+            HomeTab.TabIndex = 0;
+            HomeTab.Tag = "HomeTab";
+            HomeTab.Text = "Home";
+            HomeTab.UseVisualStyleBackColor = true;
             // 
             // listBox1
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(270, 10);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(378, 409);
-            this.listBox1.TabIndex = 2;
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(270, 10);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(378, 409);
+            listBox1.TabIndex = 2;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(6, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(258, 78);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(6, 5);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(258, 78);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.Location = new System.Drawing.Point(6, 89);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(258, 330);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "You are a valued employee\nWhy aren\'t you working?\nWork like your job depends on i" +
-    "t (because it does)\n\n";
+            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            richTextBox1.Location = new Point(6, 89);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new Size(258, 330);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "You are a valued employee\nWhy aren't you working?\nWork like your job depends on it (because it does)\n\n";
             // 
             // MarketsTab
             // 
-            this.MarketsTab.Controls.Add(this.label5);
-            this.MarketsTab.Controls.Add(this.comboBox2);
-            this.MarketsTab.Controls.Add(this.dataGridView1);
-            this.MarketsTab.Controls.Add(this.pictureBox4);
-            this.MarketsTab.Controls.Add(this.label4);
-            this.MarketsTab.Controls.Add(this.button3);
-            this.MarketsTab.Controls.Add(this.comboBox1);
-            this.MarketsTab.Controls.Add(this.dataGridView2);
-            this.MarketsTab.Location = new System.Drawing.Point(50, 4);
-            this.MarketsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MarketsTab.Name = "MarketsTab";
-            this.MarketsTab.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MarketsTab.Size = new System.Drawing.Size(665, 424);
-            this.MarketsTab.TabIndex = 1;
-            this.MarketsTab.Tag = "MarketsTab";
-            this.MarketsTab.Text = "Plane Manager";
-            this.MarketsTab.UseVisualStyleBackColor = true;
-
+            MarketsTab.Controls.Add(label5);
+            MarketsTab.Controls.Add(comboBox2);
+            MarketsTab.Controls.Add(dataGridView1);
+            MarketsTab.Controls.Add(pictureBox4);
+            MarketsTab.Controls.Add(label4);
+            MarketsTab.Controls.Add(button3);
+            MarketsTab.Controls.Add(comboBox1);
+            MarketsTab.Controls.Add(dataGridView2);
+            MarketsTab.Location = new Point(50, 4);
+            MarketsTab.Margin = new Padding(3, 2, 3, 2);
+            MarketsTab.Name = "MarketsTab";
+            MarketsTab.Padding = new Padding(3, 2, 3, 2);
+            MarketsTab.Size = new Size(665, 424);
+            MarketsTab.TabIndex = 1;
+            MarketsTab.Tag = "MarketsTab";
+            MarketsTab.Text = "Plane Manager";
+            MarketsTab.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(76, 331);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 15);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Select Flight";
+            label5.AutoSize = true;
+            label5.Location = new Point(76, 331);
+            label5.Name = "label5";
+            label5.Size = new Size(71, 15);
+            label5.TabIndex = 18;
+            label5.Text = "Select Flight";
             // 
             // comboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(3, 349);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(241, 23);
-            this.comboBox2.TabIndex = 17;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(3, 349);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(241, 23);
+            comboBox2.TabIndex = 17;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 98);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(244, 171);
-            this.dataGridView1.TabIndex = 16;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2 });
+            dataGridView1.Location = new Point(0, 98);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(244, 171);
+            dataGridView1.TabIndex = 16;
             // 
             // Column1
             // 
-            this.Column1.HeaderText = "AircraftID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
+            Column1.HeaderText = "AircraftID";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "Plane Model";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            Column2.HeaderText = "Plane Model";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::AirEase_AMS.Properties.Resources.number2;
-            this.pictureBox4.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(163, 79);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 15;
-            this.pictureBox4.TabStop = false;
+            pictureBox4.Image = Properties.Resources.number2;
+            pictureBox4.Location = new Point(3, 3);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(163, 79);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 15;
+            pictureBox4.TabStop = false;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(76, 287);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Select Aircraft";
+            label4.AutoSize = true;
+            label4.Location = new Point(76, 287);
+            label4.Name = "label4";
+            label4.Size = new Size(80, 15);
+            label4.TabIndex = 3;
+            label4.Text = "Select Aircraft";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(52, 378);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(121, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Tag = "UpdateButton";
-            this.button3.Text = "Set";
-            this.button3.UseVisualStyleBackColor = true;
+            button3.Location = new Point(52, 378);
+            button3.Name = "button3";
+            button3.Size = new Size(121, 23);
+            button3.TabIndex = 5;
+            button3.Tag = "UpdateButton";
+            button3.Text = "Set";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 305);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(244, 23);
-            this.comboBox1.TabIndex = 0;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(0, 305);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(244, 23);
+            comboBox1.TabIndex = 0;
             // 
             // dataGridView2
             // 
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FlightID,
-            this.Column4,
-            this.gridView2Col2,
-            this.Column3,
-            this.PlaneModel});
-            this.dataGridView2.Location = new System.Drawing.Point(250, 6);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(412, 418);
-            this.dataGridView2.TabIndex = 14;
+            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { FlightID, Column4, gridView2Col2, Column3, PlaneModel });
+            dataGridView2.Location = new Point(250, 6);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowTemplate.Height = 25;
+            dataGridView2.Size = new Size(412, 418);
+            dataGridView2.TabIndex = 14;
             // 
             // FlightID
             // 
-            this.FlightID.HeaderText = "FlightID";
-            this.FlightID.Name = "FlightID";
-            this.FlightID.ReadOnly = true;
+            FlightID.HeaderText = "FlightID";
+            FlightID.Name = "FlightID";
+            FlightID.ReadOnly = true;
             // 
             // Column4
             // 
-            this.Column4.HeaderText = "Departure Time";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
+            Column4.HeaderText = "Departure Time";
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
             // 
             // gridView2Col2
             // 
-            this.gridView2Col2.HeaderText = "Origin City";
-            this.gridView2Col2.Name = "gridView2Col2";
-            this.gridView2Col2.ReadOnly = true;
+            gridView2Col2.HeaderText = "Origin City";
+            gridView2Col2.Name = "gridView2Col2";
+            gridView2Col2.ReadOnly = true;
             // 
             // Column3
             // 
-            this.Column3.HeaderText = "DestinationCity";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
+            Column3.HeaderText = "DestinationCity";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
             // 
             // PlaneModel
             // 
-            this.PlaneModel.HeaderText = "Plane Model";
-            this.PlaneModel.Name = "PlaneModel";
-            this.PlaneModel.ReadOnly = true;
+            PlaneModel.HeaderText = "Plane Model";
+            PlaneModel.Name = "PlaneModel";
+            PlaneModel.ReadOnly = true;
             // 
             // FlightsTab
             // 
-            this.FlightsTab.Controls.Add(this.comboBox4);
-            this.FlightsTab.Controls.Add(this.richTextBox2);
-            this.FlightsTab.Controls.Add(this.pictureBox5);
-            this.FlightsTab.Controls.Add(this.button2);
-            this.FlightsTab.Location = new System.Drawing.Point(50, 4);
-            this.FlightsTab.Name = "FlightsTab";
-            this.FlightsTab.Size = new System.Drawing.Size(665, 424);
-            this.FlightsTab.TabIndex = 2;
-            this.FlightsTab.Tag = "FlightsTab";
-            this.FlightsTab.Text = "Print Manifest";
-            this.FlightsTab.UseVisualStyleBackColor = true;
-
-            // 
-            // ErrorLabel2
-            // 
-            ErrorLabel2.AutoSize = true;
-            ErrorLabel2.Location = new Point(214, 57);
-            ErrorLabel2.Name = "ErrorLabel2";
-            ErrorLabel2.Size = new Size(63, 15);
-            ErrorLabel2.TabIndex = 16;
-            ErrorLabel2.Text = "Error Label";
-            ErrorLabel2.Visible = false;
+            FlightsTab.Controls.Add(comboBox4);
+            FlightsTab.Controls.Add(richTextBox2);
+            FlightsTab.Controls.Add(pictureBox5);
+            FlightsTab.Controls.Add(button2);
+            FlightsTab.Location = new Point(50, 4);
+            FlightsTab.Name = "FlightsTab";
+            FlightsTab.Size = new Size(665, 424);
+            FlightsTab.TabIndex = 2;
+            FlightsTab.Tag = "FlightsTab";
+            FlightsTab.Text = "Print Manifest";
+            FlightsTab.UseVisualStyleBackColor = true;
             // 
             // comboBox4
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(214, 42);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(440, 23);
-            this.comboBox4.TabIndex = 15;
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(214, 42);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(440, 23);
+            comboBox4.TabIndex = 15;
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(3, 127);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(659, 294);
-            this.richTextBox2.TabIndex = 14;
-            this.richTextBox2.Text = "";
+            richTextBox2.Location = new Point(3, 127);
+            richTextBox2.Name = "richTextBox2";
+            richTextBox2.Size = new Size(659, 294);
+            richTextBox2.TabIndex = 14;
+            richTextBox2.Text = "";
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::AirEase_AMS.Properties.Resources.number2;
-            this.pictureBox5.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(163, 79);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 13;
-            this.pictureBox5.TabStop = false;
+            pictureBox5.Image = Properties.Resources.number2;
+            pictureBox5.Location = new Point(3, 3);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(163, 79);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 13;
+            pictureBox5.TabStop = false;
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(214, 87);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(178, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Generate Flight Manifest";
-            this.button2.UseVisualStyleBackColor = true;
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            button2.Location = new Point(214, 87);
+            button2.Name = "button2";
+            button2.Size = new Size(178, 23);
+            button2.TabIndex = 3;
+            button2.Text = "Generate Flight Manifest";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // RoutesTab
             // 
-
-            this.RoutesTab.Controls.Add(this.numericUpDown1);
-            this.RoutesTab.Controls.Add(this.label6);
-            this.RoutesTab.Controls.Add(this.loadEnginList);
-            this.RoutesTab.Controls.Add(this.pictureBox3);
-            this.RoutesTab.Controls.Add(this.AddFlightButton);
-            this.RoutesTab.Controls.Add(this.flightTimePicker);
-            this.RoutesTab.Controls.Add(this.label3);
-            this.RoutesTab.Controls.Add(this.comboBox3);
-            this.RoutesTab.Controls.Add(this.UpdateButton);
-            this.RoutesTab.Controls.Add(this.label2);
-            this.RoutesTab.Controls.Add(this.label1);
-            this.RoutesTab.Controls.Add(this.destinationCombo);
-            this.RoutesTab.Controls.Add(this.originView);
-            this.RoutesTab.Location = new System.Drawing.Point(50, 4);
-            this.RoutesTab.Name = "RoutesTab";
-            this.RoutesTab.Size = new System.Drawing.Size(665, 424);
-            this.RoutesTab.TabIndex = 3;
-            this.RoutesTab.Tag = "RoutesTab";
-            this.RoutesTab.Text = "Route Manager";
-            this.RoutesTab.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(15, 362);
-            label9.Name = "label9";
-            label9.Size = new Size(38, 15);
-            label9.TabIndex = 18;
-            label9.Text = "label9";
-            label9.Visible = false;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(13, 224);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 17;
-            label8.Text = "label8";
-            label8.Visible = false;
+            RoutesTab.Controls.Add(numericUpDown1);
+            RoutesTab.Controls.Add(label6);
+            RoutesTab.Controls.Add(loadEnginList);
+            RoutesTab.Controls.Add(pictureBox3);
+            RoutesTab.Controls.Add(AddFlightButton);
+            RoutesTab.Controls.Add(flightTimePicker);
+            RoutesTab.Controls.Add(label3);
+            RoutesTab.Controls.Add(comboBox3);
+            RoutesTab.Controls.Add(UpdateButton);
+            RoutesTab.Controls.Add(label2);
+            RoutesTab.Controls.Add(label1);
+            RoutesTab.Controls.Add(destinationCombo);
+            RoutesTab.Controls.Add(originView);
+            RoutesTab.Location = new Point(50, 4);
+            RoutesTab.Name = "RoutesTab";
+            RoutesTab.Size = new Size(665, 424);
+            RoutesTab.TabIndex = 3;
+            RoutesTab.Tag = "RoutesTab";
+            RoutesTab.Text = "Route Manager";
+            RoutesTab.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(82, 191);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(227, 23);
-            this.numericUpDown1.TabIndex = 16;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            numericUpDown1.Location = new Point(82, 191);
+            numericUpDown1.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(227, 23);
+            numericUpDown1.TabIndex = 16;
+            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 199);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Distance";
+            label6.AutoSize = true;
+            label6.Location = new Point(13, 199);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 15);
+            label6.TabIndex = 15;
+            label6.Text = "Distance";
             // 
             // loadEnginList
             // 
-            this.loadEnginList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadEnginList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.loadEnginList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RouteID,
-            this.OriginCity,
-            this.DestinationCity});
-            this.loadEnginList.Location = new System.Drawing.Point(317, 6);
-            this.loadEnginList.Name = "loadEnginList";
-            this.loadEnginList.RowTemplate.Height = 25;
-            this.loadEnginList.Size = new System.Drawing.Size(345, 415);
-            this.loadEnginList.TabIndex = 13;
+            loadEnginList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            loadEnginList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            loadEnginList.Columns.AddRange(new DataGridViewColumn[] { RouteID, OriginCity, DestinationCity });
+            loadEnginList.Location = new Point(317, 6);
+            loadEnginList.Name = "loadEnginList";
+            loadEnginList.RowTemplate.Height = 25;
+            loadEnginList.Size = new Size(345, 415);
+            loadEnginList.TabIndex = 13;
             // 
             // RouteID
             // 
-            this.RouteID.HeaderText = "RouteID";
-            this.RouteID.Name = "RouteID";
-            this.RouteID.ReadOnly = true;
+            RouteID.HeaderText = "RouteID";
+            RouteID.Name = "RouteID";
+            RouteID.ReadOnly = true;
             // 
             // OriginCity
             // 
-            this.OriginCity.HeaderText = "Origin City";
-            this.OriginCity.Name = "OriginCity";
-            this.OriginCity.ReadOnly = true;
+            OriginCity.HeaderText = "Origin City";
+            OriginCity.Name = "OriginCity";
+            OriginCity.ReadOnly = true;
             // 
             // DestinationCity
             // 
-            this.DestinationCity.HeaderText = "Destination City";
-            this.DestinationCity.Name = "DestinationCity";
-            this.DestinationCity.ReadOnly = true;
+            DestinationCity.HeaderText = "Destination City";
+            DestinationCity.Name = "DestinationCity";
+            DestinationCity.ReadOnly = true;
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(163, 79);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 12;
-            this.pictureBox3.TabStop = false;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(3, 3);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(163, 79);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 12;
+            pictureBox3.TabStop = false;
             // 
             // AddFlightButton
             // 
-
-            this.AddFlightButton.Location = new System.Drawing.Point(84, 370);
-            this.AddFlightButton.Name = "AddFlightButton";
-            this.AddFlightButton.Size = new System.Drawing.Size(227, 23);
-            this.AddFlightButton.TabIndex = 11;
-            this.AddFlightButton.Tag = "AddFlightButton";
-            this.AddFlightButton.Text = "Add Flight";
-            this.AddFlightButton.UseVisualStyleBackColor = true;
-
+            AddFlightButton.Location = new Point(84, 370);
+            AddFlightButton.Name = "AddFlightButton";
+            AddFlightButton.Size = new Size(227, 23);
+            AddFlightButton.TabIndex = 11;
+            AddFlightButton.Tag = "AddFlightButton";
+            AddFlightButton.Text = "Add Flight";
+            AddFlightButton.UseVisualStyleBackColor = true;
+            AddFlightButton.Click += AddFlightButton_Click;
             // 
             // flightTimePicker
             // 
-            this.flightTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.flightTimePicker.Location = new System.Drawing.Point(85, 327);
-            this.flightTimePicker.Name = "flightTimePicker";
-            this.flightTimePicker.Size = new System.Drawing.Size(226, 23);
-            this.flightTimePicker.TabIndex = 10;
+            flightTimePicker.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            flightTimePicker.Location = new Point(85, 327);
+            flightTimePicker.Name = "flightTimePicker";
+            flightTimePicker.Size = new Size(226, 23);
+            flightTimePicker.TabIndex = 10;
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 282);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Route";
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Location = new Point(13, 282);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 15);
+            label3.TabIndex = 9;
+            label3.Text = "Route";
             // 
             // comboBox3
             // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(84, 279);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(226, 23);
-            this.comboBox3.TabIndex = 8;
+            comboBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(84, 279);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(226, 23);
+            comboBox3.TabIndex = 8;
             // 
             // UpdateButton
             // 
-
-            this.UpdateButton.Location = new System.Drawing.Point(82, 225);
-            this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.Size = new System.Drawing.Size(227, 29);
-            this.UpdateButton.TabIndex = 7;
-            this.UpdateButton.Tag = "UpdateButton";
-            this.UpdateButton.Text = "Update";
-            this.UpdateButton.UseVisualStyleBackColor = true;
-
+            UpdateButton.Location = new Point(82, 225);
+            UpdateButton.Name = "UpdateButton";
+            UpdateButton.Size = new Size(227, 29);
+            UpdateButton.TabIndex = 7;
+            UpdateButton.Tag = "UpdateButton";
+            UpdateButton.Text = "Update";
+            UpdateButton.UseVisualStyleBackColor = true;
+            UpdateButton.Click += UpdateButton_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 153);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Destination";
+            label2.AutoSize = true;
+            label2.Location = new Point(13, 153);
+            label2.Name = "label2";
+            label2.Size = new Size(67, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Destination";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Origin";
+            label1.AutoSize = true;
+            label1.Location = new Point(13, 108);
+            label1.Name = "label1";
+            label1.Size = new Size(40, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Origin";
             // 
             // destinationCombo
             // 
-            this.destinationCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.destinationCombo.FormattingEnabled = true;
-            this.destinationCombo.Location = new System.Drawing.Point(84, 150);
-            this.destinationCombo.Name = "destinationCombo";
-            this.destinationCombo.Size = new System.Drawing.Size(227, 23);
-            this.destinationCombo.TabIndex = 2;
-            this.destinationCombo.Tag = "destinationCombo";
+            destinationCombo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            destinationCombo.FormattingEnabled = true;
+            destinationCombo.Location = new Point(84, 150);
+            destinationCombo.Name = "destinationCombo";
+            destinationCombo.Size = new Size(227, 23);
+            destinationCombo.TabIndex = 2;
+            destinationCombo.Tag = "destinationCombo";
             // 
             // originView
             // 
-            this.originView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.originView.FormattingEnabled = true;
-            this.originView.Location = new System.Drawing.Point(84, 105);
-            this.originView.Name = "originView";
-            this.originView.Size = new System.Drawing.Size(227, 23);
-            this.originView.TabIndex = 1;
-            this.originView.Tag = "originView";
+            originView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            originView.FormattingEnabled = true;
+            originView.Location = new Point(84, 105);
+            originView.Name = "originView";
+            originView.Size = new Size(227, 23);
+            originView.TabIndex = 1;
+            originView.Tag = "originView";
             // 
             // AccountsTab
             // 
-            this.AccountsTab.Controls.Add(this.summaryReportBox);
-            this.AccountsTab.Controls.Add(this.pictureBox6);
-            this.AccountsTab.Controls.Add(this.button1);
-            this.AccountsTab.Location = new System.Drawing.Point(50, 4);
-            this.AccountsTab.Name = "AccountsTab";
-            this.AccountsTab.Size = new System.Drawing.Size(665, 424);
-            this.AccountsTab.TabIndex = 4;
-            this.AccountsTab.Tag = "AccountsTab";
-            this.AccountsTab.Text = "Accounts Manager";
-            this.AccountsTab.UseVisualStyleBackColor = true;
+            AccountsTab.Controls.Add(summaryReportBox);
+            AccountsTab.Controls.Add(pictureBox6);
+            AccountsTab.Controls.Add(button1);
+            AccountsTab.Location = new Point(50, 4);
+            AccountsTab.Name = "AccountsTab";
+            AccountsTab.Size = new Size(665, 424);
+            AccountsTab.TabIndex = 4;
+            AccountsTab.Tag = "AccountsTab";
+            AccountsTab.Text = "Accounts Manager";
+            AccountsTab.UseVisualStyleBackColor = true;
             // 
             // summaryReportBox
             // 
-            this.summaryReportBox.Location = new System.Drawing.Point(3, 151);
-            this.summaryReportBox.Name = "summaryReportBox";
-            this.summaryReportBox.Size = new System.Drawing.Size(659, 270);
-            this.summaryReportBox.TabIndex = 14;
-            this.summaryReportBox.Tag = "summaryReportBox";
-            this.summaryReportBox.Text = "";
+            summaryReportBox.Location = new Point(3, 151);
+            summaryReportBox.Name = "summaryReportBox";
+            summaryReportBox.Size = new Size(659, 270);
+            summaryReportBox.TabIndex = 14;
+            summaryReportBox.Tag = "summaryReportBox";
+            summaryReportBox.Text = "";
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Image = global::AirEase_AMS.Properties.Resources.number2;
-            this.pictureBox6.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(163, 79);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 13;
-            this.pictureBox6.TabStop = false;
+            pictureBox6.Image = Properties.Resources.number2;
+            pictureBox6.Location = new Point(3, 3);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(163, 79);
+            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox6.TabIndex = 13;
+            pictureBox6.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(230, 118);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Generate Summary Report";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            button1.Location = new Point(230, 118);
+            button1.Name = "button1";
+            button1.Size = new Size(178, 23);
+            button1.TabIndex = 1;
+            button1.Text = "Generate Summary Report";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(63, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(3, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(63, 48);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 418);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Logout";
-            this.button4.UseVisualStyleBackColor = true;
+            button4.Location = new Point(12, 418);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 2;
+            button4.Text = "Logout";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // EmployeeForm
             // 
-
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "EmployeeForm";
-            this.Text = "Employee View";
-            this.tabControl1.ResumeLayout(false);
-            this.HomeTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.MarketsTab.ResumeLayout(false);
-            this.MarketsTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.FlightsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            this.RoutesTab.ResumeLayout(false);
-            this.RoutesTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loadEnginList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.AccountsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(button4);
+            Controls.Add(pictureBox1);
+            Controls.Add(tabControl1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "EmployeeForm";
+            Text = "Employee View";
+            Load += EmployeeForm_Load;
+            tabControl1.ResumeLayout(false);
+            HomeTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            MarketsTab.ResumeLayout(false);
+            MarketsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            FlightsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            RoutesTab.ResumeLayout(false);
+            RoutesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)loadEnginList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            AccountsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

@@ -37,6 +37,8 @@
             AccountHistory = new TabPage();
             listBox2 = new ListBox();
             UpcomingFlights = new TabPage();
+            label7 = new Label();
+            label6 = new Label();
             comboBox6 = new ComboBox();
             label5 = new Label();
             label4 = new Label();
@@ -68,8 +70,6 @@
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
-            label6 = new Label();
-            label7 = new Label();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -196,6 +196,26 @@
             UpcomingFlights.UseVisualStyleBackColor = true;
             UpcomingFlights.Click += UpcomingFlights_Click;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(23, 311);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 13;
+            label7.Text = "label7";
+            label7.Visible = false;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(23, 107);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 12;
+            label6.Text = "label6";
+            label6.Visible = false;
+            // 
             // comboBox6
             // 
             comboBox6.FormattingEnabled = true;
@@ -242,7 +262,7 @@
             // 
             // BoardingPass
             // 
-            BoardingPass.Location = new Point(23, 146);
+            BoardingPass.Location = new Point(23, 125);
             BoardingPass.Name = "BoardingPass";
             BoardingPass.Size = new Size(170, 23);
             BoardingPass.TabIndex = 6;
@@ -357,6 +377,7 @@
             DateTimePicker_RT.Size = new Size(245, 23);
             DateTimePicker_RT.TabIndex = 10;
             DateTimePicker_RT.Visible = false;
+            DateTimePicker_RT.ValueChanged += DateTimePicker_RT_ValueChanged;
             // 
             // DateTimePicker_OW
             // 
@@ -480,24 +501,6 @@
             button1.Text = "Logout";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(23, 119);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 12;
-            label6.Text = "label6";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(23, 311);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 13;
-            label7.Text = "label7";
             // 
             // CustomerMain
             // 

@@ -43,68 +43,23 @@ namespace AirEase_AMS.Interface
             flightTimePicker.CustomFormat = "MM/dd/yyyy    HH:mm";
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Gather string from SummaryReport class
-            SummaryReport summaryReport = new SummaryReport();
-            summaryReport.GenerateReport();
-
-            //Set string in SummaryReportBox (textbox)
-            if (!string.IsNullOrEmpty(summaryReport.GetReport()))
-                summaryReportBox.Text = (summaryReport.GetReport());
-            else
-                summaryReportBox.Text = ("No summary report to display.");
-        }
-
-        private void RoutesTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            if (originView.SelectedItem != null && destinationCombo.SelectedItem != null && originView.SelectedIndex != destinationCombo.SelectedIndex)
+            if (comboBox4.SelectedItem != null)
             {
-                List<IGraphNode> airports = HLib.SelectAllAirports();
-                string origin = airports[originView.SelectedIndex].GetAirportId();
-                string destination = airports[destinationCombo.SelectedIndex].GetAirportId();
-                Route toAdd = new Route(origin, destination, (int)numericUpDown1.Value);
-                toAdd.UploadRoute();
-
-                label8.Visible = false;
-
-                setUp();
-            }
-            else if (originView.SelectedIndex == destinationCombo.SelectedIndex && originView.SelectedItem != null)
-            {
-                label8.Visible = true;
-                label8.Text = "Please select different origin and destination cities";
+                ErrorLabel2.Visible = false;
+                List<Flight> flights = HLib.SelectAllFlights();
+                string flightID = flights[comboBox4.SelectedIndex].GetFlightId();
+                string departureID = flights[comboBox4.SelectedIndex].GetDepartureId();
+                FlightManifest manifest = new FlightManifest(flightID, departureID);
+                manifest.PopulateManifest();
+                richTextBox2.Text = manifest.GetFlightManifest();
             }
             else
             {
-                label8.Visible = true;
-                label8.Text = "Please select both an origin and a destination";
+                ErrorLabel2.Visible = true;
+                ErrorLabel2.Text = "Please select a flight";
             }
-        }
-
-        private void flightTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void EmployeeForm_Load(object sender, EventArgs e)
@@ -117,21 +72,6 @@ namespace AirEase_AMS.Interface
 
             flightTimePicker.Format = DateTimePickerFormat.Custom;
             flightTimePicker.CustomFormat = "MM/dd/yyyy    HH:mm";
-        }
-
-        private void HomeTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -153,30 +93,6 @@ namespace AirEase_AMS.Interface
                 ErrorLabel1.Visible = true;
                 ErrorLabel1.Text = "Please make sure both selections have been made";
             }
-        }
-
-        private void button2_Click_2(object sender, EventArgs e)
-        {
-            if (comboBox4.SelectedItem != null)
-            {
-                ErrorLabel2.Visible = false;
-                List<Flight> flights = HLib.SelectAllFlights();
-                string flightID = flights[comboBox4.SelectedIndex].GetFlightId();
-                string departureID = flights[comboBox4.SelectedIndex].GetDepartureId();
-                FlightManifest manifest = new FlightManifest(flightID, departureID);
-                manifest.PopulateManifest();
-                richTextBox2.Text = manifest.GetFlightManifest();
-            }
-            else
-            {
-                ErrorLabel2.Visible = true;
-                ErrorLabel2.Text = "Please select a flight";
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void setUp()
@@ -252,12 +168,7 @@ namespace AirEase_AMS.Interface
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddFlightButton_Click_1(object sender, EventArgs e)
+        private void AddFlightButton_Click(object sender, EventArgs e)
         {
             if (comboBox3.SelectedItem != null)
             {
@@ -274,16 +185,6 @@ namespace AirEase_AMS.Interface
             }
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void originView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             Login login = new Login();
@@ -292,13 +193,7 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
-        private void MarketsTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //The button didnt map right to anything on my end, so now there's two of them. Its backwards compatible.
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //Gather string from SummaryReport class
             SummaryReport summaryReport = new SummaryReport();
@@ -309,6 +204,32 @@ namespace AirEase_AMS.Interface
                 summaryReportBox.Text = (summaryReport.GetReport());
             else
                 summaryReportBox.Text = ("No summary report to display.");
+        }
+
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            if (originView.SelectedItem != null && destinationCombo.SelectedItem != null && originView.SelectedIndex != destinationCombo.SelectedIndex)
+            {
+                List<IGraphNode> airports = HLib.SelectAllAirports();
+                string origin = airports[comboBox4.SelectedIndex].GetAirportId();
+                string destination = airports[comboBox4.SelectedIndex].GetAirportId();
+                Route toAdd = new Route(origin, destination, (int)numericUpDown1.Value);
+                toAdd.UploadRoute();
+
+                label8.Visible = false;
+
+                setUp();
+            }
+            else if (originView.SelectedIndex == destinationCombo.SelectedIndex && originView.SelectedItem != null)
+            {
+                label8.Visible = true;
+                label8.Text = "Please select different origin and destination cities";
+            }
+            else
+            {
+                label8.Visible = true;
+                label8.Text = "Please select both an origin and a destination";
+            }
         }
     }
 }
