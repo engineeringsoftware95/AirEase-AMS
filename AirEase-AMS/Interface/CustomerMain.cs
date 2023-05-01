@@ -128,55 +128,7 @@ namespace AirEase_AMS.Interface
                 selectedDeparture_RT = DateTimePicker_OW.Value.Date;
             }
             availableTickets = new List<Ticket>();
-            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
-            Ticket t = new Ticket();
-
-
-            // get direct flights
-            foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
-            {
-                t.SetStartCity(origin.GetCityName());
-                t.SetEndCity(dest.GetCityName());
-                t.AddFlight(f);
-                availableTickets.Add(t);
-                t = new Ticket();
-            }
-
-
-            if (routesToDestination[1].Count > 0)
-            {
-                for (int i = 0; i < routesToDestination[1].Count; i++)
-                {
-                    Ticket layStop = new Ticket();
-                    foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
-                    {
-                        // check departure date of the first flight
-                        // check the departure time of the connecting flights
-                        layStop.SetStartCity(origin.GetCityName());
-                        layStop.SetEndCity(dest.GetCityName());
-                        layStop.AddFlight(f);
-                    }
-
-                    availableTickets.Add(layStop);
-                }
-            }
-
-            if (routesToDestination[2].Count > 0)
-            {
-                for (int i = 0; i < routesToDestination[2].Count; i++)
-                {
-                    Ticket layStop = new Ticket();
-                    foreach (Flight f in routesToDestination[2][i].GetFlightsOnRoute())
-                    {
-                        layStop.SetStartCity(origin.GetCityName());
-                        layStop.SetEndCity(dest.GetCityName());
-                        layStop.AddFlight(f);
-                    }
-
-                    availableTickets.Add(layStop);
-                }
-            }
-
+            GetTickets(origin.GetCityName(), dest.GetCityName());
             dataGridView4.Rows.Clear();
             comboBox1.Items.Clear();
             foreach (Ticket ticket in availableTickets)
@@ -194,6 +146,61 @@ namespace AirEase_AMS.Interface
             // populate the rows with all of the flights that match the given parameters
             // allow selection of ticketID
         }
+
+
+
+        public void GetTickets(string startCity, string endCity)
+        {
+            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
+            Ticket t = new Ticket();
+
+
+            // get direct flights
+            foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
+            {
+                t.SetStartCity(startCity);
+                t.SetEndCity(endCity);
+                t.AddFlight(f);
+                availableTickets.Add(t);
+                t = new Ticket();
+            }
+
+
+            if (routesToDestination[1].Count > 0)
+            {
+                for (int i = 0; i < routesToDestination[1].Count; i++)
+                {
+                    Ticket layStop = new Ticket();
+                    foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
+                    {
+                        // check departure date of the first flight
+                        // check the departure time of the connecting flights
+                        layStop.SetStartCity(startCity);
+                        layStop.SetEndCity(endCity);
+                        layStop.AddFlight(f);
+                    }
+
+                    availableTickets.Add(layStop);
+                }
+            }
+
+            if (routesToDestination[2].Count > 0)
+            {
+                for (int i = 0; i < routesToDestination[2].Count; i++)
+                {
+                    Ticket layStop = new Ticket();
+                    foreach (Flight f in routesToDestination[2][i].GetFlightsOnRoute())
+                    {
+                        layStop.SetStartCity(startCity);
+                        layStop.SetEndCity(endCity);
+                        layStop.AddFlight(f);
+                    }
+
+                    availableTickets.Add(layStop);
+                }
+            }
+        }
+        
 
         // this is the handler for clicking the ticket cells in the list of tickets in the booking tab
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
