@@ -252,6 +252,11 @@ public class Ticket : ITicket
         return success;
     }
 
+    public void PopulateTicketCost()
+    {
+        _straightLineMileage = CalculateStraightLineMileage();
+        _ticketCost = CalculateTicketCost();
+    }
     public string GetOriginCity()
     {
         return _startCity;
