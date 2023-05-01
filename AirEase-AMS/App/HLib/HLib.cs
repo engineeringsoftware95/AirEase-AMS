@@ -421,25 +421,29 @@ namespace AirEase_AMS.App
             customer8.AttemptAccountCreation();
             customerList.Add(customer8);
 
-            foreach (Flight flight in listOfFlights)
+            for(int i = 0; i < 10; i++)
             {
-                Random rand = new Random();
-                int customerIndex = rand.Next(0, customerList.Count);
-                int purchase = rand.Next(0, 100);
-
-
-                //Customer purchases the ticket (50%)
-                if (purchase > 50)
+                foreach (Flight flight in listOfFlights)
                 {
-                    AirEase_AMS.App.Ticket.Ticket ticket = new Ticket.Ticket(flight.GetOriginCity(), flight.GetDestinationCity(), customerList[customerIndex].GetUserId().ToString(), false);
-                    ticket.AddFlight(flight);
-                    ticket.UploadTicket();
-                    if (purchase > 90)
+                    Random rand = new Random();
+                    int customerIndex = rand.Next(0, customerList.Count);
+                    int purchase = rand.Next(0, 100);
+
+
+                    //Customer purchases the ticket (50%)
+                    if (purchase > 60)
                     {
-                        ticket.CancelTicket();
+                        AirEase_AMS.App.Ticket.Ticket ticket = new Ticket.Ticket(flight.GetOriginCity(), flight.GetDestinationCity(), customerList[customerIndex].GetUserId().ToString(), false);
+                        ticket.AddFlight(flight);
+                        ticket.UploadTicket();
+                        if (purchase > 90)
+                        {
+                            ticket.CancelTicket();
+                        }
                     }
                 }
             }
+
             
 
             //Create a varied list of employees

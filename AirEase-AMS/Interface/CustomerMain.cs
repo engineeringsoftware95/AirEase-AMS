@@ -30,11 +30,11 @@ namespace AirEase_AMS.Interface
         public CustomerMain(Customer loggedIn)
         {
             origin = new Airport();
-            dest   = new Airport();
+            dest = new Airport();
             airportGraph = new Graph();
             airportGraph.GraphInit();
             currentUser = loggedIn;
-            
+
             //foreach (Ticket tickets in return list of functions)
             //{
 
@@ -65,7 +65,7 @@ namespace AirEase_AMS.Interface
             label3.Visible = RoundTrip.Checked;
             this.Update();
         }
-        
+
         // do nothing when the label is clicked
         private void label1_Click(object sender, EventArgs e)
         {
@@ -83,54 +83,113 @@ namespace AirEase_AMS.Interface
         // this is the handler for the book ticket button in the booking tab
         private void bookingButton_Click(object sender, EventArgs e)
         {
-
+            Ticket firstTicket = new Ticket();
+            CustomerBilling billing;
+            string firstTicketId = comboBox1.GetItemText(OriginCityDropDown.SelectedItem);
+            foreach (Ticket t in availableTickets)
+            {
+                if (t.GetTicketId() == firstTicketId)
+                {
+                    firstTicket = t;
+                    break;
+                }
+            }
             if (RoundTrip.Checked)
             {
-                // do the thing to create two tickets then send to customer billing
+                // get ticket selected in combobox 1
+                // get ticket selected in combobox 4
+                Ticket secondTicket = new Ticket();
+                string secondTicketId = comboBox4.GetItemText(OriginCityDropDown.SelectedItem);
+                foreach (Ticket t in availableTickets)
+                {
+                    if (t.GetTicketId() == secondTicketId)
+                    {
+                        secondTicket = t;
+                        break;
+                    }
+                }
+                billing = new CustomerBilling(this, currentUser, firstTicket);
             }
             else
             {
-                // do the thing to create one ticket then send to customer billing
-
-                //CustomerBilling customerBilling = new CustomerBilling(this, currentUser, OriginCityDropDown.Text, DestinationCityDropDown.Text, DateTimePicker_OW.Value.ToString());
-                Hide();
-                //customerBilling.ShowDialog();
+                // get ticket selected in combobox 1
+                billing = new CustomerBilling(this, currentUser, firstTicket);
             }
+            this.Hide();
+            billing.ShowDialog();
         }
 
         // this is the handler for the search button in the customer booking tab
         private void Search_Click(object sender, EventArgs e)
         {
-            availableTickets = new List<Ticket>();
-            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
-            
-            foreach (List<IRoute> originToDestination in routesToDestination)
-            {
-                Console.Write(originToDestination.Count + " " + routesToDestination.Count + " "); Console.WriteLine("List of Route");
-                Ticket t = new Ticket();
-                t.SetStartCity(origin.GetCityName());
-                t.SetEndCity(dest.GetCityName());
-                foreach (IRoute route in originToDestination)
-                {
-                    Console.WriteLine("Route");
-                    foreach (Flight flight in route.GetFlightsOnRoute())
-                    {
-
-                        t.SetCost();
-                        t.AddFlight(flight);
-                        t.SetCustomerId(currentUser.GetUserId().ToString()); // how to get current customer ID?
-                    }
-                }
-                availableTickets.Add(t);
-            }
-            // first clear table
-            // get list of flights that match query
-            // update table
             selectedDeparture_OW = DateTimePicker_OW.Value.Date;
             if (RoundTrip.Checked)
             {
                 selectedDeparture_RT = DateTimePicker_OW.Value.Date;
-            } 
+            }
+            availableTickets = new List<Ticket>();
+            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
+            Ticket t = new Ticket();
+
+
+            // get direct flights
+            foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
+            {
+                t.SetStartCity(origin.GetCityName());
+                t.SetEndCity(dest.GetCityName());
+                t.AddFlight(f);
+                availableTickets.Add(t);
+                t = new Ticket();
+            }
+
+
+            if (routesToDestination[1].Count > 0)
+            {
+                for (int i = 0; i < routesToDestination[1].Count; i++)
+                {
+                    Ticket layStop = new Ticket();
+                    foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
+                    {
+                        // check departure date of the first flight
+                        // check the departure time of the connecting flights
+                        layStop.SetStartCity(origin.GetCityName());
+                        layStop.SetEndCity(dest.GetCityName());
+                        layStop.AddFlight(f);
+                    }
+
+                    availableTickets.Add(layStop);
+                }
+            }
+
+            if (routesToDestination[2].Count > 0)
+            {
+                for (int i = 0; i < routesToDestination[2].Count; i++)
+                {
+                    Ticket layStop = new Ticket();
+                    foreach (Flight f in routesToDestination[2][i].GetFlightsOnRoute())
+                    {
+                        layStop.SetStartCity(origin.GetCityName());
+                        layStop.SetEndCity(dest.GetCityName());
+                        layStop.AddFlight(f);
+                    }
+
+                    availableTickets.Add(layStop);
+                }
+            }
+
+            dataGridView4.Rows.Clear();
+            comboBox1.Items.Clear();
+            foreach (Ticket ticket in availableTickets)
+            {
+                comboBox1.Items.Add(ticket.GetTicketId());
+                dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(), ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
+                    ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+            }
+
+            // first clear table
+            // get list of flights that match query
+            // update table
+            Console.WriteLine(":)");
             // dataGridView4.Rows.Clear();
             // populate the rows with all of the flights that match the given parameters
             // allow selection of ticketID
@@ -141,7 +200,7 @@ namespace AirEase_AMS.Interface
         {
 
         }
-        
+
         // handler for when the home tab is clicked
         private void Home_Click(object sender, EventArgs e)
         {
@@ -194,7 +253,7 @@ namespace AirEase_AMS.Interface
             {
                 comboBox5.Items.Add(ticket.GetTicketId());
                 listBox1.Items.Add(ticket.GetTicketInformation());
-                foreach(Flight flight in ticket.GetFlights())
+                foreach (Flight flight in ticket.GetFlights())
                 {
                     comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
                 }
@@ -215,7 +274,7 @@ namespace AirEase_AMS.Interface
         // handler for when the value of datetime picker for the first ticket is changed
         private void DateTimePicker_OW_ValueChanged(object sender, EventArgs e)
         {
-        
+
         }
 
         private void DateTimePicker_RT_ValueChanged(object sender, EventArgs e)
@@ -232,7 +291,7 @@ namespace AirEase_AMS.Interface
             this.Close();
         }
 
-        // handler for when the button to book a flight is clicked
+        // handler for when the booking tab is clicked
         private void Booking_Click(object sender, EventArgs e)
         {
 
@@ -241,8 +300,9 @@ namespace AirEase_AMS.Interface
         // handler for when the button to print a boarding pass is clicked
         private void BoardingPass_Click(object sender, EventArgs e)
         {
-            if (OriginCityDropDown.SelectedItem != null)
+            if (comboBox5.SelectedItem != null)
             {
+                label6.Visible = false;
                 List<Flight> flights = new List<Flight>();
                 foreach (Ticket ticket in currentUser.GetUpcomingTickets())
                 {
@@ -252,21 +312,27 @@ namespace AirEase_AMS.Interface
                     }
                 }
 
-                BoardingPass boarding = new BoardingPass(flights[OriginCityDropDown.SelectedIndex].GetFlightId(), currentUser.GetFirstName(),
-                    currentUser.GetLastName(), flights[OriginCityDropDown.SelectedIndex].GetOriginCity(), flights[OriginCityDropDown.SelectedIndex].GetDestinationCity(),
-                    flights[OriginCityDropDown.SelectedIndex].GetTime(), flights[OriginCityDropDown.SelectedIndex].EstimateArrivalTime(), currentUser.GetUserId().ToString());
+                BoardingPass boarding = new BoardingPass(flights[comboBox5.SelectedIndex].GetFlightId(), currentUser.GetFirstName(),
+                    currentUser.GetLastName(), flights[comboBox5.SelectedIndex].GetOriginCity(), flights[comboBox5.SelectedIndex].GetDestinationCity(),
+                    flights[comboBox5.SelectedIndex].GetTime(), flights[comboBox5.SelectedIndex].EstimateArrivalTime(), currentUser.GetUserId().ToString());
                 ShowBoardingPass pass = new ShowBoardingPass(boarding);
-                
+
                 pass.ShowDialog();
+            }
+            else
+            {
+                label6.Visible = true;
+                label6.Text = "Please select a flight.";
             }
         }
 
         // handler for when the button to cancel a ticket is clicked
         private void Cancel_Click(object sender, EventArgs e)
         {
-            if(OriginCityDropDown.SelectedItem != null)
+            if (comboBox6.SelectedItem != null)
             {
-                currentUser.GetUpcomingTickets()[OriginCityDropDown.SelectedIndex].CancelTicket();
+                label7.Visible = false;
+                currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
 
                 NewsFeed.Items.Clear();
                 NewsFeed.Items.Add("Air-Ease has been released!");
@@ -281,9 +347,9 @@ namespace AirEase_AMS.Interface
                 {
                     foreach (Flight flight in ticket.GetFlights())
                     {
-                        string info = ticket.GetTicketId()      + ": ";
-                        info.Concat(flight.GetFlightId()        + ": ");
-                        info.Concat(flight.GetOriginCity()      + ", ");
+                        string info = ticket.GetTicketId() + ": ";
+                        info.Concat(flight.GetFlightId() + ": ");
+                        info.Concat(flight.GetOriginCity() + ", ");
                         info.Concat(flight.GetDestinationCity() + ", ");
                         info.Concat(flight.GetTime().ToString());
                         listBox2.Items.Add(info);
@@ -303,6 +369,11 @@ namespace AirEase_AMS.Interface
                         comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
                     }
                 }
+            }
+            else
+            {
+                label7.Visible = true;
+                label7.Text = "Please select a ticket.";
             }
         }
     }
