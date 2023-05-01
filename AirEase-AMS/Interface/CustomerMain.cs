@@ -86,48 +86,75 @@ namespace AirEase_AMS.Interface
             Ticket firstTicket = new Ticket();
             CustomerBilling billing;
             string firstTicketId = comboBox1.GetItemText(OriginCityDropDown.SelectedItem);
-            foreach (Ticket t in availableTickets)
+            if (firstTicketId != null)
             {
-                if (t.GetTicketId() == firstTicketId)
+                if (availableTickets.Count > 0)
                 {
-                    firstTicket = t;
-                    break;
-                }
-            }
-
-            if (RoundTrip.Checked)
-            {
-                // get ticket selected in combobox 1
-                // get ticket selected in combobox 4
-                Ticket secondTicket = new Ticket();
-                string secondTicketId = comboBox4.GetItemText(OriginCityDropDown.SelectedItem);
-                if (secondTicketId != null)
-                {
-                    comboBox4.Items.Add("No valid tickets.");
-                }
-
-                foreach (Ticket t in returnTickets)
-                {
-                    if (t.GetTicketId() == secondTicketId)
+                    foreach (Ticket t in availableTickets)
                     {
-                        secondTicket = t;
-                        break;
+                        if (t.GetTicketId() == firstTicketId)
+                        {
+                            firstTicket = t;
+                            break;
+                        }
                     }
                 }
-
-                if (secondTicketId != null)
+                else
                 {
-                    billing = new CustomerBilling(this, currentUser, secondTicket);
+                    label8.Visible = true;
+                    label8.Text = "No tickets were found for these cities. Please select different origin or destination.";
+                }
+
+                if (RoundTrip.Checked)
+                {
+                    // get ticket selected in combobox 1
+                    // get ticket selected in combobox 4
+                    Ticket secondTicket = new Ticket();
+                    string secondTicketId = comboBox4.GetItemText(OriginCityDropDown.SelectedItem);
+                    if (secondTicketId != null)
+                    {
+                        if (returnTickets.Count > 0)
+                        {
+                            if (secondTicketId != null)
+                            {
+                                comboBox4.Items.Add("No valid tickets.");
+                            }
+
+                            foreach (Ticket t in returnTickets)
+                            {
+                                if (t.GetTicketId() == secondTicketId)
+                                {
+                                    secondTicket = t;
+                                    break;
+                                }
+                            }
+
+                            if (secondTicketId != null)
+                            {
+                                billing = new CustomerBilling(this, currentUser, secondTicket);
+                                this.Hide();
+                                billing.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            label8.Visible = true;
+                            label8.Text = "No round-trips were found for these cities. Please select different origin or destination.";
+                        }
+                    }
+                    else
+                    {
+                        label8.Visible = true;
+                        label8.Text = "Something went wrong. Please try again.";
+                    }
+                }
+                else
+                {
+                    // get ticket selected in combobox 1
+                    billing = new CustomerBilling(this, currentUser, firstTicket);
                     this.Hide();
                     billing.ShowDialog();
                 }
-            }
-            else
-            {
-                // get ticket selected in combobox 1
-                billing = new CustomerBilling(this, currentUser, firstTicket);
-                this.Hide();
-                billing.ShowDialog();
             }
         }
 
@@ -233,6 +260,8 @@ namespace AirEase_AMS.Interface
                         if (finalArrival.TotalMinutes >= departureTime.TotalMinutes + 40)
                         {
                             t = new Ticket();
+                            t.SetStartCity(startCity);
+                            t.SetEndCity(endCity);
                             t.AddFlight(orig);
                             t.AddFlight(lyvr);
                             tickets.Add(t);
@@ -286,6 +315,8 @@ namespace AirEase_AMS.Interface
                                 if (finalLayoverDepartureTime.TotalMinutes >= layoverTime.TotalMinutes + 40)
                                 {
                                     t = new Ticket();
+                                    t.SetStartCity(startCity);
+                                    t.SetEndCity(endCity);
                                     t.AddFlight(orig);
                                     t.AddFlight(lyvr);
                                     t.AddFlight(finalLayover);
