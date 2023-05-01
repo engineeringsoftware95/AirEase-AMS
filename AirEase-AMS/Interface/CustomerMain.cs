@@ -103,26 +103,17 @@ namespace AirEase_AMS.Interface
         {
             availableTickets = new List<Ticket>();
             List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
+            Ticket t = new Ticket();
+            t.SetStartCity(origin.GetCityName());
+            t.SetEndCity(dest.GetCityName());
             
-            foreach (List<IRoute> originToDestination in routesToDestination)
+            // get direct flights
+            foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
             {
-                Console.Write(originToDestination.Count + " " + routesToDestination.Count + " "); Console.WriteLine("List of Route");
-                Ticket t = new Ticket();
-                t.SetStartCity(origin.GetCityName());
-                t.SetEndCity(dest.GetCityName());
-                foreach (IRoute route in originToDestination)
-                {
-                    Console.WriteLine("Route");
-                    foreach (Flight flight in route.GetFlightsOnRoute())
-                    {
-
-                        t.SetCost();
-                        t.AddFlight(flight);
-                        t.SetCustomerId(currentUser.GetUserId().ToString()); // how to get current customer ID?
-                    }
-                }
+                t.AddFlight(f);
                 availableTickets.Add(t);
             }
+
             // first clear table
             // get list of flights that match query
             // update table
