@@ -17,19 +17,22 @@ namespace AirEase_AMS.Interface
         Customer currentuser;
         Ticket purchasedTicket;
         Ticket returnTicket;
+        Form parent;
 
-        public SummaryPage(Customer loggedIn, Ticket ticket)
+        public SummaryPage(Form main, Customer loggedIn, Ticket ticket)
         {
             currentuser = loggedIn;
             purchasedTicket = ticket;
             returnTicket = new Ticket();
+            parent = main;
             InitializeComponent();
         }
-        public SummaryPage(Customer loggedIn, Ticket ticket, Ticket secondTicket)
+        public SummaryPage(Form main, Customer loggedIn, Ticket ticket, Ticket secondTicket)
         {
             currentuser = loggedIn;
             purchasedTicket = ticket;
             returnTicket = secondTicket;
+            parent = main;
             InitializeComponent();
         }
 
@@ -55,9 +58,9 @@ namespace AirEase_AMS.Interface
 
         private void confirmationButton_Click(object sender, EventArgs e)
         {
-            CustomerMain customerInstance = new CustomerMain(currentuser);
             this.Hide();
-            customerInstance.ShowDialog();
+            parent.Show();
+            this.Close();
         }
 
         private void AccountSummary_SelectedIndexChanged(object sender, EventArgs e)

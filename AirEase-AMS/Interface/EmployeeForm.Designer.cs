@@ -95,6 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+
             // 
             // tabControl1
             // 
@@ -184,6 +185,7 @@
             this.MarketsTab.Tag = "MarketsTab";
             this.MarketsTab.Text = "Plane Manager";
             this.MarketsTab.UseVisualStyleBackColor = true;
+
             // 
             // label5
             // 
@@ -324,6 +326,17 @@
             this.FlightsTab.Tag = "FlightsTab";
             this.FlightsTab.Text = "Print Manifest";
             this.FlightsTab.UseVisualStyleBackColor = true;
+
+            // 
+            // ErrorLabel2
+            // 
+            ErrorLabel2.AutoSize = true;
+            ErrorLabel2.Location = new Point(214, 57);
+            ErrorLabel2.Name = "ErrorLabel2";
+            ErrorLabel2.Size = new Size(63, 15);
+            ErrorLabel2.TabIndex = 16;
+            ErrorLabel2.Text = "Error Label";
+            ErrorLabel2.Visible = false;
             // 
             // comboBox4
             // 
@@ -364,6 +377,7 @@
             // 
             // RoutesTab
             // 
+
             this.RoutesTab.Controls.Add(this.numericUpDown1);
             this.RoutesTab.Controls.Add(this.label6);
             this.RoutesTab.Controls.Add(this.loadEnginList);
@@ -384,6 +398,26 @@
             this.RoutesTab.Tag = "RoutesTab";
             this.RoutesTab.Text = "Route Manager";
             this.RoutesTab.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(15, 362);
+            label9.Name = "label9";
+            label9.Size = new Size(38, 15);
+            label9.TabIndex = 18;
+            label9.Text = "label9";
+            label9.Visible = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(13, 224);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 17;
+            label8.Text = "label8";
+            label8.Visible = false;
             // 
             // numericUpDown1
             // 
@@ -462,6 +496,7 @@
             // 
             // AddFlightButton
             // 
+
             this.AddFlightButton.Location = new System.Drawing.Point(84, 370);
             this.AddFlightButton.Name = "AddFlightButton";
             this.AddFlightButton.Size = new System.Drawing.Size(227, 23);
@@ -469,6 +504,7 @@
             this.AddFlightButton.Tag = "AddFlightButton";
             this.AddFlightButton.Text = "Add Flight";
             this.AddFlightButton.UseVisualStyleBackColor = true;
+
             // 
             // flightTimePicker
             // 
@@ -502,6 +538,7 @@
             // 
             // UpdateButton
             // 
+
             this.UpdateButton.Location = new System.Drawing.Point(82, 225);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(227, 29);
@@ -509,6 +546,7 @@
             this.UpdateButton.Tag = "UpdateButton";
             this.UpdateButton.Text = "Update";
             this.UpdateButton.UseVisualStyleBackColor = true;
+
             // 
             // label2
             // 
@@ -615,6 +653,7 @@
             // 
             // EmployeeForm
             // 
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -698,5 +737,10 @@
         private Label label7;
         private Button button4;
         private RichTextBox summaryReportBox;
+        private Label ErrorLabel1;
+        private Label ErrorLabel2;
+        private Label label9;
+        private Label label8;
+
     }
 }

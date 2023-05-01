@@ -229,6 +229,6 @@ public class Flight : Route
 
     public int GetSeatsTaken()
     {
-        return _peopleOnFlight;
-    } 
+        return _aircraft.GetNumberOfSeats() - _peopleOnFlight;
+    }
 }

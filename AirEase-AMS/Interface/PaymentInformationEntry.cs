@@ -21,20 +21,29 @@ namespace AirEase_AMS.Interface
         {
             currentUser = loggedIn;
             parent = calledFrom;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "HH:mm";
             InitializeComponent();
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "MM/yy";
         }
 
         private void continue_Click(object sender, EventArgs e)
         {
             // update database with payment info
-            CreditCard newCard = new CreditCard(CCNEntry.Text, dateTimePicker1.Value.ToString(), textBox3.Text, textBox1.Text, currentUser.GetUserId().ToString());
-            newCard.SaveCreditCard();
-            this.Hide();
-            parent.Update();
-            parent.Show();
-            this.Close();
+            if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox3.Text) && !string.IsNullOrEmpty(CCNEntry.Text))
+            {
+                CreditCard newCard = new CreditCard(CCNEntry.Text, dateTimePicker1.Value.ToString(), textBox3.Text, textBox1.Text, currentUser.GetUserId().ToString());
+                newCard.SaveCreditCard();
+                this.Hide();
+                parent.Update();
+                parent.Show();
+                this.Close();
+            }
+            else
+            {
+                ErrorLabel.Text = "Please fill out all fields.";
+                ErrorLabel.Visible = true;
+
+            }
         }
 
         private void cancel_Click(object sender, EventArgs e)
