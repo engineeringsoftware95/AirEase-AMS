@@ -69,14 +69,15 @@ namespace AirEase_AMS.Interface
             {
                 ifRoundTrip.UploadTicket();
             }
+
             SummaryPage summary;
             if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
             {
-                summary = new SummaryPage(currentUser, ticketToBuy, ifRoundTrip);
+                summary = new SummaryPage(parent, currentUser, ticketToBuy, ifRoundTrip);
             }
             else
             {
-                summary = new SummaryPage(currentUser, ticketToBuy);
+                summary = new SummaryPage(parent, currentUser, ticketToBuy);
             }
             this.Hide();
             summary.ShowDialog();

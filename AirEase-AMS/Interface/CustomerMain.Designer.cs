@@ -56,16 +56,18 @@
             DateTimePicker_OW = new DateTimePicker();
             RoundTrip = new CheckBox();
             dataGridView4 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
             bookingButton = new Button();
             OriginCityDropDown = new ComboBox();
             DestinationCityDropDown = new ComboBox();
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -376,37 +378,13 @@
             // 
             dataGridView4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
+            dataGridView4.Columns.AddRange(new DataGridViewColumn[] { Column1, Column6, Column5, Column3, Column4, Column2 });
             dataGridView4.Location = new Point(254, 3);
             dataGridView4.Name = "dataGridView4";
             dataGridView4.RowTemplate.Height = 25;
             dataGridView4.Size = new Size(391, 433);
             dataGridView4.TabIndex = 6;
             dataGridView4.CellContentClick += dataGridView4_CellContentClick;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Origin City";
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Destination City";
-            Column2.Name = "Column2";
-            Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Departure Date and Time";
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "TicketID";
-            Column4.Name = "Column4";
-            Column4.ReadOnly = true;
             // 
             // bookingButton
             // 
@@ -463,6 +441,42 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // Column1
+            // 
+            Column1.HeaderText = "Ticket ID";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Price";
+            Column6.Name = "Column6";
+            Column6.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            Column5.HeaderText = "Departure Date and Time";
+            Column5.Name = "Column5";
+            Column5.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Origin City";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Destination City";
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Seats Available";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            // 
             // CustomerMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -514,10 +528,6 @@
         private ComboBox comboBox1;
         private Label label3;
         private ComboBox comboBox4;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
         private Button button1;
         private ComboBox comboBox5;
         private Button BoardingPass;
@@ -527,5 +537,11 @@
         private ComboBox comboBox6;
         private Label label5;
         private Label label4;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column2;
     }
 }

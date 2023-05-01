@@ -30,11 +30,11 @@ namespace AirEase_AMS.Interface
         public CustomerMain(Customer loggedIn)
         {
             origin = new Airport();
-            dest   = new Airport();
+            dest = new Airport();
             airportGraph = new Graph();
             airportGraph.GraphInit();
             currentUser = loggedIn;
-            
+
             //foreach (Ticket tickets in return list of functions)
             //{
 
@@ -65,7 +65,7 @@ namespace AirEase_AMS.Interface
             label3.Visible = RoundTrip.Checked;
             this.Update();
         }
-        
+
         // do nothing when the label is clicked
         private void label1_Click(object sender, EventArgs e)
         {
@@ -105,12 +105,12 @@ namespace AirEase_AMS.Interface
             if (RoundTrip.Checked)
             {
                 selectedDeparture_RT = DateTimePicker_OW.Value.Date;
-            } 
+            }
             availableTickets = new List<Ticket>();
             List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
             Ticket t = new Ticket();
 
-            
+
             // get direct flights
             foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
             {
@@ -121,7 +121,7 @@ namespace AirEase_AMS.Interface
                 t = new Ticket();
             }
 
-            
+
             if (routesToDestination[1].Count > 0)
             {
                 for (int i = 0; i < routesToDestination[1].Count; i++)
@@ -156,7 +156,14 @@ namespace AirEase_AMS.Interface
                 }
             }
 
-
+            dataGridView4.Rows.Clear();
+            comboBox1.Items.Clear();
+            foreach (Ticket ticket in availableTickets)
+            {
+                comboBox1.Items.Add(ticket.GetTicketId());
+                dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(), ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
+                    ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+            }
 
             // first clear table
             // get list of flights that match query
@@ -172,7 +179,7 @@ namespace AirEase_AMS.Interface
         {
 
         }
-        
+
         // handler for when the home tab is clicked
         private void Home_Click(object sender, EventArgs e)
         {
@@ -225,7 +232,7 @@ namespace AirEase_AMS.Interface
             {
                 comboBox5.Items.Add(ticket.GetTicketId());
                 listBox1.Items.Add(ticket.GetTicketInformation());
-                foreach(Flight flight in ticket.GetFlights())
+                foreach (Flight flight in ticket.GetFlights())
                 {
                     comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
                 }
@@ -246,7 +253,7 @@ namespace AirEase_AMS.Interface
         // handler for when the value of datetime picker for the first ticket is changed
         private void DateTimePicker_OW_ValueChanged(object sender, EventArgs e)
         {
-        
+
         }
 
         private void DateTimePicker_RT_ValueChanged(object sender, EventArgs e)
@@ -266,7 +273,20 @@ namespace AirEase_AMS.Interface
         // handler for when the button to book a flight is clicked
         private void Booking_Click(object sender, EventArgs e)
         {
-
+            if(RoundTrip.Checked)
+            {
+                // get ticket selected in combobox 1
+                Ticket firstTicket = new Ticket();
+                // get ticket selected in combobox 4
+                Ticket secondTicket = new Ticket();
+                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket, secondTicket);
+            }
+            else
+            {
+                // get ticket selected in combobox 1
+                Ticket firstTicket = new Ticket();
+                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket);
+            }
         }
 
         // handler for when the button to print a boarding pass is clicked
@@ -287,7 +307,7 @@ namespace AirEase_AMS.Interface
                     currentUser.GetLastName(), flights[OriginCityDropDown.SelectedIndex].GetOriginCity(), flights[OriginCityDropDown.SelectedIndex].GetDestinationCity(),
                     flights[OriginCityDropDown.SelectedIndex].GetTime(), flights[OriginCityDropDown.SelectedIndex].EstimateArrivalTime(), currentUser.GetUserId().ToString());
                 ShowBoardingPass pass = new ShowBoardingPass(boarding);
-                
+
                 pass.ShowDialog();
             }
         }
@@ -295,7 +315,7 @@ namespace AirEase_AMS.Interface
         // handler for when the button to cancel a ticket is clicked
         private void Cancel_Click(object sender, EventArgs e)
         {
-            if(OriginCityDropDown.SelectedItem != null)
+            if (OriginCityDropDown.SelectedItem != null)
             {
                 currentUser.GetUpcomingTickets()[OriginCityDropDown.SelectedIndex].CancelTicket();
 
@@ -312,9 +332,9 @@ namespace AirEase_AMS.Interface
                 {
                     foreach (Flight flight in ticket.GetFlights())
                     {
-                        string info = ticket.GetTicketId()      + ": ";
-                        info.Concat(flight.GetFlightId()        + ": ");
-                        info.Concat(flight.GetOriginCity()      + ", ");
+                        string info = ticket.GetTicketId() + ": ";
+                        info.Concat(flight.GetFlightId() + ": ");
+                        info.Concat(flight.GetOriginCity() + ", ");
                         info.Concat(flight.GetDestinationCity() + ", ");
                         info.Concat(flight.GetTime().ToString());
                         listBox2.Items.Add(info);
