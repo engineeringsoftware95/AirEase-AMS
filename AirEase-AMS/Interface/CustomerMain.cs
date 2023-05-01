@@ -86,9 +86,9 @@ namespace AirEase_AMS.Interface
             Ticket firstTicket = new Ticket();
             CustomerBilling billing;
             string firstTicketId = comboBox1.GetItemText(OriginCityDropDown.SelectedItem);
-            if (firstTicketId != null)
+            if (availableTickets != null)
             {
-                if (availableTickets != null)
+                if (comboBox1.GetItemText(OriginCityDropDown.SelectedItem) != null)
                 {
                     if (availableTickets.Count > 0)
                     {
@@ -158,6 +158,11 @@ namespace AirEase_AMS.Interface
                     this.Hide();
                     billing.ShowDialog();
                 }
+            }
+            else
+            {
+                label8.Visible = true;
+                label8.Text = "Please select an origin and a destination.";
             }
         }
 
