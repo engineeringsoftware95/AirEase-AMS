@@ -134,44 +134,58 @@ namespace AirEase_AMS.Interface
         // this is the handler for the search button in the customer booking tab
         private void Search_Click(object sender, EventArgs e)
         {
-            dataGridView4.Rows.Clear();
-            comboBox1.Items.Clear();
-
-            selectedDeparture_OW = DateTimePicker_OW.Value.Date;
-            availableTickets = GetTickets(origin.GetCityName(), dest.GetCityName());
-
-            if (RoundTrip.Checked)
+            if(OriginCityDropDown.SelectedItem != null && DestinationCityDropDown.SelectedItem != null &&
+                OriginCityDropDown.SelectedItem != DestinationCityDropDown.SelectedItem)
             {
-                selectedDeparture_RT = DateTimePicker_OW.Value.Date;
-                returnTickets = GetTickets(dest.GetCityName(), origin.GetCityName());
-            }
+                label8.Visible = false;
+                dataGridView4.Rows.Clear();
+                comboBox1.Items.Clear();
 
-            foreach (Ticket ticket in availableTickets)
-            {
-                comboBox1.Items.Add(ticket.GetTicketId());
-                dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(), ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
-                    ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
-            }
+                selectedDeparture_OW = DateTimePicker_OW.Value.Date;
+                availableTickets = GetTickets(origin.GetCityName(), dest.GetCityName());
 
-            if (RoundTrip.Checked)
-            {
-                comboBox4.Items.Clear();
-                foreach (Ticket ticket in returnTickets)
+                if (RoundTrip.Checked)
                 {
-                    comboBox4.Items.Add(ticket.GetTicketId());
-                    dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
-                        ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
+                    selectedDeparture_RT = DateTimePicker_OW.Value.Date;
+                    returnTickets = GetTickets(dest.GetCityName(), origin.GetCityName());
+                }
+
+                foreach (Ticket ticket in availableTickets)
+                {
+                    comboBox1.Items.Add(ticket.GetTicketId());
+                    dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(), ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
                         ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
                 }
-            }
 
-            // first clear table
-            // get list of flights that match query
-            // update table
-            Console.WriteLine(":)");
-            // dataGridView4.Rows.Clear();
-            // populate the rows with all of the flights that match the given parameters
-            // allow selection of ticketID
+                if (RoundTrip.Checked)
+                {
+                    comboBox4.Items.Clear();
+                    foreach (Ticket ticket in returnTickets)
+                    {
+                        comboBox4.Items.Add(ticket.GetTicketId());
+                        dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
+                            ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
+                            ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+                    }
+                }
+
+                // first clear table
+                // get list of flights that match query
+                // update table
+                Console.WriteLine(":)");
+                // populate the rows with all of the flights that match the given parameters
+                // allow selection of ticketID
+            }
+            else if(OriginCityDropDown.SelectedItem == DestinationCityDropDown.SelectedItem && OriginCityDropDown.SelectedItem != null)
+            {
+                label8.Visible = true;
+                label8.Text = "No flights have the same origin and destination.";
+            }
+            else
+            {
+                label8.Visible = true;
+                label8.Text = "Please select both an origin and a destination.";
+            }
         }
 
 

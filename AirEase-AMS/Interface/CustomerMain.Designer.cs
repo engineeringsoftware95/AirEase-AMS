@@ -70,6 +70,8 @@
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
+            label8 = new Label();
+            label9 = new Label();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -283,6 +285,8 @@
             // 
             // Booking
             // 
+            Booking.Controls.Add(label9);
+            Booking.Controls.Add(label8);
             Booking.Controls.Add(label3);
             Booking.Controls.Add(comboBox4);
             Booking.Controls.Add(label2);
@@ -309,7 +313,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(6, 333);
+            label3.Location = new Point(6, 322);
             label3.Name = "label3";
             label3.Size = new Size(113, 15);
             label3.TabIndex = 17;
@@ -318,7 +322,7 @@
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(3, 351);
+            comboBox4.Location = new Point(3, 340);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(248, 23);
             comboBox4.TabIndex = 16;
@@ -344,7 +348,7 @@
             // 
             // Search
             // 
-            Search.Location = new Point(89, 115);
+            Search.Location = new Point(82, 132);
             Search.Name = "Search";
             Search.Size = new Size(75, 23);
             Search.TabIndex = 13;
@@ -452,7 +456,7 @@
             // 
             // bookingButton
             // 
-            bookingButton.Location = new Point(51, 384);
+            bookingButton.Location = new Point(51, 393);
             bookingButton.Name = "bookingButton";
             bookingButton.Size = new Size(143, 38);
             bookingButton.TabIndex = 4;
@@ -504,6 +508,24 @@
             button1.Text = "Logout";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(6, 108);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 18;
+            label8.Text = "label8";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(6, 366);
+            label9.Name = "label9";
+            label9.Size = new Size(38, 15);
+            label9.TabIndex = 19;
+            label9.Text = "label9";
             // 
             // CustomerMain
             // 
@@ -573,5 +595,7 @@
         private DataGridViewTextBoxColumn Column2;
         private Label label7;
         private Label label6;
+        private Label label9;
+        private Label label8;
     }
 }

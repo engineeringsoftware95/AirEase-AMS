@@ -58,6 +58,8 @@
             pictureBox5 = new PictureBox();
             button2 = new Button();
             RoutesTab = new TabPage();
+            label9 = new Label();
+            label8 = new Label();
             numericUpDown1 = new NumericUpDown();
             label6 = new Label();
             loadEnginList = new DataGridView();
@@ -80,8 +82,6 @@
             button1 = new Button();
             pictureBox1 = new PictureBox();
             button4 = new Button();
-            label8 = new Label();
-            label9 = new Label();
             tabControl1.SuspendLayout();
             HomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -187,7 +187,7 @@
             // ErrorLabel1
             // 
             ErrorLabel1.AutoSize = true;
-            ErrorLabel1.Location = new Point(45, 378);
+            ErrorLabel1.Location = new Point(6, 375);
             ErrorLabel1.Name = "ErrorLabel1";
             ErrorLabel1.Size = new Size(44, 15);
             ErrorLabel1.TabIndex = 19;
@@ -399,6 +399,26 @@
             RoutesTab.Text = "Route Manager";
             RoutesTab.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(13, 329);
+            label9.Name = "label9";
+            label9.Size = new Size(38, 15);
+            label9.TabIndex = 18;
+            label9.Text = "label9";
+            label9.Visible = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(13, 225);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 17;
+            label8.Text = "label8";
+            label8.Visible = false;
+            // 
             // numericUpDown1
             // 
             numericUpDown1.Location = new Point(82, 191);
@@ -471,7 +491,7 @@
             // flightTimePicker
             // 
             flightTimePicker.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            flightTimePicker.Location = new Point(87, 344);
+            flightTimePicker.Location = new Point(84, 358);
             flightTimePicker.Name = "flightTimePicker";
             flightTimePicker.Size = new Size(226, 23);
             flightTimePicker.TabIndex = 10;
@@ -606,26 +626,6 @@
             button4.Text = "Logout";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(27, 225);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 17;
-            label8.Text = "label8";
-            label8.Visible = false;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(27, 326);
-            label9.Name = "label9";
-            label9.Size = new Size(38, 15);
-            label9.TabIndex = 18;
-            label9.Text = "label9";
-            label9.Visible = false;
             // 
             // EmployeeForm
             // 
