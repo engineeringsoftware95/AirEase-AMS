@@ -187,7 +187,7 @@
             // ErrorLabel1
             // 
             ErrorLabel1.AutoSize = true;
-            ErrorLabel1.Location = new Point(6, 375);
+            ErrorLabel1.Location = new Point(6, 378);
             ErrorLabel1.Name = "ErrorLabel1";
             ErrorLabel1.Size = new Size(44, 15);
             ErrorLabel1.TabIndex = 19;
@@ -197,7 +197,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(76, 331);
+            label5.Location = new Point(76, 316);
             label5.Name = "label5";
             label5.Size = new Size(71, 15);
             label5.TabIndex = 18;
@@ -206,10 +206,11 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(3, 349);
+            comboBox2.Location = new Point(3, 334);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(241, 23);
             comboBox2.TabIndex = 17;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // dataGridView1
             // 
@@ -246,7 +247,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(76, 287);
+            label4.Location = new Point(76, 272);
             label4.Name = "label4";
             label4.Size = new Size(80, 15);
             label4.TabIndex = 3;
@@ -266,20 +267,21 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(0, 305);
+            comboBox1.Location = new Point(0, 290);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(244, 23);
             comboBox1.TabIndex = 0;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // dataGridView2
             // 
             dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { FlightID, Column4, gridView2Col2, Column3, PlaneModel });
-            dataGridView2.Location = new Point(250, 6);
+            dataGridView2.Location = new Point(270, 6);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(412, 418);
+            dataGridView2.Size = new Size(392, 418);
             dataGridView2.TabIndex = 14;
             // 
             // FlightID

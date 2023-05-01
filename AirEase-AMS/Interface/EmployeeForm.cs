@@ -216,7 +216,7 @@ namespace AirEase_AMS.Interface
                 string routeid = routes[comboBox3.SelectedIndex].GetRouteId();
                 Flight toAdd = new Flight(routeid, HLib.GenerateYearWeekID(flightTimePicker.Value), flightTimePicker.Value);
                 toAdd.UploadFlight();
-                label9.Text = "Succesfully added flight " + toAdd.GetFlightId() + ", with departureID " + toAdd.GetDepartureId();
+                label9.Text = "Succesfully added flight.";
             }
             else
             {
@@ -231,6 +231,16 @@ namespace AirEase_AMS.Interface
             this.Hide();
             login.ShowDialog();
             this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorLabel1.Visible = false;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorLabel1.Visible = false;
         }
     }
 }
