@@ -83,24 +83,40 @@ namespace AirEase_AMS.Interface
         // this is the handler for the book ticket button in the booking tab
         private void bookingButton_Click(object sender, EventArgs e)
         {
-            if (RoundTrip.Checked)
+            Ticket firstTicket = new Ticket();
+            CustomerBilling billing;
+            string firstTicketId = comboBox1.GetItemText(OriginCityDropDown.SelectedItem);
+            foreach (Ticket t in availableTickets)
+            {
+                if (t.GetTicketId() == firstTicketId)
+                {
+                    firstTicket = t;
+                    break;
+                }
+            }
+            if(RoundTrip.Checked)
             {
                 // get ticket selected in combobox 1
-                Ticket firstTicket = new Ticket();
                 // get ticket selected in combobox 4
                 Ticket secondTicket = new Ticket();
-                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket, secondTicket);
-                this.Hide();
-                billing.ShowDialog();
+                string secondTicketId = comboBox4.GetItemText(OriginCityDropDown.SelectedItem);
+                foreach (Ticket t in availableTickets)
+                {
+                    if (t.GetTicketId() == secondTicketId)
+                    {
+                        secondTicket = t;
+                        break;
+                    }
+                }
+                billing = new CustomerBilling(this, currentUser, firstTicket);
             }
             else
             {
                 // get ticket selected in combobox 1
-                Ticket firstTicket = new Ticket();
-                CustomerBilling billing = new CustomerBilling(this, currentUser, firstTicket);
-                this.Hide();
-                billing.ShowDialog();
+                billing = new CustomerBilling(this, currentUser, firstTicket);
             }
+            this.Hide();
+            billing.ShowDialog();
         }
 
         // this is the handler for the search button in the customer booking tab
