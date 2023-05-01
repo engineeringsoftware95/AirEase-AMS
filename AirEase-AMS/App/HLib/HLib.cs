@@ -365,23 +365,26 @@ namespace AirEase_AMS.App
             List<Flight> listOfFlights = new List<Flight>();
 
             //Upload a fair selection of flights for the next seven months
-            foreach(string routeid in routeIds)
+            for(int i = 0; i < 3; i ++)
             {
-                Random rand = new Random();
-                DateTime dateTime;
-                //Sufficiently randomize the date and hours
-                dateTime = DateTime.Now.AddMonths(rand.Next(0, 7)).AddDays(rand.Next(0, 27));
-                dateTime.AddHours(rand.Next(0, 23)).AddMinutes(rand.Next(0, 59));
-                Flight flight = new Flight(routeid, HLib.GenerateYearWeekID(dateTime), dateTime);
-                flight.UploadFlight();
-                //Depending on the distance, set the plane appropriately
-                if (flight.GetDistance() > 900)
-                    flight.SetPlaneForFlight(boeing777.GetAircraftId());
-                else if (flight.GetDistance() > 600)
-                    flight.SetPlaneForFlight(boeing787.GetAircraftId());
-                else flight.SetPlaneForFlight(boeing737.GetAircraftId());
+                foreach (string routeid in routeIds)
+                {
+                    Random rand = new Random();
+                    DateTime dateTime;
+                    //Sufficiently randomize the date and hours
+                    dateTime = DateTime.Now.AddMonths(rand.Next(0, 7)).AddDays(rand.NextDouble()*28);
+                    dateTime.AddHours(rand.NextDouble() * 23).AddMinutes(rand.NextDouble()*59);
+                    Flight flight = new Flight(routeid, HLib.GenerateYearWeekID(dateTime), dateTime);
+                    flight.UploadFlight();
+                    //Depending on the distance, set the plane appropriately
+                    if (flight.GetDistance() > 900)
+                        flight.SetPlaneForFlight(boeing777.GetAircraftId());
+                    else if (flight.GetDistance() > 600)
+                        flight.SetPlaneForFlight(boeing787.GetAircraftId());
+                    else flight.SetPlaneForFlight(boeing737.GetAircraftId());
 
-                listOfFlights.Add(flight);
+                    listOfFlights.Add(flight);
+                }
             }
 
             List<Customer> customerList = new List<Customer>();
