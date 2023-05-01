@@ -57,7 +57,7 @@ namespace AirEase_AMS.Interface
         {
             PaymentInformationEntry enter = new PaymentInformationEntry(currentUser, this);
             this.Hide();
-            enter.Show();
+            enter.ShowDialog();
         }
 
         // handler for when the purchase button is clicked
