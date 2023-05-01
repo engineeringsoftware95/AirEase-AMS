@@ -59,12 +59,11 @@ namespace AirEase_AMS.Interface
             SummaryReport summaryReport = new SummaryReport();
             summaryReport.GenerateReport();
 
-            summaryReportBox.Items.Clear();
             //Set string in SummaryReportBox (textbox)
             if (!string.IsNullOrEmpty(summaryReport.GetReport()))
-                summaryReportBox.Items.Add(summaryReport.GetReport());
+                summaryReportBox.Text = (summaryReport.GetReport());
             else
-                summaryReportBox.Items.Add("No summary report to display.");
+                summaryReportBox.Text = ("No summary report to display.");
         }
 
         private void RoutesTab_Click(object sender, EventArgs e)
@@ -296,6 +295,20 @@ namespace AirEase_AMS.Interface
         private void MarketsTab_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //The button didnt map right to anything on my end, so now there's two of them. Its backwards compatible.
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //Gather string from SummaryReport class
+            SummaryReport summaryReport = new SummaryReport();
+            summaryReport.GenerateReport();
+
+            //Set string in SummaryReportBox (textbox)
+            if (!string.IsNullOrEmpty(summaryReport.GetReport()))
+                summaryReportBox.Text = (summaryReport.GetReport());
+            else
+                summaryReportBox.Text = ("No summary report to display.");
         }
     }
 }
