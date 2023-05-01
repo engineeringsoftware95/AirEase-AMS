@@ -101,36 +101,67 @@ namespace AirEase_AMS.Interface
         // this is the handler for the search button in the customer booking tab
         private void Search_Click(object sender, EventArgs e)
         {
-            availableTickets = new List<Ticket>();
-            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
-            
-            foreach (List<IRoute> originToDestination in routesToDestination)
-            {
-                Console.Write(originToDestination.Count + " " + routesToDestination.Count + " "); Console.WriteLine("List of Route");
-                Ticket t = new Ticket();
-                t.SetStartCity(origin.GetCityName());
-                t.SetEndCity(dest.GetCityName());
-                foreach (IRoute route in originToDestination)
-                {
-                    Console.WriteLine("Route");
-                    foreach (Flight flight in route.GetFlightsOnRoute())
-                    {
-
-                        t.SetCost();
-                        t.AddFlight(flight);
-                        t.SetCustomerId(currentUser.GetUserId().ToString()); // how to get current customer ID?
-                    }
-                }
-                availableTickets.Add(t);
-            }
-            // first clear table
-            // get list of flights that match query
-            // update table
             selectedDeparture_OW = DateTimePicker_OW.Value.Date;
             if (RoundTrip.Checked)
             {
                 selectedDeparture_RT = DateTimePicker_OW.Value.Date;
             } 
+            availableTickets = new List<Ticket>();
+            List<List<IRoute>> routesToDestination = airportGraph.FindRoutes(origin.GetCityName(), dest.GetCityName());
+            Ticket t = new Ticket();
+
+            
+            // get direct flights
+            foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
+            {
+                t.SetStartCity(origin.GetCityName());
+                t.SetEndCity(dest.GetCityName());
+                t.AddFlight(f);
+                availableTickets.Add(t);
+                t = new Ticket();
+            }
+
+            
+            if (routesToDestination[1].Count > 0)
+            {
+                for (int i = 0; i < routesToDestination[1].Count; i++)
+                {
+                    Ticket layStop = new Ticket();
+                    foreach (Flight f in routesToDestination[1][i].GetFlightsOnRoute())
+                    {
+                        // check departure date of the first flight
+                        // check the departure time of the connecting flights
+                        layStop.SetStartCity(origin.GetCityName());
+                        layStop.SetEndCity(dest.GetCityName());
+                        layStop.AddFlight(f);
+                    }
+
+                    availableTickets.Add(layStop);
+                }
+            }
+
+            if (routesToDestination[2].Count > 0)
+            {
+                for (int i = 0; i < routesToDestination[2].Count; i++)
+                {
+                    Ticket layStop = new Ticket();
+                    foreach (Flight f in routesToDestination[2][i].GetFlightsOnRoute())
+                    {
+                        layStop.SetStartCity(origin.GetCityName());
+                        layStop.SetEndCity(dest.GetCityName());
+                        layStop.AddFlight(f);
+                    }
+
+                    availableTickets.Add(layStop);
+                }
+            }
+
+
+
+            // first clear table
+            // get list of flights that match query
+            // update table
+            Console.WriteLine(":)");
             // dataGridView4.Rows.Clear();
             // populate the rows with all of the flights that match the given parameters
             // allow selection of ticketID
