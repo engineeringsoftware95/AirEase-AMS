@@ -201,7 +201,7 @@ namespace AirEase_AMS.Interface
                         comboBox4.Items.Add(ticket.GetTicketId());
                         dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
                             ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
-                            ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
+                            ticket.GetDestinationCity(),(ticket.GetFlights()[0].GetSeats() -  ticket.GetFlights()[0].GetSeatsTaken()));
                     }
                 }
 
