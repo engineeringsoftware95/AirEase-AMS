@@ -318,7 +318,6 @@
             label9.Size = new Size(38, 15);
             label9.TabIndex = 19;
             label9.Text = "label9";
-            label9.Visible = false;
             // 
             // label8
             // 
@@ -328,7 +327,6 @@
             label8.Size = new Size(38, 15);
             label8.TabIndex = 18;
             label8.Text = "label8";
-            label8.Visible = false;
             // 
             // label3
             // 
