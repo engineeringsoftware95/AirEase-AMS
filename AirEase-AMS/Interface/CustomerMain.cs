@@ -88,14 +88,17 @@ namespace AirEase_AMS.Interface
             string firstTicketId = comboBox1.GetItemText(OriginCityDropDown.SelectedItem);
             if (firstTicketId != null)
             {
-                if (availableTickets.Count > 0)
+                if (availableTickets != null)
                 {
-                    foreach (Ticket t in availableTickets)
+                    if (availableTickets.Count > 0)
                     {
-                        if (t.GetTicketId() == firstTicketId)
+                        foreach (Ticket t in availableTickets)
                         {
-                            firstTicket = t;
-                            break;
+                            if (t.GetTicketId() == firstTicketId)
+                            {
+                                firstTicket = t;
+                                break;
+                            }
                         }
                     }
                 }
