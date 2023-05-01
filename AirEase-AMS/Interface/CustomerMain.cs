@@ -140,13 +140,13 @@ namespace AirEase_AMS.Interface
             selectedDeparture_OW = DateTimePicker_OW.Value.Date;
             availableTickets = GetTickets(origin.GetCityName(), dest.GetCityName());
 
-            /*if (RoundTrip.Checked)
+            if (RoundTrip.Checked)
             {
                 selectedDeparture_RT = DateTimePicker_OW.Value.Date;
                 returnTickets = GetTickets(dest.GetCityName(), origin.GetCityName());
-            }*/
+            }
 
-            /*foreach (Ticket ticket in availableTickets)
+            foreach (Ticket ticket in availableTickets)
             {
                 comboBox1.Items.Add(ticket.GetTicketId());
                 dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(), ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
@@ -163,7 +163,7 @@ namespace AirEase_AMS.Interface
                         ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
                         ticket.GetDestinationCity(), ticket.GetFlights()[0].GetSeatsTaken());
                 }
-            }*/
+            }
 
             // first clear table
             // get list of flights that match query
