@@ -28,20 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listBox1 = new ListBox();
             button1 = new Button();
+            listBox1 = new RichTextBox();
             SuspendLayout();
-            // 
-            // listBox1
-            // 
-            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(0, 90);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(803, 364);
-            listBox1.TabIndex = 0;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // button1
             // 
@@ -54,13 +43,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // listBox1
+            // 
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listBox1.Location = new Point(2, 74);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(796, 373);
+            listBox1.TabIndex = 2;
+            listBox1.Text = "";
+            // 
             // ShowBoardingPass
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
             Controls.Add(listBox1);
+            Controls.Add(button1);
             Name = "ShowBoardingPass";
             Text = "ShowBoardingPass";
             Load += ShowBoardingPass_Load;
@@ -68,8 +66,7 @@
         }
 
         #endregion
-
-        private ListBox listBox1;
         private Button button1;
+        private RichTextBox listBox1;
     }
 }

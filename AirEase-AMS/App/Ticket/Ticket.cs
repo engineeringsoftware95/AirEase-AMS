@@ -307,4 +307,14 @@ public class Ticket : ITicket
     {
         _endCity = name;
     }
+
+    public void SetPointsUsed(bool used)
+    {
+        _pointsUsed = used;
+    }
+
+    public DateTime GetTime()
+    {
+        return flights[0].GetTime();
+    }
 }
