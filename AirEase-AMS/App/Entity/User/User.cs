@@ -307,13 +307,13 @@ public class User : Defs.IUser
 
             if(ticket.GetFlights() != null && ticket.GetFlights().Count() > 0)
             {
-                if(int.Parse(HLib.GenerateYearWeekID(ticket.GetFlights()[0].GetTime())) > int.Parse(HLib.GenerateYearWeekID(DateTime.Now)))
+                if(int.Parse(HLib.GenerateYearWeekID(ticket.GetFlights()[0].GetTime())) >= int.Parse(HLib.GenerateYearWeekID(DateTime.Now)))
                 {
                     tickets.Add(ticket);
                 }
             }
         }
-        
+        Console.Write(":)");
         //Return our list of tickets
         return tickets;
     }
@@ -354,7 +354,7 @@ public class User : Defs.IUser
                 }
             }
         }
-
+        Console.Write(":)");
         //Return our list of tickets
         return tickets;
     }

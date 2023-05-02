@@ -405,7 +405,7 @@ namespace AirEase_AMS.Interface
             // update flights with past flights
             listBox2.Items.Clear();
             listBox2.Items.Add("TicketID: Flight ID: Origin City, Destination City, Departure Time and Date");
-            foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+            foreach (Ticket ticket in currentUser.GetPastTickets())
             {
                 foreach (Flight flight in ticket.GetFlights())
                 {
@@ -424,11 +424,13 @@ namespace AirEase_AMS.Interface
             listBox1.Items.Clear();
             foreach (Ticket ticket in currentUser.GetUpcomingTickets())
             {
-                comboBox5.Items.Add(ticket.GetTicketId());
+                if (ticket.IsRefunded()){ continue;}
+                comboBox6.Items.Add(ticket.GetTicketId());
                 listBox1.Items.Add(ticket.GetTicketInformation());
                 foreach (Flight flight in ticket.GetFlights())
                 {
-                    comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
+   
+                    comboBox5.Items.Add(flight.GetFlightId() + ", " +flight.GetDepartureId());
                 }
             }
         }
@@ -507,8 +509,9 @@ namespace AirEase_AMS.Interface
             if (comboBox6.SelectedItem != null)
             {
                 label7.Visible = false;
-
-                currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
+                Ticket CancelCulture = new Ticket(comboBox6.GetItemText(comboBox6.SelectedItem));
+                CancelCulture.CancelTicket();
+              //  currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
 
                 NewsFeed.Items.Clear();
                 NewsFeed.Items.Add("Air-Ease has been released!");
@@ -519,7 +522,7 @@ namespace AirEase_AMS.Interface
                 // update flights with past flights
                 listBox2.Items.Clear();
                 listBox2.Items.Add("TicketID: Flight ID: Origin City, Destination City, Departure Time and Date");
-                foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+                foreach (Ticket ticket in currentUser.GetPastTickets())
                 {
                     foreach (Flight flight in ticket.GetFlights())
                     {
@@ -538,11 +541,12 @@ namespace AirEase_AMS.Interface
                 listBox1.Items.Clear();
                 foreach (Ticket ticket in currentUser.GetUpcomingTickets())
                 {
-                    comboBox5.Items.Add(ticket.GetTicketId());
+                    if(ticket.IsRefunded()) {continue;}
+                    comboBox6.Items.Add(ticket.GetTicketId());
                     listBox1.Items.Add(ticket.GetTicketInformation());
                     foreach (Flight flight in ticket.GetFlights())
                     {
-                        comboBox6.Items.Add(flight.GetFlightId() + flight.GetDepartureId());
+                        comboBox5.Items.Add(flight.GetFlightId() +", " +flight.GetDepartureId());
                     }
                 }
             }
@@ -551,6 +555,7 @@ namespace AirEase_AMS.Interface
                 label7.Visible = true;
                 label7.Text = "Please select a ticket to cancel.";
             }
+            comboBox6.Refresh();
         }
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
