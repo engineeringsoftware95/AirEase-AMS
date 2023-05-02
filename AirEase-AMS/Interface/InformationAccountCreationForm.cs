@@ -60,7 +60,7 @@ namespace AirEase_AMS.Interface
                 (emailFormatCorrect ? "" : "Email is not formatted correctly.\r\n") +
                 (phoneFormatCorrect ? "" : "Phone number is not formatted correctly.\r\n") +
                 ((passwordsMatch) ? "" : "Passwords do not match.\r\n") +
-                (BirthDateCalendar.Equals(DateTime.Now) ? "" : "Birthdate cannot be today.");
+                (BirthDateCalendar.Equals(DateTime.Now) ? "" : "Too young to buy ticket.");
 
             if (passwordsMatch)
             {
