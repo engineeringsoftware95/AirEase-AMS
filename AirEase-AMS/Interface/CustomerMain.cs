@@ -198,7 +198,7 @@ namespace AirEase_AMS.Interface
                         comboBox1.Items.Add(ticket.GetTicketId());
                         dataGridView4.Rows.Add(ticket.GetTicketId(), ticket.GetTicketCost(),
                             ticket.GetFlights()[0].GetTime(), ticket.GetOriginCity(),
-                            ticket.GetDestinationCity(),(ticket.GetFlights()[0].GetSeats() - ticket.GetFlights()[0].GetSeatsTaken()));
+                            ticket.GetDestinationCity(), (ticket.GetFlights()[0].GetSeats() - ticket.GetFlights()[0].GetSeatsTaken()));
                     }
                 }
                 else
@@ -396,9 +396,11 @@ namespace AirEase_AMS.Interface
             upcomingDepartureList.Items.Clear();
             if (currentUser.GetUpcomingTickets().Count > 0)
             {
-                foreach(Ticket upcoming in currentUser.GetUpcomingTickets())
+                foreach (Ticket upcoming in currentUser.GetUpcomingTickets())
                 {
-                    upcomingDepartureList.Items.Add(upcoming.GetTicketInformation());
+                    if (upcoming.IsRefunded()) { continue; }
+                    upcomingDepartureList.Items.Add(upcoming.GetTicketId() + ": " + upcoming.GetTime().ToString("MM/dd/yyyy h:mm tt") + ", " +
+                        upcoming.GetOriginCity() + " to " + upcoming.GetDestinationCity());
                 }
             }
 
@@ -424,13 +426,13 @@ namespace AirEase_AMS.Interface
             listBox1.Items.Clear();
             foreach (Ticket ticket in currentUser.GetUpcomingTickets())
             {
-                if (ticket.IsRefunded()){ continue;}
+                if (ticket.IsRefunded()) { continue; }
                 comboBox6.Items.Add(ticket.GetTicketId());
-                listBox1.Items.Add(ticket.GetTicketInformation());
+                listBox1.Items.Add(ticket.GetTicketId() + ": " + ticket.GetTime().ToString("MM/dd/yyyy h:mm tt") + ", " +
+                            ticket.GetOriginCity() + " to " + ticket.GetDestinationCity());
                 foreach (Flight flight in ticket.GetFlights())
                 {
-   
-                    comboBox5.Items.Add(flight.GetFlightId() + ", " +flight.GetDepartureId());
+                    comboBox5.Items.Add(ticket.GetTicketId() + ", " + flight.GetFlightId());
                 }
             }
         }
@@ -511,13 +513,21 @@ namespace AirEase_AMS.Interface
                 label7.Visible = false;
                 Ticket CancelCulture = new Ticket(comboBox6.GetItemText(comboBox6.SelectedItem));
                 CancelCulture.CancelTicket();
-              //  currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
+                //  currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
 
                 NewsFeed.Items.Clear();
                 NewsFeed.Items.Add("Air-Ease has been released!");
 
                 upcomingDepartureList.Items.Clear();
-                upcomingDepartureList.Items.Add(currentUser.GetUpcomingTickets());
+                if (currentUser.GetUpcomingTickets().Count > 0)
+                {
+                    foreach (Ticket upcoming in currentUser.GetUpcomingTickets())
+                    {
+                        if (upcoming.IsRefunded()) { continue; }
+                        upcomingDepartureList.Items.Add(upcoming.GetTicketId() + ": " + upcoming.GetTime().ToString("MM/dd/yyyy h:mm tt") + ", " +
+                            upcoming.GetOriginCity() + " to " + upcoming.GetDestinationCity());
+                    }
+                }
 
                 // update flights with past flights
                 listBox2.Items.Clear();
@@ -541,12 +551,13 @@ namespace AirEase_AMS.Interface
                 listBox1.Items.Clear();
                 foreach (Ticket ticket in currentUser.GetUpcomingTickets())
                 {
-                    if(ticket.IsRefunded()) {continue;}
+                    if (ticket.IsRefunded()) { continue; }
                     comboBox6.Items.Add(ticket.GetTicketId());
-                    listBox1.Items.Add(ticket.GetTicketInformation());
+                    listBox1.Items.Add(ticket.GetTicketId() + ": " + ticket.GetTime().ToString("MM/dd/yyyy h:mm tt") + ", " +
+                            ticket.GetOriginCity() + " to " + ticket.GetDestinationCity());
                     foreach (Flight flight in ticket.GetFlights())
                     {
-                        comboBox5.Items.Add(flight.GetFlightId() +", " +flight.GetDepartureId());
+                        comboBox5.Items.Add(ticket.GetTicketId() + ", " + flight.GetFlightId());
                     }
                 }
             }
@@ -571,6 +582,55 @@ namespace AirEase_AMS.Interface
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void refresh_Click(object sender, EventArgs e)
+        {
+            NewsFeed.Items.Clear();
+            NewsFeed.Items.Add("Air-Ease has been released!");
+
+            upcomingDepartureList.Items.Clear();
+            if (currentUser.GetUpcomingTickets().Count > 0)
+            {
+                foreach (Ticket upcoming in currentUser.GetUpcomingTickets())
+                {
+                    if (upcoming.IsRefunded()) { continue; }
+                    upcomingDepartureList.Items.Add(upcoming.GetTicketId() + ": " + upcoming.GetTime().ToString("MM/dd/yyyy h:mm tt") + ", " +
+                        upcoming.GetOriginCity() + " to " + upcoming.GetDestinationCity());
+                }
+            }
+
+            // update flights with past flights
+            listBox2.Items.Clear();
+            listBox2.Items.Add("TicketID: Flight ID: Origin City, Destination City, Departure Time and Date");
+            foreach (Ticket ticket in currentUser.GetPastTickets())
+            {
+                foreach (Flight flight in ticket.GetFlights())
+                {
+                    string info = ticket.GetTicketId() + ": ";
+                    info.Concat(flight.GetFlightId() + ": ");
+                    info.Concat(flight.GetOriginCity() + ", ");
+                    info.Concat(flight.GetDestinationCity() + ", ");
+                    info.Concat(flight.GetTime().ToString());
+                    listBox2.Items.Add(info);
+                }
+            }
+
+            // update upcoming flights
+            comboBox5.Items.Clear();
+            comboBox6.Items.Clear();
+            listBox1.Items.Clear();
+            foreach (Ticket ticket in currentUser.GetUpcomingTickets())
+            {
+                if (ticket.IsRefunded()) { continue; }
+                comboBox6.Items.Add(ticket.GetTicketId());
+                listBox1.Items.Add(ticket.GetTicketId() + ": " + ticket.GetTime().ToString("MM/dd/yyyy h:mm tt") + ", " +
+                            ticket.GetOriginCity() + " to " + ticket.GetDestinationCity());
+                foreach (Flight flight in ticket.GetFlights())
+                {
+                    comboBox5.Items.Add(ticket.GetTicketId() + ", " + flight.GetFlightId());
+                }
+            }
         }
     }
 }

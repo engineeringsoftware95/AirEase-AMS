@@ -66,9 +66,17 @@ namespace AirEase_AMS.Interface
             if (comboBox1.SelectedItem != null)
             {
                 // buy the ticket
+                if (comboBox1.GetItemText(comboBox1.SelectedItem).Equals("Points"))
+                {
+                    ticketToBuy.SetPointsUsed(true);
+                }
                 ticketToBuy.UploadTicket();
                 if (!string.IsNullOrEmpty(ifRoundTrip.GetOriginCity()))
                 {
+                    if (comboBox1.GetItemText(comboBox1.SelectedItem).Equals("Points"))
+                    {
+                        ifRoundTrip.SetPointsUsed(true);
+                    }
                     ifRoundTrip.UploadTicket();
                 }
 
@@ -121,10 +129,18 @@ namespace AirEase_AMS.Interface
             CreditCard credit = new CreditCard(currentUser.GetUserId());
 
             comboBox1.Items.Add(credit.GetCCNum());
-            if (HLib.ConvertToPoints((decimal)ticketToBuy.GetTicketCost()) < currentUser._pointBalance)
+            if (HLib.ConvertToPoints((decimal)ticketToBuy.GetTicketCost()) <= currentUser._pointBalance)
             {
                 comboBox1.Items.Add("Points");
             }
+        }
+
+        private void refresh_Click(object sender, EventArgs e)
+        {
+            flightInfo.Clear();
+            flightInfo.Text = ticketToBuy.GetTicketInformation();
+
+            setUp();
         }
     }
 }
