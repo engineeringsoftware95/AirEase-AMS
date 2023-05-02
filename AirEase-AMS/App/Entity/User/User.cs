@@ -340,6 +340,7 @@ public class User : Defs.IUser
 
         //Initialize our return array of tickets
         List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
+
         foreach (System.Data.DataRow row in dt.Rows)
         {
             Ticket.Ticket ticket = new App.Ticket.Ticket(row["TicketID"].ToString() ?? "-1");
