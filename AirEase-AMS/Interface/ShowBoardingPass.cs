@@ -16,7 +16,7 @@ namespace AirEase_AMS.Interface
         public ShowBoardingPass(BoardingPass pass)
         {
             InitializeComponent();
-            listBox1.Items.Add(pass.printBoardingPass());
+            listBox1.Text = pass.printBoardingPass();
         }
 
         private void button1_Click(object sender, EventArgs e)

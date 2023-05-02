@@ -72,6 +72,7 @@
             pictureBox1 = new PictureBox();
             FlightID = new DataGridViewTextBoxColumn();
             button1 = new Button();
+            refresh = new Button();
             CustomerTabControl.SuspendLayout();
             Home.SuspendLayout();
             AccountHistory.SuspendLayout();
@@ -104,6 +105,7 @@
             // 
             // Home
             // 
+            Home.Controls.Add(refresh);
             Home.Controls.Add(newPaymentMethod);
             Home.Controls.Add(monthCalendar1);
             Home.Controls.Add(upcomingDepartureList);
@@ -531,6 +533,16 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // refresh
+            // 
+            refresh.Location = new Point(25, 340);
+            refresh.Name = "refresh";
+            refresh.Size = new Size(192, 23);
+            refresh.TabIndex = 22;
+            refresh.Text = "Refresh";
+            refresh.UseVisualStyleBackColor = true;
+            refresh.Click += refresh_Click;
+            // 
             // CustomerMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -601,5 +613,6 @@
         private Label label6;
         private Label label9;
         private Label label8;
+        private Button refresh;
     }
 }

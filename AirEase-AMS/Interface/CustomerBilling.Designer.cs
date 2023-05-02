@@ -35,6 +35,7 @@
             newPaymentMethod = new Button();
             pictureBox1 = new PictureBox();
             label1 = new Label();
+            refresh = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -85,7 +86,7 @@
             newPaymentMethod.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             newPaymentMethod.Location = new Point(603, 314);
             newPaymentMethod.Name = "newPaymentMethod";
-            newPaymentMethod.Size = new Size(163, 23);
+            newPaymentMethod.Size = new Size(185, 23);
             newPaymentMethod.TabIndex = 7;
             newPaymentMethod.Text = "Enter new payment method";
             newPaymentMethod.UseVisualStyleBackColor = true;
@@ -111,11 +112,22 @@
             label1.Text = "label1";
             label1.Visible = false;
             // 
+            // refresh
+            // 
+            refresh.Location = new Point(603, 343);
+            refresh.Name = "refresh";
+            refresh.Size = new Size(185, 23);
+            refresh.TabIndex = 23;
+            refresh.Text = "Refresh";
+            refresh.UseVisualStyleBackColor = true;
+            refresh.Click += refresh_Click;
+            // 
             // CustomerBilling
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(refresh);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
             Controls.Add(newPaymentMethod);
@@ -140,5 +152,6 @@
         private Button newPaymentMethod;
         private PictureBox pictureBox1;
         private Label label1;
+        private Button refresh;
     }
 }
