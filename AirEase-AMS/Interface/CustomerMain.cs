@@ -504,11 +504,11 @@ namespace AirEase_AMS.Interface
         // handler for when the button to cancel a ticket is clicked
         private void Cancel_Click(object sender, EventArgs e)
         {
-            if (OriginCityDropDown.SelectedItem != null)
+            if (comboBox6.SelectedItem != null)
             {
                 label7.Visible = false;
 
-                currentUser.GetUpcomingTickets()[OriginCityDropDown.SelectedIndex].CancelTicket();
+                currentUser.GetUpcomingTickets()[comboBox6.SelectedIndex].CancelTicket();
 
                 NewsFeed.Items.Clear();
                 NewsFeed.Items.Add("Air-Ease has been released!");

@@ -304,7 +304,8 @@ public class User : Defs.IUser
             //For each ticket in the table, add it to our list of tickets
             tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
         }
-
+        
+        Console.Write(":(");
         //Return our list of tickets
         return tickets;
     }
