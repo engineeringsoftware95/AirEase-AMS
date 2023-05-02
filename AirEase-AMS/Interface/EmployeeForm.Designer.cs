@@ -493,7 +493,7 @@
             // flightTimePicker
             // 
             flightTimePicker.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            flightTimePicker.Location = new Point(84, 358);
+            flightTimePicker.Location = new Point(86, 344);
             flightTimePicker.Name = "flightTimePicker";
             flightTimePicker.Size = new Size(226, 23);
             flightTimePicker.TabIndex = 10;
@@ -519,7 +519,7 @@
             // 
             // UpdateButton
             // 
-            UpdateButton.Location = new Point(84, 242);
+            UpdateButton.Location = new Point(86, 246);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(227, 29);
             UpdateButton.TabIndex = 7;

@@ -216,6 +216,7 @@ namespace AirEase_AMS.Interface
                 string routeid = routes[comboBox3.SelectedIndex].GetRouteId();
                 Flight toAdd = new Flight(routeid, HLib.GenerateYearWeekID(flightTimePicker.Value), flightTimePicker.Value);
                 toAdd.UploadFlight();
+                label9.Visible = true;
                 label9.Text = "Succesfully added flight.";
             }
             else
