@@ -28,21 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Reciept = new ListBox();
             pictureBox1 = new PictureBox();
             confirmationButton = new Button();
             AccountSummary = new ListBox();
+            Reciept = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // Reciept
-            // 
-            Reciept.FormattingEnabled = true;
-            Reciept.ItemHeight = 15;
-            Reciept.Location = new Point(424, 12);
-            Reciept.Name = "Reciept";
-            Reciept.Size = new Size(364, 409);
-            Reciept.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -74,15 +65,24 @@
             AccountSummary.TabIndex = 26;
             AccountSummary.SelectedIndexChanged += AccountSummary_SelectedIndexChanged;
             // 
+            // Reciept
+            // 
+            Reciept.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Reciept.Location = new Point(424, 12);
+            Reciept.Name = "Reciept";
+            Reciept.Size = new Size(364, 426);
+            Reciept.TabIndex = 27;
+            Reciept.Text = "";
+            // 
             // SummaryPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Reciept);
             Controls.Add(AccountSummary);
             Controls.Add(confirmationButton);
             Controls.Add(pictureBox1);
-            Controls.Add(Reciept);
             Name = "SummaryPage";
             Text = "Reciept View";
             Load += SummaryPage_Load;
@@ -91,10 +91,9 @@
         }
 
         #endregion
-
-        private ListBox Reciept;
         private PictureBox pictureBox1;
         private Button confirmationButton;
         private ListBox AccountSummary;
+        private RichTextBox Reciept;
     }
 }

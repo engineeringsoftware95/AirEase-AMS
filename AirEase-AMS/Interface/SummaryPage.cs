@@ -48,11 +48,11 @@ namespace AirEase_AMS.Interface
             AccountSummary.Items.Add(creditCard.GetCCNum());
             AccountSummary.Items.Add(creditCard.GetExpirationDate());
 
-            Reciept.Items.Add(purchasedTicket.GetTicketInformation());
-            if(!string.IsNullOrEmpty(returnTicket.GetOriginCity()))
+            Reciept.Text = purchasedTicket.GetTicketInformation();
+            if (!string.IsNullOrEmpty(returnTicket.GetOriginCity()))
             {
-                Reciept.Items.Add(" ");
-                Reciept.Items.Add(returnTicket.GetTicketInformation());
+                Reciept.Text += " ";
+                Reciept.Text += returnTicket.GetTicketInformation();
             }
         }
 
