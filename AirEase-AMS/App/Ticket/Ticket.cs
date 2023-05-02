@@ -94,7 +94,15 @@ public class Ticket : ITicket
             _endCity = ticket["EndCity"].ToString() ?? "";
             _isRefunded = int.Parse(ticket["IsRefunded"].ToString() ?? "-1") > 0;
         }
+
         flights = new List<Flight>();
+
+        query = String.Format("EXEC SelectFlightsOnTicket @TicketID = {0};", _ticketId);
+        dt = dao.Retrieve(query);
+        foreach(DataRow row in dt.Rows)
+        {
+            flights.Add(new Flight(row["FlightID"].ToString() ?? "-1", row["DepartureID"].ToString() ?? "-1"));
+        }
     }
 
     /// <summary>

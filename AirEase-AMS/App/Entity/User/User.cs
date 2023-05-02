@@ -1,4 +1,5 @@
 using AirEase_AMS.App.Defs;
+using AirEase_AMS.App.Ticket;
 using Microsoft.Identity.Client;
 using System.Security.Cryptography.X509Certificates;
 
@@ -291,7 +292,7 @@ public class User : Defs.IUser
         yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
 
         //Create our query to execute the stored procedure
-        string query = String.Format("EXEC SelectFutureTickets @CustomerId = {0}, @YearWeekID={1};", _userId, yearWeekId);
+        string query = String.Format("EXEC SelectCustomerTickets @CustomerId = {0};", _userId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //Get our table of ticket information
@@ -301,11 +302,18 @@ public class User : Defs.IUser
         List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
         foreach(System.Data.DataRow row in dt.Rows)
         {
+            Ticket.Ticket ticket = new App.Ticket.Ticket(row["TicketID"].ToString() ?? "-1");
             //For each ticket in the table, add it to our list of tickets
-            tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
+
+            if(ticket.GetFlights() != null && ticket.GetFlights().Count() > 0)
+            {
+                if(int.Parse(HLib.GenerateYearWeekID(ticket.GetFlights()[0].GetTime())) > int.Parse(HLib.GenerateYearWeekID(DateTime.Now)))
+                {
+                    tickets.Add(ticket);
+                }
+            }
         }
         
-        Console.Write(":(");
         //Return our list of tickets
         return tickets;
     }
@@ -324,7 +332,7 @@ public class User : Defs.IUser
         yearWeekId += ((int)Math.Floor(time.DayOfYear / 7.0)).ToString();
 
         //Create our query to execute the stored procedure
-        string query = String.Format("EXEC SelectPastTickets @CustomerId = {0}, @YearWeekID={1};", _userId, yearWeekId);
+        string query = String.Format("EXEC SelectCustomerTickets @CustomerId = {0};", _userId);
         DatabaseAccessObject dao = new DatabaseAccessObject();
 
         //Get our table of ticket information
@@ -334,8 +342,16 @@ public class User : Defs.IUser
         List<App.Ticket.Ticket> tickets = new List<Ticket.Ticket>();
         foreach (System.Data.DataRow row in dt.Rows)
         {
+            Ticket.Ticket ticket = new App.Ticket.Ticket(row["TicketID"].ToString() ?? "-1");
             //For each ticket in the table, add it to our list of tickets
-            tickets.Add(new Ticket.Ticket(row["TicketID"].ToString() ?? "-1"));
+
+            if (ticket.GetFlights() != null && ticket.GetFlights().Count() > 0)
+            {
+                if (int.Parse(HLib.GenerateYearWeekID(ticket.GetFlights()[0].GetTime())) < int.Parse(HLib.GenerateYearWeekID(DateTime.Now)))
+                {
+                    tickets.Add(ticket);
+                }
+            }
         }
 
         //Return our list of tickets
