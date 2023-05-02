@@ -34,7 +34,7 @@ namespace AirEase_AMS.Interface
                 if (username[0] == '1')
                 {
                     //Initialize customer class
-                    Customer loggedUser = new Customer(username, password);
+                    Customer loggedUser = new Customer(username);
 
                     // Setup currentCustomer using a database query for the username
 

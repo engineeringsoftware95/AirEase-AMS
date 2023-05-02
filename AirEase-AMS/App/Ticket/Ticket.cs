@@ -33,6 +33,8 @@ public class Ticket : ITicket
         _transaction = new Transaction.Transaction(0, 0, " ");
         num_flights = 0;
     }
+    
+
 
     /// <summary>
     /// This constructor is designed to instantiate a new ticket.
@@ -199,6 +201,7 @@ public class Ticket : ITicket
     {
         return HLib.GenerateSixDigitId().ToString();
     }
+    
 
     public string GetTicketInformation()
     {

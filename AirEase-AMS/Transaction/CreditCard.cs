@@ -133,7 +133,7 @@ public class CreditCard
         string query = String.Format("EXEC SaveCreditCard @CreditCardNum = '{0}', @ExpirationDate = '{1}', @CVC = {2}, @ZipCode = '{3}', @CustomerID = {4};", _ccNum, _expDate, _cvc, _billingZipCode, _accountHolderId);
 
         //If rows returned is equal to one, it means we updated one row in the database.
-        return (dao.Update(query) == 1);
+        return (dao.Update(query) >= 1);
     }
 
     public string GetExpirationDate() { return _expDate;  }

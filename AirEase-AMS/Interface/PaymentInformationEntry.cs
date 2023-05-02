@@ -34,6 +34,7 @@ namespace AirEase_AMS.Interface
                 CreditCard newCard = new CreditCard(CCNEntry.Text, dateTimePicker1.Value.ToString(), textBox3.Text, textBox1.Text, currentUser.GetUserId().ToString());
                 newCard.SaveCreditCard();
                 this.Hide();
+                parent.Refresh();
                 parent.Update();
                 parent.Show();
                 this.Close();

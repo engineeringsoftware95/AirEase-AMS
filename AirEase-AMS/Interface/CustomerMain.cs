@@ -253,6 +253,7 @@ namespace AirEase_AMS.Interface
             {
                 foreach (Flight f in routesToDestination[0][0].GetFlightsOnRoute())
                 {
+                    t.SetCustomerId(currentUser.GetUserId().ToString());
                     t.SetStartCity(startCity);
                     t.SetEndCity(endCity);
                     t.AddFlight(f);
@@ -286,6 +287,7 @@ namespace AirEase_AMS.Interface
                         if (finalArrival.TotalMinutes >= departureTime.TotalMinutes + 40)
                         {
                             t = new Ticket();
+                            t.SetCustomerId(currentUser.GetUserId().ToString());
                             t.SetStartCity(startCity);
                             t.SetEndCity(endCity);
                             t.AddFlight(orig);
@@ -341,6 +343,7 @@ namespace AirEase_AMS.Interface
                                 if (finalLayoverDepartureTime.TotalMinutes >= layoverTime.TotalMinutes + 40)
                                 {
                                     t = new Ticket();
+                                    t.SetCustomerId(currentUser.GetUserId().ToString());
                                     t.SetStartCity(startCity);
                                     t.SetEndCity(endCity);
                                     t.AddFlight(orig);
