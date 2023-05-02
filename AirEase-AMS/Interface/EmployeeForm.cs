@@ -86,7 +86,7 @@ namespace AirEase_AMS.Interface
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            listBox1.Items.Add("Nothing to see here...");
+            listBox1.Items.Add("Coconuts are not migratory.");
 
             richTextBox1.Clear();
             richTextBox1.Text = "Hello World!";
